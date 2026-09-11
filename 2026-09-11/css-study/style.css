@@ -1,0 +1,22 @@
+﻿body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: red;
+}
+
+h2 {
+    color: blue;
+}
+
+p {
+    font-size: 18px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+}

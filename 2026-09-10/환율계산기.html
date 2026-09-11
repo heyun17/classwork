@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>환율 계산기</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#687386; --line:#dce2ea; --accent:#2563eb; --soft:#eff6ff; --card:#fff; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; background:#f5f7fb; color:var(--ink); font-family:Arial,"Malgun Gothic",sans-serif; }
+    .wrap { width:min(720px, calc(100% - 32px)); margin:48px auto; }
+    .eyebrow { margin:0 0 8px; color:var(--accent); font-size:13px; font-weight:700; letter-spacing:.08em; }
+    h1 { margin:0; font-size:32px; letter-spacing:-.04em; }
+    .intro { margin:10px 0 26px; color:var(--muted); line-height:1.6; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px; box-shadow:0 10px 30px rgba(23,32,51,.06); }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:end; }
+    label { display:block; margin-bottom:7px; font-size:13px; font-weight:700; }
+    input, select, button { width:100%; height:46px; border:1px solid #cbd3df; border-radius:10px; background:#fff; color:var(--ink); font:inherit; padding:0 12px; }
+    input:focus, select:focus { outline:3px solid #bfdbfe; border-color:var(--accent); }
+    .amount { grid-column:1 / -1; }
+    .actions { display:flex; gap:10px; margin-top:18px; }
+    button { cursor:pointer; font-weight:700; }
+    .primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .secondary { background:#fff; }
+    .result { margin-top:22px; padding:20px; border-radius:12px; background:var(--soft); border:1px solid #bfdbfe; }
+    .result-label { color:var(--muted); font-size:13px; }
+    .result-value { margin-top:5px; font-size:30px; font-weight:800; overflow-wrap:anywhere; }
+    .rate-line { margin-top:8px; color:#46546b; font-size:13px; }
+    .meta { margin-top:22px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; line-height:1.7; }
+    .meta a { color:var(--accent); }
+    .file-row { display:flex; gap:10px; align-items:center; margin-top:16px; }
+    .file-row input { height:auto; padding:9px 10px; font-size:13px; }
+    .status { margin:14px 0 0; color:var(--muted); font-size:12px; }
+    .status.error { color:#b42318; }
+    @media (max-width:560px) { .wrap { margin:28px auto; } .card { padding:18px; } .grid { grid-template-columns:1fr; } .amount { grid-column:auto; } .actions { flex-direction:column; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">USD EXCHANGE RATES</p>
+    <h1>환율 계산기</h1>
+    <p class="intro">같은 폴더의 <code>환율_데이터.csv</code>를 읽어 통화 간 금액을 계산합니다. CSV에 날짜별 행을 추가하면 가장 최근 날짜의 환율을 자동으로 사용합니다.</p>
+
+    <section class="card" aria-label="환율 계산 입력">
+      <div class="grid">
+        <div class="amount">
+          <label for="amount">금액</label>
+          <input id="amount" type="number" min="0" step="any" value="1" inputmode="decimal">
+        </div>
+        <div>
+          <label for="from">보낼 통화</label>
+          <select id="from"></select>
+        </div>
+        <div>
+          <label for="to">받을 통화</label>
+          <select id="to"></select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="calculate" type="button">계산하기</button>
+        <button class="secondary" id="swap" type="button">통화 바꾸기</button>
+      </div>
+
+      <div class="result" aria-live="polite">
+        <div class="result-label">계산 결과</div>
+        <div class="result-value" id="result">CSV를 불러오는 중…</div>
+        <div class="rate-line" id="rateLine"></div>
+      </div>
+
+      <div class="file-row">
+        <input id="file" type="file" accept=".csv,text/csv" aria-label="CSV 파일 선택">
+      </div>
+      <p class="status" id="status">같은 폴더에서 자동으로 CSV를 읽는 중입니다.</p>
+
+      <div class="meta">
+        <div>자료 기준일: <span id="rateDate">-</span></div>
+        <div>출처: <a id="source" href="#" target="_blank" rel="noreferrer">-</a></div>
+        <div>참고: 환전 수수료와 실제 거래 시점의 스프레드는 반영하지 않습니다.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- file://로 직접 열 때 fetch가 차단되는 브라우저를 위한 최신 CSV 스냅샷 -->
+  <script type="text/plain" id="embeddedCsv">rate_date,fetched_at,base_currency,quote_currency,rate,amount,source_url
+2026-09-09,2026-09-10T14:35:44+09:00,USD,EUR,0.85822,1,"https://api.frankfurter.dev/v1/latest?from=USD&to=KRW,JPY,EUR"
+2026-09-09,2026-09-10T14:35:44+09:00,USD,JPY,153.27,1,"https://api.frankfurter.dev/v1/latest?from=USD&to=KRW,JPY,EUR"
+2026-09-09,2026-09-10T14:35:44+09:00,USD,KRW,1336.2,1,"https://api.frankfurter.dev/v1/latest?from=USD&to=KRW,JPY,EUR"</script>
+
+  <script>
+    const csvFileName = '환율_데이터.csv';
+    const embeddedCsv = document.querySelector('#embeddedCsv').textContent.trim();
+    const amountEl = document.querySelector('#amount');
+    const fromEl = document.querySelector('#from');
+    const toEl = document.querySelector('#to');
+    const resultEl = document.querySelector('#result');
+    const rateLineEl = document.querySelector('#rateLine');
+    const statusEl = document.querySelector('#status');
+    const dateEl = document.querySelector('#rateDate');
+    const sourceEl = document.querySelector('#source');
+    let rates = {};
+    let baseCurrency = 'USD';
+    let latestDate = '';
+    let sourceUrl = '';
+
+    function parseCsv(text) {
+      const rows = [], row = [];
+      let field = '', quoted = false;
+      text = text.replace(/^\uFEFF/, '');
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i], next = text[i + 1];
+        if (ch === '"' && quoted && next === '"') { field += '"'; i++; }
+        else if (ch === '"') quoted = !quoted;
+        else if (ch === ',' && !quoted) { row.push(field); field = ''; }
+        else if ((ch === '\n' || ch === '\r') && !quoted) {
+          if (ch === '\r' && next === '\n') i++;
+          row.push(field); field = '';
+          if (row.some(value => value.trim() !== '')) rows.push(row.splice(0));
+        } else field += ch;
+      }
+      if (field || row.length) { row.push(field); if (row.some(value => value.trim() !== '')) rows.push(row); }
+      if (!rows.length) return [];
+      const headers = rows.shift().map(h => h.trim());
+      return rows.map(values => Object.fromEntries(headers.map((h, i) => [h, (values[i] ?? '').trim()])));
+    }
+
+    function useCsv(text, label) {
+      const rows = parseCsv(text).filter(row => row.base_currency && row.quote_currency && Number.isFinite(Number(row.rate)));
+      if (!rows.length) throw new Error('유효한 환율 행이 없습니다.');
+      baseCurrency = rows[0].base_currency.toUpperCase();
+      const ordered = [...rows].sort((a, b) => (a.rate_date || '').localeCompare(b.rate_date || '') || (a.fetched_at || '').localeCompare(b.fetched_at || ''));
+      rates = { [baseCurrency]: 1 };
+      for (const row of ordered) rates[row.quote_currency.toUpperCase()] = Number(row.rate);
+      const dates = rows.map(row => row.rate_date).filter(Boolean).sort();
+      latestDate = dates.at(-1) || '-';
+      sourceUrl = rows.at(-1).source_url || '';
+      const currencies = Object.keys(rates).sort((a, b) => a === baseCurrency ? -1 : b === baseCurrency ? 1 : a.localeCompare(b));
+      const previousFrom = fromEl.value || baseCurrency;
+      const previousTo = toEl.value || currencies.find(code => code !== baseCurrency) || baseCurrency;
+      fromEl.innerHTML = currencies.map(code => `<option value="${code}">${code}</option>`).join('');
+      toEl.innerHTML = currencies.map(code => `<option value="${code}">${code}</option>`).join('');
+      fromEl.value = currencies.includes(previousFrom) ? previousFrom : baseCurrency;
+      toEl.value = currencies.includes(previousTo) && previousTo !== fromEl.value ? previousTo : (currencies.find(code => code !== fromEl.value) || fromEl.value);
+      dateEl.textContent = latestDate;
+      if (sourceUrl) { sourceEl.href = sourceUrl; sourceEl.textContent = sourceUrl; }
+      statusEl.className = 'status';
+      statusEl.textContent = `${label} · ${rows.length}개 환율 행을 읽었습니다.`;
+      calculate();
+    }
+
+    function formatNumber(value, currency) {
+      try { return new Intl.NumberFormat('ko-KR', { style:'currency', currency, maximumFractionDigits: currency === 'KRW' || currency === 'JPY' ? 0 : 4 }).format(value); }
+      catch { return `${value.toLocaleString('ko-KR')} ${currency}`; }
+    }
+
+    function calculate() {
+      const amount = Number(amountEl.value), from = fromEl.value, to = toEl.value;
+      if (!Number.isFinite(amount) || amount < 0 || rates[from] == null || rates[to] == null) {
+        resultEl.textContent = '금액과 통화를 확인하세요.'; rateLineEl.textContent = ''; return;
+      }
+      const usdAmount = from === baseCurrency ? amount : amount / rates[from];
+      const converted = to === baseCurrency ? usdAmount : usdAmount * rates[to];
+      const oneUnit = to === baseCurrency ? 1 / rates[from] : (from === baseCurrency ? rates[to] : rates[to] / rates[from]);
+      resultEl.textContent = formatNumber(converted, to);
+      rateLineEl.textContent = `1 ${from} = ${oneUnit.toLocaleString('ko-KR', { maximumFractionDigits: 8 })} ${to}`;
+    }
+
+    document.querySelector('#calculate').addEventListener('click', calculate);
+    amountEl.addEventListener('input', calculate);
+    fromEl.addEventListener('change', calculate);
+    toEl.addEventListener('change', calculate);
+    document.querySelector('#swap').addEventListener('click', () => { const old = fromEl.value; fromEl.value = toEl.value; toEl.value = old; calculate(); });
+    document.querySelector('#file').addEventListener('change', event => {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => { try { useCsv(reader.result, `선택한 파일: ${file.name}`); } catch (error) { statusEl.className='status error'; statusEl.textContent=error.message; } };
+      reader.readAsText(file, 'utf-8');
+    });
+
+    try { useCsv(embeddedCsv, '기본 CSV 스냅샷 로드 완료'); }
+    catch (error) { statusEl.className='status error'; statusEl.textContent=error.message; }
+
+    fetch(csvFileName, { cache:'no-store' })
+      .then(response => { if (!response.ok) throw new Error('CSV 자동 읽기 실패'); return response.text(); })
+      .then(text => useCsv(text, '자동으로 CSV 로드 완료'))
+      .catch(() => {
+        try {
+          useCsv(embeddedCsv, '로컬 파일용 CSV 스냅샷 로드 완료');
+          statusEl.textContent += ' 최신 CSV가 있으면 아래에서 파일을 선택해 갱신하세요.';
+        } catch (error) {
+          statusEl.className='status error';
+          statusEl.textContent='CSV를 읽지 못했습니다. 아래에서 환율_데이터.csv를 선택하세요.';
+          resultEl.textContent='CSV 파일을 선택하세요.';
+        }
+      });
+  </script>
+</body>
+</html>

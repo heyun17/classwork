@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마크다운 뷰어</title>
+    <!-- 마크다운 파싱 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background-color: #212529;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        /* 상단 확장 마크다운 명령어 안내 바 */
+        .cheatsheet {
+            background-color: #e9ecef;
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 8px 12px;
+            font-size: 0.8rem;
+            color: #495057;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+
+        .cheat-group {
+            background-color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cheat-label {
+            font-weight: bold;
+            color: #0d6efd;
+            white-space: nowrap;
+        }
+
+        .cheat-group code {
+            font-family: monospace;
+            background-color: #f1f3f5;
+            padding: 1px 4px;
+            border-radius: 3px;
+            color: #d63384;
+            white-space: nowrap;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 210px);
+            overflow: hidden;
+        }
+
+        .pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            height: 100%;
+        }
+
+        .pane-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #6c757d;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        #editor {
+            flex: 1;
+            width: 100%;
+            padding: 15px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            resize: none;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        #editor:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+        }
+
+        #preview {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background-color: #ffffff;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        /* 뷰어 내부 마크다운 스타일링 */
+        #preview h1, #preview h2, #preview h3, #preview h4 {
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.3em;
+        }
+
+        #preview p {
+            margin-bottom: 1em;
+        }
+
+        #preview ul, #preview ol {
+            margin-left: 20px;
+            margin-bottom: 1em;
+        }
+
+        #preview code {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #d63384;
+        }
+
+        #preview pre {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+
+        #preview pre code {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        #preview blockquote {
+            border-left: 4px solid #0d6efd;
+            padding-left: 12px;
+            color: #6c757d;
+            margin-bottom: 1em;
+        }
+
+        #preview table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+
+        #preview th, #preview td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #preview th {
+            background-color: #f1f3f5;
+        }
+
+        #preview details {
+            margin-bottom: 1em;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+
+        #preview summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>Markdown Live Viewer</header>
+
+    <!-- 확장된 마크다운 명령어 안내 바 -->
+    <div class="cheatsheet">
+        <div class="cheat-group">
+            <span class="cheat-label">제목</span>
+            <code># H1</code> <code>## H2</code> <code>### H3</code> <code>#### H4</code>
+        </div>
+        <div class="cheat-group">
+            <span class="cheat-label">텍스트</span>
+            <code>**굵게**</code> <code>*기울임*</code> <code>~~취소선~~</code> <code><u>밑줄</u></code>
+        </div>
+        <div class="cheat-group">
+            <span class="cheat-label">목록</span>
+            <code>- 순서없음</code> <code>1. 순서있음</code>
+        </div>
+        <div class="cheat-group">
+            <span class="cheat-label">체크리스트</span>
+            <code>- [ ] 미완료</code> <code>- [x] 완료</code>
+        </div>
+        <div class="cheat-group">
+            <span class="cheat-label">코드</span>
+            <code>`인라인`</code> <code>```언어 코드블록```</code>
+        </div>
+        <div class="cheat-group">
+            <span class="cheat-label">인용/구분선</span>
+            <code>> 인용구</code> <code>--- (구분선)</code>
+        </div>
+        <div class="cheat-group">
+            <span class="cheat-label">링크/미디어</span>
+            <code>[텍스트](URL)</code> <code>![설명](이미지URL)</code>
+        </div>
+        <div class="cheat-group">
+            <span class="cheat-label">표(Table)</span>
+            <code>| 제목 | 내용 |</code> <code>| --- | --- |</code>
+        </div>
+        <div class="cheat-group">
+            <span class="cheat-label">접기/펼치기</span>
+            <code>&lt;details&gt;&lt;summary&gt;제목&lt;/summary&gt;내용&lt;/details&gt;</code>
+        </div>
+        <div class="cheat-group">
+            <span class="cheat-label">첨자/기호</span>
+            <code>X<sub>아래</sub></code> <code>X<sup>위</sup></code> <code>&amp;copy; (©)</code>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 왼쪽: 마크다운 입력 창 -->
+        <div class="pane">
+            <div class="pane-title">Input (Markdown)</div>
+            <textarea id="editor" placeholder="마크다운 문법으로 내용을 입력하세요..."></textarea>
+        </div>
+
+        <!-- 오른쪽: 렌더링 뷰어 창 -->
+        <div class="pane">
+            <div class="pane-title">Viewer (HTML)</div>
+            <div id="preview"></div>
+        </div>
+    </div>
+
+    <script>
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('preview');
+
+        // 다양한 문법 예시를 포함한 초기 텍스트
+        const defaultText = `# 마크다운 종합 안내
+
+상단 안내 바를 참고하여 다양한 마크다운을 작성해보세요.
+
+---
+
+## 1. 텍스트 스타일
+- **굵은 글씨** / *기울임* / ~~취소선~~ / <u>밑줄</u>
+- 위첨자: H<sup>2</sup>O / 아래첨자: CO<sub>2</sub>
+
+## 2. 체크리스트
+- [x] 상단 명령어 목록 확장하기
+- [ ] 마크다운 실습해보기
+
+## 3. 표 (Table)
+| 항목 | 설명 | 비고 |
+| :--- | :---: | ---: |
+| 좌측 정렬 | 중앙 정렬 | 우측 정렬 |
+| 데이터 1 | 데이터 2 | 데이터 3 |
+
+## 4. 코드 블록
+\`\`\`html
+<h1>Hello World</h1>
+\`\`\`
+
+## 5. 접기/펼치기 (HTML 응용)
+<details>
+<summary>여기를 클릭하여 내용 열기</summary>
+숨겨진 내용이 여기에 표시됩니다.
+</details>
+
+> **Tip:** HTML 태그(<u>,<sub>,<sup>,<details> 등)도 함께 활용할 수 있습니다.
+`;
+
+        editor.value = defaultText;
+
+        function updatePreview() {
+            const rawMarkdown = editor.value;
+            preview.innerHTML = marked.parse(rawMarkdown);
+        }
+
+        editor.addEventListener('input', updatePreview);
+        updatePreview();
+    </script>
+</body>
+</html>

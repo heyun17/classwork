@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Network Recovery Agent 기획서</title>
+<style>
+:root{
+  --ink:#1c1b19; --paper:#ffffff; --soft:#f7f6f3; --soft2:#efedea;
+  --line:#e3e0db; --line2:#cfcbc4; --muted:#86827b; --muted2:#5b574f;
+  --accent:#b23c0a; --accent-soft:#fdf3ec; --ink2:#2f2d2a;
+  --pa:#15803d; --pab:#bcdcc8; --pas:#f1f7f3;
+  --px:#b91c1c; --pxb:#f0c3c3; --pxs:#fdf2f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{
+  font-family:'Noto Sans KR','Malgun Gothic',sans-serif;
+  color:var(--ink);background:#eceae5;line-height:1.65;
+  font-weight:400;letter-spacing:-.003em;
+}
+.page{
+  width:210mm;height:297mm;background:var(--paper);margin:8mm auto;
+  padding:17mm 18mm 14mm;position:relative;
+  box-shadow:0 1px 14px rgba(0,0,0,.07);overflow:hidden;
+}
+@page{size:A4 portrait;margin:0}
+@media print{
+  body{background:#fff}
+  .page{margin:0;box-shadow:none}
+}
+.rh{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:22px;padding-bottom:8px;border-bottom:1px solid var(--line)
+}
+.rh .l{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--muted2)}
+.rh .l b{color:var(--accent)}
+.rh .r{font-size:10.5px;color:var(--muted);letter-spacing:.04em;display:flex;align-items:baseline;gap:12px}
+.rh .r .pg{
+  font-family:'Consolas','JetBrains Mono',monospace;font-size:12px;font-weight:700;
+  color:var(--ink);letter-spacing:.06em;border:1px solid var(--line2);
+  padding:1px 7px;border-radius:3px
+}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--accent);margin-bottom:7px}
+h1{font-size:26px;font-weight:900;line-height:1.25;letter-spacing:-.02em;margin-bottom:9px}
+.lede{font-size:13px;color:var(--muted2);line-height:1.7;margin-bottom:14px;max-width:96%}
+h2{
+  font-size:12.5px;font-weight:700;letter-spacing:.09em;color:var(--accent);
+  margin:17px 0 9px;display:flex;align-items:center;gap:10px
+}
+h2::after{content:"";flex:1;height:1px;background:var(--line)}
+h3{font-size:15px;font-weight:700;margin:14px 0 5px}
+p{font-size:13px;line-height:1.75;margin:8px 0;color:var(--ink2)}
+strong{font-weight:700;color:var(--ink)}
+code{
+  font-family:'Consolas','JetBrains Mono',monospace;background:var(--soft2);
+  padding:1px 5px;border-radius:3px;font-size:12px;color:var(--accent)
+}
+.mission{
+  border:1px solid var(--line2);border-left:3px solid var(--accent);
+  background:var(--accent-soft);padding:13px 16px;margin:13px 0;border-radius:4px
+}
+.mission b{font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--accent)}
+.mission h3{font-size:14px;margin:4px 0 0;line-height:1.5}
+.mission .wy{
+  margin:9px 0 0;padding-top:8px;border-top:1px solid var(--line2);
+  font-size:12px;color:var(--muted2);line-height:1.65
+}
+.mission .wy b{color:var(--ink);font-size:10.5px;letter-spacing:.06em}
+.grid{
+  display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin:12px 0
+}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.cell{background:var(--paper);padding:13px 13px}
+.cell .num{font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.cell h4{font-size:13px;font-weight:700;margin:5px 0 4px;line-height:1.35}
+.cell p{font-size:11.3px;color:var(--muted2);margin:0;line-height:1.55}
+.flow{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.flow span{
+  border:1px solid var(--line2);padding:6px 9px;background:#fff;border-radius:4px;
+  font-size:11px;font-weight:700
+}
+.flow i{font-style:normal;color:var(--accent);font-weight:900}
+.deflist{margin:10px 0}
+.deflist .d{display:flex;gap:14px;padding:8px 0;border-bottom:1px solid var(--line)}
+.deflist .d:last-child{border-bottom:none}
+.deflist .dt{flex:0 0 27%;font-weight:700;font-size:12.5px}
+.deflist .dt small{display:block;font-weight:400;color:var(--muted);font-size:10.5px;margin-top:1px}
+.deflist .dd{flex:1;font-size:12px;color:var(--muted2);line-height:1.55}
+.warn{
+  background:var(--pxs);border:1px solid var(--pxb);border-radius:4px;
+  padding:10px 13px;margin:12px 0;font-size:12px;color:var(--ink2);line-height:1.6
+}
+.warn b{color:var(--px)}
+.point{
+  border-left:2.5px solid var(--accent);
+  padding:3px 0 3px 16px;margin:13px 0
+}
+.point .pl{font-size:10.5px;font-weight:700;letter-spacing:.09em;color:var(--accent);margin-bottom:4px}
+.point p{margin:0;font-size:12.5px;color:var(--ink2)}
+.term{border:1px solid var(--line2);background:#fbfaf8;margin:12px 0}
+.term .th{
+  background:var(--soft2);padding:5px 12px;font-size:10.5px;color:var(--muted2);
+  border-bottom:1px solid var(--line2);letter-spacing:.04em;font-weight:700;
+  font-family:'Consolas',monospace;display:flex;justify-content:space-between
+}
+.term .tb2{
+  padding:10px 13px;font-family:'Consolas','JetBrains Mono',monospace;
+  font-size:10.8px;line-height:1.72;color:var(--ink2);white-space:pre-wrap
+}
+.term .p{color:var(--accent);font-weight:700}
+.term .g{color:var(--pa)}
+.term .d{color:var(--muted)}
+.brand{
+  position:absolute;bottom:9mm;left:18mm;font-size:9px;color:var(--muted);letter-spacing:.03em
+}
+.brand b{color:var(--muted2);font-weight:500}
+.pagenum{
+  position:absolute;bottom:9mm;right:18mm;font-size:10.5px;color:var(--muted);
+  font-family:'Consolas',monospace
+}
+</style>
+</head>
+<body>
+<section class="page">
+  <div class="rh">
+    <div class="l"><b>NETWORK AUTOMATION</b> · AGENT PLAN</div>
+    <div class="r">Network Recovery Agent <span class="pg">01</span></div>
+  </div>
+
+  <div class="kicker">POWERSHELL · NETWORK · AUTOMATION</div>
+  <h1>네트워크를 끊고, 다시 연결하고,<br>정상 복구까지 확인하는 에이전트</h1>
+  <div class="lede">
+    관리자가 반복해서 수행하는 네트워크 재연결 작업을 하나의 흐름으로 자동화한다.
+    단순히 어댑터를 다시 켜는 것에서 끝나지 않고, 마지막에 <strong>실제 통신 가능 여부까지 확인해 결과를 보고</strong>한다.
+  </div>
+
+  <div class="mission">
+    <b>AGENT MISSION</b>
+    <h3><strong>Network Recovery Agent</strong>가 활성 네트워크 어댑터를 찾아 일시적으로 연결을 끊고,
+    10초 후 다시 연결한 뒤 <code>ping</code>으로 네트워크 복구 여부를 확인한다.</h3>
+    <p class="wy"><b>WHY</b> 네트워크 장애 대응에서 중요한 것은 “다시 켰다”가 아니라
+    <strong>실제로 통신이 정상화되었는지 확인하는 것</strong>이다.</p>
+  </div>
+
+  <h2>사용할 에이전트</h2>
+  <div class="grid g3">
+    <div class="cell">
+      <div class="num">ROLE 01</div>
+      <h4>Detect</h4>
+      <p>현재 상태가 <b>Up</b>인 Wi-Fi 또는 Ethernet 어댑터를 자동으로 찾는다.</p>
+    </div>
+    <div class="cell">
+      <div class="num">ROLE 02</div>
+      <h4>Recover</h4>
+      <p>어댑터를 비활성화하고 10초 대기 후 다시 활성화한다.</p>
+    </div>
+    <div class="cell">
+      <div class="num">ROLE 03</div>
+      <h4>Verify & Report</h4>
+      <p><code>Test-Connection</code>으로 외부 통신을 확인하고 성공·실패를 보고한다.</p>
+    </div>
+  </div>
+
+  <h2>자동화 흐름</h2>
+  <div class="flow">
+    <span>① Active Adapter</span><i>→</i>
+    <span>② Disconnect</span><i>→</i>
+    <span>③ Wait 10s</span><i>→</i>
+    <span>④ Reconnect</span><i>→</i>
+    <span>⑤ Ping Test</span><i>→</i>
+    <span>⑥ Report</span>
+  </div>
+
+  <h2>에이전트 책임과 실행 명령</h2>
+  <div class="deflist">
+    <div class="d">
+      <div class="dt">Adapter Check<small>상태 확인</small></div>
+      <div class="dd"><code>Get-NetAdapter</code>로 현재 연결된 네트워크 어댑터를 확인한다.</div>
+    </div>
+    <div class="d">
+      <div class="dt">Disconnect<small>연결 끊기</small></div>
+      <div class="dd"><code>Disable-NetAdapter</code>를 사용해 대상 어댑터를 비활성화한다.</div>
+    </div>
+    <div class="d">
+      <div class="dt">Reconnect<small>연결 복구</small></div>
+      <div class="dd">10초 후 <code>Enable-NetAdapter</code>로 같은 어댑터를 다시 활성화한다.</div>
+    </div>
+    <div class="d">
+      <div class="dt">Connectivity Test<small>통신 확인</small></div>
+      <div class="dd"><code>Test-Connection 8.8.8.8</code>로 인터넷 통신 가능 여부를 검사한다.</div>
+    </div>
+  </div>
+
+  <div class="term">
+    <div class="th"><span>Network Recovery Agent · Expected Result</span><span>POWERSHELL</span></div>
+    <div class="tb2"><span class="p">Network adapter:</span> Wi-Fi
+Disconnecting network...
+Waiting for 10 seconds...
+Reconnecting network...
+Checking network connection...
+<span class="g">SUCCESS: Network connection is working.</span></div>
+  </div>
+
+  <div class="warn">
+    <b>SAFETY RULE</b>  IP 주소, DNS, Gateway, 방화벽, 드라이버 등 다른 네트워크 설정은 변경하지 않는다.
+    관리자 권한 부족이나 명령 오류가 발생하면 임의로 수정하지 않고 <strong>즉시 중단 후 오류를 보고</strong>한다.
+  </div>
+
+  <div class="point">
+    <div class="pl">SUCCESS CONDITION</div>
+    <p><strong>Network Adapter = Enabled</strong> · <strong>Ping Test = Success</strong> ·
+    최종 상태가 <strong>“Network connection is working.”</strong>으로 보고되면 작업을 완료한다.</p>
+  </div>
+
+  <div class="brand">청년취업사관학교 동대문4기 · <b>기업연계형 AI 서비스·클라우드 실무 과정</b></div>
+  <div class="pagenum">01</div>
+</section>
+</body>
+</html>

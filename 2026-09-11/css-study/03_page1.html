@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>첫 번째 페이지</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>첫 번째 페이지</h1>
+
+    <h2>외부 CSS 사용하기</h2>
+
+    <p>
+        이 페이지는 style.css 파일을 사용하고 있습니다.
+    </p>
+
+    <button onclick="goToPage2()">2페이지로 이동</button>
+
+
+    <script>
+
+        function goToPage2() {
+
+            let password = prompt("암호를 입력하세요.");
+
+            if (password === "123") {
+                alert("암호가 맞습니다.");
+                location.href = "03_page2.html";
+            } else {
+                alert("암호가 틀렸습니다.");
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
