@@ -1,5 +1,11 @@
-﻿# Bootcamp Classwork
+# Bootcamp Classwork
+기업연계형 AI 서비스·클라우드 실무 과정에서
+직접 작성한 실습 코드와 프로젝트를 정리한 저장소입니다.
 
-수업 중 직접 작성한 실습 코드와 작업물을 정리한 저장소입니다.
+## Structure
+- `2026-09-09` - PowerShell, Python 기초
+- `2026-09-10` - Network, API, Public Data
+- `2026-09-11` - CSS, MediaPipe
 
-강의 녹음, 전사문, 개인 학습 기록 및 비공개 자료는 포함하지 않습니다.
+## Repository Policy
+이 저장소에는 수업 중 직접 작성한 실습 결과물만 포함합니다.
