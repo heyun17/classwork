@@ -6,6 +6,7 @@
 - `2026-09-09` - PowerShell, Python 기초
 - `2026-09-10` - Network, API, Public Data
 - `2026-09-11` - CSS, MediaPipe
+- `2026-09-14` - VS Code, Python 기본 문법
 
 ## Repository Policy
 이 저장소에는 수업 중 직접 작성한 실습 결과물만 포함합니다.
