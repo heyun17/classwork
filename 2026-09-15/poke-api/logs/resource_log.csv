@@ -1,0 +1,2 @@
+﻿time,target,action,lib,rows,file_size,width,height,mem_before_mb,mem_after_mb,mem_delta_mb,cpu_pct,elapsed_s
+2026-09-15 19:19:48,pokeapi,fetch,requests-50,,,,,28.3,33.9,5.6,42.7,21.94

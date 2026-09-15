@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>색상값 확인</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    #colorValue {
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    input[type="color"] {
+      width: 100px;
+      height: 100px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>색상값 확인</h1>
+
+  <input type="color" id="colorPicker" value="#3498db">
+
+  <div id="colorValue">#3498db</div>
+
+  <script>
+    const colorPicker = document.getElementById("colorPicker");
+    const colorValue = document.getElementById("colorValue");
+
+    colorPicker.addEventListener("input", function () {
+      colorValue.textContent = colorPicker.value;
+    });
+  </script>
+
+</body>
+</html>

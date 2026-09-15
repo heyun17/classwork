@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>10초 클릭 게임</title>
+<style>
+body { font-family: Arial; text-align:center; margin-top:60px; }
+input, button { font-size:20px; padding:10px; margin:8px; }
+#clickBtn { width:200px; height:100px; font-size:30px; }
+</style>
+</head>
+<body>
+<h1>10초 클릭 게임</h1>
+<p>닉네임 <input id="nickname" placeholder="user02"></p>
+<button id="connectBtn">접속 기록</button>
+<button id="startBtn" disabled>게임 시작</button>
+<h2>남은 시간 : <span id="time">10</span>초</h2>
+<h2>점수 : <span id="score">0</span></h2>
+<button id="clickBtn" disabled>클릭!</button>
+<p id="result"></p>
+
+<script>
+let score=0, time=10, timer;
+const nickname=document.getElementById("nickname");
+const connectBtn=document.getElementById("connectBtn");
+const startBtn=document.getElementById("startBtn");
+const clickBtn=document.getElementById("clickBtn");
+
+connectBtn.onclick=async()=>{
+  if(!nickname.value.trim()){ alert("닉네임을 입력하세요."); return; }
+  await sendLog("connect","");
+  nickname.disabled=true;
+  connectBtn.disabled=true;
+  startBtn.disabled=false;
+  document.getElementById("result").innerText="접속 기록 완료";
+};
+
+startBtn.onclick=async()=>{
+  score=0; time=10;
+  document.getElementById("score").innerText=0;
+  document.getElementById("time").innerText=10;
+  document.getElementById("result").innerText="";
+  startBtn.disabled=true; clickBtn.disabled=false;
+  await sendLog("start","");
+  timer=setInterval(async()=>{
+    time--;
+    document.getElementById("time").innerText=time;
+    if(time<=0){
+      clearInterval(timer);
+      clickBtn.disabled=true; startBtn.disabled=false;
+      document.getElementById("result").innerText="최종 점수 : "+score;
+      await sendLog("end",score);
+    }
+  },1000);
+};
+
+clickBtn.onclick=()=>{
+  score++;
+  document.getElementById("score").innerText=score;
+  sendLog("click",score);
+};
+
+async function sendLog(event,scoreValue){
+  try{
+    await fetch("/log",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({nickname:nickname.value,event:event,score:scoreValue})
+    });
+  }catch(e){ console.log("기록 실패",e); }
+}
+</script>
+</body>
+</html>
