@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}주문 내역 · 페퍼로니 연구소{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>주문 내역</h1>
+    <p>{{ channel or "전체" }} {{ "{:,}".format(total) }}건 중 최근 {{ orders|length }}건</p>
+  </div>
+</section>
+
+<nav class="filters">
+  <a href="{{ url_for('orders') }}"
+     class="{% if not channel %}on{% endif %}">전체</a>
+  {% for c in channels %}
+  <a href="{{ url_for('orders', channel=c) }}"
+     class="{% if c == channel %}on{% endif %}">{{ c }}</a>
+  {% endfor %}
+</nav>
+
+{% if orders %}
+<div class="table-wrap">
+  <table class="ledger">
+    <thead>
+      <tr><th>번호</th><th>주문 시각</th><th>메뉴</th><th>사이즈</th><th>엣지</th><th class="num">수량</th><th>채널</th><th class="num">금액</th></tr>
+    </thead>
+    <tbody>
+      {% for o in orders %}
+      <tr>
+        <td class="muted">#{{ o.id }}</td>
+        <td>{{ o.ordered_at[5:16] }}</td>
+        <td>{{ o.emoji }} {{ o.menu_name }}</td>
+        <td>{{ o.size }}</td>
+        <td>{{ o.crust }}</td>
+        <td class="num">{{ o.qty }}</td>
+        <td><span class="chip ch-{{ o.channel }}">{{ o.channel }}</span></td>
+        <td class="num strong">{{ "{:,}".format(o.amount) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p class="empty">아직 주문이 없습니다. <a href="{{ url_for('order') }}">첫 주문 넣기</a></p>
+{% endif %}
+{% endblock %}

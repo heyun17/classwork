@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}대시보드 · 페퍼로니 연구소{% endblock %}
+{% block main_class %}wide{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>사장님 대시보드</h1>
+    <p>{{ s.start }} ~ {{ s.end }} · DB의 마지막 주문일 기준</p>
+  </div>
+  <nav class="filters">
+    {% for d, label in periods.items() %}
+    <a href="{{ url_for('dashboard', days=d) }}"
+       class="{% if d == days %}on{% endif %}">{{ label }}</a>
+    {% endfor %}
+  </nav>
+</section>
+
+<!-- ① 카드 -->
+<div class="cards">
+  <div class="card">
+    <span>매출</span>
+    <b>{{ "{:,}".format(s.sales) }}원</b>
+    {% if s.change is not none %}
+    <small class="{{ 'up' if s.change >= 0 else 'down' }}">
+      직전 {{ periods[days] }} 대비 {{ '%+d' % s.change }}%</small>
+    {% endif %}
+  </div>
+  <div class="card">
+    <span>주문</span><b>{{ s.orders }}건</b><small>{{ s.pizzas }}판</small>
+  </div>
+  <div class="card">
+    <span>주문당 평균</span><b>{{ "{:,}".format(s.avg) }}원</b>
+  </div>
+  <div class="card">
+    <span>1등 메뉴</span>
+    {% if s.by_menu %}
+    {% set best = s.by_menu[0] %}
+    <b>{{ best.emoji }} {{ best.name }}</b><small>{{ best.qty }}판</small>
+    {% else %}
+    <b>-</b>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ② AI 인사이트 -->
+<section class="insight">
+  <div class="insight-head">
+    <h2>🤖 AI 인사이트</h2>
+    <button class="btn" id="insightBtn" type="button">조언 받기</button>
+  </div>
+  <p class="insight-body" id="insightBody">
+    {% if has_key %}버튼을 누르면 위 기간의 요약을 {{ model }}에게 보내 조언을 받아요.
+    {% else %}.env에 OPENAI_API_KEY를 넣으면 사용할 수 있어요. 나머지 화면은 키 없이도 동작합니다.{% endif %}
+  </p>
+  <details class="sent" id="sentBox" hidden>
+    <summary>AI에게 보낸 내용 보기</summary>
+    <pre id="sentText"></pre>
+  </details>
+</section>
+
+<div class="panels">
+  <!-- ③ 날짜별 매출 -->
+  <section class="panel">
+    <h2>날짜별 매출</h2>
+    {% set top = s.daily | map(attribute='sales') | max if s.daily else 1 %}
+    {% for d in s.daily %}
+    {% set pct = (d.sales / top * 100) | round %}
+    <div class="bar">
+      <span class="label">{{ d.day[5:] }}</span>
+      <span class="track"><span class="fill" style="width: {{ pct }}%"></span></span>
+      <span class="val">{{ "{:,}".format((d.sales / 1000) | round | int) }}천</span>
+    </div>
+    {% else %}
+    <p class="empty">이 기간에는 주문이 없습니다.</p>
+    {% endfor %}
+  </section>
+
+  <!-- ④ 메뉴 순위 -->
+  <section class="panel">
+    <h2>메뉴별 판매</h2>
+    {% set top = s.by_menu | map(attribute='qty') | max if s.by_menu else 1 %}
+    {% for m in s.by_menu %}
+    {% set pct = (m.qty / top * 100) | round %}
+    <div class="bar">
+      <span class="label">{{ m.emoji }} {{ m.name }}</span>
+      <span class="track">
+        <span class="fill {% if loop.last %}low{% endif %}"
+              style="width: {{ pct }}%"></span>
+      </span>
+      <span class="val">{{ m.qty }}판</span>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- ⑤ 시간대 -->
+  <section class="panel">
+    <h2>시간대별 주문</h2>
+    {% set top = s.by_hour | map(attribute='orders') | max if s.by_hour else 1 %}
+    <div class="columns">
+      {% for h in s.by_hour %}
+      {% set pct = (h.orders / top * 100) | round %}
+      <div class="col" title="{{ h.hour }}시 {{ h.orders }}건">
+        <span class="stick" style="height: {{ pct }}%"></span>
+        <small>{{ h.hour }}</small>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ⑥ 채널 · 엣지 -->
+  <section class="panel">
+    <h2>받는 방법 · 엣지</h2>
+    {% for group in [s.by_channel, s.by_crust] %}
+    <div class="stack">
+      {% for g in group %}
+      <span class="seg seg{{ loop.index }}" style="flex: {{ g.n }}"></span>
+      {% endfor %}
+    </div>
+    <p class="legend">
+      {% for g in group %}
+      <span><i class="seg{{ loop.index }}"></i>{{ g.name }} {{ g.pct }}%</span>
+      {% endfor %}
+    </p>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  const btn = document.getElementById("insightBtn");
+  const body = document.getElementById("insightBody");
+
+  btn.addEventListener("click", async () => {
+    btn.disabled = true;                       // 누르는 동안 막기
+    body.textContent = "🍕 요약을 보내고 답을 기다리는 중…";
+
+    try {
+      // 서버의 /api/insight 에 기간을 JSON 으로 보내기
+      const res = await fetch("{{ url_for('api_insight') }}", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ days: {{ days }} }),
+      });
+      const data = await res.json();           // {ok, message, summary}
+
+      body.textContent = data.message;
+      body.classList.toggle("error", !data.ok);
+      document.getElementById("sentText").textContent = data.summary;
+      document.getElementById("sentBox").hidden = false;
+    } catch (err) {
+      body.textContent = "서버에 연결하지 못했습니다. 서버가 켜져 있는지 확인하세요.";
+      body.classList.add("error");
+    }
+    btn.disabled = false;                      // 다시 누를 수 있게
+  });
+</script>
+{% endblock %}

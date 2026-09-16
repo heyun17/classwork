@@ -1,0 +1,201 @@
+/* ───────── 페퍼로니 연구소 공통 스타일 (제공 파일) ───────── */
+:root {
+  --tomato: #d6332a;
+  --tomato-dark: #a8241d;
+  --basil: #2e7d4f;
+  --cheese: #ffc83d;
+  --ink: #2a1f1a;
+  --flour: #fffdf8;
+  --line: #eadfd3;
+  --muted: #7a6a60;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--flour);
+  color: var(--ink);
+  font-family: "Gowun Dodum", "Malgun Gothic", sans-serif;
+  line-height: 1.6;
+}
+h1, h2, h3, .logo, .btn, .price { font-family: "Black Han Sans", "Malgun Gothic", sans-serif; font-weight: 400; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--cheese); outline-offset: 3px; }
+
+/* 체크무늬 식탁보 띠 — 이 가게의 얼굴 */
+.cloth {
+  height: 18px;
+  background:
+    repeating-linear-gradient(90deg, rgba(214,51,42,.9) 0 18px, transparent 18px 36px),
+    repeating-linear-gradient(0deg, rgba(214,51,42,.55) 0 9px, transparent 9px 18px),
+    #fff;
+}
+
+/* 상단 */
+.top { background: var(--tomato); color: #fff; }
+.top-inner {
+  max-width: 880px; margin: 0 auto; padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.logo { font-size: 1.6rem; text-decoration: none; letter-spacing: .5px; }
+.nav { display: flex; gap: 6px; }
+.nav a {
+  text-decoration: none; padding: 6px 14px; border-radius: 999px;
+  border: 2px solid rgba(255,255,255,.6);
+}
+.nav a:hover, .nav a.on { background: #fff; color: var(--tomato); border-color: #fff; }
+
+main { max-width: 880px; margin: 0 auto; padding: 28px 20px 60px; }
+.foot { text-align: center; color: var(--muted); font-size: .85rem; padding: 0 0 30px; }
+
+/* 버튼 */
+.btn {
+  display: inline-block; border: 0; cursor: pointer; text-decoration: none;
+  background: var(--tomato); color: #fff; font-size: 1.1rem;
+  padding: 10px 22px; border-radius: 10px; box-shadow: 0 4px 0 var(--tomato-dark);
+}
+.btn:active { transform: translateY(4px); box-shadow: none; }
+.btn.ghost { background: #fff; color: var(--tomato); border: 2px solid var(--tomato); box-shadow: none; }
+
+/* ───────── 메뉴판 (index.html) ───────── */
+.hero { display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 18px; }
+.hero h1 { font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.1; margin: 0; }
+.hero p { margin: 6px 0 0; color: var(--muted); }
+.board { border-top: 3px solid var(--ink); list-style: none; margin: 0; padding: 0; }
+.dish {
+  display: grid; grid-template-columns: 56px 1fr auto; gap: 4px 16px; align-items: center;
+  padding: 16px 4px; border-bottom: 1px dashed var(--line);
+}
+.dish .emoji { font-size: 2.4rem; grid-row: span 2; text-align: center; }
+.dish .name { display: flex; align-items: baseline; gap: 8px; font-size: 1.35rem; }
+.dish .name h3 { margin: 0; font-size: inherit; }
+.dish .dots { flex: 1; border-bottom: 2px dotted #cbb8a8; transform: translateY(-5px); min-width: 20px; }
+.dish .price { font-size: 1.2rem; white-space: nowrap; }
+.dish .price small { font-family: "Gowun Dodum", sans-serif; color: var(--muted); font-size: .8rem; margin-right: 4px; }
+.dish .desc { color: var(--muted); margin: 0; }
+.dish .go { grid-column: 3; grid-row: 1 / span 2; }
+.tag {
+  font-family: "Gowun Dodum", sans-serif; font-size: .75rem; font-weight: 700;
+  background: var(--cheese); padding: 2px 8px; border-radius: 999px; white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .dish { grid-template-columns: 44px 1fr; }
+  .dish .go { grid-column: 2; grid-row: auto; justify-self: start; }
+}
+
+/* ───────── 주문서 (order.html) ───────── */
+.slip {
+  background: #fff; border: 2px solid var(--ink); border-radius: 14px;
+  padding: 24px; max-width: 560px; margin: 0 auto; position: relative;
+}
+.slip h1 { margin: 0 0 4px; font-size: 2rem; }
+.slip .sub { margin: 0 0 18px; color: var(--muted); }
+.field { margin: 18px 0; border: 0; padding: 0; }
+.field > label, .field > legend { font-weight: 700; display: block; margin-bottom: 8px; }
+select, input[type=number] {
+  width: 100%; font: inherit; padding: 10px 12px;
+  border: 2px solid var(--line); border-radius: 10px; background: #fff;
+}
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choices label { cursor: pointer; }
+.choices input { position: absolute; opacity: 0; }
+.choices span {
+  display: inline-block; padding: 8px 14px; border: 2px solid var(--line); border-radius: 10px;
+}
+.choices input:checked + span { border-color: var(--tomato); background: #fff0ee; color: var(--tomato-dark); font-weight: 700; }
+.choices input:focus-visible + span { outline: 3px solid var(--cheese); }
+.total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-top: 2px dashed var(--ink); margin-top: 22px; padding-top: 14px;
+}
+.total b { font-family: "Black Han Sans", sans-serif; font-weight: 400; font-size: 1.8rem; color: var(--tomato); }
+
+/* ───────── 주문 완료 (done.html) ───────── */
+.oven { text-align: center; margin-bottom: 16px; }
+.oven .fire { font-size: 3.5rem; display: inline-block; animation: bake 1.2s ease-in-out infinite alternate; }
+@keyframes bake { from { transform: scale(1); } to { transform: scale(1.12) rotate(-6deg); } }
+.oven h1 { margin: 6px 0 0; font-size: 2.2rem; }
+.receipt {
+  background: #fff; max-width: 380px; margin: 0 auto; padding: 22px 24px 26px;
+  border: 1px solid var(--line);
+  /* 아래쪽 톱니 모양 = 영수증 */
+  -webkit-mask: radial-gradient(circle 7px at 50% 100%, #0000 98%, #000) 50% 0 / 18px 100%;
+          mask: radial-gradient(circle 7px at 50% 100%, #0000 98%, #000) 50% 0 / 18px 100%;
+}
+.receipt dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0; }
+.receipt dt { color: var(--muted); }
+.receipt dd { margin: 0; text-align: right; font-weight: 700; }
+.receipt .sum { border-top: 2px dashed var(--ink); margin-top: 12px; padding-top: 10px; }
+.receipt .sum dd { font-family: "Black Han Sans", sans-serif; font-weight: 400; font-size: 1.6rem; color: var(--tomato); }
+.notice { max-width: 380px; margin: 16px auto; font-size: .9rem; color: var(--muted); text-align: center; }
+.actions { display: flex; gap: 10px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) { .oven .fire { animation: none; } }
+
+/* ───────── 공통 추가 ───────── */
+main.wide { max-width: 1040px; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 16px; }
+.filters a {
+  text-decoration: none; padding: 5px 14px; border-radius: 999px;
+  border: 2px solid var(--line); background: #fff;
+}
+.filters a.on { border-color: var(--ink); background: var(--ink); color: #fff; }
+.empty { color: var(--muted); padding: 30px 0; text-align: center; }
+.top-inner { max-width: 1040px; }
+
+/* ───────── 주문 내역 (orders.html) ───────── */
+.table-wrap { overflow-x: auto; border-top: 3px solid var(--ink); }
+.ledger { width: 100%; border-collapse: collapse; min-width: 640px; }
+.ledger th, .ledger td { padding: 9px 10px; border-bottom: 1px dashed var(--line); text-align: left; white-space: nowrap; }
+.ledger th { font-size: .85rem; color: var(--muted); font-weight: 700; }
+.ledger .num { text-align: right; }
+.ledger .strong { font-weight: 700; }
+.ledger .muted { color: var(--muted); }
+.chip { font-size: .8rem; padding: 2px 9px; border-radius: 999px; background: #f3ece6; }
+.chip.ch-배달 { background: #fde2df; color: var(--tomato-dark); }
+.chip.ch-포장 { background: #fff1c9; color: #7a5600; }
+.chip.ch-매장 { background: #dcefe4; color: var(--basil); }
+
+/* ───────── 대시보드 (dashboard.html) ───────── */
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.card { background: #fff; border: 2px solid var(--ink); border-radius: 12px; padding: 14px 16px; }
+.card span { display: block; color: var(--muted); font-size: .9rem; }
+.card b { display: block; font-family: "Black Han Sans", sans-serif; font-weight: 400; font-size: 1.6rem; margin: 2px 0; }
+.card small { color: var(--muted); }
+.card small.up { color: var(--basil); font-weight: 700; }
+.card small.down { color: var(--tomato); font-weight: 700; }
+
+.insight {
+  margin: 16px 0; padding: 16px 18px; border-radius: 12px;
+  background: #fff8df; border: 2px dashed #e0b54a;
+}
+.insight-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.insight h2 { margin: 0; font-size: 1.4rem; }
+.insight-body { white-space: pre-line; margin: 10px 0 0; line-height: 1.8; }
+.insight-body.error { color: var(--tomato-dark); }
+.btn:disabled { opacity: .6; cursor: wait; }
+.sent { margin-top: 10px; font-size: .9rem; color: var(--muted); }
+.sent pre { white-space: pre-wrap; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid var(--line); }
+
+.panels { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.panel { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.panel h2 { margin: 0 0 10px; font-size: 1.2rem; }
+.bar { display: grid; grid-template-columns: 96px 1fr 58px; gap: 8px; align-items: center; margin: 6px 0; font-size: .9rem; }
+.bar .track { height: 14px; background: #f3ece6; border-radius: 7px; overflow: hidden; }
+.bar .fill { display: block; height: 100%; background: var(--tomato); border-radius: 7px; }
+.bar .fill.low { background: var(--cheese); }
+.bar .val { text-align: right; color: var(--muted); }
+.columns { display: flex; align-items: end; gap: 6px; height: 170px; }
+.col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: end; height: 100%; }
+.stick { width: 100%; background: var(--basil); border-radius: 6px 6px 0 0; min-height: 2px; }
+.col small { color: var(--muted); margin-top: 4px; }
+.stack { display: flex; height: 22px; border-radius: 8px; overflow: hidden; margin: 10px 0 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 14px; font-size: .88rem; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; }
+.seg1 { background: var(--tomato); }
+.seg2 { background: var(--basil); }
+.seg3 { background: #c9892b; }
+
+@media (max-width: 760px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+  .panels { grid-template-columns: 1fr; }
+}

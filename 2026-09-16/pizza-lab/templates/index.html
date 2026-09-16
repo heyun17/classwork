@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}메뉴판 · 페퍼로니 연구소{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>오늘도 치즈는<br>넉넉하게</h1>
+    <p>메뉴 {{ menus|length }}종 · R / L 사이즈</p>
+  </div>
+  <a class="btn" href="{{ url_for('order') }}">바로 주문하기</a>
+</section>
+
+<ul class="board">
+  {% for m in menus %}
+  <li class="dish">
+    <div class="emoji">{{ m.emoji }}</div>
+    <div class="name">
+      <h3>{{ m.name }}</h3>
+      {% if m.tag %}<span class="tag">{{ m.tag }}</span>{% endif %}
+      <span class="dots"></span>
+      <span class="price"><small>R</small>{{ "{:,}".format(m.price_r) }}</span>
+      <span class="price"><small>L</small>{{ "{:,}".format(m.price_l) }}</span>
+    </div>
+    <p class="desc">{{ m.description }}</p>
+    <a class="btn ghost go" href="{{ url_for('order', menu_id=m.id) }}">이걸로 주문</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

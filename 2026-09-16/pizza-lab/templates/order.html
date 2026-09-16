@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}주문하기 · 페퍼로니 연구소{% endblock %}
+
+{% block content %}
+<form class="slip" method="post" action="{{ url_for('order') }}">
+  <h1>주문서</h1>
+  <p class="sub">고르면 아래 금액이 바로 바뀌어요.</p>
+
+  <div class="field">
+    <label for="menu_id">메뉴</label>
+    <select id="menu_id" name="menu_id">
+      {% for m in menus %}
+      <option value="{{ m.id }}" {% if m.id == selected %}selected{% endif %}>{{ m.emoji }} {{ m.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <fieldset class="field">
+    <legend>사이즈</legend>
+    <div class="choices">
+      <label><input type="radio" name="size" value="R" checked><span>R · 한 판 혼자</span></label>
+      <label><input type="radio" name="size" value="L"><span>L · 둘 이상</span></label>
+    </div>
+  </fieldset>
+
+  <fieldset class="field">
+    <legend>엣지</legend>
+    <div class="choices">
+      {% for name, extra in crusts.items() %}
+      <label>
+        <input type="radio" name="crust" value="{{ name }}" {% if loop.first %}checked{% endif %}>
+        <span>{{ name }}{% if extra %} +{{ "{:,}".format(extra) }}{% endif %}</span>
+      </label>
+      {% endfor %}
+    </div>
+  </fieldset>
+
+  <div class="field">
+    <label for="qty">수량</label>
+    <input id="qty" name="qty" type="number" min="1" max="10" value="1">
+  </div>
+
+  <fieldset class="field">
+    <legend>받는 방법</legend>
+    <div class="choices">
+      {% for c in channels %}
+      <label><input type="radio" name="channel" value="{{ c }}" {% if loop.first %}checked{% endif %}><span>{{ c }}</span></label>
+      {% endfor %}
+    </div>
+  </fieldset>
+
+  <div class="total">
+    <span>예상 금액</span>
+    <b id="total">0원</b>
+  </div>
+  <p style="text-align:right;margin:14px 0 0">
+    <button class="btn" type="submit">주문 넣기</button>
+  </p>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+  // Flask가 넘겨준 파이썬 데이터를 자바스크립트로 받기
+  const MENUS = {{ menus|tojson }};
+  const CRUSTS = {{ crusts|tojson }};
+
+  const form = document.querySelector(".slip");
+
+  function updateTotal() {
+    const menu = MENUS.find(m => m.id === Number(form.menu_id.value));
+    const size = form.size.value;
+    const crust = form.crust.value;
+    const qty = Number(form.qty.value) || 0;
+
+    const unit = (size === "R" ? menu.price_r : menu.price_l) + CRUSTS[crust];
+    document.getElementById("total").textContent = (unit * qty).toLocaleString() + "원";
+  }
+
+  form.addEventListener("input", updateTotal);   // 무엇이든 바뀌면 다시 계산
+  updateTotal();                                  // 처음 한 번
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}주문 완료 · 페퍼로니 연구소{% endblock %}
+
+{% block content %}
+<div class="oven">
+  <span class="fire">🔥</span>
+  <h1>오븐에 들어갔어요!</h1>
+  <p>주문 #{{ order.id }} · {{ order.ordered_at[11:16] }} · {{ order.channel }}</p>
+</div>
+
+<div class="receipt">
+  <dl>
+    <dt>메뉴</dt><dd>{{ order.emoji }} {{ order.menu_name }}</dd>
+    <dt>사이즈</dt><dd>{{ order.size }}</dd>
+    <dt>엣지</dt><dd>{{ order.crust }}</dd>
+    <dt>수량</dt><dd>{{ order.qty }}판</dd>
+  </dl>
+  <dl class="sum">
+    <dt>합계</dt><dd>{{ "{:,}".format(order.amount) }}원</dd>
+  </dl>
+</div>
+
+<p class="notice">shop.db에 저장되었습니다. 새로고침해도 주문이 두 번 들어가지 않아요.</p>
+
+<div class="actions">
+  <a class="btn ghost" href="{{ url_for('orders') }}">주문 내역 보기</a>
+  <a class="btn" href="{{ url_for('order', menu_id=order.menu_id) }}">같은 메뉴 또 주문</a>
+</div>
+{% endblock %}

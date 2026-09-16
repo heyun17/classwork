@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}페퍼로니 연구소{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="logo" href="{{ url_for('index') }}">🍕 페퍼로니 연구소</a>
+      <nav class="nav">
+        {% set here = request.endpoint %}
+        <a href="{{ url_for('index') }}" class="{% if here == 'index' %}on{% endif %}">메뉴판</a>
+        <a href="{{ url_for('order') }}" class="{% if here in ('order', 'done') %}on{% endif %}">주문하기</a>
+        <a href="{{ url_for('orders') }}" class="{% if here == 'orders' %}on{% endif %}">주문 내역</a>
+        <a href="{{ url_for('dashboard') }}" class="{% if here == 'dashboard' %}on{% endif %}">대시보드</a>
+      </nav>
+    </div>
+  </header>
+  <div class="cloth"></div>
+
+  <main class="{% block main_class %}{% endblock %}">
+    {% block content %}{% endblock %}
+  </main>
+
+  <p class="foot">Flask가 구워 낸 페이지 · 페퍼로니 연구소</p>
+  {% block script %}{% endblock %}
+</body>
+</html>
