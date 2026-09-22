@@ -1,0 +1,6 @@
+﻿route,sessions,input_tokens,output_tokens,api_calls,api_cost_krw
+LLM,4660,7619888,2359954,4828,51179.112
+MENU_FAQ,2100,0,0,0,0.0
+TEXT_FAQ,1800,0,0,0,0.0
+SECURITY_ESCALATE,350,0,0,0,0.0
+NON_WORK,90,0,0,0,0.0

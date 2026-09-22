@@ -1,0 +1,12 @@
+﻿key,value
+company_name,GaonWorks Services (가상회사)
+industry,IT 서비스 / 사내 운영 지원
+employees,620
+offices,서울 본사 + 2개 지사
+helpdesk_teams,"전산팀, 인사팀, 총무팀, 재무팀, 법무팀, 보안팀"
+why_suitable,반복 문의가 많고 규정/절차형 답변 비중이 높으며 직원 수가 충분해 문의 자동화 효과를 측정하기 쉬움
+hourly_labor_cost_krw,35000
+fixed_chatbot_infra_cost_monthly_krw,800000
+input_token_cost_per_1m_krw,3000
+output_token_cost_per_1m_krw,12000
+cost_note,모든 비용은 프로젝트 실습용 가정값이며 실제 운영 시 사용하는 모델/클라우드 요금으로 교체해야 함

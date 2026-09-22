@@ -1,0 +1,6 @@
+{
+  "pre_rows": 3000,
+  "post_rows": 9000,
+  "system_rows": 92,
+  "db": "/mnt/data/chatbot-efficiency-monitor/database/chatbot_monitor.db"
+}
