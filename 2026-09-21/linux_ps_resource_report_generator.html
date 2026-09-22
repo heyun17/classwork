@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux ps 자원 보고서 생성기</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar styling for sleek appearance */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* A4 Page Simulation for Preview */
+        .report-page {
+            width: 100%;
+            min-height: 297mm;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 0.5rem;
+        }
+        @media print {
+            body {
+                background: white;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .report-page {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+                min-height: auto;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 h-screen flex flex-col overflow-hidden">
+
+    <header class="bg-slate-900 text-white px-6 py-3 flex justify-between items-center shadow-md no-print z-10 shrink-0">
+        <div class="flex items-center space-x-3">
+            <i data-lucide="server" class="w-6 h-6 text-indigo-400"></i>
+            <h1 class="text-xl font-bold tracking-wide">Linux PS 자원 보고서 생성기</h1>
+        </div>
+        <div class="flex items-center space-x-3">
+            <button onclick="addNewPage()" class="flex items-center space-x-1.5 bg-indigo-600 hover:bg-indigo-700 text-white px-3.5 py-1.5 rounded-lg text-sm font-medium transition shadow-sm">
+                <i data-lucide="file-plus" class="w-4 h-4"></i>
+                <span>페이지 추가</span>
+            </button>
+            <button onclick="window.print()" class="flex items-center space-x-1.5 bg-slate-700 hover:bg-slate-600 text-white px-3.5 py-1.5 rounded-lg text-sm font-medium transition">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>인쇄 / PDF 저장</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN TWO-COLUMN CONTAINER -->
+    <div class="flex flex-1 overflow-hidden">
+
+        <aside class="w-1/2 lg:w-5/12 bg-white border-r border-slate-200 flex flex-col h-full no-print shadow-lg">
+            
+            <!-- Tab Navigation for Pages -->
+            <div class="bg-slate-50 border-b border-slate-200 px-4 pt-3 flex items-center justify-between shrink-0">
+                <div id="page-tabs" class="flex space-x-1 overflow-x-auto pb-1 max-w-[80%]">
+                    <!-- Dynamic Page Tabs will be inserted here -->
+                </div>
+                <span class="text-xs text-slate-500 font-medium pb-1" id="page-count-badge">페이지: 1</span>
+            </div>
+
+            <!-- Page Config & Raw Input Area -->
+            <div class="p-5 flex-1 overflow-y-auto space-y-5">
+                
+                <!-- Page Information Form -->
+                <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+                            <i data-lucide="sliders" class="w-4 h-4 text-slate-500"></i>
+                            페이지 설정 (<span id="active-page-title-label">페이지 1</span>)
+                        </h3>
+                        <button id="delete-page-btn" onclick="deleteCurrentPage()" class="text-xs text-rose-600 hover:text-rose-800 hover:underline hidden flex items-center gap-1">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> 삭제
+                        </button>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">보고서 / 서버 제목</label>
+                        <input type="text" id="input-page-title" oninput="updateCurrentPageMeta()" placeholder="예: Web-Server-01 ps aux 분석" class="w-full text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">상위 프로세스 출력 수</label>
+                            <select id="input-top-count" onchange="renderReport()" class="w-full text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                                <option value="5">TOP 5</option>
+                                <option value="10" selected>TOP 10</option>
+                                <option value="15">TOP 15</option>
+                                <option value="20">TOP 20</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">정렬 기준</label>
+                            <select id="input-sort-by" onchange="renderReport()" class="w-full text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                                <option value="cpu">CPU 사용률 (%CPU)</option>
+                                <option value="mem">메모리 사용률 (%MEM)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Raw Data Input -->
+                <div class="flex flex-col space-y-2 h-[calc(100%-220px)]">
+                    <div class="flex justify-between items-center">
+                        <label class="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+                            <i data-lucide="terminal" class="w-4 h-4 text-slate-500"></i>
+                            `ps aux` 또는 `ps -ef` 결과 붙여넣기
+                        </label>
+                        <button onclick="loadSampleData()" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">샘플 데이터 로드</button>
+                    </div>
+                    <textarea id="raw-ps-input" oninput="parseAndUpdate()" placeholder="여기에 터미널에서 실행한 'ps aux' 결과 전체를 붙여넣으세요...&#10;&#10;예시:&#10;USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND&#10;root         1  0.0  0.1 168600 11400 ?        Ss   08:00   0:02 /sbin/init" class="w-full flex-1 p-3 font-mono text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-slate-900 text-emerald-400 resize-none shadow-inner"></textarea>
+                </div>
+
+            </div>
+        </aside>
+
+        <main class="w-1/2 lg:w-7/12 bg-slate-200/70 p-6 overflow-y-auto flex flex-col items-center">
+            
+            <div id="pages-container" class="w-full max-w-4xl space-y-8">
+                <!-- Pages will be rendered here dynamically -->
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Data State Store
+        let pagesData = [
+            {
+                id: 1,
+                title: "서버 자원 사용량 분석 (페이지 1)",
+                rawInput: "",
+                topCount: 10,
+                sortBy: "cpu",
+                parsedProcesses: [],
+                summary: { totalCpu: 0, totalMem: 0, processCount: 0, userCount: 0 }
+            }
+        ];
+        let activePageId = 1;
+        let chartInstances = {}; // Store Chart JS instances per page
+
+        // Initialize icons and render on load
+        window.onload = function () {
+            lucide.createIcons();
+            loadSampleData(); // Load initial sample data
+        };
+
+        function addNewPage() {
+            const newId = Date.now();
+            const newPage = {
+                id: newId,
+                title: `서버 자원 사용량 분석 (페이지 ${pagesData.length + 1})`,
+                rawInput: "",
+                topCount: 10,
+                sortBy: "cpu",
+                parsedProcesses: [],
+                summary: { totalCpu: 0, totalMem: 0, processCount: 0, userCount: 0 }
+            };
+            pagesData.push(newPage);
+            activePageId = newId;
+            renderTabs();
+            syncFormWithActivePage();
+            renderReport();
+        }
+
+        function switchPage(pageId) {
+            activePageId = pageId;
+            renderTabs();
+            syncFormWithActivePage();
+        }
+
+        function deleteCurrentPage() {
+            if (pagesData.length <= 1) {
+                alert("최소 하나의 페이지는 유지되어야 합니다.");
+                return;
+            }
+            pagesData = pagesData.filter(p => p.id !== activePageId);
+            // Destroy associated chart instance
+            if (chartInstances[activePageId]) {
+                chartInstances[activePageId].destroy();
+                delete chartInstances[activePageId];
+            }
+            activePageId = pagesData[0].id;
+            renderTabs();
+            syncFormWithActivePage();
+            renderReport();
+        }
+
+        function renderTabs() {
+            const tabContainer = document.getElementById('page-tabs');
+            tabContainer.innerHTML = pagesData.map((page, index) => {
+                const isActive = page.id === activePageId;
+                return `
+                    <button onclick="switchPage(${page.id})" class="px-3 py-1.5 rounded-t-lg text-xs font-semibold flex items-center gap-2 border-t border-x transition ${
+                        isActive 
+                        ? 'bg-white border-slate-300 text-indigo-600 shadow-sm' 
+                        : 'bg-slate-200/60 border-transparent text-slate-600 hover:bg-slate-200'
+                    }">
+                        <span>Page ${index + 1}</span>
+                    </button>
+                `;
+            }).join('');
+
+            document.getElementById('page-count-badge').textContent = `총 ${pagesData.length}개 페이지`;
+            
+            // Toggle Delete button visibility
+            const deleteBtn = document.getElementById('delete-page-btn');
+            if (pagesData.length > 1) {
+                deleteBtn.classList.remove('hidden');
+            } else {
+                deleteBtn.classList.add('hidden');
+            }
+        }
+
+        function syncFormWithActivePage() {
+            const activePage = pagesData.find(p => p.id === activePageId);
+            if (!activePage) return;
+
+            document.getElementById('input-page-title').value = activePage.title;
+            document.getElementById('active-page-title-label').textContent = activePage.title || "페이지";
+            document.getElementById('raw-ps-input').value = activePage.rawInput;
+            document.getElementById('input-top-count').value = activePage.topCount;
+            document.getElementById('input-sort-by').value = activePage.sortBy;
+        }
+
+        function updateCurrentPageMeta() {
+            const activePage = pagesData.find(p => p.id === activePageId);
+            if (!activePage) return;
+
+            activePage.title = document.getElementById('input-page-title').value;
+            document.getElementById('active-page-title-label').textContent = activePage.title || "페이지";
+            renderReport();
+        }
+
+        function parseAndUpdate() {
+            const activePage = pagesData.find(p => p.id === activePageId);
+            if (!activePage) return;
+
+            const input = document.getElementById('raw-ps-input').value;
+            activePage.rawInput = input;
+            
+            parsePsData(activePage);
+            renderReport();
+        }
+
+        function parsePsData(page) {
+            const lines = page.rawInput.trim().split('\n');
+            if (lines.length === 0 || !lines[0]) {
+                page.parsedProcesses = [];
+                page.summary = { totalCpu: 0, totalMem: 0, processCount: 0, userCount: 0 };
+                return;
+            }
+
+            const parsed = [];
+            let totalCpu = 0;
+            let totalMem = 0;
+            const uniqueUsers = new Set();
+
+            // Detect if header exists and column types
+            const headerLine = lines[0].toUpperCase();
+            const isAux = headerLine.includes('%CPU') || headerLine.includes('%MEM');
+
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+
+                // Split line by whitespace, merging extra trailing fields for COMMAND
+                const parts = line.split(/\s+/);
+                if (parts.length < 4) continue;
+
+                if (isAux) {
+                    // standard ps aux format:
+                    // USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND...
+                    const user = parts[0] || 'unknown';
+                    const pid = parts[1] || '-';
+                    const cpu = parseFloat(parts[2]) || 0;
+                    const mem = parseFloat(parts[3]) || 0;
+                    const vsz = parts[4] || '0';
+                    const rss = parts[5] || '0';
+                    const command = parts.slice(10).join(' ') || parts.slice(7).join(' ') || 'unknown';
+
+                    totalCpu += cpu;
+                    totalMem += mem;
+                    uniqueUsers.add(user);
+
+                    parsed.push({ user, pid, cpu, mem, vsz, rss, command });
+                } else {
+                    // Fallback for ps -ef or custom outputs
+                    // UID PID PPID C STIME TTY TIME CMD
+                    const user = parts[0] || 'unknown';
+                    const pid = parts[1] || '-';
+                    const cpu = parseFloat(parts[3]) || 0; // standard C value
+                    const command = parts.slice(7).join(' ') || 'unknown';
+
+                    totalCpu += cpu;
+                    uniqueUsers.add(user);
+
+                    parsed.push({ user, pid, cpu, mem: 0, vsz: '-', rss: '-', command });
+                }
+            }
+
+            page.parsedProcesses = parsed;
+            page.summary = {
+                totalCpu: parseFloat(totalCpu.toFixed(1)),
+                totalMem: parseFloat(totalMem.toFixed(1)),
+                processCount: parsed.length,
+                userCount: uniqueUsers.size
+            };
+        }
+
+        function renderReport() {
+            const container = document.getElementById('pages-container');
+            
+            // Read UI filter inputs for current active page
+            const activePage = pagesData.find(p => p.id === activePageId);
+            if (activePage) {
+                activePage.topCount = parseInt(document.getElementById('input-top-count').value) || 10;
+                activePage.sortBy = document.getElementById('input-sort-by').value || 'cpu';
+            }
+
+            container.innerHTML = pagesData.map((page, index) => {
+                // Sort processes based on setting
+                let sortedList = [...page.parsedProcesses].sort((a, b) => {
+                    return page.sortBy === 'mem' ? b.mem - a.mem : b.cpu - a.cpu;
+                });
+
+                const topProcesses = sortedList.slice(0, page.topCount);
+
+                return `
+                    <div id="report-page-${page.id}" class="report-page relative transition-all border border-slate-200">
+                        <!-- Header / Metadata -->
+                        <div class="border-b-2 border-slate-800 pb-4 mb-6 flex justify-between items-end">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Linux Resource Audit Report</span>
+                                <h2 class="text-2xl font-bold text-slate-900 mt-1">${escapeHtml(page.title || 'Untitled Report')}</h2>
+                            </div>
+                            <div class="text-right text-xs text-slate-500">
+                                <div>페이지 번호: ${index + 1} / ${pagesData.length}</div>
+                                <div>생성 일시: ${new Date().toLocaleDateString('ko-KR')} ${new Date().toLocaleTimeString('ko-KR', {hour: '2-digit', minute:'2-digit'})}</div>
+                            </div>
+                        </div>
+
+                        <!-- Summary Cards -->
+                        <div class="grid grid-cols-4 gap-4 mb-6">
+                            <div class="bg-indigo-50 border border-indigo-100 p-3.5 rounded-xl">
+                                <div class="text-xs font-medium text-indigo-600 mb-0.5">총 CPU 사용 합계</div>
+                                <div class="text-2xl font-extrabold text-indigo-950">${page.summary.totalCpu}%</div>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-100 p-3.5 rounded-xl">
+                                <div class="text-xs font-medium text-emerald-600 mb-0.5">총 MEM 사용 합계</div>
+                                <div class="text-2xl font-extrabold text-emerald-950">${page.summary.totalMem}%</div>
+                            </div>
+                            <div class="bg-sky-50 border border-sky-100 p-3.5 rounded-xl">
+                                <div class="text-xs font-medium text-sky-600 mb-0.5">총 프로세스 수</div>
+                                <div class="text-2xl font-extrabold text-sky-950">${page.summary.processCount}개</div>
+                            </div>
+                            <div class="bg-amber-50 border border-amber-100 p-3.5 rounded-xl">
+                                <div class="text-xs font-medium text-amber-600 mb-0.5">활성 사용자 계정</div>
+                                <div class="text-2xl font-extrabold text-amber-950">${page.summary.userCount}명</div>
+                            </div>
+                        </div>
+
+                        <!-- Top Resource Usage Chart Container -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6">
+                            <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wide mb-3 flex items-center justify-between">
+                                <span>상위 프로세스 자원 점유 차트 (TOP ${page.topCount})</span>
+                                <span class="text-indigo-600 font-medium">기준: ${page.sortBy.toUpperCase()}</span>
+                            </h3>
+                            <div class="relative h-52 w-full">
+                                <canvas id="chart-${page.id}"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Process Data Table -->
+                        <div class="mb-4">
+                            <h3 class="text-sm font-bold text-slate-800 mb-2 flex items-center justify-between">
+                                <span>프로세스 리스트 (${page.sortBy === 'cpu' ? 'CPU' : '메모리'} 상위)</span>
+                                <span class="text-xs font-normal text-slate-500">표시 항목: ${topProcesses.length} / ${page.parsedProcesses.length}</span>
+                            </h3>
+                            <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                                <table class="w-full text-left text-xs">
+                                    <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200">
+                                        <tr>
+                                            <th class="p-2.5">USER</th>
+                                            <th class="p-2.5">PID</th>
+                                            <th class="p-2.5 text-right">%CPU</th>
+                                            <th class="p-2.5 text-right">%MEM</th>
+                                            <th class="p-2.5 text-right">VSZ</th>
+                                            <th class="p-2.5 text-right">RSS</th>
+                                            <th class="p-2.5">COMMAND</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100 font-mono">
+                                        ${topProcesses.length > 0 ? topProcesses.map((proc, pIdx) => `
+                                            <tr class="${pIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-slate-100/80 transition">
+                                                <td class="p-2.5 text-slate-800 font-sans font-medium">${escapeHtml(proc.user)}</td>
+                                                <td class="p-2.5 text-slate-600">${proc.pid}</td>
+                                                <td class="p-2.5 text-right font-bold ${proc.cpu > 20 ? 'text-rose-600' : 'text-slate-700'}">${proc.cpu.toFixed(1)}</td>
+                                                <td class="p-2.5 text-right font-bold ${proc.mem > 20 ? 'text-amber-600' : 'text-slate-700'}">${proc.mem.toFixed(1)}</td>
+                                                <td class="p-2.5 text-right text-slate-500">${proc.vsz}</td>
+                                                <td class="p-2.5 text-right text-slate-500">${proc.rss}</td>
+                                                <td class="p-2.5 text-slate-800 truncate max-w-xs" title="${escapeHtml(proc.command)}">${escapeHtml(proc.command)}</td>
+                                            </tr>
+                                        `).join('') : `
+                                            <tr>
+                                                <td colspan="7" class="p-8 text-center text-slate-400 font-sans">
+                                                    왼쪽 입력 창에 ps aux 결과를 입력해주세요.
+                                                </td>
+                                            </tr>
+                                        `}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="mt-8 pt-4 border-t border-slate-100 flex justify-between items-center text-[10px] text-slate-400 font-sans">
+                            <div>Linux Resource Report System</div>
+                            <div>Confidential & Internal Use Only</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Render Charts for all pages
+            pagesData.forEach(page => {
+                renderChartForPage(page);
+            });
+
+            lucide.createIcons();
+        }
+
+        function renderChartForPage(page) {
+            const canvasId = `chart-${page.id}`;
+            const canvasEl = document.getElementById(canvasId);
+            if (!canvasEl) return;
+
+            // Destroy previous instance if exists
+            if (chartInstances[page.id]) {
+                chartInstances[page.id].destroy();
+            }
+
+            let sortedList = [...page.parsedProcesses].sort((a, b) => {
+                return page.sortBy === 'mem' ? b.mem - a.mem : b.cpu - a.cpu;
+            }).slice(0, page.topCount);
+
+            const labels = sortedList.map(p => {
+                const cmd = p.command.split(' ')[0].split('/').pop();
+                return `${cmd} (${p.pid})`;
+            });
+
+            const cpuData = sortedList.map(p => p.cpu);
+            const memData = sortedList.map(p => p.mem);
+
+            const ctx = canvasEl.getContext('2d');
+            chartInstances[page.id] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'CPU 사용률 (%)',
+                            data: cpuData,
+                            backgroundColor: 'rgba(79, 70, 229, 0.75)',
+                            borderColor: 'rgba(79, 70, 229, 1)',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        },
+                        {
+                            label: '메모리 사용률 (%)',
+                            data: memData,
+                            backgroundColor: 'rgba(16, 185, 129, 0.75)',
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { font: { size: 11 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                footer: (items) => {
+                                    const index = items[0].dataIndex;
+                                    return `Command: ${sortedList[index].command}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { font: { size: 10 } },
+                            grid: { display: false }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: { font: { size: 10 } },
+                            grid: { color: '#f1f5f9' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function loadSampleData() {
+            const samplePs = `USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.1 168600 11400 ?        Ss   08:00   0:02 /sbin/init
+root       432  0.0  0.2  89200 18400 ?        Ss   08:00   0:00 /lib/systemd/systemd-journald
+www-data  1204 35.2  8.4 840200 142100 ?       S    08:05  12:45 nginx: worker process
+www-data  1205 32.1  7.9 838100 138000 ?       S    08:05  11:20 nginx: worker process
+mysql     1450 18.5 22.3 2450100 380400 ?      Ssl  08:01  24:10 mysqld --daemonize
+redis     1520  2.1  3.1 340200  52000 ?       Ssl  08:01   1:15 redis-server *:6379
+node      2103 42.8 14.2 1240500 230100 ?      Sl   08:10  18:30 node /var/www/app/server.js
+root      3040  0.0  0.1  14200  2400 pts/0    Ss   09:00   0:00 bash
+root      3150  0.0  0.1  10500  1800 pts/0    R+   09:15   0:00 ps aux
+appuser   4021  5.4  4.2 512000  68000 ?       Sl   08:30   2:10 python3 background_worker.py`;
+
+            const activePage = pagesData.find(p => p.id === activePageId);
+            if (activePage) {
+                activePage.rawInput = samplePs;
+                syncFormWithActivePage();
+                parsePsData(activePage);
+                renderReport();
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

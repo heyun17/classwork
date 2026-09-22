@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux PS 자원 보고서</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; color: #334155; height: 100vh; display: flex; flex-direction: column; }
+    
+    /* 헤더 */
+    .app-header { background: #1e293b; color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .app-header h1 { font-size: 1.2rem; }
+
+    /* 메인 분할 레이아웃 */
+    .main-container { display: flex; flex: 1; overflow: hidden; }
+    
+    /* [좌측 입력 패널] */
+    .left-panel { width: 420px; background: #ffffff; border-right: 1px solid #e2e8f0; padding: 20px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+    .panel-section { background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .section-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    
+    .form-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+    .form-row { display: flex; gap: 8px; }
+    .form-row .form-group { flex: 1; }
+    label { font-size: 0.8rem; color: #64748b; font-weight: 600; }
+    input, select, textarea { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; }
+    textarea { height: 200px; font-family: monospace; font-size: 0.75rem; resize: vertical; }
+
+    /* 페이지 버튼 & 탭 */
+    .page-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .tab-btn { padding: 6px 10px; background: #e2e8f0; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+    .tab-btn.active { background: #2563eb; color: white; }
+
+    /* 버튼 공통 */
+    .btn { padding: 6px 12px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; font-size: 0.8rem; }
+    .btn-primary { background: #2563eb; color: white; }
+    .btn-secondary { background: #64748b; color: white; }
+    .btn-danger { background: #ef4444; color: white; }
+
+    /* [우측 보고서 프리뷰 패널] */
+    .right-panel { flex: 1; background: #cbd5e1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; }
+    
+    /* 보고서 A4 용지 스타일 */
+    .report-card { width: 100%; max-width: 800px; background: white; border-radius: 8px; padding: 32px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 24px; }
+
+    /* ===== PART별 디자인 스타일 ===== */
+    .report-part { margin-bottom: 24px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; background: #fff; }
+    .part-header { background: #f8fafc; padding: 10px 16px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 8px; }
+    .part-header .part-num { background: #2563eb; color: white; font-size: 0.75rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; }
+    .part-header h3 { font-size: 0.95rem; color: #1e293b; }
+    .part-body { padding: 16px; }
+
+    /* PART 1: 헤더 및 스탯 카드 */
+    .report-title-area { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; border-bottom: 2px solid #0f172a; padding-bottom: 8px; }
+    .report-title-area h2 { font-size: 1.4rem; color: #0f172a; }
+    .report-title-area .meta { font-size: 0.8rem; color: #64748b; text-align: right; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .stat-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; text-align: center; }
+    .stat-card .label { font-size: 0.75rem; color: #64748b; }
+    .stat-card .value { font-size: 1.1rem; font-weight: bold; color: #0f172a; margin-top: 4px; }
+
+    /* PART 2: 차트 */
+    .chart-container { height: 220px; position: relative; }
+
+    /* PART 3: 표 */
+    .process-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+    .process-table th, .process-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    .process-table th { background-color: #f1f5f9; color: #475569; font-weight: 600; }
+    .process-table td.cmd { font-family: monospace; max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* 인쇄 모드 */
+    @media print {
+      .app-header, .left-panel { display: none !important; }
+      .right-panel { padding: 0; background: white; }
+      .report-card { box-shadow: none; padding: 0; width: 100%; page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <h1>Linux PS 자원 분석 보고서</h1>
+    <button class="btn btn-secondary" onclick="window.print()">🖨️ PDF / 인쇄 출력</button>
+  </header>
+
+  <div class="main-container">
+    <!-- [좌측 컨트롤 영역] -->
+    <div class="left-panel">
+      <div class="panel-section">
+        <div class="section-title">
+          <span>📄 보고서 페이지 관리</span>
+          <button class="btn btn-primary" onclick="addPage()">+ 페이지 추가</button>
+        </div>
+        <div class="page-tabs" id="pageTabs"></div>
+      </div>
+
+      <div class="panel-section">
+        <div class="section-title">⚙️ 페이지 옵션</div>
+        <div class="form-group">
+          <label>서버 / 호스트명</label>
+          <input type="text" id="serverNameInput" oninput="updateCurrentPage()">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>표시 수 (Top N)</label>
+            <select id="topCountSelect" onchange="updateCurrentPage()">
+              <option value="5">Top 5</option>
+              <option value="10" selected>Top 10</option>
+              <option value="15">Top 15</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>정렬 기준</label>
+            <select id="sortBySelect" onchange="updateCurrentPage()">
+              <option value="cpu">%CPU 높음</option>
+              <option value="mem">%MEM 높음</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section" style="flex: 1; display: flex; flex-direction: column;">
+        <div class="section-title">
+          <span>📋 'ps aux' 결과 붙여넣기</span>
+          <button class="btn btn-secondary" style="font-size:0.7rem;" onclick="loadSample()">샘플 데이터</button>
+        </div>
+        <textarea id="psInput" placeholder="ps aux 또는 ps -ef 결과를 여기에 붙여넣으세요..." oninput="updateCurrentPage()"></textarea>
+      </div>
+
+      <button class="btn btn-danger" onclick="deleteCurrentPage()">현재 페이지 삭제</button>
+    </div>
+
+    <!-- [우측 프리뷰 영역] -->
+    <div class="right-panel">
+      <div class="report-card" id="reportView">
+        
+        <!-- [PART 1] 개요 및 자원 현황 요약 -->
+        <div class="report-part">
+          <div class="part-header">
+            <span class="part-num">PART 1</span>
+            <h3>서버 개요 및 자원 요약 (Overview & Summary)</h3>
+          </div>
+          <div class="part-body">
+            <div class="report-title-area">
+              <h2 id="viewServerName">Server-01</h2>
+              <div class="meta">
+                <div>생성일시: <span id="viewReportDate">-</span></div>
+              </div>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="label">총 프로세스 수</div>
+                <div class="value" id="statProcCount">0</div>
+              </div>
+              <div class="stat-card">
+                <div class="label">CPU 사용 합계</div>
+                <div class="value" id="statCpuSum" style="color: #2563eb;">0%</div>
+              </div>
+              <div class="stat-card">
+                <div class="label">메모리 사용 합계</div>
+                <div class="value" id="statMemSum" style="color: #10b981;">0%</div>
+              </div>
+              <div class="stat-card">
+                <div class="label">실행 사용자 수</div>
+                <div class="value" id="statUserCount">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- [PART 2] 점유율 시각화 차트 -->
+        <div class="report-part">
+          <div class="part-header">
+            <span class="part-num">PART 2</span>
+            <h3>상위 프로세스 자원 사용률 차트 (Resource Usage Chart)</h3>
+          </div>
+          <div class="part-body">
+            <div class="chart-container">
+              <canvas id="resourceChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- [PART 3] 상세 프로세스 목록 -->
+        <div class="report-part" style="margin-bottom:0;">
+          <div class="part-header">
+            <span class="part-num">PART 3</span>
+            <h3>상위 프로세스 상세 목록 (Top Process List)</h3>
+          </div>
+          <div class="part-body" style="padding:0;">
+            <table class="process-table">
+              <thead>
+                <tr>
+                  <th>USER</th>
+                  <th>PID</th>
+                  <th>%CPU</th>
+                  <th>%MEM</th>
+                  <th>COMMAND</th>
+                </tr>
+              </thead>
+              <tbody id="processTableBody">
+                <tr><td colspan="5" style="text-align: center; color:#94a3b8;">데이터가 없습니다.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 페이지 상태 데이터 관리
+    let pages = [
+      { id: 1, name: "Web-Server-01", psData: "", topCount: 10, sortBy: "cpu" }
+    ];
+    let activePageIndex = 0;
+    let chartInstance = null;
+
+    // 초기화
+    window.onload = () => {
+      initChart();
+      renderTabs();
+      loadPageToForm();
+    };
+
+    // 차트 초기화
+    function initChart() {
+      const ctx = document.getElementById('resourceChart').getContext('2d');
+      chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: [],
+          datasets: [
+            { label: '% CPU 점유율', data: [], backgroundColor: '#3b82f6' },
+            { label: '% MEM 점유율', data: [], backgroundColor: '#10b981' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+    }
+
+    // 탭 렌더링
+    function renderTabs() {
+      const tabsContainer = document.getElementById('pageTabs');
+      tabsContainer.innerHTML = pages.map((page, idx) => `
+        <button class="tab-btn ${idx === activePageIndex ? 'active' : ''}" onclick="switchPage(${idx})">
+          📄 ${page.name || 'Page ' + (idx+1)}
+        </button>
+      `).join('');
+    }
+
+    // 페이지 Switch
+    function switchPage(index) {
+      activePageIndex = index;
+      renderTabs();
+      loadPageToForm();
+    }
+
+    // 페이지 추가
+    function addPage() {
+      const newId = Date.now();
+      pages.push({
+        id: newId,
+        name: `Server-0${pages.length + 1}`,
+        psData: "",
+        topCount: 10,
+        sortBy: "cpu"
+      });
+      activePageIndex = pages.length - 1;
+      renderTabs();
+      loadPageToForm();
+    }
+
+    // 페이지 삭제
+    function deleteCurrentPage() {
+      if (pages.length <= 1) {
+        alert("최소 1개의 페이지는 존재해야 합니다.");
+        return;
+      }
+      pages.splice(activePageIndex, 1);
+      activePageIndex = Math.max(0, activePageIndex - 1);
+      renderTabs();
+      loadPageToForm();
+    }
+
+    // 폼에 현재 데이터 로드
+    function loadPageToForm() {
+      const page = pages[activePageIndex];
+      document.getElementById('serverNameInput').value = page.name;
+      document.getElementById('topCountSelect').value = page.topCount;
+      document.getElementById('sortBySelect').value = page.sortBy;
+      document.getElementById('psInput').value = page.psData;
+      updateReportView();
+    }
+
+    // 입력 변경 시 데이터 갱신
+    function updateCurrentPage() {
+      const page = pages[activePageIndex];
+      page.name = document.getElementById('serverNameInput').value;
+      page.topCount = parseInt(document.getElementById('topCountSelect').value);
+      page.sortBy = document.getElementById('sortBySelect').value;
+      page.psData = document.getElementById('psInput').value;
+
+      renderTabs();
+      updateReportView();
+    }
+
+    // ps aux 파싱 로직
+    function parsePsData(text) {
+      if (!text.trim()) return [];
+      const lines = text.trim().split('\n');
+      const processes = [];
+
+      lines.forEach(line => {
+        const parts = line.trim().split(/\s+/);
+        if (parts.length < 11 || parts[0] === 'USER' || parts[0] === 'UID') return;
+
+        const cpu = parseFloat(parts[2]) || 0;
+        const mem = parseFloat(parts[3]) || 0;
+        const cmd = parts.slice(10).join(' ');
+
+        processes.push({
+          user: parts[0],
+          pid: parts[1],
+          cpu: cpu,
+          mem: mem,
+          cmd: cmd
+        });
+      });
+
+      return processes;
+    }
+
+    // 우측 리포트 화면 업데이트
+    function updateReportView() {
+      const page = pages[activePageIndex];
+      const procs = parsePsData(page.psData);
+
+      // PART 1 데이터 업데이트
+      document.getElementById('viewServerName').innerText = page.name || "서버 이름 미지정";
+      document.getElementById('viewReportDate').innerText = new Date().toLocaleString();
+
+      const totalProc = procs.length;
+      const cpuSum = procs.reduce((acc, p) => acc + p.cpu, 0).toFixed(1);
+      const memSum = procs.reduce((acc, p) => acc + p.mem, 0).toFixed(1);
+      const users = new Set(procs.map(p => p.user)).size;
+
+      document.getElementById('statProcCount').innerText = totalProc;
+      document.getElementById('statCpuSum').innerText = `${cpuSum}%`;
+      document.getElementById('statMemSum').innerText = `${memSum}%`;
+      document.getElementById('statUserCount').innerText = users;
+
+      // 정렬 및 Top N 추출
+      const sortedProcs = [...procs].sort((a, b) => b[page.sortBy] - a[page.sortBy]).slice(0, page.topCount);
+
+      // PART 2 차트 업데이트
+      chartInstance.data.labels = sortedProcs.map(p => `${p.cmd.substring(0, 12)}.. (${p.pid})`);
+      chartInstance.data.datasets[0].data = sortedProcs.map(p => p.cpu);
+      chartInstance.data.datasets[1].data = sortedProcs.map(p => p.mem);
+      chartInstance.update();
+
+      // PART 3 테이블 업데이트
+      const tbody = document.getElementById('processTableBody');
+      if (sortedProcs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color:#94a3b8;">데이터가 없거나 파싱할 수 없습니다.</td></tr>`;
+      } else {
+        tbody.innerHTML = sortedProcs.map(p => `
+          <tr>
+            <td>${p.user}</td>
+            <td>${p.pid}</td>
+            <td><b>${p.cpu}%</b></td>
+            <td><b>${p.mem}%</b></td>
+            <td class="cmd" title="${p.cmd}">${p.cmd}</td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // 샘플 데이터
+    function loadSample() {
+      const sample = `USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.4 168580  9612 ?        Ss   09:00   0:02 /sbin/init
+mysql       1234 12.5  8.2 1452300 168200 ?      Ssl  09:01  15:30 /usr/sbin/mysqld
+www-data    2341  8.1  3.1 412500 64200 ?        S    09:15   5:12 php-fpm: pool www
+www-data    2342  7.4  2.9 408200 60100 ?        S    09:15   4:45 php-fpm: pool www
+root        3412  2.1  1.2 250100 24800 ?        S    10:00   1:10 nginx: worker process
+node        4123 25.4 12.1 980500 250100 ?       Sl   10:30  35:20 node /app/server.js
+redis       5122  1.0  1.5 150000 31000 ?        Ssl  09:00   1:05 redis-server *:6379`;
+      
+      document.getElementById('psInput').value = sample;
+      updateCurrentPage();
+    }
+  </script>
+</body>
+</html>
