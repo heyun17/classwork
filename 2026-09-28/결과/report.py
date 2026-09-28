@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import html
 import json
 import sys
@@ -9,8 +10,31 @@ from pathlib import Path
 from typing import Any
 
 BASE_DIR = Path(__file__).resolve().parent
-INPUT_PATH = BASE_DIR / "diagnosis.json"
-OUTPUT_PATH = BASE_DIR / "ai_report.html"
+DEFAULT_INPUT = "diagnosis.json"
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="diagnosis JSON 파일을 읽어 AI 네트워크 진단 HTML 보고서를 생성합니다."
+    )
+    parser.add_argument(
+        "--input",
+        default=DEFAULT_INPUT,
+        help=(
+            "입력 JSON 파일명 "
+            "(기본값: diagnosis.json, 예: diagnosis_google.json)"
+        ),
+    )
+    parser.add_argument(
+        "--output",
+        default=None,
+        help=(
+            "출력 HTML 파일명. 생략하면 입력 파일명에 따라 자동 결정 "
+            "(diagnosis.json -> ai_report.html, "
+            "diagnosis_google.json -> ai_report_google.html)"
+        ),
+    )
+    return parser.parse_args()
 
 
 def esc(value: Any) -> str:
@@ -140,7 +164,8 @@ def render_case(case: dict[str, Any]) -> str:
     """
 
 
-def build_html(data: dict[str, Any]) -> str:
+def build_html(data: dict[str, Any], source_name: str) -> str:
+    provider = esc(data.get("provider", "openai"))
     model = esc(data.get("model", "unknown"))
     diagnoses = data.get("diagnoses") or []
 
@@ -189,9 +214,15 @@ def build_html(data: dict[str, Any]) -> str:
       color: #58616b;
     }}
 
-    .model {{
-      display: inline-block;
+    .meta {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-top: 10px;
+    }}
+
+    .pill {{
+      display: inline-block;
       padding: 6px 10px;
       border: 1px solid #cfd6dd;
       border-radius: 999px;
@@ -362,13 +393,17 @@ def build_html(data: dict[str, Any]) -> str:
     <section class="top">
       <h1>AI Network Diagnosis Report</h1>
       <p>패킷 관찰 결과를 기반으로 생성한 네트워크 장애 분석 보고서</p>
-      <span class="model">Model: {model}</span>
+      <div class="meta">
+        <span class="pill">Provider: {provider}</span>
+        <span class="pill">Model: {model}</span>
+        <span class="pill">Source: {esc(source_name)}</span>
+      </div>
     </section>
 
     {case_html}
 
     <footer>
-      Generated from diagnosis.json
+      Generated from {esc(source_name)}
     </footer>
   </main>
 </body>
@@ -376,31 +411,54 @@ def build_html(data: dict[str, Any]) -> str:
 """
 
 
+def default_output_name(input_path: Path) -> str:
+    stem = input_path.stem.lower()
+
+    if "google" in stem:
+        return "ai_report_google.html"
+
+    if stem == "diagnosis":
+        return "ai_report.html"
+
+    return f"ai_report_{input_path.stem}.html"
+
+
 def main() -> None:
-    if not INPUT_PATH.exists():
-        print(f"[오류] {INPUT_PATH.name} 파일을 찾을 수 없습니다.")
+    args = parse_args()
+
+    input_path = BASE_DIR / args.input
+    output_path = BASE_DIR / (
+        args.output if args.output else default_output_name(input_path)
+    )
+
+    if not input_path.exists():
+        print(f"[오류] {input_path.name} 파일을 찾을 수 없습니다.")
         print(f"현재 폴더: {BASE_DIR}")
         sys.exit(1)
 
     try:
-        data = json.loads(INPUT_PATH.read_text(encoding="utf-8-sig"))
+        data = json.loads(input_path.read_text(encoding="utf-8-sig"))
     except json.JSONDecodeError as exc:
         print(
-            f"[오류] {INPUT_PATH.name}의 JSON 형식이 올바르지 않습니다. "
+            f"[오류] {input_path.name}의 JSON 형식이 올바르지 않습니다. "
             f"line {exc.lineno}, column {exc.colno}"
         )
         sys.exit(1)
 
     diagnoses = data.get("diagnoses")
     if not isinstance(diagnoses, list) or not diagnoses:
-        print(f"[오류] {INPUT_PATH.name}에 비어 있지 않은 diagnoses 배열이 필요합니다.")
+        print(
+            f"[오류] {input_path.name}에 "
+            "비어 있지 않은 diagnoses 배열이 필요합니다."
+        )
         sys.exit(1)
 
-    report = build_html(data)
-    OUTPUT_PATH.write_text(report, encoding="utf-8")
+    report = build_html(data, input_path.name)
+    output_path.write_text(report, encoding="utf-8")
 
     print(f"완료: {len(diagnoses)}개 장애 보고서를 생성했습니다.")
-    print(f"저장: {OUTPUT_PATH}")
+    print(f"입력: {input_path}")
+    print(f"저장: {output_path}")
 
 
 if __name__ == "__main__":
