@@ -1,0 +1,56 @@
+{
+  "cases": [
+    {
+      "case_id": "fault_01",
+      "test": {
+        "source": "PC1",
+        "destination": "PC3",
+        "destination_ip": "192.168.20.10",
+        "protocol": "ICMP",
+        "result": "failure"
+      },
+      "observations": [
+        "PC1이 PC3로 ICMP Echo Request를 전송함",
+        "ICMP Echo Request가 Switch0과 Router0을 거쳐 PC3까지 정상 도착함",
+        "PC3가 응답 과정에서 ARP Request를 발생시킴",
+        "ARP Target IP는 192.168.20.254임",
+        "192.168.20.254에 대한 ARP Reply가 관찰되지 않음"
+      ]
+    },
+    {
+      "case_id": "fault_02",
+      "test": {
+        "source": "PC1",
+        "destination": "PC3",
+        "destination_ip": "192.168.20.10",
+        "protocol": "ICMP",
+        "result": "failure"
+      },
+      "observations": [
+        "PC1이 PC3로 ICMP Echo Request를 전송함",
+        "ICMP Echo Request가 Switch0을 거쳐 Router0까지 정상 도착함",
+        "Router0가 192.168.20.10의 MAC 주소를 찾기 위해 ARP Request를 발생시킴",
+        "ARP Target IP는 192.168.20.10임",
+        "192.168.20.10에 대한 ARP Reply가 관찰되지 않음",
+        "Router0의 ARP Table에서 192.168.20.10이 Incomplete 상태로 확인됨"
+      ]
+    },
+    {
+      "case_id": "fault_03",
+      "test": {
+        "source": "PC2",
+        "destination": "PC1",
+        "destination_ip": "192.168.10.10",
+        "protocol": "ICMP",
+        "result": "failure"
+      },
+      "observations": [
+        "PC2가 192.168.10.10으로 ping을 시도함",
+        "PC2가 192.168.10.10의 MAC 주소를 찾기 위해 ARP Request를 발생시킴",
+        "ARP Request가 Switch0을 통해 VLAN 10에 Broadcast됨",
+        "ARP Target IP는 192.168.10.10임",
+        "192.168.10.10에 대한 ARP Reply가 관찰되지 않음"
+      ]
+    }
+  ]
+}

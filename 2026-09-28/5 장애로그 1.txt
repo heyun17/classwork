@@ -1,0 +1,100 @@
+장애 1: PC3의 Default Gateway 오설정
+
+1. PC1 → PC3 ICMP Echo Request 전송
+2. Switch0 → Router0 → Switch0를 거쳐 PC3까지 정상 도착
+3. PC3가 응답 과정에서 ARP Request 발생
+4. ARP Target IP: 192.168.20.254
+5. 해당 ARP에 정상 응답 없음
+6. PC1 → PC3 ping 최종 실패
+
+
+여기서 핵심은 이 부분이야:
+ARP Packet Src. IP: 192.168.20.10
+Dest. IP: 192.168.20.254
+
+뜻은:
+- 192.168.20.10 = PC3
+- PC3가 192.168.20.254의 MAC 주소를 찾으려고 ARP 요청 중
+- 그런데 원래 PC3의 올바른 Gateway는 192.168.20.1
+- 즉 잘못 설정된 Gateway인 192.168.20.254를 찾고 있다는 사실이 패킷에서 직접 확인된 것
+위쪽의
+Destination: Broadcast
+
+도 정상적인 ARP 동작이야.
+ARP Request는 “192.168.20.254 가진 사람 누구야?” 하고 같은 네트워크 전체에 물어보는 거라 Ethernet 목적지 MAC이:
+FFFF.FFFF.FFFF
+
+즉 브로드캐스트로 나가.
+이번 장애에서 지금까지 확보한 증거
+PC1 → PC3 ICMP Echo Request
+        ↓
+PC3까지 정상 도착
+        ↓
+PC3가 응답하려고 함
+        ↓
+PC3가 192.168.20.254에 ARP Request
+        ↓
+응답할 장비 없음
+        ↓
+Echo Reply를 PC1으로 못 돌려보냄
+        ↓
+ping Failed
+
+이제 패킷 관찰 기록에는 정확히 이렇게 써도 돼:
+- PC3는 ICMP Echo Request를 정상적으로 수신했다.
+- PC3는 응답 경로를 구성하기 위해 ARP Request를 발생시켰다.
+- ARP Request의 Source IP는 192.168.20.10, Target IP는 192.168.20.254였다.
+- 192.168.20.254에 대한 ARP 응답이 없어 ICMP Echo Reply를 반환하지 못했다.
+
+
+
+ICMP
+ICMP = Internet Control Message Protocol
+쉽게 말하면:
+IP 네트워크에서 연결 상태나 오류를 확인할 때 쓰는 프로토콜
+대표적인 게 ping
+PC1이:
+“PC3야, 살아 있어?”
+
+라고 보내는 거고,
+PC3가 정상적으로 답하면:
+PC3 → PC1
+ICMP Echo Reply
+
+즉:
+“응, 나 여기 있어.”
+
+라고 답하는 셈이야.
+그래서 네 실습에서 ICMP = ping 패킷이라고 생각해도 거의 맞아.
+
+
+ARP
+ARP = Address Resolution Protocol
+쉽게 말하면:
+IP 주소를 가지고 실제 MAC 주소를 알아내는 프로토콜
+
+네가 방금 본 장애에서는
+PC3 Gateway를 일부러:
+192.168.20.254
+
+로 잘못 넣었지.
+그래서 PC3가:
+ARP:
+192.168.20.254 가진 장비 누구야?
+
+라고 물어본 거야.
+그런 장비가 없으니까 ARP Reply가 안 옴.
+그래서 PC3가 PC1에게 ICMP 답장을 돌려줄 수 없었던 거고.
+ICMP Echo Request
+PC1 ─────────────→ PC3
+                    │
+                    │ 답장 보내야 함
+                    ↓
+              ARP로 Gateway MAC 찾기
+                    │
+          192.168.20.254?
+                    │
+                 응답 없음
+                    ↓
+          ICMP Echo Reply 못 보냄
+

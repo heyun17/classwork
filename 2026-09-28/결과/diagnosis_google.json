@@ -1,0 +1,195 @@
+{
+  "provider": "google",
+  "model": "gemma-4-31b-it",
+  "diagnoses": [
+    {
+      "case_id": "fault_01",
+      "summary": "PC1에서 PC3로의 ICMP 요청은 정상적으로 전달되었으나, PC3가 응답을 보내기 위해 게이트웨이(192.168.20.254)의 MAC 주소를 확인하는 ARP 과정에서 응답을 받지 못해 통신이 실패함.",
+      "failure_point": "PC3와 게이트웨이(192.168.20.254) 간의 Layer 2 통신 구간",
+      "evidence": [
+        {
+          "observation": "ICMP Echo Request가 PC3까지 정상 도착함",
+          "meaning": "PC1에서 PC3로 향하는 단방향 경로(Inbound) 및 라우팅은 정상적으로 작동함"
+        },
+        {
+          "observation": "PC3가 192.168.20.254에 대해 ARP Request를 발생시킴",
+          "meaning": "PC3가 응답 패킷을 전송하기 위해 기본 게이트웨이의 MAC 주소를 학습하려는 시도를 함"
+        },
+        {
+          "observation": "192.168.20.254에 대한 ARP Reply가 관찰되지 않음",
+          "meaning": "게이트웨이 장비가 ARP 요청에 응답하지 않았거나, 응답 패킷이 PC3에 도달하지 못함"
+        }
+      ],
+      "possible_causes": [
+        {
+          "cause": "게이트웨이 인터페이스 설정 오류 또는 다운",
+          "evidence": [
+            "192.168.20.254에 대한 ARP Reply가 관찰되지 않음"
+          ],
+          "reasoning": "Router0의 PC3 접점 인터페이스가 Shutdown 상태이거나, IP 주소가 192.168.20.254가 아니어서 ARP 요청에 응답하지 않았을 가능성이 큼",
+          "verification": [
+            "Router0에서 'show ip interface brief' 명령어로 192.168.20.254 인터페이스의 상태(Status/Protocol) 확인",
+            "Router0의 해당 인터페이스에 설정된 IP 주소가 192.168.20.254가 맞는지 확인"
+          ],
+          "action": [
+            "인터페이스가 Down 상태라면 'no shutdown' 명령어로 활성화",
+            "IP 주소가 잘못 설정되었다면 올바른 IP(192.168.20.254)로 수정"
+          ]
+        },
+        {
+          "cause": "L2 스위치(Switch0)의 VLAN 설정 오류",
+          "evidence": [
+            "PC3의 ARP Request는 발생했으나 Reply가 없음"
+          ],
+          "reasoning": "PC3와 Router0의 인터페이스가 서로 다른 VLAN에 할당되어 있거나, Switch0의 포트 설정 오류로 인해 ARP 브로드캐스트가 게이트웨이에 도달하지 못했거나 응답이 차단되었을 가능성이 있음",
+          "verification": [
+            "Switch0에서 'show vlan brief' 명령어로 PC3 포트와 Router0 포트의 VLAN 할당 상태 확인",
+            "Switch0의 트렁크 포트 설정 및 허용 VLAN 목록 확인"
+          ],
+          "action": [
+            "PC3와 Router0의 인터페이스를 동일한 VLAN으로 재설정"
+          ]
+        },
+        {
+          "cause": "게이트웨이 장비의 보안 설정(ACL/방화벽)에 의한 ARP 차단",
+          "evidence": [
+            "ARP Request는 전송되었으나 Reply가 관찰되지 않음"
+          ],
+          "reasoning": "Router0에서 특정 보안 설정이나 ACL(Access Control List)을 통해 ARP 응답이나 특정 호스트의 통신을 차단하고 있을 가능성이 있음",
+          "verification": [
+            "Router0에 적용된 ACL 설정 및 인터페이스 필터링 규칙 확인"
+          ],
+          "action": [
+            "PC3의 IP 주소로부터 오는 ARP 요청 및 ICMP 응답을 허용하도록 ACL 규칙 수정"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "fault_02",
+      "summary": "PC1에서 PC3(192.168.20.10)로 ICMP Echo Request를 전송했으나, Router0가 목적지 MAC 주소를 확인하기 위해 보낸 ARP Request에 대해 응답이 없어 통신이 실패한 상황입니다.",
+      "failure_point": "Router0와 PC3 사이의 L2 통신 구간 (ARP Resolution 단계)",
+      "evidence": [
+        {
+          "observation": "ICMP Echo Request가 Switch0를 거쳐 Router0까지 정상 도착함",
+          "meaning": "PC1에서 Router0까지의 물리적 연결 및 L3 라우팅 경로는 정상적으로 동작하고 있음"
+        },
+        {
+          "observation": "Router0가 192.168.20.10의 MAC 주소를 찾기 위해 ARP Request를 발생시킴",
+          "meaning": "Router0가 목적지 네트워크에 도달했으나, 해당 IP의 하드웨어 주소(MAC)를 알지 못해 ARP 프로세스를 시작함"
+        },
+        {
+          "observation": "ARP Reply가 관찰되지 않으며 Router0의 ARP Table이 Incomplete 상태임",
+          "meaning": "목적지 호스트(PC3)가 ARP 요청을 수신하지 못했거나, 수신했더라도 응답을 보내지 않음"
+        }
+      ],
+      "possible_causes": [
+        {
+          "cause": "PC3의 전원 꺼짐 또는 물리적 연결 단절",
+          "evidence": [
+            "ARP Reply가 관찰되지 않음",
+            "ARP Table 상태가 Incomplete임"
+          ],
+          "reasoning": "PC3가 네트워크에 연결되어 있지 않거나 전원이 꺼져 있다면, Router0가 보낸 ARP Request에 응답할 수 없습니다.",
+          "verification": [
+            "PC3의 전원 상태 확인",
+            "PC3와 연결된 네트워크 케이블의 링크 LED 상태 확인"
+          ],
+          "action": [
+            "PC3 전원 켜기",
+            "불량 케이블 교체 또는 포트 연결 재확인"
+          ]
+        },
+        {
+          "cause": "PC3의 IP 주소 설정 오류",
+          "evidence": [
+            "Router0는 192.168.20.10으로 ARP Request를 보냈으나 응답이 없음"
+          ],
+          "reasoning": "PC3에 설정된 IP 주소가 192.168.20.10이 아니거나 다른 서브넷으로 설정되어 있다면, 자신에게 온 요청이 아니라고 판단하여 ARP Reply를 보내지 않습니다.",
+          "verification": [
+            "PC3에서 'ipconfig' 또는 'ifconfig' 명령어를 통해 설정된 IP 주소 확인"
+          ],
+          "action": [
+            "PC3의 IP 주소를 192.168.20.10으로 올바르게 수정"
+          ]
+        },
+        {
+          "cause": "PC3의 호스트 방화벽 설정에 의한 응답 차단",
+          "evidence": [
+            "ARP Request는 발생했으나 Reply가 관찰되지 않음"
+          ],
+          "reasoning": "매우 드문 경우지만, 호스트 기반 방화벽이나 보안 소프트웨어가 ARP 응답 또는 특정 네트워크 트래픽을 차단하도록 설정되어 있을 수 있습니다.",
+          "verification": [
+            "PC3의 OS 방화벽(Windows Firewall 등) 설정 확인",
+            "보안 소프트웨어의 패킷 필터링 로그 확인"
+          ],
+          "action": [
+            "방화벽 설정에서 ICMP 및 ARP 관련 통신 허용 규칙 추가"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "fault_03",
+      "summary": "PC2가 PC1(192.168.10.10)로 ICMP 통신을 시도하였으나, 대상 IP에 대한 ARP Reply를 받지 못해 통신에 실패함.",
+      "failure_point": "ARP Resolution 단계 (PC1의 응답 부재)",
+      "evidence": [
+        {
+          "observation": "PC2가 192.168.10.10의 MAC 주소를 찾기 위해 ARP Request를 발생시켰으며, 이것이 Switch0을 통해 VLAN 10에 Broadcast됨",
+          "meaning": "PC2와 Switch0 사이의 물리적 연결 및 VLAN 10으로의 패킷 전달은 정상적으로 동작함"
+        },
+        {
+          "observation": "192.168.10.10에 대한 ARP Reply가 관찰되지 않음",
+          "meaning": "대상 IP(192.168.10.10)를 가진 장비가 네트워크에 존재하지 않거나, 요청을 받았음에도 응답하지 못하는 상태임"
+        }
+      ],
+      "possible_causes": [
+        {
+          "cause": "대상 장비(PC1)의 전원 꺼짐 또는 물리적 연결 단절",
+          "evidence": [
+            "ARP Request가 VLAN 10 전체에 Broadcast 되었으나 응답이 없음"
+          ],
+          "reasoning": "대상 장비가 오프라인 상태라면 수신된 ARP Request에 대해 응답 패킷을 생성할 수 없음",
+          "verification": [
+            "PC1의 전원 상태 확인",
+            "PC1과 Switch0 사이의 케이블 연결 상태 및 포트 LED 확인"
+          ],
+          "action": [
+            "PC1 전원 켜기",
+            "손상된 네트워크 케이블 교체 또는 포트 재연결"
+          ]
+        },
+        {
+          "cause": "PC1의 IP 설정 오류 또는 잘못된 VLAN 할당",
+          "evidence": [
+            "ARP Target IP(192.168.10.10)에 대한 응답이 없음"
+          ],
+          "reasoning": "PC1의 IP 주소가 192.168.10.10이 아니거나, PC1이 연결된 스위치 포트가 VLAN 10이 아닌 다른 VLAN에 할당되어 있다면 ARP Request를 수신할 수 없음",
+          "verification": [
+            "PC1에서 'ipconfig' 또는 'ifconfig' 명령어로 IP 주소 확인",
+            "Switch0에서 PC1이 연결된 포트의 VLAN 설정 확인 (show vlan)"
+          ],
+          "action": [
+            "PC1의 IP 주소를 192.168.10.10으로 수정",
+            "Switch0의 해당 포트를 VLAN 10으로 재설정"
+          ]
+        },
+        {
+          "cause": "PC1의 호스트 방화벽 또는 보안 설정에 의한 ARP/ICMP 차단",
+          "evidence": [
+            "ARP Request는 전송되었으나 ARP Reply가 돌아오지 않음"
+          ],
+          "reasoning": "드문 경우지만, 호스트 기반 보안 소프트웨어가 비정상적인 트래픽으로 간주하여 응답을 차단하거나 NIC 드라이버 수준에서 문제가 발생했을 가능성이 있음",
+          "verification": [
+            "PC1의 OS 방화벽(Windows Firewall 등) 설정 확인",
+            "PC1에서 동일 네트워크 내 다른 장비로 ping 테스트 수행"
+          ],
+          "action": [
+            "방화벽 설정에서 ICMP 및 ARP 관련 허용 규칙 추가",
+            "네트워크 드라이버 업데이트 또는 재설치"
+          ]
+        }
+      ]
+    }
+  ]
+}

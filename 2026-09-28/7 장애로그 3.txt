@@ -1,0 +1,74 @@
+장애 3: PC1의 IPv4 주소 오설정
+
+1. PC2 → PC1(192.168.10.10) ICMP Ping 시도
+2. PC2가 192.168.10.10의 MAC 주소를 찾기 위해 ARP Request 발생
+3. ARP Request가 Switch0을 통해 VLAN 10에 Broadcast
+4. ARP Target IP: 192.168.10.10
+5. 해당 ARP에 정상 응답 없음
+6. PC2 → PC1 ping 최종 실패
+
+
+
+Add Simple PDU로 PC1 아이콘 자체를 목적지로 찍으면 현재 PC1에 설정된 주소인 192.168.10.30으로 보내게 될 수 있어서, 오히려 통신이 성공해버릴 수 있어.
+우리가 확인하려는 장애는:
+PC2가 원래 PC1 주소인 192.168.10.10으로 보내는데, 그 주소를 쓰는 장비가 없어서 실패하는 상황
+
+이거야.
+그래서 이번에는 PC2 → Desktop → Command Prompt에서 직접:
+ping 192.168.10.10
+
+을 실행해.
+Simulation Mode는 그대로 켜두면 이 ping도 ARP/ICMP 이벤트로 잡혀.
+
+10번 사진
+
+
+0.000  PC2              ICMP
+0.000  PC2              ARP
+0.003  PC2 → Switch0    ARP
+0.005  Switch0 → PC1    ARP
+0.005  Switch0 → Router0 ARP  >> 11번 사진
+
+PC2가 192.168.10.10으로 ping을 보내려고 함
+같은 VLAN이므로 라우터를 통해 보내는 게 아니라, 먼저 PC2가 직접
+"192.168.10.10의 MAC 주소가 뭐지?" 하고 ARP를 발생시킴.
+Switch0가 그 ARP Request를 VLAN 10에 브로드캐스트
+그래서 PC1뿐 아니라 VLAN 10 쪽 Router0에도 ARP가 전달됨.
+그런데 우리가 PC1 실제 IP를 192.168.10.30으로 바꿨으니까 아무도 192.168.10.10이라고 대답하지 않음
+그래서 아래에서 PC2가 계속 다시 시도하고 있는 거야.
+
+
+
+0.000   --    PC2      ARP
+0.003   PC2   Switch0  ARP
+
+ARP가 두 번 나간 게 아니야. 같은 ARP 한 개를 Packet Tracer가 “생성 단계”와 “다음 장비 도착 단계”로 각각 기록한 것이야.
+
+
+시간	Last Device	At Device	Type	의미
+0.000	--	PC2	ICMP	PC2에서 ping을 시작함
+0.000	--	PC2	ARP	ICMP를 보내려는데 PC1의 MAC을 몰라서 ARP 시작
+0.003	PC2	Switch0	ARP	ARP Request가 실제로 스위치로 이동
+0.005	Switch0	PC1	ARP	VLAN 10으로 브로드캐스트
+0.005	Switch0	Router0	ARP	같은 VLAN 포트 쪽으로 브로드캐스트
+2.003	--	PC2	ICMP	첫 ICMP 시도가 완료되지 못한 상태를 PC2에서 처리
+6.003	--	PC2	ICMP	ICMP 재시도 시작
+6.003	--	PC2	ARP	다시 MAC 주소 확인을 위해 ARP 재시도
+6.005~	...	...	ARP	ARP 브로드캐스트
+8.006	--	PC2	ICMP	재시도 역시 실패 처리
+
+0.000  ICMP   → "PC1한테 ping 보내야지"
+0.000  ARP    → "근데 192.168.10.10의 MAC 주소가 뭐지?"
+               ↓
+        ARP Request 전송
+               ↓
+        ARP Reply 없음
+
+2.003  ICMP   → "첫 번째 시도는 결국 못 보냈어/실패했어"
+정확하게는 ICMP Echo Request를 보냈는데 Echo Reply를 못 받은 상황조차 아니야. 그보다 앞 단계인 ARP에서 목적지 MAC 주소를 못 알아내서 ICMP 자체가 PC2 밖으로 못 나간 것이 핵심이야.
+
+        (기다린 뒤)
+
+6.003  ICMP   → "그러면 다음 ping 시도할게"
+6.003  ARP    → "여전히 MAC 모르니까 ARP부터 다시 해보자"
+

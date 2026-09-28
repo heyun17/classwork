@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Network Diagnosis Report</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #f4f6f8;
+      color: #20252b;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 32px auto 60px;
+    }
+
+    .top {
+      background: white;
+      border: 1px solid #dfe3e8;
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .top h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    .top p {
+      margin: 4px 0;
+      color: #58616b;
+    }
+
+    .model {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 10px;
+      border: 1px solid #cfd6dd;
+      border-radius: 999px;
+      font-size: 14px;
+      background: #fafbfc;
+    }
+
+    .case-card {
+      background: white;
+      border: 1px solid #dfe3e8;
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .case-header {
+      border-bottom: 1px solid #e5e9ed;
+      padding-bottom: 16px;
+      margin-bottom: 22px;
+    }
+
+    .case-header h2 {
+      margin: 6px 0 0;
+      font-size: 24px;
+    }
+
+    .case-id {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 6px;
+      background: #eef1f4;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .summary-box {
+      border: 1px solid #e1e5e9;
+      border-radius: 10px;
+      padding: 18px;
+      background: #fafbfc;
+    }
+
+    h3 {
+      margin-top: 28px;
+      margin-bottom: 12px;
+      font-size: 19px;
+    }
+
+    h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    h5 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #dfe3e8;
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f2f4f6;
+    }
+
+    .cause-card {
+      border: 1px solid #dde2e7;
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 14px;
+    }
+
+    .cause-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #eef1f4;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .cause-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .cause-grid > div {
+      border-top: 1px solid #eceff2;
+      padding-top: 12px;
+    }
+
+    .muted {
+      color: #77818c;
+    }
+
+    footer {
+      text-align: center;
+      color: #7a848e;
+      font-size: 13px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 760px) {
+      .summary-grid,
+      .cause-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        width: min(100% - 20px, 1180px);
+        margin-top: 16px;
+      }
+
+      .top,
+      .case-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <section class="top">
+      <h1>AI Network Diagnosis Report</h1>
+      <p>패킷 관찰 결과를 기반으로 생성한 네트워크 장애 분석 보고서</p>
+      <span class="model">Model: gpt-5.6-luna</span>
+    </section>
+
+    
+    <article class="case-card">
+      <header class="case-header">
+        <div>
+          <span class="case-id">fault_01</span>
+          <h2>fault_01 분석 결과</h2>
+        </div>
+      </header>
+
+      <section class="summary-grid">
+        <div class="summary-box">
+          <h3>요약</h3>
+          <p>PC1의 ICMP Echo Request는 PC3까지 정상 도착하므로 요청 전달 경로는 동작한 것으로 보입니다. 그러나 PC3가 응답을 전달하기 위해 192.168.20.254의 MAC 주소를 확인하는 ARP Request를 발생시킨 뒤 ARP Reply를 받지 못했습니다. 따라서 장애 지점은 PC3의 응답 전송 과정, 특히 192.168.20.254에 대한 ARP 해석 또는 해당 응답 경로로 추정됩니다. 제공된 정보만으로 단일 원인을 확정할 수 없습니다.</p>
+        </div>
+
+        <div class="summary-box">
+          <h3>실패 지점</h3>
+          <p>PC3에서 192.168.20.254로 수행한 ARP 해석 이후의 응답 전송 구간</p>
+        </div>
+      </section>
+
+      <section>
+        <h3>패킷 근거</h3>
+        
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>관찰 내용</th>
+            <th>의미</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td>PC1이 PC3로 ICMP Echo Request를 전송했고, 해당 패킷이 Switch0과 Router0을 거쳐 PC3까지 정상 도착함</td>
+              <td>PC1에서 PC3까지의 ICMP 요청 전달 경로는 적어도 해당 테스트 시점에는 동작했습니다.</td>
+            </tr>
+            
+            <tr>
+              <td>PC3가 응답 과정에서 ARP Request를 발생시킴</td>
+              <td>PC3는 ICMP Echo Reply를 전송하기 전에 다음 홉 또는 게이트웨이의 MAC 주소를 확인해야 하는 상태입니다.</td>
+            </tr>
+            
+            <tr>
+              <td>ARP Target IP가 192.168.20.254임</td>
+              <td>PC3가 응답을 전달하기 위해 192.168.20.254의 MAC 주소를 필요로 했음을 의미합니다. 이 주소는 PC3의 기본 게이트웨이일 가능성이 있지만, 제공된 정보만으로 그 설정을 확정할 수는 없습니다.</td>
+            </tr>
+            
+            <tr>
+              <td>192.168.20.254에 대한 ARP Reply가 관찰되지 않음</td>
+              <td>PC3가 해당 IP의 MAC 주소를 학습하지 못해 ICMP Echo Reply를 전송하지 못했을 가능성이 큽니다.</td>
+            </tr>
+            
+        </tbody>
+      </table>
+    </div>
+    
+      </section>
+
+      <section>
+        <h3>원인 후보 · 확인 방법 · 조치</h3>
+        
+    <section class="cause-card">
+      <div class="cause-title">
+        <span class="badge">후보 1</span>
+        <h4>PC3의 기본 게이트웨이 또는 IP 서브넷 설정이 잘못되어 192.168.20.254를 게이트웨이로 조회하고 있음</h4>
+      </div>
+
+      <div class="cause-grid">
+        <div>
+          <h5>근거</h5>
+          <ul><li>PC3가 응답 과정에서 192.168.20.254를 대상으로 ARP Request를 발생시킴</li>
+<li>해당 대상에 대한 ARP Reply가 관찰되지 않음</li></ul>
+        </div>
+
+        <div>
+          <h5>추론</h5>
+          <p>PC3의 기본 게이트웨이가 실제 연결된 네트워크의 게이트웨이 주소가 아니거나, IP 주소와 서브넷 마스크 설정이 부적절하면 존재하지 않는 대상에 ARP를 요청할 수 있습니다. 다만 현재 정보만으로 PC3의 실제 설정 오류를 확정할 수는 없습니다.</p>
+        </div>
+
+        <div>
+          <h5>확인 방법</h5>
+          <ul><li>PC3에서 Windows는 `ipconfig /all`, Linux는 `ip addr` 및 `ip route`로 IP 주소, 서브넷 마스크, 기본 게이트웨이를 확인</li>
+<li>PC3에서 `arp -a`로 192.168.20.254의 ARP 상태를 확인</li>
+<li>PC3에서 192.168.20.254로 직접 ping을 수행</li>
+<li>PC3가 연결된 인터페이스의 네트워크 주소와 192.168.20.254가 동일한 로컬 서브넷인지 확인</li></ul>
+        </div>
+
+        <div>
+          <h5>조치</h5>
+          <ul><li>PC3의 IP 주소, 서브넷 마스크, 기본 게이트웨이를 실제 네트워크 설계에 맞게 수정</li>
+<li>잘못된 정적 ARP 또는 캐시가 있다면 삭제 후 재학습</li>
+<li>설정 수정 후 PC3에서 게이트웨이 ping과 PC1에서 PC3로의 ICMP 테스트를 재수행</li></ul>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cause-card">
+      <div class="cause-title">
+        <span class="badge">후보 2</span>
+        <h4>192.168.20.254에 해당하는 라우터 인터페이스 또는 게이트웨이 장치가 해당 세그먼트에서 정상 동작하지 않음</h4>
+      </div>
+
+      <div class="cause-grid">
+        <div>
+          <h5>근거</h5>
+          <ul><li>PC3가 192.168.20.254에 ARP Request를 전송함</li>
+<li>192.168.20.254로부터 ARP Reply가 관찰되지 않음</li>
+<li>PC1의 요청은 PC3까지 도착했지만 PC3의 응답 과정에서 중단됨</li></ul>
+        </div>
+
+        <div>
+          <h5>추론</h5>
+          <p>192.168.20.254가 PC3의 게이트웨이라면, 해당 장치의 인터페이스가 비활성화되었거나 주소가 설정되지 않았거나 ARP에 응답하지 않는 상태일 때 현재 현상이 발생할 수 있습니다. 그러나 라우터 인터페이스 상태와 설정 정보가 없으므로 원인을 확정할 수 없습니다.</p>
+        </div>
+
+        <div>
+          <h5>확인 방법</h5>
+          <ul><li>192.168.20.254를 제공하는 장치에서 인터페이스 상태와 IP 주소를 확인</li>
+<li>라우터에서 `show ip interface brief` 또는 장비에 해당하는 인터페이스 상태 명령을 확인</li>
+<li>라우터에서 해당 인터페이스의 ARP 및 인접 장치 상태를 확인</li>
+<li>PC3가 연결된 세그먼트에서 ARP Request가 실제로 게이트웨이 인터페이스까지 도달하는지 패킷 캡처로 확인</li></ul>
+        </div>
+
+        <div>
+          <h5>조치</h5>
+          <ul><li>게이트웨이 인터페이스가 비활성화되어 있거나 주소가 누락된 경우 올바른 IP 설정과 인터페이스 활성화를 수행</li>
+<li>게이트웨이 장치의 해당 인터페이스와 연결 상태를 복구</li>
+<li>복구 후 PC3에서 192.168.20.254의 ARP Reply 및 ping 응답을 확인</li></ul>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cause-card">
+      <div class="cause-title">
+        <span class="badge">후보 3</span>
+        <h4>PC3와 192.168.20.254 사이의 Layer 2 연결 문제 또는 ARP 차단</h4>
+      </div>
+
+      <div class="cause-grid">
+        <div>
+          <h5>근거</h5>
+          <ul><li>PC3에서 192.168.20.254를 대상으로 ARP Request가 발생함</li>
+<li>ARP Reply가 관찰되지 않음</li>
+<li>ICMP Echo Request가 PC3까지 도달한 사실만으로 PC3의 응답 방향 Layer 2 경로가 정상이라고 판단할 수 없음</li></ul>
+        </div>
+
+        <div>
+          <h5>추론</h5>
+          <p>PC3가 연결된 VLAN과 게이트웨이 인터페이스의 VLAN이 다르거나, 스위치 포트/VLAN 설정 문제 또는 ARP 필터링이 있으면 ARP Reply가 PC3까지 전달되지 않을 수 있습니다. 다만 VLAN 구성이나 필터 설정은 입력에 없어 확정할 수 없습니다.</p>
+        </div>
+
+        <div>
+          <h5>확인 방법</h5>
+          <ul><li>PC3 연결 스위치 포트의 VLAN 및 링크 상태 확인</li>
+<li>192.168.20.254가 연결된 라우터 포트 또는 스위치 포트의 VLAN 소속 확인</li>
+<li>스위치의 MAC 주소 테이블에서 PC3와 게이트웨이 인터페이스가 예상된 포트에 학습되는지 확인</li>
+<li>ARP Request와 ARP Reply를 PC3 측 및 게이트웨이 측에서 각각 캡처하여 Reply가 생성되는지와 전달되는지를 비교</li>
+<li>ARP inspection, 포트 보안, ACL 등 ARP를 차단할 수 있는 설정이 있는지 확인</li></ul>
+        </div>
+
+        <div>
+          <h5>조치</h5>
+          <ul><li>PC3와 게이트웨이 인터페이스가 동일한 올바른 VLAN 및 Layer 2 세그먼트에 속하도록 포트 설정을 수정</li>
+<li>비정상적인 ARP 차단 정책이나 포트 보안 상태를 설계에 맞게 해제 또는 수정</li>
+<li>수정 후 ARP Request에 대한 Reply 수신 여부와 PC1-PC3 ICMP 통신을 재검증</li></ul>
+        </div>
+      </div>
+    </section>
+    
+      </section>
+    </article>
+    
+    <article class="case-card">
+      <header class="case-header">
+        <div>
+          <span class="case-id">fault_02</span>
+          <h2>fault_02 분석 결과</h2>
+        </div>
+      </header>
+
+      <section class="summary-grid">
+        <div class="summary-box">
+          <h3>요약</h3>
+          <p>PC1에서 Router0까지 ICMP Echo Request 전달은 정상이나, Router0가 목적지 192.168.20.10의 MAC 주소를 ARP로 확인하지 못해 PC3 구간에서 통신이 실패한 것으로 판단됩니다. 현재 정보만으로 PC3의 전원·링크 문제인지, L2 구간 문제인지, PC3의 IP 설정 문제인지는 확정할 수 없습니다.</p>
+        </div>
+
+        <div class="summary-box">
+          <h3>실패 지점</h3>
+          <p>Router0에서 192.168.20.10으로 패킷을 전달하기 위한 ARP 해석 단계</p>
+        </div>
+      </section>
+
+      <section>
+        <h3>패킷 근거</h3>
+        
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>관찰 내용</th>
+            <th>의미</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td>PC1의 ICMP Echo Request가 Switch0을 거쳐 Router0까지 정상 도착함</td>
+              <td>PC1에서 Router0까지의 전송 구간은 관찰된 패킷 기준으로 정상 동작함</td>
+            </tr>
+            
+            <tr>
+              <td>Router0가 192.168.20.10을 대상으로 ARP Request를 전송함</td>
+              <td>Router0는 목적지 IP로 패킷을 전달하기 위해 해당 IP의 MAC 주소를 확인하려고 함</td>
+            </tr>
+            
+            <tr>
+              <td>192.168.20.10에 대한 ARP Reply가 관찰되지 않음</td>
+              <td>Router0가 목적지의 MAC 주소를 확인하지 못했으며, 이후 ICMP 패킷 전달이 진행되지 못했을 가능성이 높음</td>
+            </tr>
+            
+            <tr>
+              <td>Router0의 ARP Table에서 192.168.20.10이 Incomplete 상태임</td>
+              <td>Router0의 ARP 해석이 완료되지 않은 상태이며, 목적지 구간에서 통신 실패가 발생한 지점과 일치함</td>
+            </tr>
+            
+        </tbody>
+      </table>
+    </div>
+    
+      </section>
+
+      <section>
+        <h3>원인 후보 · 확인 방법 · 조치</h3>
+        
+    <section class="cause-card">
+      <div class="cause-title">
+        <span class="badge">후보 1</span>
+        <h4>PC3의 전원 꺼짐, NIC 비활성화 또는 물리적 링크 단절</h4>
+      </div>
+
+      <div class="cause-grid">
+        <div>
+          <h5>근거</h5>
+          <ul><li>Router0가 ARP Request를 전송했지만 192.168.20.10의 ARP Reply가 관찰되지 않음</li>
+<li>Router0의 ARP Table에서 해당 주소가 Incomplete 상태임</li></ul>
+        </div>
+
+        <div>
+          <h5>추론</h5>
+          <p>PC3가 ARP Request를 수신하거나 응답할 수 없는 상태라면 Router0에서 ARP Reply가 관찰되지 않을 수 있습니다. 다만 현재 정보만으로 PC3의 전원 및 물리 링크 상태를 확정할 수는 없습니다.</p>
+        </div>
+
+        <div>
+          <h5>확인 방법</h5>
+          <ul><li>PC3의 전원 상태와 NIC 링크 LED 확인</li>
+<li>PC3에서 Windows는 `ipconfig /all`, Linux는 `ip addr`로 인터페이스 및 IP 상태 확인</li>
+<li>PC3에서 Windows는 `arp -a`, Linux는 `ip neigh`로 ARP 상태 확인</li>
+<li>Switch0에서 PC3 연결 포트의 링크 상태 및 인터페이스 오류 확인</li>
+<li>Router0에서 동일한 ARP Request를 재전송하면서 PC3 측 또는 연결 구간에서 ARP 수신 여부 확인</li></ul>
+        </div>
+
+        <div>
+          <h5>조치</h5>
+          <ul><li>PC3 전원 및 네트워크 케이블을 복구</li>
+<li>비활성화된 NIC 또는 스위치 포트를 활성화</li>
+<li>물리 링크 복구 후 Router0의 불완전한 ARP 항목을 삭제하고 재시도</li>
+<li>PC3에서 동일 IP에 대한 ARP 응답이 정상 발생하는지 확인</li></ul>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cause-card">
+      <div class="cause-title">
+        <span class="badge">후보 2</span>
+        <h4>Router0와 PC3 사이의 L2 전달 구간 또는 VLAN 구성이 일치하지 않음</h4>
+      </div>
+
+      <div class="cause-grid">
+        <div>
+          <h5>근거</h5>
+          <ul><li>Router0에서 ARP Request는 발생했으나 ARP Reply가 돌아오지 않음</li>
+<li>PC1에서 Router0까지는 정상 도달했지만 Router0 이후 목적지 구간의 응답은 관찰되지 않음</li></ul>
+        </div>
+
+        <div>
+          <h5>추론</h5>
+          <p>ARP는 동일한 L2 브로드캐스트 도메인에서 전달되어야 합니다. Router0의 ARP Request가 PC3까지 도달하지 않거나 PC3의 Reply가 Router0까지 돌아오지 않으면 ARP Table이 Incomplete로 남을 수 있습니다. 그러나 실제 VLAN 또는 포트 구성이 제공되지 않았으므로 이 원인을 확정할 수 없습니다.</p>
+        </div>
+
+        <div>
+          <h5>확인 방법</h5>
+          <ul><li>Router0의 목적지 방향 인터페이스가 연결된 네트워크와 192.168.20.10이 동일한 L2 구간인지 확인</li>
+<li>Router0 인터페이스의 IP 주소, 서브넷 마스크, 상태 및 ARP 관련 상태 확인</li>
+<li>Switch0 및 PC3 연결 포트의 VLAN ID와 포트 모드 확인</li>
+<li>ARP Request가 PC3 연결 포트까지 전달되는지, ARP Reply가 Router0 방향으로 전달되는지 패킷 캡처로 확인</li>
+<li>스위치 포트의 차단 상태, VLAN 불일치, 인터페이스 오류 또는 브로드캐스트 필터링 여부 확인</li></ul>
+        </div>
+
+        <div>
+          <h5>조치</h5>
+          <ul><li>Router0 인터페이스와 스위치 포트의 VLAN 및 서브넷 구성을 의도된 네트워크에 맞게 수정</li>
+<li>PC3 연결 포트를 올바른 VLAN에 배치</li>
+<li>차단되거나 비정상인 포트 및 링크를 복구</li>
+<li>구성 변경 후 ARP 캐시를 초기화하고 PC1에서 ICMP를 재시험</li></ul>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cause-card">
+      <div class="cause-title">
+        <span class="badge">후보 3</span>
+        <h4>PC3에 192.168.20.10이 올바르게 설정되지 않았거나 해당 IP를 사용하지 않음</h4>
+      </div>
+
+      <div class="cause-grid">
+        <div>
+          <h5>근거</h5>
+          <ul><li>Router0가 192.168.20.10으로 ARP Request를 보냈으나 해당 IP의 Reply가 없음</li>
+<li>Router0의 ARP Table에서 192.168.20.10이 Incomplete 상태임</li></ul>
+        </div>
+
+        <div>
+          <h5>추론</h5>
+          <p>PC3의 실제 IP가 다르거나 해당 주소가 인터페이스에 설정되지 않았다면 PC3가 192.168.20.10에 대한 ARP Reply를 생성하지 않을 수 있습니다. 제공된 정보만으로 PC3의 실제 IP 설정은 확인할 수 없습니다.</p>
+        </div>
+
+        <div>
+          <h5>확인 방법</h5>
+          <ul><li>PC3에서 Windows는 `ipconfig /all`, Linux는 `ip addr`로 실제 IP 주소와 서브넷 마스크 확인</li>
+<li>PC3에 192.168.20.10이 실제로 설정되어 있는지 확인</li>
+<li>PC3의 IP 중복 또는 주소 변경 이력 확인</li>
+<li>PC3에서 ARP Request 수신 여부와 ARP Reply 생성 여부를 패킷 캡처로 확인</li>
+<li>Router0에서 목적지 네트워크에 대한 연결 인터페이스와 서브넷 설정 확인</li></ul>
+        </div>
+
+        <div>
+          <h5>조치</h5>
+          <ul><li>PC3에 의도된 IP 주소와 올바른 서브넷 마스크를 설정</li>
+<li>잘못된 IP 설정을 수정하고 중복 IP가 있다면 주소를 정리</li>
+<li>PC3의 인터페이스를 재시작하거나 네트워크 설정을 갱신</li>
+<li>Router0의 ARP 캐시를 초기화한 후 ARP 및 ICMP를 재시험</li></ul>
+        </div>
+      </div>
+    </section>
+    
+      </section>
+    </article>
+    
+    <article class="case-card">
+      <header class="case-header">
+        <div>
+          <span class="case-id">fault_03</span>
+          <h2>fault_03 분석 결과</h2>
+        </div>
+      </header>
+
+      <section class="summary-grid">
+        <div class="summary-box">
+          <h3>요약</h3>
+          <p>PC2에서 192.168.10.10으로 통신을 시도했으나 ARP Reply가 관찰되지 않아 MAC 주소 확인 단계에서 실패한 것으로 판단됩니다. 따라서 ICMP Echo Request가 PC1까지 전달되었는지는 확인할 수 없으며, 현재 정보만으로 단일 원인을 확정할 수 없습니다.</p>
+        </div>
+
+        <div class="summary-box">
+          <h3>실패 지점</h3>
+          <p>PC2가 192.168.10.10에 대한 ARP Request를 Broadcast한 이후 ARP Reply를 수신하지 못한 지점입니다. ICMP 통신 이전의 L2 주소 해석 단계에서 실패했습니다.</p>
+        </div>
+      </section>
+
+      <section>
+        <h3>패킷 근거</h3>
+        
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>관찰 내용</th>
+            <th>의미</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td>PC2가 192.168.10.10의 MAC 주소를 찾기 위해 ARP Request를 발생시킴</td>
+              <td>PC2가 목적지 IP에 대한 MAC 주소를 알지 못해 ARP 주소 해석을 수행하고 있습니다.</td>
+            </tr>
+            
+            <tr>
+              <td>ARP Request가 Switch0을 통해 VLAN 10에 Broadcast됨</td>
+              <td>ARP Request가 최소한 PC2에서 Switch0의 VLAN 10 구간까지 전송된 사실이 관찰됩니다.</td>
+            </tr>
+            
+            <tr>
+              <td>192.168.10.10에 대한 ARP Reply가 관찰되지 않음</td>
+              <td>PC2가 목적지 MAC 주소를 학습하지 못했으며, 정상적인 ICMP Echo Request 전송까지 진행되지 않았을 가능성이 높습니다.</td>
+            </tr>
+            
+            <tr>
+              <td>PC2에서 PC1으로의 ping 결과가 failure임</td>
+              <td>최종 ICMP 통신은 성공하지 않았지만, 실패 원인이 PC1 자체인지 VLAN 또는 연결 경로인지 현재 패킷 정보만으로는 구분할 수 없습니다.</td>
+            </tr>
+            
+        </tbody>
+      </table>
+    </div>
+    
+      </section>
+
+      <section>
+        <h3>원인 후보 · 확인 방법 · 조치</h3>
+        
+    <section class="cause-card">
+      <div class="cause-title">
+        <span class="badge">후보 1</span>
+        <h4>PC1이 꺼져 있거나 네트워크에 연결되어 있지 않음</h4>
+      </div>
+
+      <div class="cause-grid">
+        <div>
+          <h5>근거</h5>
+          <ul><li>PC2가 192.168.10.10을 대상으로 ARP Request를 전송함</li>
+<li>해당 IP에 대한 ARP Reply가 관찰되지 않음</li></ul>
+        </div>
+
+        <div>
+          <h5>추론</h5>
+          <p>PC1이 전원 꺼짐, 케이블 분리, NIC 비활성화 등의 상태라면 ARP Request를 수신하거나 Reply를 전송하지 못할 수 있습니다. 다만 현재 정보에는 PC1의 전원 및 링크 상태가 없으므로 확정할 수 없습니다.</p>
+        </div>
+
+        <div>
+          <h5>확인 방법</h5>
+          <ul><li>PC1의 전원 상태와 네트워크 케이블 연결 상태 확인</li>
+<li>PC1에서 NIC 링크 상태 및 인터페이스 활성화 여부 확인</li>
+<li>PC1에서 IP 주소가 실제로 192.168.10.10인지 확인</li>
+<li>PC1에서 ARP Request 수신 여부를 패킷 캡처로 확인</li></ul>
+        </div>
+
+        <div>
+          <h5>조치</h5>
+          <ul><li>PC1의 전원, 케이블, NIC를 정상화</li>
+<li>PC1의 인터페이스를 활성화하고 192.168.10.10 주소 설정을 수정</li>
+<li>정상화 후 PC2에서 ARP 캐시를 삭제하고 ping 재시도</li></ul>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cause-card">
+      <div class="cause-title">
+        <span class="badge">후보 2</span>
+        <h4>PC1 또는 PC2의 스위치 포트가 VLAN 10에 올바르게 연결되지 않음</h4>
+      </div>
+
+      <div class="cause-grid">
+        <div>
+          <h5>근거</h5>
+          <ul><li>ARP Request는 VLAN 10에 Broadcast됨</li>
+<li>192.168.10.10에 대한 ARP Reply가 관찰되지 않음</li></ul>
+        </div>
+
+        <div>
+          <h5>추론</h5>
+          <p>PC2의 ARP Request가 VLAN 10으로 전송되었더라도 PC1의 연결 포트가 다른 VLAN에 속하거나 VLAN 10이 해당 경로에서 허용되지 않으면 PC1이 Request를 수신하지 못할 수 있습니다. 다만 PC1 포트 설정이나 VLAN 구성은 제공되지 않았으므로 확정할 수 없습니다.</p>
+        </div>
+
+        <div>
+          <h5>확인 방법</h5>
+          <ul><li>Switch0에서 PC1 및 PC2 연결 포트의 VLAN 소속 확인</li>
+<li>해당 포트의 access/trunk 모드와 VLAN 10 허용 여부 확인</li>
+<li>Switch0의 VLAN 10 존재 여부와 포트 상태 확인</li>
+<li>PC1이 연결된 포트에서 ARP Broadcast가 수신되는지 패킷 캡처 또는 스위치 모니터링으로 확인</li></ul>
+        </div>
+
+        <div>
+          <h5>조치</h5>
+          <ul><li>PC1과 PC2가 동일한 통신 목적에 맞는 VLAN 10 포트에 연결되도록 수정</li>
+<li>필요한 경우 포트의 VLAN 또는 trunk 허용 VLAN 설정을 수정</li>
+<li>설정 변경 후 ARP Request와 Reply가 양방향으로 관찰되는지 확인</li></ul>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cause-card">
+      <div class="cause-title">
+        <span class="badge">후보 3</span>
+        <h4>PC1의 IP 주소 또는 ARP 응답 관련 호스트 설정 문제</h4>
+      </div>
+
+      <div class="cause-grid">
+        <div>
+          <h5>근거</h5>
+          <ul><li>ARP Target IP가 192.168.10.10임</li>
+<li>해당 IP에 대한 ARP Reply가 관찰되지 않음</li></ul>
+        </div>
+
+        <div>
+          <h5>추론</h5>
+          <p>PC1의 실제 주소가 192.168.10.10이 아니거나, 인터페이스에 해당 주소가 설정되지 않았거나, 호스트의 ARP 응답 동작이 제한되어 있으면 Reply가 발생하지 않을 수 있습니다. 일반적인 ICMP 방화벽 차단만으로는 ARP Reply 부재를 설명하기 어렵지만, 현재 호스트 설정 정보가 없어 원인을 확정할 수 없습니다.</p>
+        </div>
+
+        <div>
+          <h5>확인 방법</h5>
+          <ul><li>PC1에서 인터페이스의 IP 주소와 서브넷 마스크 확인</li>
+<li>PC1의 ARP 관련 설정 및 주소 중복 여부 확인</li>
+<li>PC1에서 ARP Request가 실제로 수신되는지 확인</li>
+<li>PC2에서 동일 VLAN 내 다른 장비의 ARP 동작과 비교</li>
+<li>PC1의 로컬 방화벽 또는 보안 프로그램이 ARP 처리에 영향을 주는지 확인</li></ul>
+        </div>
+
+        <div>
+          <h5>조치</h5>
+          <ul><li>PC1에 올바른 IP 주소 192.168.10.10과 네트워크 설정을 적용</li>
+<li>잘못된 정적 ARP 또는 ARP 필터링 설정이 있다면 수정</li>
+<li>필요한 경우 호스트 방화벽 및 보안 정책을 조정한 뒤 ARP와 ping을 재시험</li></ul>
+        </div>
+      </div>
+    </section>
+    
+      </section>
+    </article>
+    
+
+    <footer>
+      Generated from diagnosis.json
+    </footer>
+  </main>
+</body>
+</html>
