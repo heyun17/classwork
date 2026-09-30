@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>매출 대시보드</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>매출 대시보드</h1>
+    <p class="sub">이 페이지는 <b>site 컨테이너</b>가 보여 주고, 숫자는 <b>api 컨테이너</b>가 준다</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>합계</h2>
+      <p id="total" class="big">불러오는 중…</p>
+      <p id="count" class="muted"></p>
+    </section>
+
+    <section class="card">
+      <h2>지역별</h2>
+      <ul id="region"></ul>
+    </section>
+
+    <section class="card">
+      <h2>제품별</h2>
+      <ul id="product"></ul>
+    </section>
+
+    <section class="card">
+      <h2>연결 상태</h2>
+      <p id="status" class="muted">API 주소 : <code id="apiUrl"></code></p>
+      <button id="reload">다시 불러오기</button>
+    </section>
+  </main>
+
+  <footer>site 컨테이너 : 8080 &nbsp;·&nbsp; api 컨테이너 : 5000</footer>
+
+  <script>
+    // 브라우저는 내 PC에서 돌기 때문에, 컨테이너 이름이 아니라 localhost의 열린 포트로 부른다
+    const API = "http://localhost:5000";
+    document.getElementById("apiUrl").textContent = API + "/api/summary";
+
+    const won = n => n.toLocaleString("ko-KR") + "원";
+
+    function draw(list, elId, total) {
+      const ul = document.getElementById(elId);
+      ul.innerHTML = "";
+      list.forEach(item => {
+        const pct = (item.amount / total * 100).toFixed(1);
+        const li = document.createElement("li");
+        li.innerHTML = `<span class="name">${item.name}</span>
+                        <span class="bar" style="width:${pct * 2}px"></span>
+                        <span class="val">${won(item.amount)} · ${pct}%</span>`;
+        ul.appendChild(li);
+      });
+    }
+
+    async function load() {
+      const status = document.getElementById("status");
+      try {
+        const res = await fetch(API + "/api/summary");
+        const data = await res.json();
+        document.getElementById("total").textContent = won(data.total);
+        document.getElementById("count").textContent = `거래 ${data.count}건`;
+        draw(data.by_region, "region", data.total);
+        draw(data.by_product, "product", data.total);
+        status.innerHTML = 'API 연결 <b class="ok">성공</b> · <code>' + API + '/api/summary</code>';
+      } catch (e) {
+        document.getElementById("total").textContent = "API에 연결하지 못했습니다";
+        status.innerHTML = 'API 연결 <b class="ng">실패</b> · api 컨테이너가 떠 있는지, 5000번이 열려 있는지 확인하세요';
+      }
+    }
+
+    document.getElementById("reload").addEventListener("click", load);
+    load();
+  </script>
+</body>
+</html>

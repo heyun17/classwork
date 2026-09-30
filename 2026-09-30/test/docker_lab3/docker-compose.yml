@@ -1,0 +1,27 @@
+# 두 컨테이너를 한 파일로 정의한다
+# 실행 : docker compose up -d        중지·삭제 : docker compose down
+
+services:
+
+  api:                          # 서비스 이름 = 네트워크에서의 주소
+    build: ./api                # 이 폴더의 Dockerfile로 이미지를 굽는다
+    image: my-api:3.0           # 구운 이미지에 붙일 이름표
+    container_name: api         # 컨테이너 이름 (생략하면 lab3-api-1 처럼 자동)
+    ports:
+      - "5000:5000"             # 내 PC 5000 → 컨테이너 5000
+    environment:
+      CSV_PATH: /data/sales.csv # api.py가 읽을 파일 위치
+      PORT: "5000"
+    volumes:
+      - ./data:/data            # 내 PC의 data 폴더 → 컨테이너의 /data
+    restart: unless-stopped     # 꺼지면 자동으로 다시 시작
+
+  site:
+    build: ./site
+    image: my-site:3.0
+    container_name: site
+    ports:
+      - "8080:80"
+    depends_on:
+      - api                     # api를 먼저 띄운다
+    restart: unless-stopped
