@@ -1,0 +1,28 @@
+# 장애 실습용 · restart 와 healthcheck 를 비교한다
+services:
+
+  app-no:                       # 재시작하지 않는 쪽
+    build: ./app
+    image: my-app:5.0
+    container_name: app-no
+    environment:
+      APP_NAME: app-no
+    ports:
+      - "8001:8000"
+    restart: "no"
+
+  app-always:                   # 죽으면 자동으로 다시 뜨는 쪽
+    build: ./app
+    image: my-app:5.0
+    container_name: app-always
+    environment:
+      APP_NAME: app-always
+    ports:
+      - "8002:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0) if urllib.request.urlopen('http://localhost:8000/healthz').status==200 else sys.exit(1)"]
+      interval: 10s
+      timeout: 3s
+      retries: 2
+      start_period: 5s

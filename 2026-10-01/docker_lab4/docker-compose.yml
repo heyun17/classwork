@@ -1,0 +1,8 @@
+services:
+  report:
+    build: ./report
+    image: my-report:4.0
+    volumes:
+      - ./data:/data
+      - ./out:/out
+    restart: "no"

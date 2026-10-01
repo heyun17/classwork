@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web                     # 이 Deployment의 이름
+spec:
+  replicas: 2                   # 파드를 몇 개 유지할지
+  selector:
+    matchLabels:
+      app: web                  # 이 라벨이 붙은 파드를 내 것으로 본다
+  template:                     # 아래는 "파드를 어떻게 만들지"의 설계도
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          readinessProbe:       # 요청을 받을 준비가 됐는지 확인
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 2
+            periodSeconds: 5
