@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>상품 목록</title>
+</head>
+<body>
+
+    <h1>상품 목록</h1>
+
+    <ul>
+        {% for product in products %}
+            <li>
+                {{ product.name }} : {{ product.price }}원
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">메인으로</a>
+
+</body>
+</html>

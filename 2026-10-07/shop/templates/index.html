@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 목록</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body>
+    <main>
+        <div id="title-area">
+            <h1>상품 목록</h1>
+            <p>총 {{ products|length }}개 상품</p>
+        </div>
+
+        <form method="get" action="/">
+            <input
+                id="search-input"
+                type="search"
+                name="q"
+                value="{{ keyword }}"
+                placeholder="상품명 검색"
+            >
+            <button type="submit">검색</button>
+        </form>
+
+        <div id="table-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th>상품명</th>
+                        <th>가격</th>
+                    </tr>
+                </thead>
+                <tbody id="product-list">
+                    {% for product in products %}
+                    <tr class="product-row">
+                        <td><a href="{{ url_for('get_product', product_id=product.id) }}">{{ product.name }}</a></td>
+                        <td>{{ "{:,}".format(product.price) }}원</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p id="empty-message"{% if products %} hidden{% endif %}>검색 결과가 없습니다.</p>
+        </div>
+    </main>
+    <script src="{{ url_for('static', path='script.js') }}" defer></script>
+</body>
+
+</html>
