@@ -1,0 +1,227 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+header {
+    background: #263238;
+    color: white;
+    padding: 20px 30px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    background: white;
+    padding: 12px 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+nav button {
+    margin-right: 8px;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background: #f0f0f0;
+}
+
+main {
+    padding: 30px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* 대시보드 */
+
+.cards {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 140px;
+}
+
+.card span {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.card strong {
+    font-size: 28px;
+}
+
+
+/* 공통 버튼 */
+
+.filter-buttons {
+    margin-bottom: 20px;
+}
+
+.filter-buttons button,
+.attendance-controls button,
+.payment-controls button {
+    margin-right: 8px;
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+}
+
+.filter-buttons button:hover,
+.attendance-controls button:hover,
+.payment-controls button:hover {
+    background: #f0f0f0;
+}
+
+
+/* 표 */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th,
+td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #eceff1;
+}
+
+#students-table-body tr {
+    cursor: pointer;
+}
+
+#students-table-body tr:hover {
+    background: #f5f5f5;
+}
+
+
+/* 학생 상세 */
+
+.student-detail {
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.student-detail p {
+    margin: 10px 0;
+}
+
+.student-detail h3 {
+    margin-top: 24px;
+}
+
+.student-detail ul {
+    padding-left: 20px;
+}
+
+
+/* 출결 */
+
+.attendance-controls {
+    display: flex;
+    align-items: end;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.attendance-controls label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.attendance-controls input,
+.attendance-controls select {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.attendance-action-button {
+    margin-right: 5px;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+}
+
+.attendance-action-button:disabled {
+    cursor: default;
+    opacity: 0.5;
+}
+
+#attendance-message {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+
+/* 수납 */
+
+.payment-controls {
+    display: flex;
+    align-items: end;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.payment-controls label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.payment-controls input,
+.payment-controls select {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.payment-action-button {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+}
+
+.payment-action-button:hover {
+    background: #f0f0f0;
+}
+
+.payment-action-button:disabled {
+    cursor: default;
+    opacity: 0.5;
+}
+
+#payment-message {
+    margin-top: 15px;
+    font-weight: bold;
+}

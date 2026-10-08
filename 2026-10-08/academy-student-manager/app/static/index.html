@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학원 학생 관리 시스템</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>학원 학생 관리 시스템</h1>
+    </header>
+
+    <nav>
+        <button id="dashboard-button">대시보드</button>
+        <button id="students-button">학생</button>
+        <button id="attendance-button">출결</button>
+        <button id="payments-button">수납</button>
+    </nav>
+
+    <main>
+
+        <!-- 대시보드 -->
+        <section id="dashboard-section">
+            <h2>대시보드</h2>
+
+            <div class="cards">
+                <div class="card">
+                    <span>전체 학생</span>
+                    <strong id="total-students">-</strong>
+                </div>
+
+                <div class="card">
+                    <span>중1반</span>
+                    <strong id="grade-1">-</strong>
+                </div>
+
+                <div class="card">
+                    <span>중2반</span>
+                    <strong id="grade-2">-</strong>
+                </div>
+
+                <div class="card">
+                    <span>중3반</span>
+                    <strong id="grade-3">-</strong>
+                </div>
+            </div>
+
+            <h3>오늘 출결</h3>
+
+            <div class="cards">
+                <div class="card">
+                    <span>출석</span>
+                    <strong id="today-present">-</strong>
+                </div>
+
+                <div class="card">
+                    <span>지각</span>
+                    <strong id="today-late">-</strong>
+                </div>
+
+                <div class="card">
+                    <span>결석</span>
+                    <strong id="today-absent">-</strong>
+                </div>
+            </div>
+
+            <h3>이번 달 수납</h3>
+
+            <div class="cards">
+                <div class="card">
+                    <span>납부</span>
+                    <strong id="monthly-paid">-</strong>
+                </div>
+
+                <div class="card">
+                    <span>미납</span>
+                    <strong id="monthly-unpaid">-</strong>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 학생 관리 -->
+        <section id="students-section" class="hidden">
+
+            <div id="student-list-view">
+                <h2>학생 관리</h2>
+
+                <div class="filter-buttons">
+                    <button data-class-id="">전체</button>
+                    <button data-class-id="1">중1반</button>
+                    <button data-class-id="2">중2반</button>
+                    <button data-class-id="3">중3반</button>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>학생 ID</th>
+                            <th>이름</th>
+                            <th>학년</th>
+                            <th>학교</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="students-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div id="student-detail-view" class="hidden">
+
+                <div class="filter-buttons">
+                    <button id="student-back-button">
+                        ← 목록으로
+                    </button>
+                </div>
+
+                <h2>학생 상세</h2>
+
+                <div class="student-detail">
+
+                    <p>
+                        <strong>이름:</strong>
+                        <span id="detail-name"></span>
+                    </p>
+
+                    <p>
+                        <strong>학년:</strong>
+                        <span id="detail-grade"></span>
+                    </p>
+
+                    <p>
+                        <strong>학교:</strong>
+                        <span id="detail-school"></span>
+                    </p>
+
+                    <p>
+                        <strong>소속 반:</strong>
+                        <span id="detail-class"></span>
+                    </p>
+
+                    <p>
+                        <strong>보호자 연락처:</strong>
+                        <span id="detail-phone"></span>
+                    </p>
+
+                    <h3>최근 출결</h3>
+                    <ul id="detail-attendance"></ul>
+
+                    <h3>이번 달 수납</h3>
+                    <p id="detail-payment"></p>
+
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- 출결 관리 -->
+        <section id="attendance-section" class="hidden">
+
+            <h2>출결 관리</h2>
+
+            <div class="attendance-controls">
+
+                <label>
+                    날짜
+                    <input
+                        type="date"
+                        id="attendance-date"
+                    >
+                </label>
+
+                <label>
+                    반
+                    <select id="attendance-class">
+                        <option value="1">중1반</option>
+                        <option value="2">중2반</option>
+                        <option value="3">중3반</option>
+                    </select>
+                </label>
+
+                <button id="attendance-search-button">
+                    조회
+                </button>
+
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>학생 ID</th>
+                        <th>이름</th>
+                        <th>학교</th>
+                        <th>출결 상태</th>
+                        <th>출결 처리</th>
+                    </tr>
+                </thead>
+
+                <tbody id="attendance-table-body">
+                </tbody>
+            </table>
+
+            <p id="attendance-message"></p>
+
+        </section>
+
+
+        <!-- 수납 관리 -->
+        <section id="payments-section" class="hidden">
+
+            <h2>수납 관리</h2>
+
+            <div class="payment-controls">
+
+                <label>
+                    대상 월
+                    <input
+                        type="month"
+                        id="payment-month"
+                    >
+                </label>
+
+                <label>
+                    상태
+                    <select id="payment-status">
+                        <option value="">전체</option>
+                        <option value="납부">납부</option>
+                        <option value="미납">미납</option>
+                    </select>
+                </label>
+
+                <label>
+                    반
+                    <select id="payment-class">
+                        <option value="">전체</option>
+                        <option value="1">중1반</option>
+                        <option value="2">중2반</option>
+                        <option value="3">중3반</option>
+                    </select>
+                </label>
+
+                <button id="payment-search-button">
+                    조회
+                </button>
+
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>학생 ID</th>
+                        <th>이름</th>
+                        <th>학년</th>
+                        <th>반</th>
+                        <th>대상 월</th>
+                        <th>수강료</th>
+                        <th>상태</th>
+                        <th>납부일</th>
+                        <th>처리</th>
+                    </tr>
+                </thead>
+
+                <tbody id="payments-table-body">
+                </tbody>
+            </table>
+
+            <p id="payment-message"></p>
+
+        </section>
+
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

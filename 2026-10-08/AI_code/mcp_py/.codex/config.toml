@@ -1,0 +1,8 @@
+[mcp_servers.sales]
+command = 'D:\OneDrive\#classes\October\1008\classwork\AI_code\mcp_py\.venv\Scripts\python.exe'
+args = ['D:\OneDrive\#classes\October\1008\classwork\AI_code\mcp_py\sales_server.py']
+
+[mcp_servers.ai-tools]
+command = 'D:\OneDrive\#classes\October\1008\classwork\AI_code\mcp_py\.venv\Scripts\python.exe'
+args = ['D:\OneDrive\#classes\October\1008\classwork\AI_code\mcp_py\ai_server.py']
+tool_timeout_sec = 90
