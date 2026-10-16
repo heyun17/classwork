@@ -1,0 +1,141 @@
+﻿dataset,file,column_order,column_name,duckdb_type
+01_dunnhumby,campaign_desc.csv,1,DESCRIPTION,VARCHAR
+01_dunnhumby,campaign_desc.csv,2,CAMPAIGN,BIGINT
+01_dunnhumby,campaign_desc.csv,3,START_DAY,BIGINT
+01_dunnhumby,campaign_desc.csv,4,END_DAY,BIGINT
+01_dunnhumby,campaign_table.csv,1,DESCRIPTION,VARCHAR
+01_dunnhumby,campaign_table.csv,2,household_key,BIGINT
+01_dunnhumby,campaign_table.csv,3,CAMPAIGN,BIGINT
+01_dunnhumby,causal_data.csv,1,PRODUCT_ID,BIGINT
+01_dunnhumby,causal_data.csv,2,STORE_ID,BIGINT
+01_dunnhumby,causal_data.csv,3,WEEK_NO,BIGINT
+01_dunnhumby,causal_data.csv,4,display,VARCHAR
+01_dunnhumby,causal_data.csv,5,mailer,VARCHAR
+01_dunnhumby,coupon.csv,1,COUPON_UPC,BIGINT
+01_dunnhumby,coupon.csv,2,PRODUCT_ID,BIGINT
+01_dunnhumby,coupon.csv,3,CAMPAIGN,BIGINT
+01_dunnhumby,coupon_redempt.csv,1,household_key,BIGINT
+01_dunnhumby,coupon_redempt.csv,2,DAY,BIGINT
+01_dunnhumby,coupon_redempt.csv,3,COUPON_UPC,BIGINT
+01_dunnhumby,coupon_redempt.csv,4,CAMPAIGN,BIGINT
+01_dunnhumby,hh_demographic.csv,1,AGE_DESC,VARCHAR
+01_dunnhumby,hh_demographic.csv,2,MARITAL_STATUS_CODE,VARCHAR
+01_dunnhumby,hh_demographic.csv,3,INCOME_DESC,VARCHAR
+01_dunnhumby,hh_demographic.csv,4,HOMEOWNER_DESC,VARCHAR
+01_dunnhumby,hh_demographic.csv,5,HH_COMP_DESC,VARCHAR
+01_dunnhumby,hh_demographic.csv,6,HOUSEHOLD_SIZE_DESC,VARCHAR
+01_dunnhumby,hh_demographic.csv,7,KID_CATEGORY_DESC,VARCHAR
+01_dunnhumby,hh_demographic.csv,8,household_key,BIGINT
+01_dunnhumby,product.csv,1,PRODUCT_ID,BIGINT
+01_dunnhumby,product.csv,2,MANUFACTURER,BIGINT
+01_dunnhumby,product.csv,3,DEPARTMENT,VARCHAR
+01_dunnhumby,product.csv,4,BRAND,VARCHAR
+01_dunnhumby,product.csv,5,COMMODITY_DESC,VARCHAR
+01_dunnhumby,product.csv,6,SUB_COMMODITY_DESC,VARCHAR
+01_dunnhumby,product.csv,7,CURR_SIZE_OF_PRODUCT,VARCHAR
+01_dunnhumby,transaction_data.csv,1,household_key,BIGINT
+01_dunnhumby,transaction_data.csv,2,BASKET_ID,BIGINT
+01_dunnhumby,transaction_data.csv,3,DAY,BIGINT
+01_dunnhumby,transaction_data.csv,4,PRODUCT_ID,BIGINT
+01_dunnhumby,transaction_data.csv,5,QUANTITY,BIGINT
+01_dunnhumby,transaction_data.csv,6,SALES_VALUE,DOUBLE
+01_dunnhumby,transaction_data.csv,7,STORE_ID,BIGINT
+01_dunnhumby,transaction_data.csv,8,RETAIL_DISC,DOUBLE
+01_dunnhumby,transaction_data.csv,9,TRANS_TIME,VARCHAR
+01_dunnhumby,transaction_data.csv,10,WEEK_NO,BIGINT
+01_dunnhumby,transaction_data.csv,11,COUPON_DISC,DOUBLE
+01_dunnhumby,transaction_data.csv,12,COUPON_MATCH_DISC,DOUBLE
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,1,item_id,BIGINT
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,2,status,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,3,created_at,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,4,sku,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,5,price,DOUBLE
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,6,qty_ordered,BIGINT
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,7,grand_total,DOUBLE
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,8,increment_id,BIGINT
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,9,category_name_1,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,10,sales_commission_code,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,11,discount_amount,DOUBLE
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,12,payment_method,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,13,Working Date,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,14,BI Status,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,15,MV,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,16,Year,BIGINT
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,17,Month,BIGINT
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,18,Customer Since,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,19,M-Y,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,20,FY,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,21,Customer ID,BIGINT
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,22,column21,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,23,column22,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,24,column23,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,25,column24,VARCHAR
+02_pakistan,Pakistan Largest Ecommerce Dataset.csv,26,column25,VARCHAR
+03_online_retail,online_retail_II.csv,1,Invoice,VARCHAR
+03_online_retail,online_retail_II.csv,2,StockCode,VARCHAR
+03_online_retail,online_retail_II.csv,3,Description,VARCHAR
+03_online_retail,online_retail_II.csv,4,Quantity,BIGINT
+03_online_retail,online_retail_II.csv,5,InvoiceDate,TIMESTAMP
+03_online_retail,online_retail_II.csv,6,Price,DOUBLE
+03_online_retail,online_retail_II.csv,7,Customer ID,DOUBLE
+03_online_retail,online_retail_II.csv,8,Country,VARCHAR
+04_instacart,aisles.csv,1,aisle_id,BIGINT
+04_instacart,aisles.csv,2,aisle,VARCHAR
+04_instacart,departments.csv,1,department_id,BIGINT
+04_instacart,departments.csv,2,department,VARCHAR
+04_instacart,order_products__prior.csv,1,order_id,BIGINT
+04_instacart,order_products__prior.csv,2,product_id,BIGINT
+04_instacart,order_products__prior.csv,3,add_to_cart_order,BIGINT
+04_instacart,order_products__prior.csv,4,reordered,BIGINT
+04_instacart,order_products__train.csv,1,order_id,BIGINT
+04_instacart,order_products__train.csv,2,product_id,BIGINT
+04_instacart,order_products__train.csv,3,add_to_cart_order,BIGINT
+04_instacart,order_products__train.csv,4,reordered,BIGINT
+04_instacart,orders.csv,1,order_id,BIGINT
+04_instacart,orders.csv,2,user_id,BIGINT
+04_instacart,orders.csv,3,eval_set,VARCHAR
+04_instacart,orders.csv,4,order_number,BIGINT
+04_instacart,orders.csv,5,order_dow,BIGINT
+04_instacart,orders.csv,6,order_hour_of_day,VARCHAR
+04_instacart,orders.csv,7,days_since_prior_order,DOUBLE
+04_instacart,products.csv,1,product_id,BIGINT
+04_instacart,products.csv,2,product_name,VARCHAR
+04_instacart,products.csv,3,aisle_id,BIGINT
+04_instacart,products.csv,4,department_id,BIGINT
+05_hm,articles.csv,1,article_id,VARCHAR
+05_hm,articles.csv,2,product_code,VARCHAR
+05_hm,articles.csv,3,prod_name,VARCHAR
+05_hm,articles.csv,4,product_type_no,BIGINT
+05_hm,articles.csv,5,product_type_name,VARCHAR
+05_hm,articles.csv,6,product_group_name,VARCHAR
+05_hm,articles.csv,7,graphical_appearance_no,BIGINT
+05_hm,articles.csv,8,graphical_appearance_name,VARCHAR
+05_hm,articles.csv,9,colour_group_code,VARCHAR
+05_hm,articles.csv,10,colour_group_name,VARCHAR
+05_hm,articles.csv,11,perceived_colour_value_id,BIGINT
+05_hm,articles.csv,12,perceived_colour_value_name,VARCHAR
+05_hm,articles.csv,13,perceived_colour_master_id,BIGINT
+05_hm,articles.csv,14,perceived_colour_master_name,VARCHAR
+05_hm,articles.csv,15,department_no,BIGINT
+05_hm,articles.csv,16,department_name,VARCHAR
+05_hm,articles.csv,17,index_code,VARCHAR
+05_hm,articles.csv,18,index_name,VARCHAR
+05_hm,articles.csv,19,index_group_no,BIGINT
+05_hm,articles.csv,20,index_group_name,VARCHAR
+05_hm,articles.csv,21,section_no,BIGINT
+05_hm,articles.csv,22,section_name,VARCHAR
+05_hm,articles.csv,23,garment_group_no,BIGINT
+05_hm,articles.csv,24,garment_group_name,VARCHAR
+05_hm,articles.csv,25,detail_desc,VARCHAR
+05_hm,customers.csv,1,customer_id,VARCHAR
+05_hm,customers.csv,2,FN,DOUBLE
+05_hm,customers.csv,3,Active,DOUBLE
+05_hm,customers.csv,4,club_member_status,VARCHAR
+05_hm,customers.csv,5,fashion_news_frequency,VARCHAR
+05_hm,customers.csv,6,age,BIGINT
+05_hm,customers.csv,7,postal_code,VARCHAR
+05_hm,transactions_train.csv,1,t_dat,DATE
+05_hm,transactions_train.csv,2,customer_id,VARCHAR
+05_hm,transactions_train.csv,3,article_id,VARCHAR
+05_hm,transactions_train.csv,4,price,DOUBLE
+05_hm,transactions_train.csv,5,sales_channel_id,BIGINT
