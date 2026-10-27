@@ -1,0 +1,31 @@
+{
+  "rule_content_fields": [
+    "title",
+    "description",
+    "reason",
+    "limitation"
+  ],
+  "rule_metadata_fields": [
+    "rule_id",
+    "rule_version",
+    "status",
+    "scope",
+    "policy_id",
+    "selector",
+    "operator",
+    "attribute",
+    "values",
+    "wcag_ref",
+    "kwcag_ref",
+    "reference_url",
+    "effective_from"
+  ],
+  "tree_metadata_fields": [
+    "node_id",
+    "parent_id",
+    "file",
+    "rule_id",
+    "path"
+  ],
+  "note": "CSV 필드 분류는 RAG 설계를 위한 사전 약속이다. 실행 시 검색용 content/metadata 변환은 후속 모듈에서 수행한다."
+}

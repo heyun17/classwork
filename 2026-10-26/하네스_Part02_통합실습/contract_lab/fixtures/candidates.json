@@ -1,0 +1,82 @@
+{
+  "pass": {
+    "schema_version": "1.0",
+    "request_id": "REQ-5000",
+    "status": "completed",
+    "artifact_path": "contract_lab/fixtures/filtered_ok.csv",
+    "declared_count": 2,
+    "declared_total": 11000,
+    "ok": true
+  },
+  "false_success_claim": {
+    "schema_version": "1.0",
+    "request_id": "REQ-5000",
+    "status": "completed",
+    "artifact_path": "contract_lab/fixtures/filtered_wrong_total.csv",
+    "declared_count": 2,
+    "declared_total": 11000,
+    "ok": true
+  },
+  "missing_id": {
+    "schema_version": "1.0",
+    "request_id": "REQ-5000",
+    "status": "completed",
+    "artifact_path": "contract_lab/fixtures/filtered_missing_id.csv",
+    "declared_count": 2,
+    "declared_total": 11000,
+    "ok": true
+  },
+  "missing_file": {
+    "schema_version": "1.0",
+    "request_id": "REQ-5000",
+    "status": "completed",
+    "artifact_path": "contract_lab/fixtures/no_such.csv",
+    "declared_count": 2,
+    "declared_total": 11000,
+    "ok": true
+  },
+  "wrong_request_id": {
+    "schema_version": "1.0",
+    "request_id": "REQ-OTHER",
+    "status": "completed",
+    "artifact_path": "contract_lab/fixtures/filtered_ok.csv",
+    "declared_count": 2,
+    "declared_total": 11000,
+    "ok": true
+  },
+  "path_escape": {
+    "schema_version": "1.0",
+    "request_id": "REQ-5000",
+    "status": "completed",
+    "artifact_path": "../../orders.csv",
+    "declared_count": 2,
+    "declared_total": 11000,
+    "ok": true
+  },
+  "fake_summary": {
+    "schema_version": "1.0",
+    "request_id": "REQ-5000",
+    "status": "completed",
+    "artifact_path": "contract_lab/fixtures/filtered_ok.csv",
+    "declared_count": 2,
+    "declared_total": 99999,
+    "ok": true
+  },
+  "missing_field": {
+    "schema_version": "1.0",
+    "request_id": "REQ-5000",
+    "status": "completed",
+    "artifact_path": "contract_lab/fixtures/filtered_ok.csv",
+    "declared_total": 11000,
+    "ok": true
+  },
+  "offsetting_row_errors": {
+    "schema_version": "1.0",
+    "request_id": "REQ-5000",
+    "status": "completed",
+    "artifact_path": "contract_lab/fixtures/filtered_offset.csv",
+    "declared_count": 2,
+    "declared_total": 11000,
+    "ok": true
+  }
+}

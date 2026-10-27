@@ -1,0 +1,7 @@
+experiment,module,request,role_or_skill,expected,observed,passed,notes
+E01,M2,report.py min_total 구현,author agent,코드 수정 후 test PASS,,,
+E02,M2,독립 리뷰,report-reviewer,원본 보존/테스트 사실 보고,,,
+E03,M3,주문 보고서 검증,order-report-check,스킬 로딩 및 테스트 로그,,,
+E04,M3,README 교정,order-report-check 비대상,원칙상 불필요한 호출 없음,,,
+E05,M4,O101 주문 조회,orders-readonly,읽기 전용 JSON 결과,,,
+E06,M4,재검증 실행,workflow,검증 실패 시 BLOCK,,,

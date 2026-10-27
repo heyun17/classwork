@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "request_id": "REQ-5000",
+  "source_file": "orders.csv",
+  "min_total": 5000,
+  "preserve_default": true
+}

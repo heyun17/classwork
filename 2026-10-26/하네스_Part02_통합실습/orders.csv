@@ -1,0 +1,5 @@
+order_id,product,quantity,unit_price
+O101,노트,2,3000
+O102,연필,3,1000
+O103,파일,1,5000
+O104,지우개,2,1500

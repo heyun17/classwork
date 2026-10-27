@@ -1,0 +1,1321 @@
+{
+  "note": "이 파일의 정답은 교육용 검토셋이며 공식 WCAG 검사 성능 보고서가 아니다.",
+  "data_sha256_prefix": {
+    "rules_csv": "e01e680bcde5",
+    "tree_csv": "1933fe7f18d7",
+    "sample_html": "1abfd889a0ae",
+    "detection_gold": "02af7cab3937",
+    "search_gold": "668a500701a9"
+  },
+  "document_count": 7,
+  "inspection": {
+    "labeled_total": 22,
+    "exact_agreement": 1.0,
+    "review_expected": 4,
+    "review_predicted": 4,
+    "not_applicable_expected": 0,
+    "definitive_gold": 18,
+    "binary_scored": 18,
+    "decision_coverage": 1.0,
+    "binary": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0,
+      "tn": 11,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0
+    },
+    "rows": [
+      {
+        "target": "I01",
+        "rule_id": "IMG-001",
+        "scope": "standard",
+        "expected": "failed",
+        "predicted": "failed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "alt 속성 존재 여부라는 자체 검사 조건 기준"
+      },
+      {
+        "target": "I02",
+        "rule_id": "IMG-001",
+        "scope": "standard",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "alt 빈 문자열도 속성은 존재함"
+      },
+      {
+        "target": "I03",
+        "rule_id": "IMG-001",
+        "scope": "standard",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "alt 속성은 있으나 의미 적절성은 미평가"
+      },
+      {
+        "target": "L01",
+        "rule_id": "LINK-001",
+        "scope": "standard",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "링크 텍스트 이름 후보 발견"
+      },
+      {
+        "target": "L02",
+        "rule_id": "LINK-001",
+        "scope": "standard",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "더보기라는 텍스트 자체는 이름 후보임"
+      },
+      {
+        "target": "L01",
+        "rule_id": "LINK-002",
+        "scope": "standard",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "모호 문구 목록에 없는 구체적 링크"
+      },
+      {
+        "target": "L02",
+        "rule_id": "LINK-002",
+        "scope": "standard",
+        "expected": "cantTell",
+        "predicted": "cantTell",
+        "exact_match": true,
+        "binary_scored": false,
+        "note": "WCAG 링크 목적은 주변 맥락 검토 필요"
+      },
+      {
+        "target": "L03",
+        "rule_id": "LINK-002",
+        "scope": "standard",
+        "expected": "cantTell",
+        "predicted": "cantTell",
+        "exact_match": true,
+        "binary_scored": false,
+        "note": "동일 문구라도 주변 맥락에 따라 달라질 수 있음"
+      },
+      {
+        "target": "F01",
+        "rule_id": "FORM-001",
+        "scope": "standard",
+        "expected": "failed",
+        "predicted": "failed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "이름 후보가 없는 입력란"
+      },
+      {
+        "target": "F02",
+        "rule_id": "FORM-001",
+        "scope": "standard",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "명시적 label 연결"
+      },
+      {
+        "target": "F03",
+        "rule_id": "FORM-001",
+        "scope": "standard",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "aria-label 이름 후보 존재"
+      },
+      {
+        "target": "F04",
+        "rule_id": "FORM-001",
+        "scope": "standard",
+        "expected": "cantTell",
+        "predicted": "cantTell",
+        "exact_match": true,
+        "binary_scored": false,
+        "note": "aria-labelledby 참조된 실제 이름은 미검증"
+      },
+      {
+        "target": "L01",
+        "rule_id": "COMP-LINK-001",
+        "scope": "company",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "사내 금칙어와 다름"
+      },
+      {
+        "target": "L02",
+        "rule_id": "COMP-LINK-001",
+        "scope": "company",
+        "expected": "failed",
+        "predicted": "failed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "단독 더보기 사내 금칙어"
+      },
+      {
+        "target": "L03",
+        "rule_id": "COMP-LINK-001",
+        "scope": "company",
+        "expected": "failed",
+        "predicted": "failed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "단독 보기 사내 금칙어"
+      },
+      {
+        "target": "F01",
+        "rule_id": "COMP-FORM-001",
+        "scope": "company",
+        "expected": "failed",
+        "predicted": "failed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "회사 기준에 필요한 표시 label 없음"
+      },
+      {
+        "target": "F02",
+        "rule_id": "COMP-FORM-001",
+        "scope": "company",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "화면에 보이는 label 있음"
+      },
+      {
+        "target": "F03",
+        "rule_id": "COMP-FORM-001",
+        "scope": "company",
+        "expected": "failed",
+        "predicted": "failed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "접근 가능한 이름과 사내 보이는 label 의무는 다름"
+      },
+      {
+        "target": "F04",
+        "rule_id": "COMP-FORM-001",
+        "scope": "company",
+        "expected": "cantTell",
+        "predicted": "cantTell",
+        "exact_match": true,
+        "binary_scored": false,
+        "note": "현재 검사기의 연결 확인 한계"
+      },
+      {
+        "target": "F05",
+        "rule_id": "COMP-FORM-001",
+        "scope": "company",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "label 부모 요소 내 포함"
+      },
+      {
+        "target": "L04",
+        "rule_id": "COMP-LINK-002",
+        "scope": "company",
+        "expected": "failed",
+        "predicted": "failed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "사내 정책의 자세히 금칙어"
+      },
+      {
+        "target": "L03",
+        "rule_id": "COMP-LINK-002",
+        "scope": "company",
+        "expected": "passed",
+        "predicted": "passed",
+        "exact_match": true,
+        "binary_scored": true,
+        "note": "자세히가 아닌 링크 문구"
+      }
+    ]
+  },
+  "retrieval": {
+    "tfidf": {
+      "k1": {
+        "k": 1,
+        "queries": 7,
+        "macro": {
+          "recall": 0.7857142857142857,
+          "hit": 0.8571428571428571,
+          "rr": 0.8571428571428571,
+          "ndcg": 0.8571428571428571
+        },
+        "rows": [
+          {
+            "qid": "Q01",
+            "query": "이미지 alt 속성 누락",
+            "relevant": [
+              "IMG-001"
+            ],
+            "ranking": [
+              "IMG-001",
+              "LINK-001",
+              "COMP-FORM-001",
+              "FORM-001",
+              "COMP-LINK-001",
+              "COMP-LINK-002",
+              "LINK-002"
+            ],
+            "topk": [
+              "IMG-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "대체 텍스트 속성 존재 검사"
+          },
+          {
+            "qid": "Q02",
+            "query": "더보기 사내 링크 금지",
+            "relevant": [
+              "COMP-LINK-001"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-002"
+            ],
+            "recall": 0.0,
+            "hit": 0.0,
+            "rr": 0.0,
+            "ndcg": 0.0,
+            "note": "사내 더보기 정책만 정답"
+          },
+          {
+            "qid": "Q03",
+            "query": "링크 목적 주변 맥락",
+            "relevant": [
+              "LINK-002"
+            ],
+            "ranking": [
+              "LINK-002",
+              "COMP-LINK-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "WCAG 링크 목적 검토로 연결"
+          },
+          {
+            "qid": "Q04",
+            "query": "화면에 보이는 label",
+            "relevant": [
+              "COMP-FORM-001"
+            ],
+            "ranking": [
+              "COMP-FORM-001",
+              "FORM-001",
+              "LINK-001",
+              "IMG-001",
+              "LINK-002",
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "topk": [
+              "COMP-FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 표시 레이블 정책"
+          },
+          {
+            "qid": "Q05",
+            "query": "입력 필드 이름 후보",
+            "relevant": [
+              "FORM-001"
+            ],
+            "ranking": [
+              "FORM-001",
+              "LINK-001",
+              "COMP-LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-001",
+              "IMG-001"
+            ],
+            "topk": [
+              "FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 관련 입력 이름 후보"
+          },
+          {
+            "qid": "Q06",
+            "query": "자세히 단독 문구 제한",
+            "relevant": [
+              "COMP-LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "IMG-001"
+            ],
+            "topk": [
+              "COMP-LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 자세히 제한 정책"
+          },
+          {
+            "qid": "Q07",
+            "query": "더보기 링크 목적과 회사 정책",
+            "relevant": [
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-001"
+            ],
+            "recall": 0.5,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 검토와 회사 금칙어 둘 다 관련"
+          }
+        ]
+      },
+      "k2": {
+        "k": 2,
+        "queries": 7,
+        "macro": {
+          "recall": 1.0,
+          "hit": 1.0,
+          "rr": 0.9285714285714286,
+          "ndcg": 0.9472756790816368
+        },
+        "rows": [
+          {
+            "qid": "Q01",
+            "query": "이미지 alt 속성 누락",
+            "relevant": [
+              "IMG-001"
+            ],
+            "ranking": [
+              "IMG-001",
+              "LINK-001",
+              "COMP-FORM-001",
+              "FORM-001",
+              "COMP-LINK-001",
+              "COMP-LINK-002",
+              "LINK-002"
+            ],
+            "topk": [
+              "IMG-001",
+              "LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "대체 텍스트 속성 존재 검사"
+          },
+          {
+            "qid": "Q02",
+            "query": "더보기 사내 링크 금지",
+            "relevant": [
+              "COMP-LINK-001"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 0.5,
+            "ndcg": 0.6309297535714575,
+            "note": "사내 더보기 정책만 정답"
+          },
+          {
+            "qid": "Q03",
+            "query": "링크 목적 주변 맥락",
+            "relevant": [
+              "LINK-002"
+            ],
+            "ranking": [
+              "LINK-002",
+              "COMP-LINK-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "LINK-002",
+              "COMP-LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "WCAG 링크 목적 검토로 연결"
+          },
+          {
+            "qid": "Q04",
+            "query": "화면에 보이는 label",
+            "relevant": [
+              "COMP-FORM-001"
+            ],
+            "ranking": [
+              "COMP-FORM-001",
+              "FORM-001",
+              "LINK-001",
+              "IMG-001",
+              "LINK-002",
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "topk": [
+              "COMP-FORM-001",
+              "FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 표시 레이블 정책"
+          },
+          {
+            "qid": "Q05",
+            "query": "입력 필드 이름 후보",
+            "relevant": [
+              "FORM-001"
+            ],
+            "ranking": [
+              "FORM-001",
+              "LINK-001",
+              "COMP-LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-001",
+              "IMG-001"
+            ],
+            "topk": [
+              "FORM-001",
+              "LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 관련 입력 이름 후보"
+          },
+          {
+            "qid": "Q06",
+            "query": "자세히 단독 문구 제한",
+            "relevant": [
+              "COMP-LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "IMG-001"
+            ],
+            "topk": [
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 자세히 제한 정책"
+          },
+          {
+            "qid": "Q07",
+            "query": "더보기 링크 목적과 회사 정책",
+            "relevant": [
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 검토와 회사 금칙어 둘 다 관련"
+          }
+        ]
+      },
+      "k3": {
+        "k": 3,
+        "queries": 7,
+        "macro": {
+          "recall": 1.0,
+          "hit": 1.0,
+          "rr": 0.9285714285714286,
+          "ndcg": 0.9472756790816368
+        },
+        "rows": [
+          {
+            "qid": "Q01",
+            "query": "이미지 alt 속성 누락",
+            "relevant": [
+              "IMG-001"
+            ],
+            "ranking": [
+              "IMG-001",
+              "LINK-001",
+              "COMP-FORM-001",
+              "FORM-001",
+              "COMP-LINK-001",
+              "COMP-LINK-002",
+              "LINK-002"
+            ],
+            "topk": [
+              "IMG-001",
+              "LINK-001",
+              "COMP-FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "대체 텍스트 속성 존재 검사"
+          },
+          {
+            "qid": "Q02",
+            "query": "더보기 사내 링크 금지",
+            "relevant": [
+              "COMP-LINK-001"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 0.5,
+            "ndcg": 0.6309297535714575,
+            "note": "사내 더보기 정책만 정답"
+          },
+          {
+            "qid": "Q03",
+            "query": "링크 목적 주변 맥락",
+            "relevant": [
+              "LINK-002"
+            ],
+            "ranking": [
+              "LINK-002",
+              "COMP-LINK-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "LINK-002",
+              "COMP-LINK-001",
+              "COMP-LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "WCAG 링크 목적 검토로 연결"
+          },
+          {
+            "qid": "Q04",
+            "query": "화면에 보이는 label",
+            "relevant": [
+              "COMP-FORM-001"
+            ],
+            "ranking": [
+              "COMP-FORM-001",
+              "FORM-001",
+              "LINK-001",
+              "IMG-001",
+              "LINK-002",
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "topk": [
+              "COMP-FORM-001",
+              "FORM-001",
+              "LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 표시 레이블 정책"
+          },
+          {
+            "qid": "Q05",
+            "query": "입력 필드 이름 후보",
+            "relevant": [
+              "FORM-001"
+            ],
+            "ranking": [
+              "FORM-001",
+              "LINK-001",
+              "COMP-LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-001",
+              "IMG-001"
+            ],
+            "topk": [
+              "FORM-001",
+              "LINK-001",
+              "COMP-LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 관련 입력 이름 후보"
+          },
+          {
+            "qid": "Q06",
+            "query": "자세히 단독 문구 제한",
+            "relevant": [
+              "COMP-LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "IMG-001"
+            ],
+            "topk": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 자세히 제한 정책"
+          },
+          {
+            "qid": "Q07",
+            "query": "더보기 링크 목적과 회사 정책",
+            "relevant": [
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 검토와 회사 금칙어 둘 다 관련"
+          }
+        ]
+      }
+    },
+    "bm25": {
+      "k1": {
+        "k": 1,
+        "queries": 7,
+        "macro": {
+          "recall": 0.7857142857142857,
+          "hit": 0.8571428571428571,
+          "rr": 0.8571428571428571,
+          "ndcg": 0.8571428571428571
+        },
+        "rows": [
+          {
+            "qid": "Q01",
+            "query": "이미지 alt 속성 누락",
+            "relevant": [
+              "IMG-001"
+            ],
+            "ranking": [
+              "IMG-001",
+              "LINK-001",
+              "COMP-FORM-001",
+              "COMP-LINK-001",
+              "FORM-001",
+              "COMP-LINK-002",
+              "LINK-002"
+            ],
+            "topk": [
+              "IMG-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "대체 텍스트 속성 존재 검사"
+          },
+          {
+            "qid": "Q02",
+            "query": "더보기 사내 링크 금지",
+            "relevant": [
+              "COMP-LINK-001"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-002"
+            ],
+            "recall": 0.0,
+            "hit": 0.0,
+            "rr": 0.0,
+            "ndcg": 0.0,
+            "note": "사내 더보기 정책만 정답"
+          },
+          {
+            "qid": "Q03",
+            "query": "링크 목적 주변 맥락",
+            "relevant": [
+              "LINK-002"
+            ],
+            "ranking": [
+              "LINK-002",
+              "COMP-LINK-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "WCAG 링크 목적 검토로 연결"
+          },
+          {
+            "qid": "Q04",
+            "query": "화면에 보이는 label",
+            "relevant": [
+              "COMP-FORM-001"
+            ],
+            "ranking": [
+              "COMP-FORM-001",
+              "FORM-001",
+              "LINK-001",
+              "IMG-001",
+              "LINK-002",
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "topk": [
+              "COMP-FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 표시 레이블 정책"
+          },
+          {
+            "qid": "Q05",
+            "query": "입력 필드 이름 후보",
+            "relevant": [
+              "FORM-001"
+            ],
+            "ranking": [
+              "FORM-001",
+              "LINK-001",
+              "COMP-LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-001",
+              "IMG-001"
+            ],
+            "topk": [
+              "FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 관련 입력 이름 후보"
+          },
+          {
+            "qid": "Q06",
+            "query": "자세히 단독 문구 제한",
+            "relevant": [
+              "COMP-LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "IMG-001"
+            ],
+            "topk": [
+              "COMP-LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 자세히 제한 정책"
+          },
+          {
+            "qid": "Q07",
+            "query": "더보기 링크 목적과 회사 정책",
+            "relevant": [
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-001"
+            ],
+            "recall": 0.5,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 검토와 회사 금칙어 둘 다 관련"
+          }
+        ]
+      },
+      "k2": {
+        "k": 2,
+        "queries": 7,
+        "macro": {
+          "recall": 1.0,
+          "hit": 1.0,
+          "rr": 0.9285714285714286,
+          "ndcg": 0.9472756790816368
+        },
+        "rows": [
+          {
+            "qid": "Q01",
+            "query": "이미지 alt 속성 누락",
+            "relevant": [
+              "IMG-001"
+            ],
+            "ranking": [
+              "IMG-001",
+              "LINK-001",
+              "COMP-FORM-001",
+              "COMP-LINK-001",
+              "FORM-001",
+              "COMP-LINK-002",
+              "LINK-002"
+            ],
+            "topk": [
+              "IMG-001",
+              "LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "대체 텍스트 속성 존재 검사"
+          },
+          {
+            "qid": "Q02",
+            "query": "더보기 사내 링크 금지",
+            "relevant": [
+              "COMP-LINK-001"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 0.5,
+            "ndcg": 0.6309297535714575,
+            "note": "사내 더보기 정책만 정답"
+          },
+          {
+            "qid": "Q03",
+            "query": "링크 목적 주변 맥락",
+            "relevant": [
+              "LINK-002"
+            ],
+            "ranking": [
+              "LINK-002",
+              "COMP-LINK-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "LINK-002",
+              "COMP-LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "WCAG 링크 목적 검토로 연결"
+          },
+          {
+            "qid": "Q04",
+            "query": "화면에 보이는 label",
+            "relevant": [
+              "COMP-FORM-001"
+            ],
+            "ranking": [
+              "COMP-FORM-001",
+              "FORM-001",
+              "LINK-001",
+              "IMG-001",
+              "LINK-002",
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "topk": [
+              "COMP-FORM-001",
+              "FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 표시 레이블 정책"
+          },
+          {
+            "qid": "Q05",
+            "query": "입력 필드 이름 후보",
+            "relevant": [
+              "FORM-001"
+            ],
+            "ranking": [
+              "FORM-001",
+              "LINK-001",
+              "COMP-LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-001",
+              "IMG-001"
+            ],
+            "topk": [
+              "FORM-001",
+              "LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 관련 입력 이름 후보"
+          },
+          {
+            "qid": "Q06",
+            "query": "자세히 단독 문구 제한",
+            "relevant": [
+              "COMP-LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "IMG-001"
+            ],
+            "topk": [
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 자세히 제한 정책"
+          },
+          {
+            "qid": "Q07",
+            "query": "더보기 링크 목적과 회사 정책",
+            "relevant": [
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 검토와 회사 금칙어 둘 다 관련"
+          }
+        ]
+      },
+      "k3": {
+        "k": 3,
+        "queries": 7,
+        "macro": {
+          "recall": 1.0,
+          "hit": 1.0,
+          "rr": 0.9285714285714286,
+          "ndcg": 0.9472756790816368
+        },
+        "rows": [
+          {
+            "qid": "Q01",
+            "query": "이미지 alt 속성 누락",
+            "relevant": [
+              "IMG-001"
+            ],
+            "ranking": [
+              "IMG-001",
+              "LINK-001",
+              "COMP-FORM-001",
+              "COMP-LINK-001",
+              "FORM-001",
+              "COMP-LINK-002",
+              "LINK-002"
+            ],
+            "topk": [
+              "IMG-001",
+              "LINK-001",
+              "COMP-FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "대체 텍스트 속성 존재 검사"
+          },
+          {
+            "qid": "Q02",
+            "query": "더보기 사내 링크 금지",
+            "relevant": [
+              "COMP-LINK-001"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 0.5,
+            "ndcg": 0.6309297535714575,
+            "note": "사내 더보기 정책만 정답"
+          },
+          {
+            "qid": "Q03",
+            "query": "링크 목적 주변 맥락",
+            "relevant": [
+              "LINK-002"
+            ],
+            "ranking": [
+              "LINK-002",
+              "COMP-LINK-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "LINK-002",
+              "COMP-LINK-001",
+              "COMP-LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "WCAG 링크 목적 검토로 연결"
+          },
+          {
+            "qid": "Q04",
+            "query": "화면에 보이는 label",
+            "relevant": [
+              "COMP-FORM-001"
+            ],
+            "ranking": [
+              "COMP-FORM-001",
+              "FORM-001",
+              "LINK-001",
+              "IMG-001",
+              "LINK-002",
+              "COMP-LINK-002",
+              "COMP-LINK-001"
+            ],
+            "topk": [
+              "COMP-FORM-001",
+              "FORM-001",
+              "LINK-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 표시 레이블 정책"
+          },
+          {
+            "qid": "Q05",
+            "query": "입력 필드 이름 후보",
+            "relevant": [
+              "FORM-001"
+            ],
+            "ranking": [
+              "FORM-001",
+              "LINK-001",
+              "COMP-LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-001",
+              "IMG-001"
+            ],
+            "topk": [
+              "FORM-001",
+              "LINK-001",
+              "COMP-LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 관련 입력 이름 후보"
+          },
+          {
+            "qid": "Q06",
+            "query": "자세히 단독 문구 제한",
+            "relevant": [
+              "COMP-LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002",
+              "IMG-001"
+            ],
+            "topk": [
+              "COMP-LINK-002",
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "회사 자세히 제한 정책"
+          },
+          {
+            "qid": "Q07",
+            "query": "더보기 링크 목적과 회사 정책",
+            "relevant": [
+              "COMP-LINK-001",
+              "LINK-002"
+            ],
+            "ranking": [
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001",
+              "COMP-LINK-002",
+              "LINK-001"
+            ],
+            "topk": [
+              "COMP-LINK-001",
+              "LINK-002",
+              "COMP-FORM-001"
+            ],
+            "recall": 1.0,
+            "hit": 1.0,
+            "rr": 1.0,
+            "ndcg": 1.0,
+            "note": "표준 검토와 회사 금칙어 둘 다 관련"
+          }
+        ]
+      }
+    }
+  }
+}

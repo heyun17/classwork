@@ -1,0 +1,8 @@
+{
+  "base_count": 4,
+  "base_total": 17000,
+  "filtered_ids": ["O101", "O103"],
+  "filtered_count": 2,
+  "filtered_total": 11000,
+  "min_total": 5000
+}
