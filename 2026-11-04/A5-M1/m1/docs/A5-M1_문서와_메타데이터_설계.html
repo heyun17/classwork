@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>A5-M1 문서와 메타데이터 설계</title><link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/><style>
+:root{--bg:#fff;--surface:#f8fafc;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#ff2e93;--soft:rgba(255,46,147,.065);--codebg:#101d34}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Pretendard',system-ui,'Malgun Gothic',sans-serif;font-size:18px;line-height:1.81;word-break:keep-all}
+.banner{background:linear-gradient(125deg,#fcfcff,#f8fafc);border-bottom:1px solid var(--line)}.banner-in{max-width:1320px;margin:auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-size:16px;font-weight:850;letter-spacing:.03em}.who{font-size:15px;color:var(--muted)}.layout{max-width:1320px;margin:auto;padding:32px 24px 84px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:38px;align-items:start}.sidebar{order:2;position:sticky;top:22px;max-height:calc(100vh - 44px);overflow:auto;border:1px solid var(--line);border-radius:15px;background:var(--surface);padding:17px}.group{font-size:15px;color:var(--muted);font-weight:800;margin:3px 10px 14px}.tabs{display:flex;flex-direction:column;gap:5px}.tabs button{appearance:none;border:1px solid transparent;border-radius:9px;background:transparent;color:#253348;cursor:pointer;text-align:left;font:600 16px/1.55 'Pretendard',sans-serif;padding:9px 12px 9px 14px}.tabs button span{color:var(--accent);font-weight:850;margin-right:7px}.tabs button:hover{background:#fff;border-color:var(--line)}.tabs button[aria-selected=true]{background:var(--soft);border-color:var(--accent);color:#bd1366}.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+main{min-width:0}.panel[hidden]{display:none}.panel{display:block}.crumb{color:var(--accent);font-size:15px;font-weight:800;margin:0 0 8px}.panel h1{font-size:31px;line-height:1.4;margin:0 0 12px}.lead{font-size:19px;font-weight:550;color:#344255;margin:6px 0 26px}.panel h3{font-size:21px;margin:33px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}.panel h3:before{content:'▸ ';color:var(--accent)}.panel p{margin:13px 0}.panel b,.panel strong{font-weight:790}.panel code:not(pre code){font:15px/1.6 Consolas,monospace;word-break:break-word;background:#f1f5f9;border:1px solid #e5e7eb;padding:1px 5px;border-radius:4px}
+.panel ul,.panel ol{padding-left:27px;margin:12px 0}.panel li{margin:7px 0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:17px 0 24px}.panel table{border-collapse:collapse;width:100%;font-size:17px;line-height:1.65}.panel th,.panel td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;text-align:left}.panel th{font-size:16px;font-weight:800;background:#f1f5f9;color:#40516a}.panel tbody tr:last-child td{border:0}.panel tbody tr:nth-child(even){background:#fbfcfe}
+.note,.task{border:1px solid var(--line);border-radius:13px;background:#fafcff;padding:17px 19px;margin:24px 0}.note{border-left:4px solid var(--accent);background:var(--soft)}.note b{color:#ad155e}.note p{margin:6px 0}.task{background:#fff}.task h4{margin:0 0 9px;font-size:19px}.task ol{margin:0;padding-left:23px}.task li{margin:8px 0}
+.codebox{border:1px solid #243953;border-radius:13px;overflow:hidden;margin:21px 0 26px}.codehead{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:8px 13px;background:#1d3452;color:#dceafc;font-size:14px;font-weight:700}.copy{border:1px solid #8598b4;color:#fff;background:#314f78;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:13px}.codebox pre{background:var(--codebg);color:#cbe9fb;margin:0;padding:20px;overflow-x:auto;font:15px/1.7 Consolas,'JetBrains Mono',monospace;word-break:normal;white-space:pre}
+.outbox .codehead{background:#203a2c}.outbox{border-color:#2f5a43}.outbox pre{background:#0d1f17;color:#c9f5d9}
+.qa{padding:13px 17px;margin:13px 0;border:1px solid var(--line);background:#fbfcff;border-radius:10px}.qa summary{font-size:17px;cursor:pointer;font-weight:780}.qa[open] summary{color:#c01168}.qa p{font-size:17px}
+.footer{max-width:1320px;margin:auto;border-top:1px solid var(--line);padding:20px 24px 38px;text-align:center;color:var(--muted);font-size:15px}.footer small{display:block;max-width:950px;margin:5px auto}
+.tabs .part-heading{display:block;margin:15px 4px 6px;padding:12px 11px;background:#e5e7eb;color:#334155;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;font-weight:850;line-height:1.5;white-space:normal}.tabs .part-heading:first-child{margin-top:0}
+.journey{border-left:4px solid #ff2e93;background:#fff5fa;padding:16px 19px;margin:20px 0;border-radius:8px}.journey h3{border:0!important;margin:0 0 8px!important;padding:0!important;font-size:18px!important}.journey h3:before{content:none!important}.journey ol{margin:6px 0 0;padding-left:22px}.journey li{margin:4px 0;overflow-wrap:anywhere}
+.say{border-left:4px solid #94a3b8;background:#f8fafc;padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}.say>b:first-child{display:block;color:#475569;font-size:14px;margin-bottom:4px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:18px 0 24px}.flow .fstep{flex:1 1 96px;min-width:92px;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:10px;background:#fff;padding:10px 12px}.flow .fstep b{display:block;font-size:16px;color:#0f172a}.flow .fstep span{display:block;font-size:14px;color:var(--muted);line-height:1.5;margin-top:3px}.flow .arrow{align-self:center;color:var(--accent);font-weight:900}
+main p,main li,main td{overflow-wrap:anywhere}
+.mock{border:1px solid #cbd5e1;border-radius:14px;background:#f8fafc;padding:14px 16px;margin:20px 0}.mock-title{font-weight:800;font-size:15px;color:#475569;margin-bottom:10px}
+.mock table{border-collapse:collapse;width:100%;font-size:15px;background:#fff}.mock td,.mock th{border:1px solid #e2e8f0;padding:6px 8px;text-align:center}.mock th{background:#f1f5f9}.mock .hl{background:#fde7f2;font-weight:800}.mock .dim{color:#94a3b8}
+@media(max-width:900px){.layout{grid-template-columns:1fr;gap:12px;padding:15px 16px 64px}.sidebar{order:0;position:sticky;top:0;z-index:10;border-radius:0;max-height:none;overflow:auto;padding:8px 0;background:#fff}.sidebar .group{display:none}.tabs{flex-direction:row;white-space:nowrap;overflow-x:auto}.tabs button{flex:none;font-size:15px}.tabs .part-heading{flex:none;margin:0 6px 0 0;white-space:nowrap;padding:9px 12px}.banner-in{flex-wrap:wrap}.panel h1{font-size:27px}}
+@media(max-width:680px){body{font-size:17px}.panel table{font-size:16px}.panel th{font-size:15px}.panel h1{font-size:24px}.panel h3{font-size:20px}.codebox pre{font-size:14px;padding:15px}.flow .arrow{display:none}.flow .fstep{flex-basis:100%}}
+@media print{.sidebar,.copy{display:none}.layout{display:block}.panel[hidden]{display:block!important}.banner{background:#fff}}
+.steps{list-style:none;counter-reset:st;padding-left:0!important;margin:16px 0}.steps li{counter-increment:st;position:relative;padding:4px 0 4px 46px;margin:10px 0}.steps li:before{content:counter(st);position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:850;font-size:15px;display:flex;align-items:center;justify-content:center}
+.qa .codebox{margin:12px 0}
+.diagram{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0 22px;font:14.5px/1.7 Consolas,'JetBrains Mono',monospace;white-space:pre;overflow-x:auto;color:#1e293b}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.cards.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px 16px;font-size:16.5px;line-height:1.7}.card .h{font-weight:800;color:#bd1366;margin-bottom:6px;font-size:17px}
+.hl{color:#bd1366;font-weight:800}
+@media(max-width:760px){.cards,.cards.c3{grid-template-columns:1fr}.diagram{font-size:13px}}
+.where-bar{display:flex;flex-wrap:wrap;gap:8px 20px;background:#eef6ff;border:1px solid #bfdbfe;border-radius:10px;padding:9px 14px;margin:4px 0 14px;font-size:15.5px;color:#1e3a5f}.ask{border:1px dashed #a78bfa;background:#f5f3ff;border-radius:12px;padding:13px 17px;margin:24px 0}.ask>b:first-child{color:#6d28d9}.ask p{margin:6px 0;font-size:16.5px}
+/* 화면 모형 */
+.browser{border:1px solid #cbd5e1;border-radius:10px;overflow:hidden;background:#fff}.bbar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#eef2f7;border-bottom:1px solid #e2e8f0}.dots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:#cbd5e1;margin-right:4px}.url{flex:1;background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:2px 10px;font:14px Consolas,monospace;color:#334155}
+.browser pre{margin:0;padding:12px 14px;font:14px/1.6 Consolas,monospace;white-space:pre;overflow-x:auto;color:#0f172a;background:#fff}
+.term pre{background:#0c1424;color:#d6e4f5}.term .bbar{background:#1e293b;border-color:#334155}.term .url{background:#0f172a;border-color:#334155;color:#cbd5e1}
+.mark{background:#fde7f2;font-weight:800}.mk2{background:#e0f2fe}.mk3{background:#ecfccb}
+.console{display:grid;grid-template-columns:1fr 1fr}.console .ph{font-size:12px;font-weight:800;color:#64748b;padding:6px 14px;border-bottom:1px solid #e2e8f0;background:#f1f5f9;display:flex;justify-content:space-between}.console .left{border-right:1px solid #e2e8f0}.console .right pre{background:#f8fafc}
+.svgbox{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:8px}.svgbox svg{display:block;width:100%;height:auto}
+@media(max-width:760px){.console{grid-template-columns:1fr}.console .left{border-right:0;border-bottom:1px solid #e2e8f0}}
+
+.quizbox{border:2px solid #c4b5fd;background:#faf5ff;border-radius:14px;padding:14px 18px;margin:28px 0}
+.qz-title{border:0!important;margin:0 0 6px!important;padding:0!important;color:#5b21b6}.qz-title:before{content:none!important}
+.quiz{background:#fff;border:1px solid #e9d5ff;border-radius:10px;padding:12px 14px;margin:12px 0}
+.quiz .qz-q{margin:0 0 8px}.quiz label{display:block;padding:6px 8px;border-radius:7px;cursor:pointer;font-size:16.5px}
+.quiz label:hover{background:#f5f3ff}.quiz input{margin-right:8px}
+.qz-check{margin-top:8px;border:1px solid #7c3aed;background:#7c3aed;color:#fff;border-radius:7px;padding:5px 14px;font:700 14px 'Pretendard',sans-serif;cursor:pointer}
+.qz-fb{margin-top:10px;padding:10px 12px;border-radius:8px;background:#f8fafc;border-left:4px solid #94a3b8}
+.qz-fb.ok{border-left-color:#16a34a;background:#f0fdf4}.qz-fb.no{border-left-color:#dc2626;background:#fef2f2}
+.qz-fb p{margin:4px 0;font-size:16px}.qz-res{font-weight:800}
+.wide{overflow-x:auto}.wide table{min-width:1150px}.wide td{text-align:left!important;white-space:normal}.wide td:first-child,.wide th{white-space:nowrap}
+.quiz label.right{background:#dcfce7}.quiz label.wrong{background:#fee2e2}
+</style></head><body>
+<header class="banner"><div class="banner-in"><div><div class="brand">Part A · A5-M1 · 문서와 메타데이터 설계</div><div style="font-size:23px;font-weight:850">A5-M1 자료 이해와 문서 · 메타데이터 설계 (로딩 · 청킹 · 메타데이터 검색 · 필수/선택 조건)</div></div><div class="who">© 2026 부성순 · AI·클라우드 실무 과정<br/>부성순 (bakpak@empas.com)</div><a href="/lectures/files/index.html#section-a1" style="display:inline-block;padding:7px 11px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;color:#bd1366;text-decoration:none;font-weight:800;white-space:nowrap">📚 강의자료 라이브러리 · Part A</a></div></header>
+<div class="layout"><aside class="sidebar"><div class="group">A5-M1 · 세부 목차</div><nav aria-label="교안 세부 목차" class="tabs" role="tablist">
+<div aria-level="2" class="part-heading" role="heading">Part 0. 자료 이해</div>
+<button aria-controls="u00" aria-selected="true" id="tab-u00" role="tab" tabindex="0" type="button"><span>00</span>받은 자료 한눈에</button>
+<button aria-controls="u01" aria-selected="false" id="tab-u01" role="tab" tabindex="-1" type="button"><span>01</span>faq.csv 들여다보기</button>
+<button aria-controls="u02" aria-selected="false" id="tab-u02" role="tab" tabindex="-1" type="button"><span>02</span>policies.csv와 마크다운 본문</button>
+<button aria-controls="u03" aria-selected="false" id="tab-u03" role="tab" tabindex="-1" type="button"><span>03</span>FAQ와 정책은 어떻게 이어지나</button>
+<button aria-controls="u04" aria-selected="false" id="tab-u04" role="tab" tabindex="-1" type="button"><span>04</span>눈으로 검색하기</button>
+<button aria-controls="u05" aria-selected="false" id="tab-u05" role="tab" tabindex="-1" type="button"><span>05</span>나올 답 미리 설계하기</button>
+<div aria-level="2" class="part-heading" role="heading">Part 1. 실습 01 자료 로딩</div>
+<button aria-controls="u06" aria-selected="false" id="tab-u06" role="tab" tabindex="-1" type="button"><span>06</span>실습 01 · CSV와 마크다운을 같은 모양으로 읽기</button>
+<div aria-level="2" class="part-heading" role="heading">Part 2. 실습 02 정규화 · 청킹</div>
+<button aria-controls="u07" aria-selected="false" id="tab-u07" role="tab" tabindex="-1" type="button"><span>07</span>실습 02 · 정규화와 자르는 방법 두 가지</button>
+<button aria-controls="u08" aria-selected="false" id="tab-u08" role="tab" tabindex="-1" type="button"><span>08</span>실습 02 · 세 방식 비교</button>
+<div aria-level="2" class="part-heading" role="heading">Part 3. 실습 03 메타데이터와 검색</div>
+<button aria-controls="u09" aria-selected="false" id="tab-u09" role="tab" tabindex="-1" type="button"><span>09</span>실습 03 · 키워드와 메타데이터로 찾기</button>
+<button aria-controls="u10" aria-selected="false" id="tab-u10" role="tab" tabindex="-1" type="button"><span>10</span>실습 03 · 안 되는 질문</button>
+<div aria-level="2" class="part-heading" role="heading">Part 4. 실습 04 필수 · 선택 조건</div>
+<button aria-controls="u11" aria-selected="false" id="tab-u11" role="tab" tabindex="-1" type="button"><span>11</span>실습 04 · 무엇을 반드시 거르고, 무엇을 넓힐까</button>
+<div aria-level="2" class="part-heading" role="heading">Part 5. 정리</div>
+<button aria-controls="u12" aria-selected="false" id="tab-u12" role="tab" tabindex="-1" type="button"><span>12</span>정리 · 미션 · 종합 점검</button>
+</nav></aside><main>
+<!-- 00 -->
+<section aria-labelledby="tab-u00" class="panel" id="u00" role="tabpanel"><div class="crumb">Part 0. 자료 이해 · A5-M1</div><h1>00. 받은 자료 한눈에 — FAQ, 정책 목록, 정책 본문</h1><p class="lead">이 모듈은 쇼핑몰 고객센터의 <b>FAQ</b>와 <b>정책 문서</b>로 검색의 기초를 만듭니다. 먼저 받은 자료를 그대로 펼쳐 봅니다.</p><h3>1. 받은 자료</h3><pre class="diagram">C:\rag\A5-lab\dataset
+ ├─ faq.csv        고객 질문과 답변 80행 (한 행 = 질문 하나, 꼬리표 열 포함)
+ ├─ policies.csv   정책 문서 목록 19행 (꼬리표 + 본문 파일 위치)
+ └─ md\            정책 본문 19개 (마크다운)
+      ├─ POL-*.md   표준 정책 12개
+      └─ EXC-*.md   예외 지침 7개</pre><p>파일은 세 종류입니다. 설명보다 먼저, 각 파일의 처음 부분을 그대로 보세요.</p><div class="mock"><div class="mock-title">dataset/faq.csv — 처음 3행 (엑셀로 열었을 때)</div><div class="wide"><table><thead><tr><th>doc_id</th><th>category</th><th>question</th><th>answer</th><th>product_type</th><th>region</th><th>customer_grade</th><th>order_status</th><th>related_policy_ids</th></tr></thead><tbody><tr><td>FAQ-001</td><td>배송</td><td>일반상품 출고까지 며칠 걸리나요?</td><td>결제 완료 후 통상 2~3영업일 이내 출고 목표이며 주말과 공휴일은 제외합니다.</td><td>전체</td><td>전체</td><td>전체</td><td>결제완료</td><td>POL-DEL-001</td></tr><tr><td>FAQ-002</td><td>배송</td><td>제주 배송은 수도권보다 늦나요?</td><td>제주는 운송에 1~2일이 추가될 수 있으나 지연 여부는 주문별 예정일을 비교해야 합니다.</td><td>전체</td><td>제주</td><td>전체</td><td>배송중</td><td>POL-DEL-001</td></tr><tr><td>FAQ-004</td><td>배송</td><td>태풍으로 도서산간 배송이 지연되면 보상되나요?</td><td>지연은 확인할 수 있으나 판매자 귀책은 보류할 수 있으므로 보상 확정 안내는 하지 않습니다.</td><td>전체</td><td>도서산간</td><td>전체</td><td>배송중</td><td>EXC-002</td></tr></tbody></table></div></div><div class="mock"><div class="mock-title">dataset/policies.csv — 처음 5행</div><div class="wide"><table><thead><tr><th>doc_id</th><th>title</th><th>doc_type</th><th>category</th><th>product_type</th><th>region</th><th>customer_grade</th><th>order_status</th><th>file</th></tr></thead><tbody><tr><td>EXC-001</td><td>제주 냉장식품 지연과 배송비</td><td>예외 지침</td><td>배송비</td><td>냉장식품</td><td>제주</td><td>전체</td><td>배송중</td><td>md/EXC-001.md</td></tr><tr><td>EXC-002</td><td>기상 악화로 인한 도서산간 배송 지연</td><td>예외 지침</td><td>배송</td><td>전체</td><td>도서산간</td><td>전체</td><td>배송중</td><td>md/EXC-002.md</td></tr><tr><td>EXC-003</td><td>배송중 취소와 반품의 경계</td><td>예외 지침</td><td>취소</td><td>전체</td><td>전체</td><td>전체</td><td>배송중</td><td>md/EXC-003.md</td></tr><tr><td>EXC-004</td><td>제작 시작 후 주문제작 상품 불량</td><td>예외 지침</td><td>상품</td><td>주문제작</td><td>전체</td><td>전체</td><td>제작중</td><td>md/EXC-004.md</td></tr><tr><td>EXC-005</td><td>VIP 제주 추가배송비</td><td>예외 지침</td><td>회원</td><td>전체</td><td>제주</td><td>VIP</td><td>결제완료</td><td>md/EXC-005.md</td></tr></tbody></table></div></div><div class="mock"><div class="mock-title">dataset/md/POL-RET-002.md — policies.csv의 file 열이 가리키는 파일 (전체)</div><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">dataset/md/POL-RET-002.md</span></div><pre style="white-space:pre-wrap"># 냉장식품 반품·품질 예외
+
+## 개요
+이 정책은 생크림 케이크, 요거트, 신선 연어처럼 냉장 상태로 배송되는 냉장식품의 반품과 품질 이상 처리 기준을 정한다. 냉장식품은 받은 뒤 보관 상태에 따라 품질이 바뀌므로, 일반상품처럼 단순 변심 반품을 받지 않는다. 대신 품질에 문제가 생긴 경우를 짧은 기한 안에 접수받아 증빙으로 판단한다.
+
+## 업무 규정
+냉장식품은 단순 변심 반품이 원칙적으로 불가하다. 오배송·변질·온도 이탈·판매자 귀책 배송 지연으로 인한 품질 훼손은 수령 후 48시간 안에 접수하고 증빙을 확인해 환불 또는 재배송한다. 단순히 제주 지역이라는 이유만으로 자동 환불하지 않는다.
+
+## 처리 절차
+1. 고객이 품질 이상을 알리면 수령 시각과 접수 시각을 기록하고, 수령 후 48시간 안에 접수됐는지 확인한다.
+2. 변질, 온도 이탈, 오배송, 판매자 귀책 배송 지연 중 어떤 사유인지 구분한다.
+3. 상품 사진, 보관 상태, 온도 기록을 받아 실제 품질 훼손이 있었는지 확인한다.
+4. 품질 훼손이 확인되면 환불 또는 재배송 중 하나로 처리한다.
+5. 배송비 환불이 함께 요청되면 품질 확인이 끝난 뒤 배송비 정책에 따라 따로 판단한다.
+
+## 적용 예시
+- 10월 주문의 냉장식품을 받고 36시간 뒤 변질을 신고했다 → 48시간 안이므로 시간 요건은 충족한다. 실제 변질 여부는 사진과 온도 기록으로 검증한다.
+- 받은 지 48시간이 지나서 변질을 신고했다 → 접수 기한을 넘겼다.
+- 포장을 열어 보니 주문하지 않은 다른 냉장식품이 왔다(오배송) → 기한 안에 접수하면 환불 또는 재배송을 검토한다.
+- 맛이 생각과 달라 반품하고 싶다(단순 변심) → 냉장식품은 단순 변심 반품이 원칙적으로 불가하다.
+- 제주로 배송돼 늦게 도착했지만 온도 기록과 상품 상태가 정상이다 → 제주 지역이라는 이유만으로 자동 환불하지 않는다.
+
+## 확인 항목 및 주의
+수령시각, 접수시각, 보관 상태, 사진과 온도 기록을 비교한다. 품질 확인 전 배송비 환불을 보장하지 않는다.
+
+## 자주 혼동하는 경우
+- 일반상품의 수령 후 7일 반품 기준을 냉장식품에 적용하지 않는다.
+- 늦게 도착했다는 사실과 품질이 훼손됐다는 사실은 별개다. 지연만으로 환불을 약속하지 않는다.
+- 제주 지역 냉장식품의 지연과 배송비 문제는 제주 냉장식품 예외 지침을 함께 확인한다.
+- 주문일이 이전 정책 기간에 속하면 접수 기한이 다를 수 있으므로 주문일을 먼저 확인한다.
+</pre></div></div><div class="say"><b>보이는 것</b><p><b>faq.csv</b>는 한 행이 고객 질문 하나입니다. 질문 · 답변 옆에 업무 영역, 상품 유형, 지역, 회원 등급, 주문 상태 같은 <b>꼬리표 열</b>이 있고, 마지막 열은 근거가 되는 정책 문서 ID입니다. <b>policies.csv</b>는 정책 문서의 <b>목록</b>입니다. 같은 종류의 꼬리표가 있고, 본문은 넣지 않고 <code>file</code> 열로 <b>본문 파일의 위치</b>만 적어 둡니다. <b>md</b> 폴더의 파일이 그 본문입니다. 하나에 1,000~1,500자쯤 되고, <code>## 소제목</code>으로 개요 · 업무 규정 · 처리 절차 · 적용 예시 등이 나뉘어 있습니다.</p></div><div class="note"><b>왜 정책 본문은 CSV에 넣지 않았나</b><p>정책 본문은 길고 계속 늘어날 수 있습니다. 목록(CSV)에는 찾고 거르는 데 필요한 꼬리표와 파일 위치만 두고, 긴 본문은 파일로 따로 둡니다. FAQ는 한 행이 짧아서 내용까지 CSV에 들어 있습니다.</p></div><h3>2. 이 모듈의 순서</h3><div class="tablewrap"><table><thead><tr><th>Part</th><th>하는 일</th></tr></thead><tbody><tr><td>0. 자료 이해</td><td>세 파일을 펼쳐 보고, 엑셀 필터와 텍스트 검색으로 직접 찾아보고, 질문마다 어떤 문서가 나와야 하는지 먼저 적는다</td></tr><tr><td>1. 실습 01 자료 로딩</td><td>CSV와 마크다운을 파이썬으로 읽어 같은 모양의 문서로 만든다</td></tr><tr><td>2. 실습 02 정규화 · 청킹</td><td>긴 정책 본문을 검색하기 좋은 조각으로 자른다 (소제목 단위 vs 글자 수 300 · 500)</td></tr><tr><td>3. 실습 03 메타데이터와 검색</td><td>꼬리표와 키워드로 찾아보고, 안 되는 질문에서 ‘문서끼리의 연결’을 쓴다</td></tr><tr><td>4. 실습 04 필수 · 선택 조건</td><td>어떤 조건은 반드시 거르고, 어떤 조건은 점수만 올릴지 정한다</td></tr></tbody></table></div></section>
+<!-- 01 -->
+<section aria-labelledby="tab-u01" class="panel" hidden="" id="u01" role="tabpanel"><div class="crumb">Part 0. 자료 이해 · A5-M1</div><h1>01. faq.csv 들여다보기 — 한 행이 질문 하나, 열은 꼬리표</h1><p class="lead">faq.csv는 80행, 열 9개입니다. 행을 직접 보고, 열마다 어떤 값이 있는지 세어 봅니다.</p><h3>1. 10행 펼쳐 보기</h3><div class="mock"><div class="mock-title">dataset/faq.csv — 업무 영역마다 첫 행 하나씩</div><div class="wide"><table><thead><tr><th>doc_id</th><th>category</th><th>question</th><th>answer</th><th>product_type</th><th>region</th><th>customer_grade</th><th>order_status</th><th>related_policy_ids</th></tr></thead><tbody><tr><td>FAQ-001</td><td>배송</td><td>일반상품 출고까지 며칠 걸리나요?</td><td>결제 완료 후 통상 2~3영업일 이내 출고 목표이며 주말과 공휴일은 제외합니다.</td><td>전체</td><td>전체</td><td>전체</td><td>결제완료</td><td>POL-DEL-001</td></tr><tr><td>FAQ-011</td><td>환불</td><td>카드 환불은 언제 들어오나요?</td><td>v2 대상 주문은 환불 승인 후 통상 3~5영업일이며 은행별 차이가 있습니다.</td><td>전체</td><td>전체</td><td>전체</td><td>환불승인</td><td>POL-REF-001</td></tr><tr><td>FAQ-021</td><td>취소</td><td>출고 전 일반상품 취소 가능한가요?</td><td>취소 제한 품목이 아니면 출고 전 취소 요청이 가능합니다.</td><td>일반</td><td>전체</td><td>전체</td><td>결제완료</td><td>POL-CAN-001</td></tr><tr><td>FAQ-031</td><td>교환</td><td>일반 의류 사이즈 교환할 수 있나요?</td><td>수령 후 신청기한·상품 상태·교환 재고 여부를 확인합니다.</td><td>일반</td><td>전체</td><td>전체</td><td>배송완료</td><td>POL-RET-001</td></tr><tr><td>FAQ-041</td><td>결제</td><td>카드결제 취소 후 돈은 언제 돌아오나요?</td><td>환불 승인 후 카드 결제는 v2 기준 통상 3~5영업일입니다.</td><td>전체</td><td>전체</td><td>전체</td><td>환불승인</td><td>POL-REF-001</td></tr><tr><td>FAQ-051</td><td>회원</td><td>VIP 무료배송 기준 얼마인가요?</td><td>v2 주문에서 할인 전 상품금액 30000원 이상이면 기본배송비 무료입니다.</td><td>전체</td><td>전체</td><td>VIP</td><td>결제완료</td><td>POL-MEM-001</td></tr><tr><td>FAQ-061</td><td>상품</td><td>일반상품과 냉장식품 반품 정책이 같은가요?</td><td>일반상품 7일과 냉장식품 품질 예외 48시간은 조건이 다릅니다.</td><td>전체</td><td>전체</td><td>전체</td><td>배송완료</td><td>POL-RET-001|POL-RET-002</td></tr><tr><td>FAQ-071</td><td>쿠폰</td><td>5000원 쿠폰 최소 주문금액은요?</td><td>할인 전 상품금액 50000원 이상 주문에 5000원 쿠폰을 적용합니다.</td><td>전체</td><td>전체</td><td>전체</td><td>결제완료</td><td>POL-CPN-001</td></tr><tr><td>FAQ-081</td><td>보상</td><td>배송지연이면 자동으로 보상받나요?</td><td>지연 사실과 판매자 귀책 확정은 다르므로 자동 보상을 약속하지 않습니다.</td><td>전체</td><td>전체</td><td>전체</td><td>배송중</td><td>POL-FEE-001</td></tr><tr><td>FAQ-092</td><td>주문</td><td>상품준비중이면 제작을 시작했나요?</td><td>주문제작품의 제작 착수 시점은 별도 기록 확인이 필요합니다.</td><td>주문제작</td><td>전체</td><td>전체</td><td>상품준비중</td><td>POL-CAN-002</td></tr></tbody></table></div></div><h3>2. 열 하나씩 — 어떤 값이 몇 개 있나</h3><div class="codebox"><div class="codehead"><span>Claude CLI · 열마다 값 세기</span><button class="copy" type="button">코드 복사</button></div><pre><code>python -c &quot;import csv,collections
+rows=list(csv.DictReader(open(&#x27;dataset/faq.csv&#x27;,encoding=&#x27;utf-8-sig&#x27;)))
+for c in [&#x27;category&#x27;,&#x27;product_type&#x27;,&#x27;region&#x27;,&#x27;customer_grade&#x27;,&#x27;order_status&#x27;]:
+    print(c, dict(collections.Counter(r[c] for r in rows).most_common()))&quot;</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>category {&#x27;환불&#x27;: 9, &#x27;교환&#x27;: 9, &#x27;회원&#x27;: 9, &#x27;쿠폰&#x27;: 9, &#x27;주문&#x27;: 9, &#x27;배송&#x27;: 7, &#x27;취소&#x27;: 7, &#x27;결제&#x27;: 7, &#x27;상품&#x27;: 7, &#x27;보상&#x27;: 7}
+product_type {&#x27;전체&#x27;: 37, &#x27;일반&#x27;: 22, &#x27;냉장식품&#x27;: 8, &#x27;주문제작&#x27;: 8, &#x27;디지털&#x27;: 5}
+region {&#x27;전체&#x27;: 67, &#x27;제주&#x27;: 11, &#x27;도서산간&#x27;: 2}
+customer_grade {&#x27;전체&#x27;: 67, &#x27;VIP&#x27;: 12, &#x27;일반&#x27;: 1}
+order_status {&#x27;배송완료&#x27;: 19, &#x27;결제완료&#x27;: 18, &#x27;환불승인&#x27;: 12, &#x27;배송중&#x27;: 11, &#x27;부분취소&#x27;: 10, &#x27;이용시작&#x27;: 4, &#x27;제작중&#x27;: 3, &#x27;환불접수&#x27;: 1, &#x27;전체&#x27;: 1, &#x27;상품준비중&#x27;: 1}</code></pre></div><div class="tablewrap"><table><thead><tr><th>열</th><th>뜻</th><th>실제 값 (개수)</th></tr></thead><tbody><tr><td><code>category</code></td><td>업무 영역</td><td>환불 9, 교환 9, 회원 9, 쿠폰 9, 주문 9, 배송 7, 취소 7, 결제 7, 상품 7, 보상 7</td></tr><tr><td><code>product_type</code></td><td>상품 유형</td><td>전체 37, 일반 22, 냉장식품 8, 주문제작 8, 디지털 5</td></tr><tr><td><code>region</code></td><td>지역</td><td>전체 67, 제주 11, 도서산간 2</td></tr><tr><td><code>customer_grade</code></td><td>회원 등급</td><td>전체 67, VIP 12, 일반 1</td></tr><tr><td><code>order_status</code></td><td>주문 상태</td><td>배송완료 19, 결제완료 18, 환불승인 12, 배송중 11, 부분취소 10, 이용시작 4, 제작중 3, 환불접수 1, 전체 1, 상품준비중 1</td></tr><tr><td><code>related_policy_ids</code></td><td>근거 정책 문서 ID (여러 개면 | 로 구분)</td><td>1개 67행 · 2개 이상 13행</td></tr></tbody></table></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>region 열에서 가장 많은 값은? 그 값은 무슨 뜻일까?</li><li>질문에 ‘제주’가 있어서 region이 ‘제주’인 행만 고르면 몇 행이 남나? ‘전체’ 행은 빼도 될까?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>‘전체’가 67행으로 대부분입니다. ‘전체’는 특정 지역이 아니라 <b>모든 지역에 해당한다</b>는 뜻입니다. ‘제주’만 고르면 11행이 남고, 제주 고객에게도 맞는 공통 FAQ 67행이 모두 빠집니다. 그래서 ‘제주’로 거를 때는 <b>‘제주 또는 전체’</b>로 골라야 합니다. 상품 유형 · 회원 등급의 ‘전체’도 같습니다.</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="0"><p class="qz-q"><b>Q1.</b> FAQ-053의 region=제주, customer_grade=VIP, product_type=전체가 뜻하는 것은?</p><label><input type="radio" name="qz1_1" value="0"/> 제주에 사는 VIP의, 상품을 가리지 않는 FAQ</label><label><input type="radio" name="qz1_1" value="1"/> 제주에서만 파는 상품</label><label><input type="radio" name="qz1_1" value="2"/> VIP만 볼 수 있는 FAQ</label><label><input type="radio" name="qz1_1" value="3"/> 모든 회원 대상</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>꼬리표는 ‘이 FAQ가 어떤 경우에 해당하는가’입니다. 상품 유형이 ‘전체’이므로 상품은 가리지 않습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 냉장식품 FAQ를 찾을 때 product_type 조건으로 알맞은 것은?</p><label><input type="radio" name="qz1_2" value="0"/> 냉장식품만</label><label><input type="radio" name="qz1_2" value="1"/> 냉장식품 또는 전체</label><label><input type="radio" name="qz1_2" value="2"/> 전체만</label><label><input type="radio" name="qz1_2" value="3"/> 조건 없이</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>‘전체’ 행은 모든 상품에 해당하는 공통 FAQ입니다. 빼면 냉장식품 고객에게도 맞는 답을 놓칩니다.</p></div></div></div></section>
+<!-- 02 -->
+<section aria-labelledby="tab-u02" class="panel" hidden="" id="u02" role="tabpanel"><div class="crumb">Part 0. 자료 이해 · A5-M1</div><h1>02. policies.csv와 마크다운 본문 — 목록과 본문, 기본과 예외</h1><p class="lead">정책은 목록(policies.csv)과 본문(md 파일)으로 나뉘어 있습니다. 목록을 먼저 보고, 본문의 구조와 기본 · 예외의 짝을 읽습니다.</p><h3>1. 정책 목록 19행</h3><div class="mock"><div class="mock-title">dataset/policies.csv — 전체</div><div class="wide"><table><thead><tr><th>doc_id</th><th>title</th><th>doc_type</th><th>category</th><th>product_type</th><th>region</th><th>customer_grade</th><th>order_status</th><th>file</th></tr></thead><tbody><tr><td>EXC-001</td><td>제주 냉장식품 지연과 배송비</td><td>예외 지침</td><td>배송비</td><td>냉장식품</td><td>제주</td><td>전체</td><td>배송중</td><td>md/EXC-001.md</td></tr><tr><td>EXC-002</td><td>기상 악화로 인한 도서산간 배송 지연</td><td>예외 지침</td><td>배송</td><td>전체</td><td>도서산간</td><td>전체</td><td>배송중</td><td>md/EXC-002.md</td></tr><tr><td>EXC-003</td><td>배송중 취소와 반품의 경계</td><td>예외 지침</td><td>취소</td><td>전체</td><td>전체</td><td>전체</td><td>배송중</td><td>md/EXC-003.md</td></tr><tr><td>EXC-004</td><td>제작 시작 후 주문제작 상품 불량</td><td>예외 지침</td><td>상품</td><td>주문제작</td><td>전체</td><td>전체</td><td>제작중</td><td>md/EXC-004.md</td></tr><tr><td>EXC-005</td><td>VIP 제주 추가배송비</td><td>예외 지침</td><td>회원</td><td>전체</td><td>제주</td><td>VIP</td><td>결제완료</td><td>md/EXC-005.md</td></tr><tr><td>EXC-006</td><td>쿠폰 부분취소로 무료배송 기준 미달</td><td>예외 지침</td><td>쿠폰</td><td>전체</td><td>전체</td><td>전체</td><td>부분취소</td><td>md/EXC-006.md</td></tr><tr><td>EXC-007</td><td>2026년 9월 주문의 이전 정책 적용</td><td>예외 지침</td><td>정책</td><td>전체</td><td>전체</td><td>전체</td><td>전체</td><td>md/EXC-007.md</td></tr><tr><td>POL-CAN-001</td><td>기본 주문 취소 기준</td><td>표준 정책</td><td>취소</td><td>전체</td><td>전체</td><td>전체</td><td>결제완료</td><td>md/POL-CAN-001.md</td></tr><tr><td>POL-CAN-002</td><td>주문제작 상품 제작 단계별 취소</td><td>표준 정책</td><td>취소</td><td>주문제작</td><td>전체</td><td>전체</td><td>제작중</td><td>md/POL-CAN-002.md</td></tr><tr><td>POL-CPN-001</td><td>쿠폰 사용·부분취소 재산정</td><td>표준 정책</td><td>쿠폰</td><td>전체</td><td>전체</td><td>전체</td><td>부분취소</td><td>md/POL-CPN-001.md</td></tr><tr><td>POL-DEL-001</td><td>일반 배송 기준</td><td>표준 정책</td><td>배송</td><td>전체</td><td>전체</td><td>전체</td><td>배송준비</td><td>md/POL-DEL-001.md</td></tr><tr><td>POL-DEL-002</td><td>냉장식품 배송·온도 관리</td><td>표준 정책</td><td>배송</td><td>냉장식품</td><td>전체</td><td>전체</td><td>배송중</td><td>md/POL-DEL-002.md</td></tr><tr><td>POL-FEE-001</td><td>배송비·추가배송비 환불 판단</td><td>표준 정책</td><td>배송비</td><td>전체</td><td>전체</td><td>전체</td><td>환불승인</td><td>md/POL-FEE-001.md</td></tr><tr><td>POL-MEM-001</td><td>회원등급별 무료배송·혜택</td><td>표준 정책</td><td>회원</td><td>전체</td><td>전체</td><td>VIP</td><td>결제완료</td><td>md/POL-MEM-001.md</td></tr><tr><td>POL-REF-001</td><td>환불 승인 후 결제수단별 소요 기간</td><td>표준 정책</td><td>환불</td><td>전체</td><td>전체</td><td>전체</td><td>환불승인</td><td>md/POL-REF-001.md</td></tr><tr><td>POL-RET-001</td><td>일반상품 반품·교환</td><td>표준 정책</td><td>환불</td><td>일반</td><td>전체</td><td>전체</td><td>배송완료</td><td>md/POL-RET-001.md</td></tr><tr><td>POL-RET-002</td><td>냉장식품 반품·품질 예외</td><td>표준 정책</td><td>환불</td><td>냉장식품</td><td>전체</td><td>전체</td><td>배송완료</td><td>md/POL-RET-002.md</td></tr><tr><td>POL-RET-003</td><td>디지털 상품 환불 조건</td><td>표준 정책</td><td>환불</td><td>디지털</td><td>전체</td><td>전체</td><td>이용시작</td><td>md/POL-RET-003.md</td></tr><tr><td>POL-VER-001</td><td>정책 시행일과 접근권한</td><td>표준 정책</td><td>정책</td><td>전체</td><td>전체</td><td>전체</td><td>전체</td><td>md/POL-VER-001.md</td></tr></tbody></table></div></div><div class="say"><b>보이는 것</b><p>faq.csv와 <b>같은 꼬리표 열</b>(category, product_type, region, customer_grade, order_status)이 있습니다. 그래서 FAQ와 정책을 같은 조건으로 거를 수 있습니다. POL(표준 정책)은 대부분 ‘전체’이고, EXC(예외 지침)는 냉장식품 · 제주 · VIP · 주문제작처럼 <b>범위가 좁습니다</b>.</p></div><h3>2. 본문 파일의 구조</h3><div class="codebox outbox"><div class="codehead"><span>19개 파일의 ## 소제목과 등장 횟수</span><button class="copy" type="button">코드 복사</button></div><pre><code>## 개요               19개 파일
+## 업무 규정            19개 파일
+## 처리 절차            19개 파일
+## 적용 예시            19개 파일
+## 확인 항목 및 주의       19개 파일
+## 자주 혼동하는 경우       19개 파일
+## 배송비 환불의 범위       1개 파일
+## 교환               1개 파일</code></pre></div><div class="say"><b>보이는 것</b><p>모든 파일이 같은 순서의 소제목을 갖습니다. <b>업무 규정</b>이 원칙, <b>처리 절차</b>와 <b>적용 예시</b>는 그 원칙을 실제 상황에 적용한 것입니다. 일부 파일에만 ‘교환’, ‘배송비 환불의 범위’ 같은 소제목이 더 있습니다.</p></div><h3>3. POL과 EXC — 기본 정책과 예외 규정</h3><div class="tablewrap"><table><thead><tr><th>구분</th><th>의미</th><th>분류 기준</th></tr></thead><tbody><tr><td><b>POL</b></td><td>Policy (기본 정책)</td><td>일반적인 업무 처리 기준과 규정</td></tr><tr><td><b>EXC</b></td><td>Exception (예외 규정)</td><td>특정 조건에서 기본 정책과 다르게 적용되는 규정</td></tr></tbody></table></div><p>EXC는 별도의 FAQ가 아니라, <b>기본 정책의 적용 범위를 제한하거나, 조건에 따라 다른 처리 방법을 지정하는 규정</b>입니다. 실제 짝 하나의 업무 규정을 나란히 보세요.</p><div class="mock"><div class="mock-title">POL-CAN-002(기본)와 EXC-004(예외)</div><div class="console"><div class="left"><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">POL-CAN-002.md · 업무 규정</span></div><pre style="white-space:pre-wrap">주문제작 상품은 제작 착수 전 취소가 가능하다. <span class="mark">제작이 시작된 뒤 단순 변심 취소는 제한되며</span> 파손·오제작·계약 불일치 등 판매자 책임 사유는 별도 조사한다. 상품준비중이라는 표시가 반드시 제작착수 전을 의미하지는 않는다.</pre></div></div><div class="right"><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">EXC-004.md · 업무 규정 + 확인 항목</span></div><pre style="white-space:pre-wrap"><span class="mark">제작 시작 후라도 오제작·파손·사양 불일치가 확인되면</span> 단순 변심과 달리 판매자 귀책으로 검토한다. 제작이 시작되었다는 이유 하나로 모든 환불을 거절하지 않는다. 사양 승인 기록, 제작 착수시각과 문제 사진을 확보한다.
+
+<span class="mk2">적용 정책: POL-CAN-002, POL-FEE-001.</span> 일반상품 7일 반품 규정을 자동 적용하지 않는다.</pre></div></div></div></div><div class="say"><b>보이는 것</b><p>기본 정책 POL-CAN-002는 “제작이 시작된 뒤 단순 변심 취소는 제한”입니다. 예외 EXC-004는 “그래도 오제작 · 파손이면 판매자 귀책으로 검토”라고 처리를 바꿉니다. 그리고 <b>“적용 정책: POL-CAN-002 …”</b> 줄로 어느 기본 정책에 붙는 예외인지 밝힙니다.</p></div><div class="codebox"><div class="codehead"><span>Claude CLI · 예외 문서의 ‘적용 정책’ 줄 모으기</span><button class="copy" type="button">코드 복사</button></div><pre><code>python -c &quot;import re,glob
+for p in sorted(glob.glob(&#x27;dataset/md/EXC-*.md&#x27;)):
+    t=open(p,encoding=&#x27;utf-8&#x27;).read()
+    print(p[-10:-3], &#x27;→&#x27;, re.search(r&#x27;적용 정책: ([^.]*)&#x27;, t).group(1))&quot;</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>EXC-001 → POL-DEL-002, POL-RET-002, POL-FEE-001
+EXC-002 → POL-DEL-001, POL-DEL-002, POL-FEE-001
+EXC-003 → POL-CAN-001, POL-RET-001, POL-FEE-001
+EXC-004 → POL-CAN-002, POL-FEE-001
+EXC-005 → POL-MEM-001, POL-FEE-001
+EXC-006 → POL-CPN-001, POL-MEM-001
+EXC-007 → POL-VER-001, POL-REF-001, POL-MEM-001, POL-RET-002</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>가장 많은 예외가 가리키는 정책은 무엇이고, 제목은?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>POL-FEE-001(“배송비·추가배송비 환불 판단”)을 EXC-001 · 002 · 003 · 004 · 005, 다섯 예외가 가리킵니다. 여러 예외 상황이 결국 ‘배송비를 돌려줄 것인가’로 모입니다.</p></details></section>
+<!-- 03 -->
+<section aria-labelledby="tab-u03" class="panel" hidden="" id="u03" role="tabpanel"><div class="crumb">Part 0. 자료 이해 · A5-M1</div><h1>03. FAQ와 정책은 어떻게 이어지나</h1><p class="lead">FAQ의 마지막 열과 예외 문서의 ‘적용 정책’ 줄이 정책 문서를 가리킵니다. 실제로 따라가 봅니다.</p><h3>1. FAQ 한 행을 따라 정책 두 개 열어 보기</h3><div class="mock"><div class="mock-title">FAQ-018 → 관련 정책 EXC-001, POL-FEE-001</div><div class="wide"><table><thead><tr><th>doc_id</th><th>category</th><th>question</th><th>answer</th><th>product_type</th><th>region</th><th>customer_grade</th><th>order_status</th><th>related_policy_ids</th></tr></thead><tbody><tr><td>FAQ-018</td><td>환불</td><td>제주 냉장식품이 변질됐으면 상품대금과 배송비를 모두 받나요?</td><td>품질훼손·귀책·실제 청구된 배송비를 확인해야 하며 자동 지급은 아닙니다.</td><td>냉장식품</td><td>제주</td><td>전체</td><td>배송완료</td><td>EXC-001|POL-FEE-001</td></tr></tbody></table></div><div class="console"><div class="left"><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">EXC-001.md · 업무 규정</span></div><pre style="white-space:pre-wrap">제주 냉장식품에 배송지연이 발생해도 자동 환불되지 않는다. 주문 약정일·실제 출고시각·기상 영향·온도 이탈을 확인한다. <span class="mark">판매자 귀책 지연으로 품질 훼손이 확정되면 상품대금과 실제 결제한 기본배송비·추가배송비를 함께 검토한다</span>. 항공편 중단 같은 외부 요인은 판매자 귀책 판단을 보류할 수 있다.</pre></div></div><div class="right"><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">POL-FEE-001.md · 업무 규정</span></div><pre style="white-space:pre-wrap"><span class="mark">판매자 귀책으로 계약상 의무를 이행하지 못한 경우 기본 배송비 환불을 검토한다</span>. 제주·도서산간 추가배송비도 판매자 귀책이 인정되고 해당 배송서비스가 제공되지 않았을 때 환불 대상에 포함될 수 있다. 단순 변심 반품은 왕복 회수비 공제가 가능하다.</pre></div></div></div></div><div class="say"><b>보이는 것</b><p>FAQ-018의 답 “품질훼손 · 귀책 · 실제 청구된 배송비를 확인해야 하며 자동 지급은 아닙니다”는 짧은 요약입니다. 근거 규정 원문은 관련 정책 열이 가리키는 두 문서에 있습니다. <b>FAQ는 고객의 말로 된 입구, 정책 본문은 근거</b>입니다.</p></div><h3>2. 정책마다 몇 개의 FAQ가 가리키나</h3><div class="codebox"><div class="codehead"><span>Claude CLI · 관련 정책 ID 세기</span><button class="copy" type="button">코드 복사</button></div><pre><code>python -c &quot;import csv,collections
+rows=list(csv.DictReader(open(&#x27;dataset/faq.csv&#x27;,encoding=&#x27;utf-8-sig&#x27;)))
+c=collections.Counter(p for r in rows for p in r[&#x27;related_policy_ids&#x27;].split(&#x27;|&#x27;))
+for k,v in c.most_common(): print(k, v)&quot;</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>POL-REF-001 11
+POL-RET-001 10
+POL-CPN-001 8
+POL-MEM-001 8
+POL-FEE-001 6
+POL-VER-001 5
+POL-RET-003 5
+POL-RET-002 5
+POL-DEL-001 4
+EXC-001 4
+EXC-007 4
+POL-CAN-002 4
+EXC-004 4
+EXC-002 3
+EXC-005 3
+EXC-006 3
+POL-DEL-002 2
+POL-CAN-001 2
+EXC-003 2</code></pre></div><h3>3. 자료 속 연결 두 가지</h3><pre class="diagram">FAQ ──(related_policy_ids 열)────────▶ 정책        예) FAQ-018 → EXC-001, POL-FEE-001
+예외 ──(본문의 ‘적용 정책:’ 줄)──────▶ 정책        예) EXC-001 → POL-DEL-002, POL-RET-002, POL-FEE-001
+
+연결은 이어 붙일 수 있다:  FAQ-018 → EXC-001 → POL-DEL-002</pre><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> FAQ-053(“VIP는 제주 추가배송비도 무료인가요?”)의 근거를 보려면?</p><label><input type="radio" name="qz2_1" value="0"/> 답변만 읽는다</label><label><input type="radio" name="qz2_1" value="1"/> related_policy_ids의 EXC-005를 md 폴더에서 연다</label><label><input type="radio" name="qz2_1" value="2"/> 모든 md를 연다</label><label><input type="radio" name="qz2_1" value="3"/> 근거가 없다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>관련 정책 열이 EXC-005를 가리킵니다. EXC-005는 다시 ‘적용 정책: POL-MEM-001, POL-FEE-001’을 가리킵니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> EXC-001에서 POL-FEE-001로 가는 연결은 어디에 적혀 있나?</p><label><input type="radio" name="qz2_2" value="0"/> faq.csv의 열</label><label><input type="radio" name="qz2_2" value="1"/> EXC-001 본문의 ‘적용 정책:’ 줄</label><label><input type="radio" name="qz2_2" value="2"/> policies.csv의 file 열</label><label><input type="radio" name="qz2_2" value="3"/> 어디에도 없다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>FAQ → 정책 연결은 CSV 열에, 예외 → 정책 연결은 본문 안에 있습니다.</p></div></div></div></section>
+<!-- 04 -->
+<section aria-labelledby="tab-u04" class="panel" hidden="" id="u04" role="tabpanel"><div class="crumb">Part 0. 자료 이해 · A5-M1</div><h1>04. 눈으로 검색하기 — 엑셀 필터와 폴더 검색</h1><p class="lead">코드 없이 엑셀 필터와 폴더 검색만으로 질문 세 개의 답을 찾아봅니다. 쉬운 질문부터 시작합니다.</p><h3>찾아볼 질문 세 개</h3><div class="tablewrap"><table><thead><tr><th>ID</th><th>질문</th></tr></thead><tbody><tr><td>Q-017</td><td>일반상품이 배송완료된 지 5일, 미사용인데 반품할 수 있나요?</td></tr><tr><td>Q-009</td><td>주문제작 상품이 제작 중인데 고객이 마음이 바뀌었습니다. 취소되나요?</td></tr><tr><td>Q-001</td><td>제주 VIP가 냉장 케이크를 주문했는데 배송이 늦고 상품이 변질됐습니다. 배송비까지 환불되나요?</td></tr></tbody></table></div><p>엑셀로 faq.csv · policies.csv를 열어 <b>필터</b>를 걸고, VS Code에서 md 폴더를 <b>폴더 검색(Ctrl+Shift+F)</b>하면 됩니다. 아래는 같은 조건으로 실제로 찾은 결과입니다.</p><h3>Q-017 · 일반상품이 배송완료된 지 5일, 미사용인데 반품할 수 있나요?</h3><div class="mock"><div class="mock-title">policies.csv 필터: product_type = 일반 또는 전체 · category = 환불</div><div class="wide"><table><thead><tr><th>doc_id</th><th>title</th><th>category</th><th>product_type</th><th>file</th></tr></thead><tbody><tr><td>POL-REF-001</td><td>환불 승인 후 결제수단별 소요 기간</td><td>환불</td><td>전체</td><td>md/POL-REF-001.md</td></tr><tr><td>POL-RET-001</td><td>일반상품 반품·교환</td><td>환불</td><td>일반</td><td>md/POL-RET-001.md</td></tr></tbody></table></div></div><div class="mock"><div class="mock-title">열어 보기: POL-RET-001.md의 업무 규정과 적용 예시</div><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">POL-RET-001.md</span></div><pre style="white-space:pre-wrap"><span class="mark">일반상품은 수령 후 7일 이내 반품 신청을 받는다</span>. 단순 변심 반품은 사용·훼손 여부를 확인하고 고객에게 왕복 회수비 3000원을 부과할 수 있다. 판매자 오배송 또는 불량으로 확정되면 회수비는 판매자가 부담한다.
+
+## 적용 예시
+- <span class="mark">배송완료 후 5일째에 미사용 상태로 단순 변심 반품을 신청했다</span> → 기간 조건은 충족한다. 회수된 상품의 상태와 신청 사유를 확인한 뒤 접수를 검토한다.
+- 수령 후 9일째에 단순 변심 반품을 신청했다 → 7일 접수 기한을 넘었으므로 이 정책의 반품 대상이 아니다.
+- 판매자가 다른 상품을 보냈다(오배송) → 왕복 회수비를 고객에게 부과하지 않고 판매자가 부담한다.
+- 받은 상품에 제조 불량이 있어 교환을 요청했다 → 불량이 확정되면 회수비는 판매자 부담이다.
+- 원하는 색상이 품절되어 교환할 수 없다 → 환불 등 다른 선택지를 안내한다.</pre></div></div><div class="say"><b>결과</b><p>필터로 고른 2개 중 <b>POL-RET-001</b>이 바로 이 질문입니다. 업무 규정의 “수령 후 7일 이내”와 적용 예시의 “5일째 · 미사용”이 그대로 답입니다. <b>문서 하나</b>로 끝나는 질문입니다.</p></div><h3>Q-009 · 주문제작 상품이 제작 중인데 고객이 마음이 바뀌었습니다. 취소되나요?</h3><div class="mock"><div class="mock-title">faq.csv 필터: product_type = 주문제작 · category = 취소</div><div class="wide"><table><thead><tr><th>doc_id</th><th>category</th><th>question</th><th>answer</th><th>related_policy_ids</th></tr></thead><tbody><tr><td>FAQ-023</td><td>취소</td><td>주문제작 상품 제작 시작 후 단순변심 취소되나요?</td><td>제작 착수 후 단순변심 취소는 제한됩니다.</td><td>POL-CAN-002</td></tr><tr><td>FAQ-024</td><td>취소</td><td>주문제작 상품 제작 전이라면요?</td><td>제작 착수 전이면 주문취소를 요청할 수 있습니다.</td><td>POL-CAN-002</td></tr><tr><td>FAQ-025</td><td>취소</td><td>오제작된 주문제작 상품도 취소 불가인가요?</td><td>오제작 등 판매자 귀책은 제작 시작 여부와 별도로 검토합니다.</td><td>EXC-004</td></tr></tbody></table></div></div><div class="say"><b>결과</b><p>FAQ-023이 거의 같은 질문이고, <b>POL-CAN-002</b>를 가리킵니다. 그 업무 규정 “제작이 시작된 뒤 단순 변심 취소는 제한”이 답입니다. 이것도 <b>문서 하나</b>입니다.</p></div><h3>Q-001 · 제주 VIP가 냉장 케이크를 주문했는데 배송이 늦고 상품이 변질됐습니다. 배송비까지 환불되나요?</h3><div class="mock"><div class="mock-title">VS Code 폴더 검색 ‘냉장’ — md 폴더에서 찾은 파일</div><table><thead><tr><th>문서</th><th>제목</th><th>‘냉장’ 횟수</th></tr></thead><tbody><tr><td>POL-DEL-002</td><td>냉장식품 배송·온도 관리</td><td>13</td></tr><tr><td>POL-RET-002</td><td>냉장식품 반품·품질 예외</td><td>11</td></tr><tr><td>EXC-001</td><td>제주 냉장식품 지연과 배송비</td><td>5</td></tr><tr><td>EXC-002</td><td>기상 악화로 인한 도서산간 배송 지연</td><td>5</td></tr><tr><td>EXC-007</td><td>2026년 9월 주문의 이전 정책 적용</td><td>4</td></tr><tr><td>POL-RET-001</td><td>일반상품 반품·교환</td><td>4</td></tr><tr><td>POL-DEL-001</td><td>일반 배송 기준</td><td>2</td></tr></tbody></table></div><div class="mock"><div class="mock-title">faq.csv 필터: region = 제주 · customer_grade = VIP</div><div class="wide"><table><thead><tr><th>doc_id</th><th>category</th><th>question</th><th>related_policy_ids</th></tr></thead><tbody><tr><td>FAQ-053</td><td>회원</td><td>VIP는 제주 추가배송비도 무료인가요?</td><td>EXC-005</td></tr><tr><td>FAQ-058</td><td>회원</td><td>제주 VIP에게 쿠폰이 있으면 무료배송되나요?</td><td>EXC-005</td></tr></tbody></table></div></div><div class="mock"><div class="mock-title">faq.csv 필터: product_type = 냉장식품 · region = 제주 · category = 환불</div><div class="wide"><table><thead><tr><th>doc_id</th><th>category</th><th>question</th><th>related_policy_ids</th></tr></thead><tbody><tr><td>FAQ-018</td><td>환불</td><td>제주 냉장식품이 변질됐으면 상품대금과 배송비를 모두 받나요?</td><td>EXC-001|POL-FEE-001</td></tr></tbody></table></div></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>‘냉장’으로 찾은 문서 중 이 질문에 필요한 것은? 필요 없는 것은?</li><li>‘냉장’으로는 안 나오는데 필요한 문서는 무엇이고, 어떻게 찾았나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>‘냉장’으로는 POL-DEL-002(냉장 배송) · POL-RET-002(냉장 품질) · EXC-001(제주 냉장 지연과 배송비)이 필요한 문서이고, POL-RET-001 · POL-DEL-001 · EXC-002 · EXC-007은 ‘냉장식품은 다른 정책을 따른다’ 같은 문장 때문에 걸린 것입니다. <b>POL-FEE-001</b>(배송비 환불 판단)에는 ‘냉장’이 없지만 FAQ-018의 관련 정책과 EXC-001의 ‘적용 정책’ 줄이 가리킵니다. <b>EXC-005</b>(VIP 제주 추가배송비)는 ‘제주 · VIP’ 필터의 FAQ-053을 거쳐 나옵니다. 이 질문은 <b>문서 5개</b>가 필요하고, 그중 2개는 <b>단어가 아니라 조건과 연결</b>로 찾았습니다.</p></details></section>
+<!-- 05 -->
+<section aria-labelledby="tab-u05" class="panel" hidden="" id="u05" role="tabpanel"><div class="crumb">Part 0. 자료 이해 · A5-M1</div><h1>05. 나올 답 미리 설계하기 — 코드를 짜기 전에</h1><p class="lead">코드를 짜기 전에, 질문마다 <b>어떤 조건이 있고 어떤 문서가 나와야 하는지</b>를 먼저 적습니다.</p><p>지금까지 본 것으로 질문마다 표를 채웁니다. 실습 03 · 04의 검색 코드는 <b>이 표의 문서를 찾아야</b> 합니다.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>질문</th><th>질문에 명시된 조건</th><th>업무 영역</th><th>찾아야 할 정책</th></tr></thead><tbody><tr><td><span style="white-space:nowrap">Q-017</span></td><td>일반상품이 배송완료된 지 5일, 미사용인데 반품할 수 있나요?</td><td>product_type=일반</td><td>환불</td><td>POL-RET-001</td></tr><tr><td><span style="white-space:nowrap">Q-009</span></td><td>주문제작 상품이 제작 중인데 고객이 마음이 바뀌었습니다. 취소되나요?</td><td>product_type=주문제작</td><td>취소</td><td>POL-CAN-002</td></tr><tr><td><span style="white-space:nowrap">Q-013</span></td><td>56000원 주문에 5000원 쿠폰을 쓰고 12000원 제품을 취소하면 쿠폰은요?</td><td>—</td><td>쿠폰</td><td>EXC-006, POL-CPN-001</td></tr><tr><td><span style="white-space:nowrap">Q-002</span></td><td>10월 15일 VIP가 35000원짜리 상품을 제주에서 주문하면 배송비가 모두 무료인가요?</td><td>region=제주, customer_grade=VIP</td><td>배송비, 회원</td><td>POL-MEM-001, EXC-005</td></tr><tr><td><span style="white-space:nowrap">Q-028</span></td><td>고객은 제주인데 상품은 디지털 이용권입니다. 제주 배송비 규정을 적용하나요?</td><td>product_type=디지털, region=제주</td><td>배송비</td><td>POL-RET-003, POL-FEE-001</td></tr><tr><td><span style="white-space:nowrap">Q-001</span></td><td>제주 VIP가 냉장 케이크를 주문했는데 배송이 늦고 상품이 변질됐습니다. 배송비까지 환불되나요?</td><td>product_type=냉장식품, region=제주, customer_grade=VIP</td><td>배송, 환불, 배송비</td><td>EXC-001, POL-DEL-002, POL-RET-002, POL-FEE-001, EXC-005</td></tr><tr><td><span style="white-space:nowrap">Q-030</span></td><td>배송지연과 반품이 관련돼 있는데 환불기간은 어떻게 계산하나요?</td><td>—</td><td>배송, 환불, 취소</td><td>POL-DEL-001, POL-CAN-001, POL-RET-001, POL-REF-001</td></tr></tbody></table></div><p>이 표를 파일로 저장해 두고 코드에서 읽습니다.</p><div class="codebox"><div class="codehead"><span>design/answers.json (일부)</span><button class="copy" type="button">코드 복사</button></div><pre><code>{
+  &quot;questions&quot;: [
+    {
+      &quot;id&quot;: &quot;Q-017&quot;,
+      &quot;question&quot;: &quot;일반상품이 배송완료된 지 5일, 미사용인데 반품할 수 있나요?&quot;,
+      &quot;conditions&quot;: {
+        &quot;product_type&quot;: &quot;일반&quot;
+      },
+      &quot;domains&quot;: [
+        &quot;환불&quot;
+      ],
+      &quot;expected&quot;: [
+        &quot;POL-RET-001&quot;
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;Q-001&quot;,
+      &quot;question&quot;: &quot;제주 VIP가 냉장 케이크를 주문했는데 배송이 늦고 상품이 변질됐습니다. 배송비까지 환불되나요?&quot;,
+      &quot;conditions&quot;: {
+        &quot;product_type&quot;: &quot;냉장식품&quot;,
+        &quot;region&quot;: &quot;제주&quot;,
+        &quot;customer_grade&quot;: &quot;VIP&quot;
+      },
+      &quot;domains&quot;: [
+        &quot;배송&quot;,
+        &quot;환불&quot;,
+        &quot;배송비&quot;
+      ],
+      &quot;expected&quot;: [
+        &quot;EXC-001&quot;,
+        &quot;POL-DEL-002&quot;,
+        &quot;POL-RET-002&quot;,
+        &quot;POL-FEE-001&quot;,
+        &quot;EXC-005&quot;
+      ]
+    }
+  ]
+}</code></pre></div><div class="mock"><div class="mock-title">비교: 평가 자료 reference/evaluation_questions_30.csv의 정답 열 (실제 값)</div><table><thead><tr><th>question_id</th><th>expected_doc_ids</th><th>expected_answer</th></tr></thead><tbody><tr><td>Q-017</td><td>POL-RET-001</td><td>시간 조건은 충족하나 상품 상태 및 신청 사유에 따라 접수 검토한다.</td></tr><tr><td>Q-009</td><td>POL-CAN-002</td><td>제작 착수 후 단순변심 취소는 제한된다.</td></tr><tr><td>Q-013</td><td>EXC-006|POL-CPN-001</td><td>남은 주문금액 44000원이므로 최소금액 50000원 쿠폰 조건 상실, 재산정이 필요하다.</td></tr><tr><td>Q-002</td><td>POL-MEM-001|EXC-005</td><td>기본배송비는 무료지만 제주 추가배송비는 별도 행사 없으면 유료이다.</td></tr><tr><td>Q-028</td><td>POL-RET-003|POL-FEE-001</td><td>적용하지 않는다. 배송지역과 상품 유형을 동시에 확인해야 한다.</td></tr><tr><td>Q-001</td><td>EXC-001|POL-DEL-002|POL-RET-002|POL-FEE-001|EXC-005</td><td>변질·귀책·실제 납부 배송비를 확인한 후 상품대금 및 청구 배송비 환불 여부를 결정한다. 자동 환불 아님.</td></tr><tr><td>Q-030</td><td>POL-DEL-001|POL-CAN-001|POL-RET-001|POL-REF-001</td><td>반품 승인 여부와 환불 승인 시점을 확인해야 하며 환불기간은 승인 후 결제수단에 따라 달라진다.</td></tr></tbody></table></div><div class="say"><b>설계 결과</b><p>Q-017 · Q-009는 조건이나 단어 하나로 근거 문서에 닿습니다. Q-001은 5개, Q-030은 4개 문서가 필요하고 여러 업무가 섞여 있습니다. 검색 코드를 짜면 <b>쉬운 질문은 바로 되고, 문서가 여러 개 필요한 질문에서 막힐 것</b>이라고 미리 예상할 수 있습니다.</p></div></section>
+<!-- 06 -->
+<section aria-labelledby="tab-u06" class="panel" hidden="" id="u06" role="tabpanel"><div class="crumb">Part 1. 실습 01 자료 로딩 · A5-M1</div><h1>06. 실습 01 · CSV와 마크다운을 같은 모양으로 읽기</h1><p class="lead">FAQ(CSV 한 행)와 정책(목록 + 마크다운 본문)을 파이썬으로 읽어, 같은 모양의 문서 99개로 만듭니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>두 형식을 같은 모양으로</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>faq.csv · policies.csv · md</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>행 → 문서, 목록의 링크 → 본문</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>문서 99개</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>목록과 파일이 맞는가</span></div></div><div class="codebox"><div class="codehead"><span>📄 m1lib.py · 로딩 (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def read_csv(path):
+    with open(path, encoding=&quot;utf-8-sig&quot;, newline=&quot;&quot;) as f:  # BOM이 있는 CSV
+        return list(csv.DictReader(f))
+
+
+def load_faq():
+    docs = []
+    for r in read_csv(DATA / &quot;faq.csv&quot;):
+        docs.append({&quot;id&quot;: r[&quot;doc_id&quot;], &quot;kind&quot;: &quot;faq&quot;, &quot;title&quot;: r[&quot;question&quot;],
+                     &quot;text&quot;: f&quot;질문: {r[&#x27;question&#x27;]}\n답변: {r[&#x27;answer&#x27;]}&quot;,
+                     &quot;meta&quot;: {k: r[k] for k in META_FIELDS},
+                     &quot;links&quot;: [x for x in r[&quot;related_policy_ids&quot;].split(&quot;|&quot;) if x]})
+    return docs
+
+
+def load_policies():
+    docs = []
+    for r in read_csv(DATA / &quot;policies.csv&quot;):
+        text = (DATA / r[&quot;file&quot;]).read_text(encoding=&quot;utf-8&quot;)  # 목록의 링크를 따라 본문을 읽는다
+        docs.append({&quot;id&quot;: r[&quot;doc_id&quot;], &quot;kind&quot;: &quot;policy&quot;, &quot;title&quot;: r[&quot;title&quot;], &quot;text&quot;: text,
+                     &quot;meta&quot;: dict({k: r[k] for k in META_FIELDS}, doc_type=r[&quot;doc_type&quot;]),
+                     &quot;links&quot;: []})
+    return docs
+
+
+def load_all():
+    return load_faq() + load_policies()</code></pre></div><ol class="steps"><li><code>read_csv</code>: CSV를 <code>utf-8-sig</code>로 엽니다. 이 CSV들은 맨 앞에 BOM이 있어 <code>utf-8</code>로 열면 첫 열 이름이 <code>\ufeffdoc_id</code>로 깨집니다.</li><li><code>load_faq</code>: 한 행을 문서 하나로 만듭니다. 본문은 “질문: … 답변: …”, 꼬리표는 <code>meta</code>, 관련 정책은 <code>links</code>에 담습니다.</li><li><code>load_policies</code>: 목록의 한 행을 읽고, <code>file</code> 열의 경로를 따라가 마크다운 본문을 읽습니다. 꼬리표는 목록에서, 본문은 파일에서 옵니다.</li><li>두 함수 모두 <code>{id, kind, title, text, meta, links}</code> 같은 모양을 돌려주므로, 이후 코드는 FAQ인지 정책인지 신경 쓰지 않고 다룰 수 있습니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m1_01_load.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>FAQ 80개 · 정책 19개 · 합계 99개
+
+[FAQ 문서 하나]
+  id    : FAQ-001
+  kind  : faq
+  text  : &#x27;질문: 일반상품 출고까지 며칠 걸리나요?\n답변: 결제 완료 후 통상 2~3영업일 이내 출고 목표이며 주말과 공휴일은 제외합니다.&#x27;
+  meta  : {&#x27;category&#x27;: &#x27;배송&#x27;, &#x27;product_type&#x27;: &#x27;전체&#x27;, &#x27;region&#x27;: &#x27;전체&#x27;, &#x27;customer_grade&#x27;: &#x27;전체&#x27;, &#x27;order_status&#x27;: &#x27;결제완료&#x27;}
+  links : [&#x27;POL-DEL-001&#x27;]
+
+[정책 문서 하나]
+  id    : POL-RET-002
+  kind  : policy
+  title : 냉장식품 반품·품질 예외
+  meta  : {&#x27;category&#x27;: &#x27;환불&#x27;, &#x27;product_type&#x27;: &#x27;냉장식품&#x27;, &#x27;region&#x27;: &#x27;전체&#x27;, &#x27;customer_grade&#x27;: &#x27;전체&#x27;, &#x27;order_status&#x27;: &#x27;배송완료&#x27;, &#x27;doc_type&#x27;: &#x27;표준 정책&#x27;}
+  text  : 1211자, 처음 3줄 → [&#x27;# 냉장식품 반품·품질 예외&#x27;, &#x27;&#x27;, &#x27;## 개요&#x27;]
+
+[목록과 파일이 맞는가]
+  policies.csv 19행 · 링크된 파일이 없는 행 없음 · 목록에 없는 md 파일 없음</code></pre></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 정책 문서의 꼬리표(meta)와 본문(text)은 각각 어디서 오나?</p><label><input type="radio" name="qz3_1" value="0"/> 둘 다 md 파일</label><label><input type="radio" name="qz3_1" value="1"/> 꼬리표는 policies.csv, 본문은 file 열이 가리키는 md</label><label><input type="radio" name="qz3_1" value="2"/> 둘 다 policies.csv</label><label><input type="radio" name="qz3_1" value="3"/> 꼬리표는 md, 본문은 csv</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>목록에서 꼬리표를 읽고, 같은 행의 file 열을 따라가 본문을 읽습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> CSV를 encoding='utf-8'로 열면 생기는 문제는?</p><label><input type="radio" name="qz3_2" value="0"/> 한글이 모두 깨진다</label><label><input type="radio" name="qz3_2" value="1"/> 첫 열 이름 앞에 BOM 문자가 붙어 r[&#x27;doc_id&#x27;]가 KeyError</label><label><input type="radio" name="qz3_2" value="2"/> 파일이 안 열린다</label><label><input type="radio" name="qz3_2" value="3"/> 문제없다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>BOM이 있는 파일은 utf-8-sig로 열어야 첫 열 이름이 정상입니다.</p></div></div></div></section>
+<!-- 07 -->
+<section aria-labelledby="tab-u07" class="panel" hidden="" id="u07" role="tabpanel"><div class="crumb">Part 2. 실습 02 정규화 · 청킹 · A5-M1</div><h1>07. 실습 02 · 정규화와 자르는 방법 두 가지</h1><p class="lead">긴 정책 본문을 검색 단위인 <b>조각</b>으로 자릅니다. 마크다운 소제목으로 자르는 방법과 글자 수로 자르는 방법을 같은 문서에 적용해 비교합니다.</p><h3>왜 자르나</h3><div class="say"><b>이유</b><p>정책 본문 하나에는 개요, 원칙, 절차, 예시가 모두 들어 있습니다. 질문 하나에 필요한 것은 보통 그중 한두 부분입니다. 문서 통째로 찾으면 필요 없는 내용까지 딸려 오고, 나중에 답을 만들 때도 무엇이 근거인지 흐려집니다. 그래서 검색 단위를 <b>조각(청크)</b>으로 줄입니다. FAQ는 한 행이 이미 짧아서 자르지 않습니다.</p></div><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>검색 단위 만들기</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>정책 본문</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>정규화 → 소제목 또는 글자 수로</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>조각 목록</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>조각이 뜻을 갖는가</span></div></div><div class="codebox"><div class="codehead"><span>📄 m1lib.py · 정규화와 자르기 (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def normalize(text):
+    &quot;&quot;&quot;유니코드 NFC + 줄 끝 공백 제거 + 빈 줄 여러 개를 하나로. 줄바꿈(마크다운 구조)은 남긴다.&quot;&quot;&quot;
+    text = unicodedata.normalize(&quot;NFC&quot;, text)
+    text = &quot;\n&quot;.join(line.rstrip() for line in text.splitlines())
+    return re.sub(r&quot;\n{3,}&quot;, &quot;\n\n&quot;, text).strip()
+
+
+def flatten(text):
+    &quot;&quot;&quot;글자 수로 자를 때 쓰는 한 줄 텍스트: 모든 공백을 한 칸으로.&quot;&quot;&quot;
+    return re.sub(r&quot;\s+&quot;, &quot; &quot;, normalize(text)).strip()
+
+
+def chunk_by_section(doc):
+    &quot;&quot;&quot;마크다운 &#x27;## 소제목&#x27; 단위로 자른다. 각 조각 앞에 &#x27;문서 제목 &gt; 소제목&#x27;을 붙인다.&quot;&quot;&quot;
+    text = normalize(doc[&quot;text&quot;])
+    parts = re.split(r&quot;\n(?=## )&quot;, text)
+    title = parts[0].lstrip(&quot;# &quot;).splitlines()[0]
+    chunks = []
+    for part in parts[1:]:
+        head, _, body = part.partition(&quot;\n&quot;)
+        section = head.lstrip(&quot;# &quot;).strip()
+        chunks.append({&quot;section&quot;: section, &quot;text&quot;: f&quot;{title} &gt; {section}\n{body.strip()}&quot;})
+    return chunks
+
+
+def chunk_by_chars(doc, size=300, overlap=50):
+    &quot;&quot;&quot;글자 수 창으로 자른다. 다음 창은 (size - overlap) 뒤에서 시작한다.&quot;&quot;&quot;
+    text = flatten(doc[&quot;text&quot;])
+    step, start, chunks = size - overlap, 0, []
+    while start &lt; len(text):
+        chunks.append({&quot;section&quot;: f&quot;{start}~{min(start + size, len(text))}자&quot;, &quot;text&quot;: text[start:start + size].strip()})
+        if start + size &gt;= len(text):
+            break
+        start += step
+    return chunks</code></pre></div><ol class="steps"><li><code>normalize</code>: 유니코드를 NFC로 맞추고(같은 한글이 다른 코드로 저장된 경우 대비), 줄 끝 공백과 연속된 빈 줄을 정리합니다. 줄바꿈은 남깁니다 — 마크다운 구조이기 때문입니다.</li><li><code>chunk_by_section</code>: <code>## 소제목</code> 앞에서 자릅니다. 조각 맨 앞에 <code>문서 제목 &gt; 소제목</code>을 붙여, 조각만 봐도 어디서 왔는지 알게 합니다.</li><li><code>chunk_by_chars</code>: 모든 공백을 한 칸으로 만든 뒤 <code>size</code>글자씩 자릅니다. 다음 조각은 <code>size - overlap</code>글자 뒤에서 시작해, 경계의 <code>overlap</code>글자가 두 조각에 함께 들어갑니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><h3>같은 문서, 두 가지로 잘라 보기</h3><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m1_02_chunk.py --show POL-RET-002 --mode section</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>POL-RET-002 · 냉장식품 반품·품질 예외 · 1211자 → 6조각 (section)
+
+--- 조각 1 [개요] 185자
+냉장식품 반품·품질 예외 &gt; 개요
+이 정책은 생크림 케이크, 요거트, 신선 연어처럼 냉장 상태로 배송되는 냉장식품의 반품과 품질 이상 처리 기준을 정한다. 냉장식품은 받은 뒤 보관 상태에 따라 품질이 바뀌므로, 일반상품처럼 단순 변심 반품을 받지 않는다. 대신 품질에 문제가 생긴 경우를 짧은 기한 안에 접수받아 증빙으로 판단한다.
+
+--- 조각 2 [업무 규정] 158자
+냉장식품 반품·품질 예외 &gt; 업무 규정
+냉장식품은 단순 변심 반품이 원칙적으로 불가하다. 오배송·변질·온도 이탈·판매자 귀책 배송 지연으로 인한 품질 훼손은 수령 후 48시간 안에 접수하고 증빙을 확인해 환불 또는 재배송한다. 단순히 제주 지역이라는 이유만으로 자동 환불하지 않는다.
+
+--- 조각 3 [처리 절차] 268자
+냉장식품 반품·품질 예외 &gt; 처리 절차
+1. 고객이 품질 이상을 알리면 수령 시각과 접수 시각을 기록하고, 수령 후 48시간 안에 접수됐는지 확인한다.
+2. 변질, 온도 이탈, 오배송, 판매자 귀책 배송 지연 중 어떤 사유인지 구분한다.
+3. 상품 사진, 보관 상태, 온도 기록을 받아 실제 품질 훼손이 있었는지 확인한다.
+4. 품질 훼손이 확인되면 환불 또는 재배송 중 하나로 처리한다.
+5. 배송비 환불이 함께 요청되면 품질 확인이 끝난 뒤 배송비 정책에 따라 따로 판단한다.
+
+--- 조각 4 [적용 예시] 341자
+냉장식품 반품·품질 예외 &gt; 적용 예시
+- 10월 주문의 냉장식품을 받고 36시간 뒤 변질을 신고했다 → 48시간 안이므로 시간 요건은 충족한다. 실제 변질 여부는 사진과 온도 기록으로 검증한다.
+- 받은 지 48시간이 지나서 변질을 신고했다 → 접수 기한을 넘겼다.
+- 포장을 열어 보니 주문하지 않은 다른 냉장식품이 왔다(오배송) → 기한 안에 접수하면 환불 또는 재배송을 검토한다.
+- 맛이 생각과 달라 반품하고 싶다(단순 변심) → 냉장식품은 단순 변심 반품이 원칙적으로 불가하다.
+- 제주로 배송돼 늦게 도착했지만 온도 기록과 상품 상태가 정상이다 → 제주 지역이라는 이유만으로 자동 환불하지 않는다.
+
+--- 조각 5 [확인 항목 및 주의] 88자
+냉장식품 반품·품질 예외 &gt; 확인 항목 및 주의
+수령시각, 접수시각, 보관 상태, 사진과 온도 기록을 비교한다. 품질 확인 전 배송비 환불을 보장하지 않는다.
+
+--- 조각 6 [자주 혼동하는 경우] 221자
+냉장식품 반품·품질 예외 &gt; 자주 혼동하는 경우
+- 일반상품의 수령 후 7일 반품 기준을 냉장식품에 적용하지 않는다.
+- 늦게 도착했다는 사실과 품질이 훼손됐다는 사실은 별개다. 지연만으로 환불을 약속하지 않는다.
+- 제주 지역 냉장식품의 지연과 배송비 문제는 제주 냉장식품 예외 지침을 함께 확인한다.
+- 주문일이 이전 정책 기간에 속하면 접수 기한이 다를 수 있으므로 주문일을 먼저 확인한다.</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m1_02_chunk.py --show POL-RET-002 --mode chars --size 300 --overlap 50</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>POL-RET-002 · 냉장식품 반품·품질 예외 · 1211자 → 5조각 (chars 300/50)
+
+--- 조각 1 [0~300자] 300자
+# 냉장식품 반품·품질 예외 ## 개요 이 정책은 생크림 케이크, 요거트, 신선 연어처럼 냉장 상태로 배송되는 냉장식품의 반품과 품질 이상 처리 기준을 정한다. 냉장식품은 받은 뒤 보관 상태에 따라 품질이 바뀌므로, 일반상품처럼 단순 변심 반품을 받지 않는다. 대신 품질에 문제가 생긴 경우를 짧은 기한 안에 접수받아 증빙으로 판단한다. ## 업무 규정 냉장식품은 단순 변심 반품이 원칙적으로 불가하다. 오배송·변질·온도 이탈·판매자 귀책 배송 지연으로 인한 품질 훼손은 수령 후 48시간 안에 접수하고 증빙을 확인해 환불 또는 재배송한
+
+--- 조각 2 [250~550자] 300자
+연으로 인한 품질 훼손은 수령 후 48시간 안에 접수하고 증빙을 확인해 환불 또는 재배송한다. 단순히 제주 지역이라는 이유만으로 자동 환불하지 않는다. ## 처리 절차 1. 고객이 품질 이상을 알리면 수령 시각과 접수 시각을 기록하고, 수령 후 48시간 안에 접수됐는지 확인한다. 2. 변질, 온도 이탈, 오배송, 판매자 귀책 배송 지연 중 어떤 사유인지 구분한다. 3. 상품 사진, 보관 상태, 온도 기록을 받아 실제 품질 훼손이 있었는지 확인한다. 4. 품질 훼손이 확인되면 환불 또는 재배송 중 하나로 처리한다. 5. 배송비 환불이
+
+--- 조각 3 [500~800자] 299자
+다. 4. 품질 훼손이 확인되면 환불 또는 재배송 중 하나로 처리한다. 5. 배송비 환불이 함께 요청되면 품질 확인이 끝난 뒤 배송비 정책에 따라 따로 판단한다. ## 적용 예시 - 10월 주문의 냉장식품을 받고 36시간 뒤 변질을 신고했다 → 48시간 안이므로 시간 요건은 충족한다. 실제 변질 여부는 사진과 온도 기록으로 검증한다. - 받은 지 48시간이 지나서 변질을 신고했다 → 접수 기한을 넘겼다. - 포장을 열어 보니 주문하지 않은 다른 냉장식품이 왔다(오배송) → 기한 안에 접수하면 환불 또는 재배송을 검토한다. - 맛이
+
+--- 조각 4 [750~1050자] 299자
+냉장식품이 왔다(오배송) → 기한 안에 접수하면 환불 또는 재배송을 검토한다. - 맛이 생각과 달라 반품하고 싶다(단순 변심) → 냉장식품은 단순 변심 반품이 원칙적으로 불가하다. - 제주로 배송돼 늦게 도착했지만 온도 기록과 상품 상태가 정상이다 → 제주 지역이라는 이유만으로 자동 환불하지 않는다. ## 확인 항목 및 주의 수령시각, 접수시각, 보관 상태, 사진과 온도 기록을 비교한다. 품질 확인 전 배송비 환불을 보장하지 않는다. ## 자주 혼동하는 경우 - 일반상품의 수령 후 7일 반품 기준을 냉장식품에 적용하지 않는다. -
+
+--- 조각 5 [1000~1204자] 204자
+주 혼동하는 경우 - 일반상품의 수령 후 7일 반품 기준을 냉장식품에 적용하지 않는다. - 늦게 도착했다는 사실과 품질이 훼손됐다는 사실은 별개다. 지연만으로 환불을 약속하지 않는다. - 제주 지역 냉장식품의 지연과 배송비 문제는 제주 냉장식품 예외 지침을 함께 확인한다. - 주문일이 이전 정책 기간에 속하면 접수 기한이 다를 수 있으므로 주문일을 먼저 확인한다.</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>글자 300 방식의 조각 1은 어디서 끝나나? 그 문장의 나머지는 어디에 있나?</li><li>글자 300 방식의 조각 2 앞부분 50자는 조각 1의 어디와 같은가? 이것이 왜 필요할까?</li><li>소제목 방식의 조각 4(적용 예시)는 따로 떼어 봐도 무슨 문서의 이야기인지 알 수 있나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>글자 300 방식의 조각 1은 업무 규정 문장 “… 환불 또는 재배송한”에서 끊기고, 나머지는 조각 2 앞부분에 있습니다. 조각 2의 앞 50자는 조각 1의 끝 50자와 같은 <b>겹침(오버랩)</b>입니다. 경계에서 잘린 문장이 한쪽에라도 온전히 남을 가능성을 높이려는 것입니다. 소제목 방식은 문장이 끊기지 않고, 앞에 “냉장식품 반품·품질 예외 &gt; 적용 예시”가 붙어 있어 조각만 봐도 출처를 압니다.</p></details></section>
+<!-- 08 -->
+<section aria-labelledby="tab-u08" class="panel" hidden="" id="u08" role="tabpanel"><div class="crumb">Part 2. 실습 02 정규화 · 청킹 · A5-M1</div><h1>08. 실습 02 · 세 방식 비교 — 소제목 vs 글자 300 vs 글자 500</h1><p class="lead">19개 정책 전체를 세 방식으로 잘라, 조각 수 · 길이 · 문장 끊김 · 원칙 문단 보존을 숫자로 비교합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m1_02_chunk.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>방식               정책 조각 수   평균 길이    최소    최대  문장 중간에서 끊김  업무 규정이 한 조각에
+소제목(##) 단위             116       193     78   432         0/116           19/19
+글자 300 / 50             91       272     56   300         65/91            3/19
+글자 500 / 50             56       411     55   500         36/56           19/19
+
+검색에 쓸 전체 조각 (소제목 단위): FAQ 80 + 정책 116 = 196</code></pre></div><div class="tablewrap"><table><thead><tr><th>지표</th><th>읽는 법</th></tr></thead><tbody><tr><td>정책 조각 수</td><td>19개 정책을 잘라 나온 조각 수. 많을수록 잘게 자른 것</td></tr><tr><td>문장 중간에서 끊김</td><td>문장 끝(“다.”)으로 끝나지 않는 조각 수</td></tr><tr><td>업무 규정이 한 조각에</td><td>원칙 문단(## 업무 규정) 전체가 어느 한 조각 안에 온전히 들어 있는 문서 수</td></tr></tbody></table></div><div class="say"><b>선택</b><p>글자 300은 조각의 70% 이상이 문장 중간에서 끊기고, 업무 규정이 온전한 문서가 19개 중 3개뿐입니다. 글자 500은 업무 규정은 지키지만 조각이 길어져 여러 내용이 섞입니다. 소제목 단위는 문장이 끊기지 않고 업무 규정이 모두 온전하며, 조각 하나가 한 가지 내용(원칙, 절차, 예시)을 담습니다. 이 자료는 마크다운으로 구조가 잘 나뉘어 있으므로, 이 모듈의 검색은 <b>소제목 단위</b>를 씁니다. 구조가 없는 텍스트라면 글자 수 방식과 오버랩이 필요합니다.</p></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 오버랩 50의 뜻은?</p><label><input type="radio" name="qz4_1" value="0"/> 조각을 50개 만든다</label><label><input type="radio" name="qz4_1" value="1"/> 이웃한 두 조각이 경계의 50글자를 함께 갖는다</label><label><input type="radio" name="qz4_1" value="2"/> 50글자보다 짧은 조각을 버린다</label><label><input type="radio" name="qz4_1" value="3"/> 50번째 글자에서 자른다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>다음 조각을 (300 − 50) = 250글자 뒤에서 시작하므로, 경계의 50글자가 두 조각에 모두 들어갑니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 소제목 단위 조각 앞에 ‘문서 제목 > 소제목’을 붙이는 이유는?</p><label><input type="radio" name="qz4_2" value="0"/> 보기 좋게</label><label><input type="radio" name="qz4_2" value="1"/> 조각만 떼어 봐도 어느 문서의 어떤 부분인지 알 수 있게</label><label><input type="radio" name="qz4_2" value="2"/> 글자 수를 늘리려고</label><label><input type="radio" name="qz4_2" value="3"/> 정렬하려고</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>검색 결과로 조각만 돌아와도 출처와 맥락이 남습니다. 키워드 점수에도 제목 단어가 도움이 됩니다.</p></div></div></div></section>
+<!-- 09 -->
+<section aria-labelledby="tab-u09" class="panel" hidden="" id="u09" role="tabpanel"><div class="crumb">Part 3. 실습 03 메타데이터와 검색 · A5-M1</div><h1>09. 실습 03 · 키워드와 메타데이터로 찾기</h1><p class="lead">잘라 둔 조각 196개(FAQ 80 + 정책 116)에서 05탭의 질문 7개를 찾고, 설계한 정책과 비교합니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>질문으로 조각 찾기</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>질문 + 조건</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>2글자 조각 점수 · 꼬리표 통과</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>상위 5개 조각</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>설계한 정책이 나오나</span></div></div><div class="codebox"><div class="codehead"><span>📄 m1lib.py · 키워드 검색과 메타데이터 조건 (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def grams(text):
+    t = flatten(text)
+    return [t[i:i + 2] for i in range(len(t) - 1) if &quot; &quot; not in t[i:i + 2]]
+
+
+class KeywordSearch:
+    &quot;&quot;&quot;질문과 겹치는 2글자 조각이 많고, 그 조각이 드물수록 점수가 높다.&quot;&quot;&quot;
+
+    def __init__(self, chunks):
+        self.chunks = chunks
+        self.tf = [Counter(grams(c[&quot;text&quot;])) for c in chunks]
+        df = Counter(g for tf in self.tf for g in tf)
+        self.idf = {g: math.log(1 + len(chunks) / n) for g, n in df.items()}
+
+    def scores(self, query):
+        q = set(grams(query))
+        return [sum(min(tf[g], 3) * self.idf[g] for g in q if g in tf) / math.sqrt(sum(tf.values()) + 1) for tf in self.tf]
+
+    def search(self, query, k=5, allow=None, boost=None):
+        &quot;&quot;&quot;allow: 조각 → True/False (필수 조건, 통과한 조각만 남김)
+        boost: 조각 → 배수 (선택 조건, 점수만 올림. 거르지는 않음)&quot;&quot;&quot;
+        sc = self.scores(query)
+        if boost:
+            sc = [s * boost(c) for s, c in zip(sc, self.chunks)]
+        order = sorted(range(len(self.chunks)), key=lambda i: -sc[i])
+        hits = [self.chunks[i] for i in order if sc[i] &gt; 0 and (allow is None or allow(self.chunks[i]))]
+        return hits[:k]
+
+
+def match(meta, conditions, wildcard=True):
+    &quot;&quot;&quot;conditions: {&quot;열&quot;: &quot;값&quot; 또는 [&quot;값&quot;, ...]}. wildcard=True면 문서 값이 &#x27;전체&#x27;일 때도 통과.&quot;&quot;&quot;
+    for field, want in conditions.items():
+        want = [want] if isinstance(want, str) else want
+        ok = meta.get(field) in want or (wildcard and meta.get(field) == WILDCARD)
+        if not ok:
+            return False
+    return True</code></pre></div><ol class="steps"><li><code>grams</code>: 문장을 한글 2글자 조각으로 나눕니다. “냉장식품” → 냉장, 장식, 식품.</li><li><code>KeywordSearch</code>: 질문과 겹치는 2글자 조각이 많을수록, 그 조각이 흔하지 않을수록 점수를 높게 줍니다. 긴 조각이 유리하지 않도록 길이로 나눕니다.</li><li><code>search(..., allow=…)</code>: <code>allow</code>를 통과한 조각만 남깁니다. 메타데이터 조건이 여기에 들어갑니다.</li><li><code>match</code>: 조건의 값과 같거나, 문서 값이 ‘전체’면 통과합니다(01탭에서 본 ‘제주 또는 전체’).</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m1_03_search.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>검색 대상: 조각 196개 (FAQ 80 + 정책 소제목 조각 116) · 상위 5개
+
+질문     찾아야 할 정책      ① 키워드만     ② + 메타데이터   ③ + 연결 1번   ④ + 연결 2번
+Q-017           1           1/1           1/1           1/1          1/1
+Q-009           1           1/1           1/1           1/1          1/1
+Q-013           2           1/2           1/2           2/2          2/2
+Q-002           2           2/2           2/2           2/2          2/2
+Q-028           2           1/2           1/2           1/2          1/2
+Q-001           5           1/5           1/5           3/5          5/5
+Q-030           4           1/4           1/4           2/4          2/4</code></pre></div><div class="tablewrap"><table><thead><tr><th>열</th><th>방법</th></tr></thead><tbody><tr><td>① 키워드만</td><td>조각 196개 전체에서 점수 상위 5개</td></tr><tr><td>② + 메타데이터</td><td>05탭에서 적은 ‘질문에 명시된 조건’을 통과한 조각 중 상위 5개</td></tr><tr><td>③ + 연결 1번 · ④ + 연결 2번</td><td>10탭에서 다룹니다</td></tr></tbody></table></div><div class="say"><b>결과</b><p>Q-017 · Q-009 · Q-002는 키워드만으로 설계한 정책을 모두 찾습니다. 05탭의 예상대로 <b>문서가 여러 개 필요한 Q-001(1/5)과 Q-030(1/4)</b>에서 막힙니다. ② 메타데이터 조건을 걸어도 숫자가 그대로입니다. 조건은 <b>틀린 것을 빼는</b> 일을 하지, <b>못 찾은 것을 찾아 주지는</b> 않습니다.</p></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m1_03_search.py --detail Q-017</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>질문     찾아야 할 정책      ① 키워드만     ② + 메타데이터   ③ + 연결 1번   ④ + 연결 2번
+Q-017           1           1/1           1/1           1/1          1/1
+    ① 키워드만
+      1. FAQ-080#1            [전체/제주/전체] 제주 추가배송비에 상품할인 쿠폰을 쓸 · FAQ  → 가리킴 [&#x27;EXC-005&#x27;]
+      2. POL-RET-001#4   정답   [일반/전체/전체] 일반상품 반품·교환 · 적용 예시
+      3. POL-RET-001#6   정답   [일반/전체/전체] 일반상품 반품·교환 · 확인 항목 및 주의
+      4. FAQ-036#1            [일반/전체/전체] 상품을 사용한 후 단순 변심 교환되나 · FAQ  → 가리킴 [&#x27;POL-RET-001&#x27;]
+      5. POL-CAN-001#3        [전체/전체/전체] 기본 주문 취소 기준 · 처리 절차
+    ② + 메타데이터 {&quot;product_type&quot;: &quot;일반&quot;}
+      1. FAQ-080#1            [전체/제주/전체] 제주 추가배송비에 상품할인 쿠폰을 쓸 · FAQ  → 가리킴 [&#x27;EXC-005&#x27;]
+      2. POL-RET-001#4   정답   [일반/전체/전체] 일반상품 반품·교환 · 적용 예시
+      3. POL-RET-001#6   정답   [일반/전체/전체] 일반상품 반품·교환 · 확인 항목 및 주의
+      4. FAQ-036#1            [일반/전체/전체] 상품을 사용한 후 단순 변심 교환되나 · FAQ  → 가리킴 [&#x27;POL-RET-001&#x27;]
+      5. POL-CAN-001#3        [전체/전체/전체] 기본 주문 취소 기준 · 처리 절차
+    ③ 연결 1번으로 더해진 정책: [&#x27;EXC-005&#x27;]
+    ④ 연결 2번으로 더해진 정책: [&#x27;POL-MEM-001&#x27;, &#x27;POL-FEE-001&#x27;]
+    ④까지 모은 문서 7개: [&#x27;FAQ-080&#x27;, &#x27;POL-RET-001&#x27;, &#x27;FAQ-036&#x27;, &#x27;POL-CAN-001&#x27;, &#x27;EXC-005&#x27;, &#x27;POL-MEM-001&#x27;, &#x27;POL-FEE-001&#x27;]
+    빠진 정책: 없음</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>Q-017의 상위 5개 중 POL-RET-001의 조각은 몇 개인가? 같은 문서의 조각이 여러 개 나오면 무엇이 아쉬운가?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>POL-RET-001의 ‘적용 예시’와 ‘확인 항목’ 두 조각이 나왔습니다. 정답은 맞지만 상위 5칸 중 2칸을 한 문서가 차지합니다. 문서가 여러 개 필요한 질문에서는 이것이 다른 정답 문서가 들어올 자리를 줄입니다.</p></details></section>
+<!-- 10 -->
+<section aria-labelledby="tab-u10" class="panel" hidden="" id="u10" role="tabpanel"><div class="crumb">Part 3. 실습 03 메타데이터와 검색 · A5-M1</div><h1>10. 실습 03 · 안 되는 질문 — 문서끼리의 연결을 따라가기</h1><p class="lead">Q-001은 키워드와 메타데이터만으로는 5개 중 1개만 찾습니다. 03탭에서 본 <b>연결</b>을 코드로 따라가 봅니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m1_03_search.py --detail Q-001</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>질문     찾아야 할 정책      ① 키워드만     ② + 메타데이터   ③ + 연결 1번   ④ + 연결 2번
+Q-001           5           1/5           1/5           3/5          5/5
+    ① 키워드만
+      1. EXC-005#1       정답   [전체/제주/VIP] VIP 제주 추가배송비 · 개요
+      2. FAQ-018#1            [냉장식품/제주/전체] 제주 냉장식품이 변질됐으면 상품대금과 · FAQ  → 가리킴 [&#x27;EXC-001&#x27;, &#x27;POL-FEE-001&#x27;]
+      3. EXC-005#4       정답   [전체/제주/VIP] VIP 제주 추가배송비 · 적용 예시
+      4. FAQ-055#1            [전체/전체/VIP] 주문 후 VIP가 되면 그 주문에 혜 · FAQ  → 가리킴 [&#x27;POL-MEM-001&#x27;]
+      5. POL-MEM-001#4        [전체/전체/VIP] 회원등급별 무료배송·혜택 · 적용 예시
+    ② + 메타데이터 {&quot;product_type&quot;: &quot;냉장식품&quot;, &quot;region&quot;: &quot;제주&quot;, &quot;customer_grade&quot;: &quot;VIP&quot;}
+      1. EXC-005#1       정답   [전체/제주/VIP] VIP 제주 추가배송비 · 개요
+      2. FAQ-018#1            [냉장식품/제주/전체] 제주 냉장식품이 변질됐으면 상품대금과 · FAQ  → 가리킴 [&#x27;EXC-001&#x27;, &#x27;POL-FEE-001&#x27;]
+      3. EXC-005#4       정답   [전체/제주/VIP] VIP 제주 추가배송비 · 적용 예시
+      4. FAQ-055#1            [전체/전체/VIP] 주문 후 VIP가 되면 그 주문에 혜 · FAQ  → 가리킴 [&#x27;POL-MEM-001&#x27;]
+      5. POL-MEM-001#4        [전체/전체/VIP] 회원등급별 무료배송·혜택 · 적용 예시
+    ③ 연결 1번으로 더해진 정책: [&#x27;POL-FEE-001&#x27;, &#x27;EXC-001&#x27;]
+    ④ 연결 2번으로 더해진 정책: [&#x27;POL-DEL-002&#x27;, &#x27;POL-RET-002&#x27;]
+    ④까지 모은 문서 8개: [&#x27;EXC-005&#x27;, &#x27;FAQ-018&#x27;, &#x27;FAQ-055&#x27;, &#x27;POL-MEM-001&#x27;, &#x27;POL-FEE-001&#x27;, &#x27;EXC-001&#x27;, &#x27;POL-DEL-002&#x27;, &#x27;POL-RET-002&#x27;]
+    빠진 정책: 없음</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>① 결과 상위 5개에 냉장 관련 문서(EXC-001, POL-DEL-002, POL-RET-002)가 있나? 대신 무엇이 올라왔나?</li><li>결과 중 다른 정책을 ‘가리키는’ 조각은 무엇이고, 무엇을 가리키나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>질문의 “제주 VIP”가 강하게 걸려 EXC-005(VIP 제주 추가배송비)와 VIP FAQ가 위를 차지했습니다. 냉장 관련 문서는 상위 5개에 없습니다. 그런데 2위 FAQ-018이 <b>EXC-001, POL-FEE-001을 가리키고</b> 있습니다. 03탭에서 사람이 했던 것처럼 이 연결을 따라가면 됩니다.</p></details><h3>연결 따라가기</h3><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>가리키는 정책 모으기</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>검색 결과 조각</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>FAQ는 열, 정책은 ‘적용 정책’ 줄</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>정책 ID 목록</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>빠진 정책이 들어왔나</span></div></div><div class="codebox"><div class="codehead"><span>📄 m1lib.py · 연결 따라가기 (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def find_links(text):
+    &quot;&quot;&quot;정책 본문의 &#x27;적용 정책: ...&#x27; 줄에 적힌 문서 ID.&quot;&quot;&quot;
+    m = re.search(r&quot;적용 정책: ([^.\n]*)&quot;, text)
+    return ID_PATTERN.findall(m.group(1)) if m else []
+
+
+def follow_links(hits, policies_by_id):
+    &quot;&quot;&quot;결과 조각이 가리키는 정책(FAQ의 related_policy_ids, 정책 본문의 &#x27;적용 정책&#x27;)을 모은다.&quot;&quot;&quot;
+    found = []
+    for h in hits:
+        if h[&quot;kind&quot;] == &quot;faq&quot;:
+            targets = h[&quot;links&quot;]                                          # FAQ → 열에 적힌 정책
+        else:
+            targets = find_links(policies_by_id[h[&quot;doc_id&quot;]][&quot;text&quot;])     # 정책 → 본문의 &#x27;적용 정책&#x27;
+
+        for t in targets:
+            if t not in found:
+                found.append(t)
+    return found</code></pre></div><ol class="steps"><li><code>find_links</code>: 정책 본문에서 “적용 정책: …” 줄을 찾아 문서 ID를 뽑습니다.</li><li><code>follow_links</code>: 결과 조각이 FAQ면 <code>related_policy_ids</code> 열을, 정책이면 본문의 ‘적용 정책’을 따라갑니다. 이것이 <b>연결 1번</b>입니다.</li><li><code>m1_03_search.py</code>는 연결 1번으로 새로 들어온 정책의 ‘적용 정책’을 한 번 더 따라갑니다. 이것이 <b>연결 2번</b>입니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><pre class="diagram">① 검색 결과            연결 1번                       연결 2번
+FAQ-018 ─(관련 정책)──▶ EXC-001 ─(적용 정책)──────▶ POL-DEL-002, POL-RET-002
+        └(관련 정책)──▶ POL-FEE-001
+EXC-005 (검색으로 이미 찾음)
+
+결과: EXC-005 · POL-FEE-001 · EXC-001 · POL-DEL-002 · POL-RET-002  = 설계한 5개</pre><div class="say"><b>결과</b><p>키워드만으로 1/5였던 Q-001이 연결 1번으로 3/5, 연결 2번으로 <b>5/5</b>가 됩니다. 단어가 겹치지 않는 문서를 <b>문서끼리의 연결</b>로 찾은 것입니다. 이렇게 연결을 여러 번 건너 찾는 것을 <b>멀티홉(Multi-hop)</b> 검색이라고 합니다.</p></div><h3>여기서 처음 나오는 말 — 온톨로지</h3><p>지금 코드는 “FAQ의 related_policy_ids 열은 정책을 가리킨다”, “예외 본문의 ‘적용 정책’ 줄은 기본 정책을 가리킨다”를 <b>알고 있어서</b> 따라갈 수 있었습니다. 이처럼 자료 속의 <b>것(FAQ, 표준 정책, 예외 지침)</b>, 그것들 사이의 <b>관계(가리킨다, 예외로 붙는다)</b>, 각자의 <b>속성(업무 영역, 상품 유형 …)</b>을 이름 붙여 정리해 둔 설계도를 <b>온톨로지(ontology)</b>라고 합니다.</p><div class="tablewrap"><table><thead><tr><th>온톨로지의 요소</th><th>이 모듈에서 본 것</th></tr></thead><tbody><tr><td>것의 종류 (클래스)</td><td>FAQ, 표준 정책(POL), 예외 지침(EXC)</td></tr><tr><td>관계</td><td>FAQ —관련 정책→ 정책 (faq.csv 열) · 예외 —적용 정책→ 기본 정책 (본문의 줄)</td></tr><tr><td>속성</td><td>category, product_type, region, customer_grade, order_status, doc_type</td></tr><tr><td>규칙</td><td>‘전체’는 모든 값에 해당한다 (실습 04에서 더 정리)</td></tr></tbody></table></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>Q-030은 연결 2번까지 해도 2/4다. 빠진 POL-DEL-001(일반 배송)과 POL-REF-001(환불 소요 기간)을 가리키는 연결이 결과 안에 있었을까?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>03탭의 표를 보면 POL-REF-001은 FAQ 11개가 가리키지만, Q-030 검색 결과에 그 FAQ들이 없었습니다. 연결은 <b>출발점이 결과 안에 있어야</b> 따라갈 수 있습니다. Q-030처럼 업무가 여러 개 섞인 질문은 출발점부터 넓혀야 합니다. 실습 04에서 다룹니다.</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> Q-001에서 POL-DEL-002를 찾은 경로는?</p><label><input type="radio" name="qz5_1" value="0"/> ‘냉장’ 키워드로 바로</label><label><input type="radio" name="qz5_1" value="1"/> FAQ-018 → EXC-001 → (적용 정책) POL-DEL-002</label><label><input type="radio" name="qz5_1" value="2"/> 메타데이터 조건으로</label><label><input type="radio" name="qz5_1" value="3"/> policies.csv의 file 열로</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>연결을 두 번 건넜습니다(멀티홉).</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 메타데이터 조건(②)만 걸었을 때 Q-001의 숫자가 그대로인 이유는?</p><label><input type="radio" name="qz5_2" value="0"/> 조건이 틀려서</label><label><input type="radio" name="qz5_2" value="1"/> 조건은 맞지 않는 것을 빼는 일만 하고, 못 찾은 문서를 새로 찾지는 않아서</label><label><input type="radio" name="qz5_2" value="2"/> 데이터가 없어서</label><label><input type="radio" name="qz5_2" value="3"/> 코드 오류</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>빠진 문서들은 걸러진 것이 아니라 애초에 점수가 낮아 상위 5개에 없었습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q3.</b> 온톨로지에서 ‘관계’의 예로 맞는 것은?</p><label><input type="radio" name="qz5_3" value="0"/> region=제주</label><label><input type="radio" name="qz5_3" value="1"/> EXC-001 —적용 정책→ POL-FEE-001</label><label><input type="radio" name="qz5_3" value="2"/> POL-RET-002.md 파일</label><label><input type="radio" name="qz5_3" value="3"/> 300글자 조각</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>region=제주는 속성입니다. 관계는 두 ‘것’을 잇는 이름 있는 선입니다.</p></div></div></div></section>
+<!-- 11 -->
+<section aria-labelledby="tab-u11" class="panel" hidden="" id="u11" role="tabpanel"><div class="crumb">Part 4. 실습 04 필수 · 선택 조건 · A5-M1</div><h1>11. 실습 04 · 무엇을 반드시 거르고, 무엇을 넓힐까</h1><p class="lead">같은 질문 7개를 조건을 거는 여섯 가지 방법(A~F)으로 찾아 비교합니다. 숫자를 보고 <b>필수 조건</b>과 <b>선택 조건</b>을 정합니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>조건을 거는 방법 비교</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>질문 7개 + 설계 표</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>A~F 방법으로 검색</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>정답 · 어긋남 · 모인 문서</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>무엇을 필수로, 무엇을 선택으로</span></div></div><div class="codebox"><div class="codehead"><span>📄 m1_04_conditions.py · 다섯 가지 조건 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>strategies = {
+    &quot;A 조건 없음&quot;: lambda q: None,
+    &quot;B 업무 영역 필수&quot;: lambda q: (lambda c: c[&quot;meta&quot;][&quot;category&quot;] in q[&quot;domains&quot;]),
+    &quot;C 명시 조건 필수 · 전체 제외&quot;: lambda q: (lambda c: match(c[&quot;meta&quot;], q[&quot;conditions&quot;], wildcard=False)),
+    &quot;D 명시 조건 필수 · 전체 통과&quot;: lambda q: (lambda c: match(c[&quot;meta&quot;], q[&quot;conditions&quot;])),
+    &quot;E D + 업무 영역 선택&quot;: lambda q: (lambda c: match(c[&quot;meta&quot;], q[&quot;conditions&quot;])),
+}
+BOOST = {&quot;E D + 업무 영역 선택&quot;: lambda q: (lambda c: 1.5 if c[&quot;meta&quot;][&quot;category&quot;] in q[&quot;domains&quot;] else 1.0)}</code></pre></div><ol class="steps"><li><b>A</b> 조건 없음 · <b>B</b> 업무 영역(category)을 필수로 · <b>C</b> 명시 조건을 필수로 하되 ‘전체’는 제외 · <b>D</b> 명시 조건을 필수로 하고 ‘전체’는 통과.</li><li><b>E</b>: D에 더해, 업무 영역이 질문과 같으면 점수를 1.5배로 올립니다. 다르다고 거르지는 않습니다(<code>boost</code>).</li><li><b>F</b>: E의 결과에서 연결을 두 번 따라갑니다(10탭).</li><li>‘어긋남’은 결과 조각 중 질문의 명시 조건과 맞지 않는 것(예: 디지털 질문에 냉장식품 문서)입니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m1_04_conditions.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>질문                    A 조건 없음            B 업무 영역 필수    C 명시 조건 필수 · 전체 제외    D 명시 조건 필수 · 전체 통과        E D + 업무 영역 선택           F E + 연결 2번
+Q-017              정답 1/1 · 어긋남 0          정답 1/1 · 어긋남 0          정답 1/1 · 어긋남 0          정답 1/1 · 어긋남 0          정답 1/1 · 어긋남 0           정답 1/1 · 문서 5
+Q-009              정답 1/1 · 어긋남 0          정답 1/1 · 어긋남 0          정답 1/1 · 어긋남 0          정답 1/1 · 어긋남 0          정답 1/1 · 어긋남 0           정답 1/1 · 문서 3
+Q-013              정답 1/2 · 어긋남 0          정답 1/2 · 어긋남 0          정답 1/2 · 어긋남 0          정답 1/2 · 어긋남 0          정답 1/2 · 어긋남 0           정답 2/2 · 문서 6
+Q-002              정답 2/2 · 어긋남 0          정답 2/2 · 어긋남 0          정답 1/2 · 어긋남 0          정답 2/2 · 어긋남 0          정답 2/2 · 어긋남 0          정답 2/2 · 문서 10
+Q-028              정답 1/2 · 어긋남 0          정답 1/2 · 어긋남 3          정답 0/2 · 어긋남 0          정답 1/2 · 어긋남 0          정답 2/2 · 어긋남 0           정답 2/2 · 문서 4
+Q-001              정답 1/5 · 어긋남 0          정답 3/5 · 어긋남 0          정답 0/5 · 어긋남 0          정답 1/5 · 어긋남 0          정답 4/5 · 어긋남 0           정답 5/5 · 문서 7
+Q-030              정답 1/4 · 어긋남 0          정답 2/4 · 어긋남 0          정답 1/4 · 어긋남 0          정답 1/4 · 어긋남 0          정답 2/4 · 어긋남 0           정답 3/4 · 문서 9
+
+합계 (7개 질문)
+  A 조건 없음                  정답 8/17 · 어긋난 조각 0 · 모인 문서 30
+  B 업무 영역 필수               정답 11/17 · 어긋난 조각 3 · 모인 문서 24
+  C 명시 조건 필수 · 전체 제외       정답 5/17 · 어긋난 조각 0 · 모인 문서 18
+  D 명시 조건 필수 · 전체 통과       정답 8/17 · 어긋난 조각 0 · 모인 문서 30
+  E D + 업무 영역 선택           정답 13/17 · 어긋난 조각 0 · 모인 문서 28
+  F E + 연결 2번              정답 16/17 · 모인 문서 44</code></pre></div><h3>결과 읽기</h3><div class="tablewrap"><table><thead><tr><th>비교</th><th>보이는 것</th><th>결론</th></tr></thead><tbody><tr><td>C vs D</td><td>‘전체’를 빼면 정답 5/17, 통과시키면 8/17</td><td>‘전체’는 와일드카드다. 필수 조건에서도 ‘전체’는 통과시킨다</td></tr><tr><td>B</td><td>정답은 11/17로 오르지만 Q-028에 조건과 어긋난 조각 3개 · Q-001의 EXC-005(업무 영역 ‘회원’)를 놓침</td><td>업무 영역은 질문이 생각한 것보다 넓게 걸친다. 필수로 걸면 다른 영역의 정답을 잃는다</td></tr><tr><td>E</td><td>업무 영역을 점수 가산으로 바꾸면 13/17, 어긋남 0</td><td>업무 영역은 <b>선택 조건</b>(점수만 올림)으로</td></tr><tr><td>F</td><td>연결 2번까지 16/17. 대신 모인 문서가 질문당 3~10개</td><td>연결은 놓친 것을 찾지만 후보를 늘린다. 필수 조건이 함께 있어야 후보가 엉뚱하게 늘지 않는다</td></tr></tbody></table></div><div class="mock"><div class="mock-title">근거 — B에서 Q-028(디지털 · 제주)에 들어온 조각</div><table><thead><tr><th>조각</th><th>상품 유형</th><th>지역</th><th>제목</th></tr></thead><tbody><tr><td>POL-FEE-001#4</td><td>전체</td><td>전체</td><td>배송비·추가배송비 환불 판단</td></tr><tr><td>EXC-001#5</td><td><span class="mark">냉장식품</span></td><td>제주</td><td>제주 냉장식품 지연과 배송비</td></tr><tr><td>EXC-001#1</td><td><span class="mark">냉장식품</span></td><td>제주</td><td>제주 냉장식품 지연과 배송비</td></tr><tr><td>POL-FEE-001#2</td><td>전체</td><td>전체</td><td>배송비·추가배송비 환불 판단</td></tr><tr><td>EXC-001#2</td><td><span class="mark">냉장식품</span></td><td>제주</td><td>제주 냉장식품 지연과 배송비</td></tr></tbody></table></div><h3>이 모듈의 설계 결론</h3><div class="tablewrap"><table><thead><tr><th>구분</th><th>무엇</th><th>어떻게</th></tr></thead><tbody><tr class="hl"><td><b>필수 조건</b></td><td>질문에 <b>명시된</b> 상품 유형 · 지역 · 회원 등급</td><td>맞지 않으면 뺀다. 단 문서 값이 ‘전체’면 통과. 명시되지 않은 조건은 추측해서 걸지 않는다</td></tr><tr><td><b>선택 조건</b></td><td>업무 영역(category)</td><td>같으면 점수를 올린다. 다르다고 빼지 않는다</td></tr><tr><td><b>관계</b></td><td>FAQ → 정책, 예외 → 기본 정책</td><td>결과에서 연결을 따라가 놓친 정책을 더한다</td></tr></tbody></table></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> ‘전체’를 필수 조건에서 제외(C)하면 Q-001이 0/5가 되는 이유는?</p><label><input type="radio" name="qz6_1" value="0"/> 질문이 어려워서</label><label><input type="radio" name="qz6_1" value="1"/> 정답 정책 대부분의 상품 유형·지역·등급이 ‘전체’라서 모두 빠짐</label><label><input type="radio" name="qz6_1" value="2"/> 냉장식품 문서가 없어서</label><label><input type="radio" name="qz6_1" value="3"/> 연결이 없어서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>POL-FEE-001, POL-DEL-002 등은 지역·등급이 ‘전체’입니다. ‘전체’를 빼면 공통 규정이 모두 사라집니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 업무 영역을 필수가 아니라 선택으로 두는 이유는?</p><label><input type="radio" name="qz6_2" value="0"/> 값이 많아서</label><label><input type="radio" name="qz6_2" value="1"/> 필요한 정책이 질문과 다른 업무 영역에 있을 수 있어서 (예: 배송비 질문에 ‘회원’ 영역의 EXC-005)</label><label><input type="radio" name="qz6_2" value="2"/> 속도 때문에</label><label><input type="radio" name="qz6_2" value="3"/> 엑셀에 없어서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>B에서 Q-001이 EXC-005를 놓쳤습니다. 점수 가산으로 바꾸면(E) 놓치지 않습니다.</p></div></div><div class="quiz" data-answer="2"><p class="qz-q"><b>Q3.</b> 질문에 회원 등급이 없을 때 customer_grade 조건은?</p><label><input type="radio" name="qz6_3" value="0"/> VIP로 건다</label><label><input type="radio" name="qz6_3" value="1"/> 일반으로 건다</label><label><input type="radio" name="qz6_3" value="2"/> 걸지 않는다</label><label><input type="radio" name="qz6_3" value="3"/> ‘전체’만 남긴다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>명시되지 않은 조건은 추측하지 않습니다.</p></div></div></div></section>
+<!-- 12 -->
+<section aria-labelledby="tab-u12" class="panel" hidden="" id="u12" role="tabpanel"><div class="crumb">Part 5. 정리 · A5-M1</div><h1>12. 정리 · 미션 · 종합 점검</h1><h3>이 모듈에서 만든 것</h3><div class="tablewrap"><table><thead><tr><th>파일</th><th>내용</th></tr></thead><tbody><tr><td><code>design/answers.json</code></td><td>질문 7개의 조건 · 업무 영역 · 찾아야 할 정책 (05탭)</td></tr><tr><td><code>m1lib.py</code></td><td>로딩 · 정규화 · 청킹 · 키워드 검색 · 조건 · 연결 따라가기</td></tr><tr><td><code>m1_01_load.py</code> ~ <code>m1_04_conditions.py</code></td><td>실습 01~04 실행 스크립트</td></tr></tbody></table></div><h3>질문 7개, 처음과 끝</h3><div class="tablewrap"><table><thead><tr><th>질문</th><th>필요한 정책 수</th><th>키워드만 (09탭 ①)</th><th>필수 + 선택 + 연결 (11탭 F)</th></tr></thead><tbody><tr><td>Q-017</td><td>1</td><td>1/1</td><td>1/1</td></tr><tr><td>Q-009</td><td>1</td><td>1/1</td><td>1/1</td></tr><tr><td>Q-013</td><td>2</td><td>1/2</td><td>2/2</td></tr><tr><td>Q-002</td><td>2</td><td>2/2</td><td>2/2</td></tr><tr><td>Q-028</td><td>2</td><td>1/2</td><td>2/2</td></tr><tr><td>Q-001</td><td>5</td><td>1/5</td><td>5/5</td></tr><tr><td>Q-030</td><td>4</td><td>1/4</td><td>3/4</td></tr><tr class="hl"><td>합계</td><td>17</td><td>8/17</td><td>16/17</td></tr></tbody></table></div><h3>한 장 요약</h3><div class="tablewrap"><table><thead><tr><th>하고 싶은 것</th><th>명령</th></tr></thead><tbody><tr><td>자료 읽기</td><td><code>python m1_01_load.py</code></td></tr><tr><td>세 방식 청킹 비교</td><td><code>python m1_02_chunk.py</code></td></tr><tr><td>한 문서 조각 보기</td><td><code>python m1_02_chunk.py --show POL-RET-002 --mode section</code></td></tr><tr><td>검색과 연결</td><td><code>python m1_03_search.py [--detail Q-001]</code></td></tr><tr><td>조건 비교</td><td><code>python m1_04_conditions.py</code></td></tr></tbody></table></div><h3>에러가 나면</h3><div class="tablewrap"><table><thead><tr><th>메시지</th><th>원인</th><th>할 일</th></tr></thead><tbody><tr><td><code>KeyError: 'doc_id'</code></td><td>CSV를 utf-8로 열어 첫 열에 BOM이 붙음</td><td><code>encoding='utf-8-sig'</code></td></tr><tr><td><code>FileNotFoundError: … dataset/md/…</code></td><td>다른 폴더에서 실행했거나 file 열 경로 오타</td><td><code>cd C:\rag\A5-lab</code> 후 실행, policies.csv의 file 열 확인</td></tr><tr><td><code>ModuleNotFoundError: No module named 'm1lib'</code></td><td>다른 폴더에서 실행</td><td><code>cd C:\rag\A5-lab</code></td></tr><tr><td><code>json.decoder.JSONDecodeError</code></td><td>answers.json 수정 중 쉼표·따옴표 실수</td><td>오류 줄 번호 확인, 마지막 항목 뒤 쉼표 제거</td></tr><tr><td>한글이 깨져 출력됨</td><td>Windows 콘솔 인코딩</td><td>PowerShell에서 <code>$env:PYTHONUTF8=1</code> 후 다시 실행</td></tr></tbody></table></div><h3>실습 미션</h3><div class="tablewrap"><table><thead><tr><th>미션</th><th>할 일</th><th>완료 기준</th></tr></thead><tbody><tr><td>1</td><td>평가 질문 Q-018 · Q-010 · Q-016을 05탭처럼 설계해 <code>design/answers.json</code>에 추가</td><td><code>m1_03_search.py</code> · <code>m1_04_conditions.py</code>에 세 질문이 나옴</td></tr><tr><td>2</td><td>선택 조건 배수를 1.5 → 1.2, 2.0으로 바꿔 E의 정답 수 비교</td><td>가장 좋은 값과 그 이유 한 줄</td></tr><tr><td>3</td><td><code>--mode chars --size 500</code> 조각으로 실습 03을 다시 돌려 소제목 단위와 비교</td><td>질문 7개의 정답 수 비교표</td></tr><tr><td>4</td><td>Q-030이 F에서도 놓친 정책을 찾을 방법 제안</td><td>어느 연결 또는 조건이 필요한지와 근거</td></tr></tbody></table></div><div class="quizbox"><h3 class="qz-title">🧪 종합 점검</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> policies.csv에 본문 대신 file 열을 둔 이유는?</p><label><input type="radio" name="qz7_1" value="0"/> 보기 좋아서</label><label><input type="radio" name="qz7_1" value="1"/> 본문은 길고 늘어날 수 있어 목록과 분리했기 때문</label><label><input type="radio" name="qz7_1" value="2"/> CSV는 한글을 못 담아서</label><label><input type="radio" name="qz7_1" value="3"/> 검색을 안 하려고</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>목록은 찾고 거르는 데 필요한 꼬리표만, 본문은 파일로 둡니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 이 자료에서 소제목 단위 청킹을 고른 근거는?</p><label><input type="radio" name="qz7_2" value="0"/> 가장 조각이 적어서</label><label><input type="radio" name="qz7_2" value="1"/> 문장이 끊기지 않고 업무 규정이 모두 한 조각에 남았기 때문</label><label><input type="radio" name="qz7_2" value="2"/> 가장 길어서</label><label><input type="radio" name="qz7_2" value="3"/> 오버랩이 없어서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>08탭: 문장 중간 끊김 0/116, 업무 규정 보존 19/19.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q3.</b> Q-001을 5/5로 만든 결정적인 요소는?</p><label><input type="radio" name="qz7_3" value="0"/> 키워드 추가</label><label><input type="radio" name="qz7_3" value="1"/> 문서끼리의 연결을 두 번 따라간 것</label><label><input type="radio" name="qz7_3" value="2"/> 글자 300 청킹</label><label><input type="radio" name="qz7_3" value="3"/> category 필수</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>FAQ-018 → EXC-001 → POL-DEL-002 · POL-RET-002.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q4.</b> 이 모듈의 결론으로 맞는 것은?</p><label><input type="radio" name="qz7_4" value="0"/> 모든 꼬리표를 필수로 건다</label><label><input type="radio" name="qz7_4" value="1"/> 명시된 상품·지역·등급은 필수(‘전체’ 통과), 업무 영역은 선택, 연결로 보완</label><label><input type="radio" name="qz7_4" value="2"/> 조건은 쓰지 않는다</label><label><input type="radio" name="qz7_4" value="3"/> 업무 영역만 필수</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>11탭의 비교 결과입니다.</p></div></div></div></section>
+</main></div>
+<footer class="footer">© 2026 부성순. All rights reserved.<small>교안의 자체 해설 및 실습 예제에 대한 저작권 표시입니다. 실습 데이터는 교육용 합성 데이터이며 실제 법률 또는 쇼핑몰 약관이 아닙니다. 교안 속 실행 출력은 실습 스크립트를 실제로 실행한 결과입니다.</small></footer>
+<script>(function(){
+const tabs=[...document.querySelectorAll('[role="tab"]')];
+function setTab(i,focus=false){tabs.forEach((t,j)=>{const on=i===j;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});if(focus)tabs[i].focus({preventScroll:true});history.replaceState(null,'','#'+tabs[i].getAttribute('aria-controls'));window.scrollTo({top:0});}
+tabs.forEach((t,i)=>{t.addEventListener('click',()=>setTab(i));t.addEventListener('keydown',e=>{if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();setTab((i+(e.key==='ArrowDown'||e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length,true);}})});
+const index=tabs.findIndex(t=>'#'+t.getAttribute('aria-controls')===location.hash);if(index>=0)setTab(index);
+document.querySelectorAll('.copy').forEach(b=>{b.dataset.label=b.textContent;b.addEventListener('click',async()=>{const code=b.closest('.codebox').querySelector('pre').textContent;try{await navigator.clipboard.writeText(code);b.textContent='복사됨';}catch(e){b.textContent='복사 실패';}setTimeout(()=>b.textContent=b.dataset.label||'코드 복사',1500);});});
+document.querySelectorAll('.quiz').forEach(q=>{const btn=q.querySelector('.qz-check'),fb=q.querySelector('.qz-fb'),res=q.querySelector('.qz-res');
+btn.addEventListener('click',()=>{const c=q.querySelector('input:checked');q.querySelectorAll('label').forEach(l=>l.classList.remove('right','wrong'));
+if(!c){fb.hidden=false;fb.className='qz-fb';res.textContent='보기를 하나 고른 뒤 확인하세요.';fb.querySelectorAll('p')[1].hidden=true;return;}
+fb.querySelectorAll('p')[1].hidden=false;const ok=c.value===q.dataset.answer;const right=q.querySelector('input[value="'+q.dataset.answer+'"]').closest('label');
+right.classList.add('right');if(!ok)c.closest('label').classList.add('wrong');fb.hidden=false;fb.className='qz-fb '+(ok?'ok':'no');res.textContent=ok?'✔ 정답입니다.':'✘ 다시 생각해 보세요. 초록색이 정답입니다.';});});
+})();</script></body></html>

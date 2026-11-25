@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "created": "2026-11-04T16:32:15",
+  "model": "text-embedding-3-small",
+  "dims": 1536,
+  "count": 196,
+  "index_type": "IndexIDMap2(IndexFlatIP)",
+  "chunking": "section",
+  "files": {
+    "index.faiss": "6c21739626b4f12d",
+    "chunks.jsonl": "7c2a6d55bdc50e42"
+  }
+}

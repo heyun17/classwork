@@ -1,0 +1,20 @@
+{
+  "note": "Part 0에서 사람이 적은 '나올 답' 설계. conditions = 질문에 명시된 조건, domains = 질문의 업무 영역, expected = 찾아야 할 정책 문서",
+  "questions": [
+    {"id": "Q-017", "question": "일반상품이 배송완료된 지 5일, 미사용인데 반품할 수 있나요?",
+     "conditions": {"product_type": "일반"}, "domains": ["환불"], "expected": ["POL-RET-001"]},
+    {"id": "Q-009", "question": "주문제작 상품이 제작 중인데 고객이 마음이 바뀌었습니다. 취소되나요?",
+     "conditions": {"product_type": "주문제작"}, "domains": ["취소"], "expected": ["POL-CAN-002"]},
+    {"id": "Q-013", "question": "56000원 주문에 5000원 쿠폰을 쓰고 12000원 제품을 취소하면 쿠폰은요?",
+     "conditions": {}, "domains": ["쿠폰"], "expected": ["EXC-006", "POL-CPN-001"]},
+    {"id": "Q-002", "question": "10월 15일 VIP가 35000원짜리 상품을 제주에서 주문하면 배송비가 모두 무료인가요?",
+     "conditions": {"region": "제주", "customer_grade": "VIP"}, "domains": ["배송비", "회원"], "expected": ["POL-MEM-001", "EXC-005"]},
+    {"id": "Q-028", "question": "고객은 제주인데 상품은 디지털 이용권입니다. 제주 배송비 규정을 적용하나요?",
+     "conditions": {"product_type": "디지털", "region": "제주"}, "domains": ["배송비"], "expected": ["POL-RET-003", "POL-FEE-001"]},
+    {"id": "Q-001", "question": "제주 VIP가 냉장 케이크를 주문했는데 배송이 늦고 상품이 변질됐습니다. 배송비까지 환불되나요?",
+     "conditions": {"product_type": "냉장식품", "region": "제주", "customer_grade": "VIP"}, "domains": ["배송", "환불", "배송비"],
+     "expected": ["EXC-001", "POL-DEL-002", "POL-RET-002", "POL-FEE-001", "EXC-005"]},
+    {"id": "Q-030", "question": "배송지연과 반품이 관련돼 있는데 환불기간은 어떻게 계산하나요?",
+     "conditions": {}, "domains": ["배송", "환불", "취소"], "expected": ["POL-DEL-001", "POL-CAN-001", "POL-RET-001", "POL-REF-001"]}
+  ]
+}

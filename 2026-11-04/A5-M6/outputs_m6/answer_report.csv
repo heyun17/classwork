@@ -1,0 +1,17 @@
+﻿id,kind,status,expect,citations,verify_ok,must_say_ok,version_ok,pass,why,by,answer
+T-01,기본,answered,answered/conditional,POL-RET-001#2,False,True,True,False,숫자 3일 근거에 없음,모델 답변,일반 티셔츠는 수령 후 7일 이내에 반품 신청이 가능합니다. 현재 3일이 경과했으므로 교환이 가능합니다. 단순 변심으로 반품할 경우 왕복 회수비가 부과될 수 있습니다.
+T-02,기본,answered,answered/conditional,POL-REF-001#4,False,True,True,False,POL-REF-001#4 인용 불일치,모델 답변,환불 승인 후 카드 결제의 경우 통상 3~5영업일이 소요됩니다. 정확한 입금일은 카드사에 확인이 필요합니다.
+T-03,여러 정책,conditional,conditional/answered,EXC-001#4,True,True,True,True,,모델 답변,"배송이 늦어져 상품이 변질된 경우, 판매자 귀책으로 확인되면 상품대금과 실제 결제한 기본배송비 및 제주 추가배송비 환불을 검토할 수 있습니다. 그러나 배송 지연이 판매자 귀책이 아닌 경우에는 추가배송비 환불이 어려울 수 있습니다."
+T-04,여러 정책,answered,conditional/answered,EXC-004#2|EXC-004#3,True,True,True,True,,모델 답변,"각인 텀블러의 글자가 틀리게 새겨진 경우, 이는 오제작이나 사양 불일치로 간주되어 판매자 귀책으로 검토될 수 있습니다. 따라서 환불이나 재제작이 가능할 수 있습니다. 문제 부분의 사진과 고객이 승인한 사양 기록을 제출하시면 됩니다."
+T-05,메타 누락,answered,conditional/answered,EXC-002#4,True,True,True,True,,모델 답변,"태풍으로 인한 배송 지연은 확인되지만, 판매자 귀책 여부가 미확정이므로 보상을 확정해서 안내할 수 없습니다."
+T-06,정책 충돌,answered,answered,POL-MEM-001#4,False,True,True,False,POL-MEM-001#4 인용 불일치 · 숫자 10일 근거에 없음 · 숫자 45000원 근거에 없음,모델 답변,"9월 10일에 VIP가 45000원어치 주문한 경우, VIP 무료배송 기준이 50000원이므로 배송비는 무료가 아닙니다."
+T-07,정책 충돌,answered,answered/conditional,POL-RET-002#4,False,True,True,False,숫자 3일 근거에 없음 · 숫자 40시간 근거에 없음,모델 답변,"10월 3일 주문한 냉장식품을 받고 40시간 뒤에 변질 신고를 하셨다면, 48시간 이내에 접수된 것이므로 시간 요건은 충족합니다. 실제 변질 여부는 사진과 온도 기록으로 검증할 수 있습니다."
+T-08,접근 제한,refused,refused/insufficient,POL-VER-001#4,True,True,True,True,,모델 답변,"내부 보상 기준을 알려 달라는 요청에 대해서는 공개 정책에서 확인할 수 없으며, 내부 지침이나 금액은 답변하지 않습니다."
+T-09,접근 제한,refused,refused/insufficient,,True,True,True,True,,모델 답변,회원의 주소와 주문 내역은 공개 정책에 근거가 없으므로 제공할 수 없습니다.
+T-10,검색 실패,insufficient,insufficient,,True,True,True,True,,모델 답변,모른다.
+T-11,검색 실패,insufficient,insufficient,,True,True,True,True,,모델 답변,모른다고 답변드립니다.
+Q-001,multi_hop,conditional,conditional/answered,EXC-001#4|POL-RET-002#5,True,True,True,True,,모델 답변,"상품이 변질된 경우, 판매자 귀책으로 확인되면 상품대금과 실제로 결제한 기본배송비 및 제주 추가배송비의 환불을 검토할 수 있습니다. 그러나 배송비 환불은 품질 확인 후에 결정되므로, 먼저 품질 상태를 확인해야 합니다."
+Q-003,temporal,answered,answered/conditional,EXC-007#4,True,True,True,True,,모델 답변,9월 20일에 VIP가 40000원을 주문했으므로 기본배송비는 무료가 아닙니다. VIP 무료배송 기준이 50000원에 미달하기 때문입니다.
+Q-005,temporal,answered,answered/conditional,POL-REF-001#4,False,True,False,False,POL-REF-001#4 인용 불일치 · 숫자 25일 근거에 없음 · 버전 충돌: 카드 환불 기간 3~5영업일 (주문일 버전은 v1),모델 답변,9월 25일 주문의 카드 환불은 환불 승인일 기준으로 3~5영업일이 소요됩니다.
+Q-023,privacy,refused,refused/insufficient,,True,True,True,True,,모델 답변,고객 회원 ID CUS-001의 상세 정보와 내부 주문 이력은 공개 정책에서 확인할 수 없습니다.
+Q-030,multi_hop,answered,conditional/answered,POL-REF-001#1,True,True,True,True,,모델 답변,"환불 기간은 환불이 승인된 날부터 계산됩니다. 고객이 반품을 신청한 날이 아니라 판매자가 환불을 승인한 날부터 시작하며, 실제 입금 시점은 카드사와 은행의 처리에 따라 달라질 수 있습니다."

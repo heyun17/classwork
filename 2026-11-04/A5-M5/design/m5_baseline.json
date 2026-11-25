@@ -1,0 +1,29 @@
+{
+  "k": 5,
+  "metrics": {
+    "vector": {
+      "recall": 0.8679,
+      "precision": 0.3067,
+      "hit1": 0.7333,
+      "mrr": 0.8344
+    },
+    "graph": {
+      "recall": 0.7547,
+      "precision": 0.2899,
+      "hit1": 0.5667,
+      "mrr": 0.6389
+    },
+    "hybrid": {
+      "recall": 0.8679,
+      "precision": 0.3067,
+      "hit1": 0.7667,
+      "mrr": 0.8233
+    },
+    "auto": {
+      "recall": 0.9434,
+      "precision": 0.3333,
+      "hit1": 0.9333,
+      "mrr": 0.9556
+    }
+  }
+}

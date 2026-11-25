@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>A5-M4 임베딩과 벡터 검색</title><link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/><style>
+:root{--bg:#fff;--surface:#f8fafc;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#ff2e93;--soft:rgba(255,46,147,.065);--codebg:#101d34}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Pretendard',system-ui,'Malgun Gothic',sans-serif;font-size:18px;line-height:1.81;word-break:keep-all}
+.banner{background:linear-gradient(125deg,#fcfcff,#f8fafc);border-bottom:1px solid var(--line)}.banner-in{max-width:1320px;margin:auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-size:16px;font-weight:850;letter-spacing:.03em}.who{font-size:15px;color:var(--muted)}.layout{max-width:1320px;margin:auto;padding:32px 24px 84px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:38px;align-items:start}.sidebar{order:2;position:sticky;top:22px;max-height:calc(100vh - 44px);overflow:auto;border:1px solid var(--line);border-radius:15px;background:var(--surface);padding:17px}.group{font-size:15px;color:var(--muted);font-weight:800;margin:3px 10px 14px}.tabs{display:flex;flex-direction:column;gap:5px}.tabs button{appearance:none;border:1px solid transparent;border-radius:9px;background:transparent;color:#253348;cursor:pointer;text-align:left;font:600 16px/1.55 'Pretendard',sans-serif;padding:9px 12px 9px 14px}.tabs button span{color:var(--accent);font-weight:850;margin-right:7px}.tabs button:hover{background:#fff;border-color:var(--line)}.tabs button[aria-selected=true]{background:var(--soft);border-color:var(--accent);color:#bd1366}.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+main{min-width:0}.panel[hidden]{display:none}.panel{display:block}.crumb{color:var(--accent);font-size:15px;font-weight:800;margin:0 0 8px}.panel h1{font-size:31px;line-height:1.4;margin:0 0 12px}.lead{font-size:19px;font-weight:550;color:#344255;margin:6px 0 26px}.panel h3{font-size:21px;margin:33px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}.panel h3:before{content:'▸ ';color:var(--accent)}.panel p{margin:13px 0}.panel b,.panel strong{font-weight:790}.panel code:not(pre code){font:15px/1.6 Consolas,monospace;word-break:break-word;background:#f1f5f9;border:1px solid #e5e7eb;padding:1px 5px;border-radius:4px}
+.panel ul,.panel ol{padding-left:27px;margin:12px 0}.panel li{margin:7px 0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:17px 0 24px}.panel table{border-collapse:collapse;width:100%;font-size:17px;line-height:1.65}.panel th,.panel td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;text-align:left}.panel th{font-size:16px;font-weight:800;background:#f1f5f9;color:#40516a}.panel tbody tr:last-child td{border:0}.panel tbody tr:nth-child(even){background:#fbfcfe}
+.note,.task{border:1px solid var(--line);border-radius:13px;background:#fafcff;padding:17px 19px;margin:24px 0}.note{border-left:4px solid var(--accent);background:var(--soft)}.note b{color:#ad155e}.note p{margin:6px 0}.task{background:#fff}.task h4{margin:0 0 9px;font-size:19px}.task ol{margin:0;padding-left:23px}.task li{margin:8px 0}
+.codebox{border:1px solid #243953;border-radius:13px;overflow:hidden;margin:21px 0 26px}.codehead{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:8px 13px;background:#1d3452;color:#dceafc;font-size:14px;font-weight:700}.copy{border:1px solid #8598b4;color:#fff;background:#314f78;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:13px}.codebox pre{background:var(--codebg);color:#cbe9fb;margin:0;padding:20px;overflow-x:auto;font:15px/1.7 Consolas,'JetBrains Mono',monospace;word-break:normal;white-space:pre}
+.outbox .codehead{background:#203a2c}.outbox{border-color:#2f5a43}.outbox pre{background:#0d1f17;color:#c9f5d9}
+.qa{padding:13px 17px;margin:13px 0;border:1px solid var(--line);background:#fbfcff;border-radius:10px}.qa summary{font-size:17px;cursor:pointer;font-weight:780}.qa[open] summary{color:#c01168}.qa p{font-size:17px}
+.footer{max-width:1320px;margin:auto;border-top:1px solid var(--line);padding:20px 24px 38px;text-align:center;color:var(--muted);font-size:15px}.footer small{display:block;max-width:950px;margin:5px auto}
+.tabs .part-heading{display:block;margin:15px 4px 6px;padding:12px 11px;background:#e5e7eb;color:#334155;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;font-weight:850;line-height:1.5;white-space:normal}.tabs .part-heading:first-child{margin-top:0}
+.journey{border-left:4px solid #ff2e93;background:#fff5fa;padding:16px 19px;margin:20px 0;border-radius:8px}.journey h3{border:0!important;margin:0 0 8px!important;padding:0!important;font-size:18px!important}.journey h3:before{content:none!important}.journey ol{margin:6px 0 0;padding-left:22px}.journey li{margin:4px 0;overflow-wrap:anywhere}
+.say{border-left:4px solid #94a3b8;background:#f8fafc;padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}.say>b:first-child{display:block;color:#475569;font-size:14px;margin-bottom:4px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:18px 0 24px}.flow .fstep{flex:1 1 96px;min-width:92px;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:10px;background:#fff;padding:10px 12px}.flow .fstep b{display:block;font-size:16px;color:#0f172a}.flow .fstep span{display:block;font-size:14px;color:var(--muted);line-height:1.5;margin-top:3px}.flow .arrow{align-self:center;color:var(--accent);font-weight:900}
+main p,main li,main td{overflow-wrap:anywhere}
+.mock{border:1px solid #cbd5e1;border-radius:14px;background:#f8fafc;padding:14px 16px;margin:20px 0}.mock-title{font-weight:800;font-size:15px;color:#475569;margin-bottom:10px}
+.mock table{border-collapse:collapse;width:100%;font-size:15px;background:#fff}.mock td,.mock th{border:1px solid #e2e8f0;padding:6px 8px;text-align:center}.mock th{background:#f1f5f9}.mock .hl{background:#fde7f2;font-weight:800}.mock .dim{color:#94a3b8}
+@media(max-width:900px){.layout{grid-template-columns:1fr;gap:12px;padding:15px 16px 64px}.sidebar{order:0;position:sticky;top:0;z-index:10;border-radius:0;max-height:none;overflow:auto;padding:8px 0;background:#fff}.sidebar .group{display:none}.tabs{flex-direction:row;white-space:nowrap;overflow-x:auto}.tabs button{flex:none;font-size:15px}.tabs .part-heading{flex:none;margin:0 6px 0 0;white-space:nowrap;padding:9px 12px}.banner-in{flex-wrap:wrap}.panel h1{font-size:27px}}
+@media(max-width:680px){body{font-size:17px}.panel table{font-size:16px}.panel th{font-size:15px}.panel h1{font-size:24px}.panel h3{font-size:20px}.codebox pre{font-size:14px;padding:15px}.flow .arrow{display:none}.flow .fstep{flex-basis:100%}}
+@media print{.sidebar,.copy{display:none}.layout{display:block}.panel[hidden]{display:block!important}.banner{background:#fff}}
+.steps{list-style:none;counter-reset:st;padding-left:0!important;margin:16px 0}.steps li{counter-increment:st;position:relative;padding:4px 0 4px 46px;margin:10px 0}.steps li:before{content:counter(st);position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:850;font-size:15px;display:flex;align-items:center;justify-content:center}
+.qa .codebox{margin:12px 0}
+.diagram{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0 22px;font:14.5px/1.7 Consolas,'JetBrains Mono',monospace;white-space:pre;overflow-x:auto;color:#1e293b}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.cards.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px 16px;font-size:16.5px;line-height:1.7}.card .h{font-weight:800;color:#bd1366;margin-bottom:6px;font-size:17px}
+.hl{color:#bd1366;font-weight:800}
+@media(max-width:760px){.cards,.cards.c3{grid-template-columns:1fr}.diagram{font-size:13px}}
+.where-bar{display:flex;flex-wrap:wrap;gap:8px 20px;background:#eef6ff;border:1px solid #bfdbfe;border-radius:10px;padding:9px 14px;margin:4px 0 14px;font-size:15.5px;color:#1e3a5f}.ask{border:1px dashed #a78bfa;background:#f5f3ff;border-radius:12px;padding:13px 17px;margin:24px 0}.ask>b:first-child{color:#6d28d9}.ask p{margin:6px 0;font-size:16.5px}
+/* 화면 모형 */
+.browser{border:1px solid #cbd5e1;border-radius:10px;overflow:hidden;background:#fff}.bbar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#eef2f7;border-bottom:1px solid #e2e8f0}.dots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:#cbd5e1;margin-right:4px}.url{flex:1;background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:2px 10px;font:14px Consolas,monospace;color:#334155}
+.browser pre{margin:0;padding:12px 14px;font:14px/1.6 Consolas,monospace;white-space:pre;overflow-x:auto;color:#0f172a;background:#fff}
+.term pre{background:#0c1424;color:#d6e4f5}.term .bbar{background:#1e293b;border-color:#334155}.term .url{background:#0f172a;border-color:#334155;color:#cbd5e1}
+.mark{background:#fde7f2;font-weight:800}.mk2{background:#e0f2fe}.mk3{background:#ecfccb}
+.console{display:grid;grid-template-columns:1fr 1fr}.console .ph{font-size:12px;font-weight:800;color:#64748b;padding:6px 14px;border-bottom:1px solid #e2e8f0;background:#f1f5f9;display:flex;justify-content:space-between}.console .left{border-right:1px solid #e2e8f0}.console .right pre{background:#f8fafc}
+.svgbox{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:8px}.svgbox svg{display:block;width:100%;height:auto}
+@media(max-width:760px){.console{grid-template-columns:1fr}.console .left{border-right:0;border-bottom:1px solid #e2e8f0}}
+
+.quizbox{border:2px solid #c4b5fd;background:#faf5ff;border-radius:14px;padding:14px 18px;margin:28px 0}
+.qz-title{border:0!important;margin:0 0 6px!important;padding:0!important;color:#5b21b6}.qz-title:before{content:none!important}
+.quiz{background:#fff;border:1px solid #e9d5ff;border-radius:10px;padding:12px 14px;margin:12px 0}
+.quiz .qz-q{margin:0 0 8px}.quiz label{display:block;padding:6px 8px;border-radius:7px;cursor:pointer;font-size:16.5px}
+.quiz label:hover{background:#f5f3ff}.quiz input{margin-right:8px}
+.qz-check{margin-top:8px;border:1px solid #7c3aed;background:#7c3aed;color:#fff;border-radius:7px;padding:5px 14px;font:700 14px 'Pretendard',sans-serif;cursor:pointer}
+.qz-fb{margin-top:10px;padding:10px 12px;border-radius:8px;background:#f8fafc;border-left:4px solid #94a3b8}
+.qz-fb.ok{border-left-color:#16a34a;background:#f0fdf4}.qz-fb.no{border-left-color:#dc2626;background:#fef2f2}
+.qz-fb p{margin:4px 0;font-size:16px}.qz-res{font-weight:800}
+.wide{overflow-x:auto}.wide table{min-width:1150px}.wide td{text-align:left!important;white-space:normal}.wide td:first-child,.wide th{white-space:nowrap}
+.quiz label.right{background:#dcfce7}.quiz label.wrong{background:#fee2e2}
+</style></head><body>
+<header class="banner"><div class="banner-in"><div><div class="brand">Part A · A5-M4 · 임베딩과 벡터 검색</div><div style="font-size:23px;font-weight:850">A5-M4 임베딩과 벡터 검색 (OpenAI Embedding · FAISS IVF · HNSW · 사전/사후 필터 · 온톨로지 동적 필터)</div></div><div class="who">© 2026 부성순 · AI·클라우드 실무 과정<br/>부성순 (bakpak@empas.com)</div><a href="/lectures/files/index.html#section-a1" style="display:inline-block;padding:7px 11px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;color:#bd1366;text-decoration:none;font-weight:800;white-space:nowrap">📚 강의자료 라이브러리 · Part A</a></div></header>
+<div class="layout"><aside class="sidebar"><div class="group">A5-M4 · 세부 목차</div><nav aria-label="교안 세부 목차" class="tabs" role="tablist">
+<div aria-level="2" class="part-heading" role="heading">Part 0. 임베딩과 벡터 검색</div>
+<button aria-controls="u00" aria-selected="true" id="tab-u00" role="tab" tabindex="0" type="button"><span>00</span>임베딩이란</button>
+<div aria-level="2" class="part-heading" role="heading">Part 1. 실습 12 Embedding + FAISS IVF</div>
+<button aria-controls="u01" aria-selected="false" id="tab-u01" role="tab" tabindex="-1" type="button"><span>01</span>실습 12 · 임베딩을 만들고 FAISS Flat · IVF로 찾기</button>
+<div aria-level="2" class="part-heading" role="heading">Part 2. 실습 13 HNSW</div>
+<button aria-controls="u02" aria-selected="false" id="tab-u02" role="tab" tabindex="-1" type="button"><span>02</span>실습 13 · HNSW</button>
+<div aria-level="2" class="part-heading" role="heading">Part 3. 실습 14 사전 · 사후 필터</div>
+<button aria-controls="u03" aria-selected="false" id="tab-u03" role="tab" tabindex="-1" type="button"><span>03</span>실습 14 · 사전 필터와 사후 필터</button>
+<div aria-level="2" class="part-heading" role="heading">Part 4. 실습 15 온톨로지 확장 동적 필터</div>
+<button aria-controls="u04" aria-selected="false" id="tab-u04" role="tab" tabindex="-1" type="button"><span>04</span>실습 15 · 정책 단위 순위와 온톨로지 확장 동적 필터</button>
+<div aria-level="2" class="part-heading" role="heading">Part 5. 운영 — 캐시 · 추가 · 저장</div>
+<button aria-controls="u05" aria-selected="false" id="tab-u05" role="tab" tabindex="-1" type="button"><span>05</span>운영 1 · 임베딩 캐시</button>
+<button aria-controls="u06" aria-selected="false" id="tab-u06" role="tab" tabindex="-1" type="button"><span>06</span>운영 2 · 인덱스에 추가 · 삭제 · 교체</button>
+<button aria-controls="u07" aria-selected="false" id="tab-u07" role="tab" tabindex="-1" type="button"><span>07</span>운영 3 · 인덱스를 객체 저장소에 버전으로 저장하기</button>
+<div aria-level="2" class="part-heading" role="heading">Part 6. 정리</div>
+<button aria-controls="u08" aria-selected="false" id="tab-u08" role="tab" tabindex="-1" type="button"><span>08</span>정리 · 미션 · 종합 점검</button>
+</nav></aside><main>
+<!-- 00 -->
+<section aria-labelledby="tab-u00" class="panel" id="u00" role="tabpanel"><div class="crumb">Part 0. 임베딩과 벡터 검색 · A5-M4</div><h1>00. 임베딩이란 — 뜻이 가까운 글을 가까운 숫자로</h1><p class="lead">조각 196개를 벡터로 바꾸기 전에, 무엇을 어떻게 바꾸는지 봅니다.</p><p>지금까지는 글자가 겹치는지(키워드)와 꼬리표(메타데이터), 그리고 관계(그래프)로 찾았습니다. 이 모듈은 <b>뜻이 가까운지</b>로 찾습니다. 글을 숫자 목록(벡터)으로 바꾸는 것을 <b>임베딩</b>이라고 하고, 뜻이 비슷한 글은 가까운 벡터가 됩니다.</p><div class="tablewrap"><table><thead><tr><th>질문의 말</th><th>문서의 말</th><th>키워드</th><th>임베딩</th></tr></thead><tbody><tr><td>마음이 바뀌었습니다</td><td>단순 변심</td><td>겹치는 글자 없음</td><td>뜻이 가까워 가까운 벡터</td></tr><tr><td>냉장 케이크</td><td>냉장식품</td><td>‘냉장’만 겹침</td><td>가까움</td></tr><tr><td>돈은 언제 돌아오나요</td><td>환불 승인 후 결제수단별 소요 기간</td><td>거의 없음</td><td>가까움</td></tr></tbody></table></div><h3>무엇을 임베딩하나</h3><p>검색 단위는 앞에서 만든 조각 그대로입니다(소제목 단위, FAQ 80 + 정책 116 = 196개). 질문 7개도 같은 모델로 임베딩합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_12_ivf.py --dry-run</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력 (API 호출 없음)</span><button class="copy" type="button">코드 복사</button></div><pre><code>모델 text-embedding-3-small · 조각 196개 (글자 27,594) + 질문 7개를 임베딩합니다
+
+[FAQ-001#1]
+질문: 일반상품 출고까지 며칠 걸리나요?
+답변: 결제 완료 후 통상 2~3영업일 이내 출고 목표이며 주말과 공휴일은 제외합니다.
+
+[FAQ-002#1]
+질문: 제주 배송은 수도권보다 늦나요?
+답변: 제주는 운송에 1~2일이 추가될 수 있으나 지연 여부는 주문별 예정일을 비교해야 합니다.
+
+[EXC-001#6]
+제주 냉장식품 지연과 배송비 &gt; 확인 항목 및 주의
+적용 정책: POL-DEL-002, POL-RET-002, POL-FEE-001. 배송비 무료 회원이라도 실제 납부하지 않은 기본배송비를 환불받는 것은 아니다.</code></pre></div><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>글 → 벡터</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>조각 196 + 질문 7</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>embeddings.create</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>embeddings.npz</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>개수 · 차원</span></div></div><div class="codebox"><div class="codehead"><span>📄 m4lib.py · 임베딩 만들기 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def embed_texts(texts, batch=100):
+    from openai import OpenAI  # pip install openai
+
+    client = OpenAI(api_key=os.environ[&quot;OPENAI_API_KEY&quot;])
+    vecs, tokens = [], 0
+    for i in range(0, len(texts), batch):
+        r = client.embeddings.create(model=EMBED_MODEL, input=texts[i:i + batch])
+        vecs += [d.embedding for d in r.data]
+        tokens += r.usage.total_tokens
+    return np.array(vecs, dtype=&quot;float32&quot;), tokens
+
+
+def build_embeddings(refresh=False):
+    &quot;&quot;&quot;조각 196개 + 질문 7개를 한 번에 임베딩해 저장한다.&quot;&quot;&quot;
+    chunks, qs = load_chunks(), questions()
+    if EMB.exists() and not refresh:
+        return load_embeddings()
+    t0 = time.time()
+    cv, t1 = embed_texts([c[&quot;text&quot;] for c in chunks])
+    qv, t2 = embed_texts([q[&quot;question&quot;] for q in qs])
+    OUT.mkdir(exist_ok=True)
+    np.savez(EMB, chunk_ids=np.array([c[&quot;chunk_id&quot;] for c in chunks]), chunk_vecs=cv,
+             q_ids=np.array([q[&quot;id&quot;] for q in qs]), q_vecs=qv,
+             info=np.array(json.dumps({&quot;model&quot;: EMBED_MODEL, &quot;tokens&quot;: t1 + t2, &quot;seconds&quot;: round(time.time() - t0, 1)})))
+    return load_embeddings()</code></pre></div><ol class="steps"><li><code>client.embeddings.create</code>에 글을 100개씩 묶어 보냅니다.</li><li>결과는 <code>outputs_m4/embeddings.npz</code>에 조각 ID와 함께 저장합니다. 파일이 있으면 다시 부르지 않습니다(요금 한 번).</li><li>모델은 <code>.env</code>의 <code>OPENAI_EMBED_MODEL</code>, 없으면 <code>text-embedding-3-small</code>(1536차원).</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>m4lib.py · unit</span><button class="copy" type="button">코드 복사</button></div><pre><code>def unit(v):
+    &quot;&quot;&quot;코사인 유사도를 내적으로 계산하려고 길이를 1로 맞춘다.&quot;&quot;&quot;
+    v = np.array(v, dtype=&quot;float32&quot;)
+    return v / np.linalg.norm(v, axis=-1, keepdims=True)</code></pre></div><div class="note"><b>코사인 유사도</b><p>두 벡터의 방향이 얼마나 같은지(-1~1)입니다. 길이를 1로 맞춘(<code>unit</code>) 뒤 내적하면 코사인 유사도와 같아서, FAISS의 내적 인덱스(<code>IndexFlatIP</code>)로 바로 계산합니다.</p></div><div class="task"><h4>📝 스스로 설명해 보기 — 남에게 설명하듯 3~4문장으로</h4><ol><li>임베딩 검색이 키워드 검색보다 나은 질문과, 오히려 키워드 검색이 나은 질문을 이 자료에서 하나씩 예로 들어 설명해 보세요.</li></ol></div><details class="qa"><summary>📝 모범 설명과 점검 기준</summary><p><b>1. 임베딩 검색이 키워드 검색보다 나은 질문과, 오히려 키워드 검색이 나은 질문을 이 자료에서 하나씩 예로 들어 설명해 보세요.</b></p><p>‘마음이 바뀌었어요’처럼 문서와 다른 말로 같은 뜻을 묻는 질문은 임베딩이 낫습니다(단순 변심). 반대로 ‘CUS-001’, ‘72시간’, ‘POL-VER-001’처럼 <b>글자가 정확히 같아야 하는</b> 식별자 · 숫자는 뜻이 비슷한 다른 숫자 · 코드와 섞일 수 있어 키워드가 더 정확합니다.</p><p style="font-size:14px"><b>이것이 들어 있으면 충분합니다</b></p><ul style="font-size:14px"><li>뜻은 같고 말이 다른 예</li><li>정확히 일치해야 하는 식별자 · 숫자 예</li><li>왜 그런지(뜻의 거리 vs 글자 일치)</li></ul></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> ‘마음이 바뀌었다’로 ‘단순 변심’ 문서를 찾을 수 있는 방법은?</p><label><input type="radio" name="qz1_1" value="0"/> 키워드 검색</label><label><input type="radio" name="qz1_1" value="1"/> 임베딩(뜻이 가까운 벡터)</label><label><input type="radio" name="qz1_1" value="2"/> 메타데이터 필터</label><label><input type="radio" name="qz1_1" value="3"/> 파일 이름</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>겹치는 글자가 없어도 뜻이 가깝습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 임베딩 결과를 파일로 저장해 두는 이유는?</p><label><input type="radio" name="qz1_2" value="0"/> 보기 좋아서</label><label><input type="radio" name="qz1_2" value="1"/> 같은 조각을 다시 임베딩하는 요금과 시간을 아끼려고</label><label><input type="radio" name="qz1_2" value="2"/> FAISS가 요구해서</label><label><input type="radio" name="qz1_2" value="3"/> 보안</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>한 번 만든 벡터는 다시 씁니다.</p></div></div></div></section>
+<!-- 01 -->
+<section aria-labelledby="tab-u01" class="panel" hidden="" id="u01" role="tabpanel"><div class="crumb">Part 1. 실습 12 Embedding + FAISS IVF · A5-M4</div><h1>01. 실습 12 · 임베딩을 만들고 FAISS Flat · IVF로 찾기</h1><p class="lead">조각 196개를 실제로 임베딩하고, 모두 비교하는 Flat과 묶음으로 나눠 찾는 IVF를 비교합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행 (처음 한 번)</span><button class="copy" type="button">코드 복사</button></div><pre><code>pip install faiss-cpu numpy openai</code></pre></div><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>벡터 인덱스</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>벡터 196개</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>Flat · IVF 만들기</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>상위 5 조각</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>Flat과 같은가</span></div></div><div class="codebox"><div class="codehead"><span>📄 m4_12_ivf.py · Flat과 IVF (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code># 정확한 검색 (모든 조각과 비교)
+flat = faiss.IndexFlatIP(X.shape[1])
+flat.add(X)
+
+# IVF: 조각을 nlist개 묶음(클러스터)으로 나누고, 검색할 때 가까운 묶음 nprobe개만 본다
+quant = faiss.IndexFlatIP(X.shape[1])
+ivf = faiss.IndexIVFFlat(quant, X.shape[1], a.nlist, faiss.METRIC_INNER_PRODUCT)
+ivf.train(X)
+ivf.add(X)</code></pre></div><ol class="steps"><li><code>IndexFlatIP</code>: 질문 벡터를 <b>모든</b> 조각과 비교합니다. 정확하지만 조각이 많아지면 느립니다.</li><li><code>IndexIVFFlat</code>: 조각을 <code>nlist</code>개 묶음(클러스터)으로 미리 나눠 두고, 검색할 때는 질문과 가까운 묶음 <code>nprobe</code>개 안에서만 비교합니다.</li><li><code>train</code>이 묶음을 정하는 단계입니다. 묶음 하나에 조각이 39개 이상 있어야 좋다는 경고가 나오는데, 조각이 196개뿐이라 생기는 경고입니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>IVF에서 nprobe=1(가장 가까운 묶음 하나만 보기)이면, Flat과 같은 결과가 35개 중 몇 개쯤일까요?</li><li>nprobe를 몇까지 올리면 Flat과 같아질까요?</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>실제로는 nprobe=1에서 <b>26/35</b>, nprobe=4에서 35/35였습니다. 묶음 8개 중 절반만 봐도 이 자료에서는 충분했습니다. 묶음 크기가 고르지 않아(9개 ~ 53개) 질문에 따라 놓치는 정도가 다릅니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_12_ivf.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>임베딩: text-embedding-3-small · 조각 196개 × 1536차원 · 토큰 27,092 · 저장 embeddings.npz
+
+IVF 묶음 8개 · 묶음별 조각 수: [18, 53, 9, 35, 15, 11, 28, 27]
+
+방법                 Flat과 같은 결과     정답 정책    시간(ms)
+Flat (전부 비교)             35/35      9/17      0.13
+IVF nprobe=1             26/35      8/17      0.09
+IVF nprobe=2             30/35      8/17      0.08
+IVF nprobe=4             35/35      9/17      0.14
+IVF nprobe=8             35/35      9/17      0.16
+
+[Flat 상위 5개 · 질문 7개]
+Q-017 정답 1/1 · POL-RET-001#2(0.62), POL-RET-001#4(0.62), POL-RET-001#3(0.58), POL-RET-001#7(0.57), FAQ-001#1(0.56)
+Q-009 정답 1/1 · FAQ-062#1(0.75), POL-CAN-002#4(0.73), POL-CAN-002#5(0.71), POL-CAN-002#3(0.69), FAQ-025#1(0.68)
+Q-013 정답 2/2 · FAQ-073#1(0.82), FAQ-077#1(0.70), FAQ-071#1(0.68), EXC-006#2(0.66), POL-CPN-001#4(0.65)
+Q-002 정답 2/2 · POL-MEM-001#4(0.74), EXC-005#4(0.74), FAQ-058#1(0.71), FAQ-053#1(0.69), EXC-005#2(0.68)
+Q-028 정답 1/2 · POL-FEE-001#4(0.67), EXC-001#1(0.64), FAQ-096#1(0.63), EXC-005#3(0.62), FAQ-018#1(0.62)
+Q-001 정답 2/5 · EXC-005#3(0.61), EXC-001#4(0.61), FAQ-058#1(0.60), EXC-005#6(0.60), EXC-005#4(0.60)
+Q-030 정답 0/4 · POL-FEE-001#5(0.62), EXC-003#1(0.61), POL-FEE-001#3(0.60), EXC-003#2(0.59), POL-FEE-001#4(0.59)
+
+저장: outputs_m4/ivf.index</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>nprobe=1일 때 Flat과 같은 결과는 35개 중 몇 개인가? 왜 줄었을까?</li><li>Flat 상위 5개를 보세요. Q-017과 Q-001의 상위 5개에는 같은 문서가 몇 번씩 나오나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>nprobe=1이면 가장 가까운 묶음 하나만 보므로, 다른 묶음에 있던 가까운 조각을 놓쳐 26/35가 됩니다. nprobe를 4로 늘리면 Flat과 같아집니다. <b>속도와 정확도를 nprobe로 맞바꿉니다</b>. Q-017은 상위 5개 중 4개가 POL-RET-001, Q-001은 3개가 EXC-005입니다. 같은 문서의 조각이 여러 칸을 차지해, 다른 정답 문서가 들어올 자리가 없습니다. 실습 15에서 다룹니다.</p></details><div class="task"><h4>🧪 직접 바꿔 보기 — 묶음 수(nlist) 바꾸기</h4><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_12_ivf.py --nlist 4
+python m4_12_ivf.py --nlist 16</code></pre></div><ol><li>묶음을 4개 · 16개로 바꾸면 nprobe=1의 ‘Flat과 같은 결과’는 어떻게 변하나?</li><li>묶음별 조각 수에서 무엇이 보이나? (아주 작은 묶음이 있나)</li></ol></div><details class="qa"><summary>🧪 실제 결과와 해설</summary><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>임베딩: text-embedding-3-small · 조각 196개 × 1536차원 · 토큰 27,092 · 저장 embeddings.npz
+
+IVF 묶음 4개 · 묶음별 조각 수: [47, 42, 41, 66]
+
+방법                 Flat과 같은 결과     정답 정책    시간(ms)
+Flat (전부 비교)             35/35      9/17      0.16
+IVF nprobe=1             30/35      8/17      2.26
+IVF nprobe=2             35/35      9/17      0.11
+IVF nprobe=4             35/35      9/17      0.22
+
+임베딩: text-embedding-3-small · 조각 196개 × 1536차원 · 토큰 27,092 · 저장 embeddings.npz
+
+IVF 묶음 16개 · 묶음별 조각 수: [4, 12, 9, 14, 15, 6, 26, 8, 17, 10, 28, 17, 15, 1, 9, 5]
+
+방법                 Flat과 같은 결과     정답 정책    시간(ms)
+Flat (전부 비교)             35/35      9/17      0.12
+IVF nprobe=1             22/35      5/17      0.12
+IVF nprobe=2             32/35      8/17      0.11
+IVF nprobe=4             34/35      9/17      0.11
+IVF nprobe=16            35/35      9/17      0.22</code></pre></div><p>묶음이 적으면(4개) 묶음 하나가 크니 nprobe=1에서도 30/35를 맞힙니다. 묶음이 많으면(16개) 묶음이 작아(조각 1개짜리도 있음) nprobe=1에서 22/35, 정답 정책도 5/17로 떨어집니다. <b>nlist를 늘리면 빨라지지만 같은 정확도를 위해 nprobe도 함께 늘려야 합니다</b>. 조각 196개에서는 차이가 작지만, 이 관계는 데이터가 커져도 같습니다.</p></details><div class="task"><h4>🧭 이런 상황이라면 어떻게 하겠습니까?</h4><p>정책 · FAQ 조각이 100만 개로 늘었습니다. 검색 시간은 20ms 안이어야 하고, Flat과 같은 결과가 95% 이상이어야 합니다.</p><ol type="A"><li>Flat을 그대로 쓴다</li><li>IVF를 쓰고 nlist · nprobe를 몇 가지 조합으로 재서 조건을 만족하는 가장 작은 nprobe를 고른다</li><li>IVF nprobe=1로 가장 빠르게 한다</li></ol><p style="margin:6px 0 0;font-size:14px">하나를 고르고, 이 탭의 숫자 중 무엇을 근거로 삼을지 한 줄로 적어 보세요.</p></div><details class="qa"><summary>🧭 판단의 근거 보기</summary><p><b>B</b>가 맞습니다. 이 탭에서 본 것처럼 nprobe가 작으면 놓치고, 크면 Flat과 같아집니다. 정답은 데이터마다 다르므로 <b>재서 고릅니다</b>: Flat 결과를 기준으로 ‘Flat과 같은 결과 비율’과 시간을 nprobe별로 표로 만들고, 95% 이상인 가장 작은 nprobe를 씁니다. 흔히 nlist는 조각 수의 제곱근 근처(100만 → 1,000 안팎)에서 시작합니다. A는 100만 개를 모두 비교해 시간 조건을 넘기기 쉽고, C는 정확도 조건을 장담할 수 없습니다.</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> IVF에서 nprobe를 늘리면?</p><label><input type="radio" name="qz2_1" value="0"/> 더 빠르고 덜 정확</label><label><input type="radio" name="qz2_1" value="1"/> 더 많은 묶음을 봐서 느려지지만 Flat에 가까워짐</label><label><input type="radio" name="qz2_1" value="2"/> 묶음 수가 늘어남</label><label><input type="radio" name="qz2_1" value="3"/> 임베딩을 다시 함</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>nprobe = nlist면 Flat과 같습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> Q-001이 2/5에 그친 원인으로 출력에서 보이는 것은?</p><label><input type="radio" name="qz2_2" value="0"/> 임베딩 오류</label><label><input type="radio" name="qz2_2" value="1"/> 같은 문서(EXC-005)의 조각이 상위 5개 중 3칸을 차지</label><label><input type="radio" name="qz2_2" value="2"/> FAISS 버그</label><label><input type="radio" name="qz2_2" value="3"/> 질문이 짧아서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>조각 단위 상위 k의 한계입니다.</p></div></div></div></section>
+<!-- 02 -->
+<section aria-labelledby="tab-u02" class="panel" hidden="" id="u02" role="tabpanel"><div class="crumb">Part 2. 실습 13 HNSW · A5-M4</div><h1>02. 실습 13 · HNSW — 가까운 조각끼리 이은 그래프로 찾기</h1><p class="lead">HNSW의 M과 efSearch를 바꿔 Flat과 비교하고, 세 인덱스의 차이를 정리합니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>그래프 인덱스</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>벡터 196개</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>M · efSearch 바꾸기</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>Flat과 비교</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>정확도 · 시간</span></div></div><div class="codebox"><div class="codehead"><span>📄 m4_13_hnsw.py (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>for M in (4, 16, 32):
+    for ef in (8, 32, 128):
+        t0 = time.perf_counter()
+        h = faiss.IndexHNSWFlat(X.shape[1], M, faiss.METRIC_INNER_PRODUCT)
+        h.hnsw.efConstruction = 40
+        h.add(X)
+        build = (time.perf_counter() - t0) * 1000
+        h.hnsw.efSearch = ef
+        _, I = h.search(Q, K)
+        same = sum(len(set(I[i]) &amp; set(F[i])) for i in range(len(Q)))
+        got = sum(hit(q[&quot;expected&quot;], [by_id[ids[j]][&quot;doc_id&quot;] for j in I[i] if j &gt;= 0]) for i, q in enumerate(questions()))
+        print(f&quot;{f&#x27;HNSW M={M} efSearch={ef}&#x27;:&lt;26}{build:&gt;14.1f}{f&#x27;{same}/{len(Q) * K}&#x27;:&gt;16}{f&#x27;{got}/{tot}&#x27;:&gt;10}&quot;)</code></pre></div><ol class="steps"><li><code>IndexHNSWFlat</code>: 조각마다 가까운 조각 <code>M</code>개를 선으로 이어 여러 층의 그래프를 만들고, 검색할 때는 그 선을 따라 가까운 쪽으로 건너갑니다.</li><li><code>efSearch</code>: 검색 중에 들고 다니는 후보 수입니다. 클수록 정확하고 느립니다.</li><li><code>efConstruction</code>: 만들 때 살펴보는 후보 수입니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>M(이웃 수)과 efSearch(살펴보는 후보 수) 중 어떤 조합에서 Flat과 결과가 달라질까요?</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>9가지 조합 중 <b>M=16 · efSearch=8</b> 하나만 34/35였습니다. 후보를 적게 보면 가끔 놓칩니다. 그런데 M=4 · efSearch=8은 35/35였습니다. 조각이 적어 그래프가 작으면 조합의 효과가 일정하지 않습니다. 큰 데이터에서는 efSearch가 클수록 정확해지는 경향이 뚜렷합니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_13_hnsw.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>방법                            만드는 시간(ms)     Flat과 같은 결과     정답 정책
+HNSW M=4 efSearch=8                  5.9           35/35      9/17
+HNSW M=4 efSearch=32                 5.6           35/35      9/17
+HNSW M=4 efSearch=128                6.5           35/35      9/17
+HNSW M=16 efSearch=8                 5.2           34/35      8/17
+HNSW M=16 efSearch=32                5.1           35/35      9/17
+HNSW M=16 efSearch=128               5.1           35/35      9/17
+HNSW M=32 efSearch=8                 6.0           35/35      9/17
+HNSW M=32 efSearch=32                7.8           35/35      9/17
+HNSW M=32 efSearch=128               6.6           35/35      9/17
+
+M = 노드마다 잇는 이웃 수 · efSearch = 검색할 때 살펴보는 후보 수
+조각이 196개뿐이라 시간 차이는 작다. 수십만 개가 되면 Flat은 느려지고 IVF · HNSW가 필요해진다.</code></pre></div><div class="tablewrap"><table><thead><tr><th>인덱스</th><th>찾는 방법</th><th>장점</th><th>조심할 것</th></tr></thead><tbody><tr><td>Flat</td><td>모두 비교</td><td>정확, 설정 없음</td><td>조각이 많으면 느림</td></tr><tr><td>IVF</td><td>묶음을 정하고 가까운 묶음만</td><td>빠르고 메모리 적게</td><td>train 필요, nprobe가 작으면 놓침</td></tr><tr><td>HNSW</td><td>가까운 조각끼리 이은 그래프를 따라감</td><td>빠르고 정확도가 높음</td><td>메모리를 더 씀, M · efSearch 조정</td></tr></tbody></table></div><div class="say"><b>보이는 것</b><p>조각이 196개뿐이라 세 인덱스의 정답 수는 거의 같고(M=16 · efSearch=8에서만 하나 놓침), 시간 차이도 1ms 안팎입니다. 인덱스는 <b>데이터가 커졌을 때 속도를 지키는 도구</b>이고, 이 자료에서 정답을 놓치는 원인은 인덱스가 아니라 다른 곳(같은 문서가 여러 칸 차지, 필요한 문서의 뜻이 질문과 멂)에 있습니다.</p></div><div class="task"><h4>🧭 이런 상황이라면 어떻게 하겠습니까?</h4><p>정책 문서가 매일 몇 개씩 고쳐지고 없어지는 서비스입니다. 조각은 50만 개입니다. IVF와 HNSW 중 무엇을 고를까요?</p><ol type="A"><li>HNSW — 빠르고 정확하니까</li><li>IVF — 삭제 · 교체가 되니까 (단, 묶음은 주기적으로 다시 학습)</li><li>HNSW + 삭제 목록으로 결과에서 거르고, 밤마다 새로 만들어 교체</li></ol><p style="margin:6px 0 0;font-size:14px">하나를 고르고, 이 탭의 숫자 중 무엇을 근거로 삼을지 한 줄로 적어 보세요.</p></div><details class="qa"><summary>🧭 판단의 근거 보기</summary><p>정답은 하나가 아닙니다. <b>B</b>와 <b>C</b> 모두 근거가 있습니다. 이 과정의 운영 2 탭에서 본 것처럼 HNSW는 이 버전의 FAISS에서 삭제가 안 되므로 A만으로는 지운 문서가 계속 검색됩니다. B는 바로 지울 수 있지만 문서가 많이 바뀌면 묶음이 낡습니다. C는 정확도가 좋지만 거르기 · 재구성 작업이 필요합니다. 어느 쪽이든 <b>삭제가 결과에 반영되는지</b>를 테스트로 확인해야 합니다.</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> HNSW의 efSearch를 줄이면?</p><label><input type="radio" name="qz3_1" value="0"/> 더 정확해진다</label><label><input type="radio" name="qz3_1" value="1"/> 빨라지지만 가까운 조각을 놓칠 수 있다</label><label><input type="radio" name="qz3_1" value="2"/> 메모리가 준다</label><label><input type="radio" name="qz3_1" value="3"/> 변화 없음</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>M=16 · efSearch=8에서 34/35가 되었습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 이 자료에서 정답을 놓친 주된 원인은?</p><label><input type="radio" name="qz3_2" value="0"/> 인덱스 종류</label><label><input type="radio" name="qz3_2" value="1"/> 같은 문서의 조각이 여러 칸을 차지하고, 필요한 문서가 질문과 뜻이 멀어서</label><label><input type="radio" name="qz3_2" value="2"/> 임베딩 차원</label><label><input type="radio" name="qz3_2" value="3"/> CPU</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>인덱스를 바꿔도 9/17로 같았습니다.</p></div></div></div></section>
+<!-- 03 -->
+<section aria-labelledby="tab-u03" class="panel" hidden="" id="u03" role="tabpanel"><div class="crumb">Part 3. 실습 14 사전 · 사후 필터 · A5-M4</div><h1>03. 실습 14 · 사전 필터와 사후 필터</h1><p class="lead">같은 조건을 벡터 검색 뒤에 거는 것과 앞에 거는 것을 비교하고, 필터가 할 수 있는 일과 없는 일을 봅니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>조건 걸기</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>질문 + 조건</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>먼저 찾고 거르기 / 거르고 찾기</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>상위 조각</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>남은 수 · 정답</span></div></div><div class="codebox"><div class="codehead"><span>📄 m4_14_filter.py · 사후와 사전 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def post(i, cond):
+    return [(c, d) for c, d in vector(i) if match(chunks[c][&quot;meta&quot;], cond)]
+
+
+def pre(i, cond):
+    allow = np.array([n for n, c in enumerate(ids) if match(chunks[c][&quot;meta&quot;], cond)], dtype=&quot;int64&quot;)
+    params = faiss.SearchParameters(sel=faiss.IDSelectorBatch(allow))
+    D, I = flat.search(Q[i:i + 1], K, params=params)
+    return [(ids[j], float(d)) for j, d in zip(I[0], D[0]) if j &gt;= 0], len(allow)</code></pre></div><ol class="steps"><li><b>사후 필터</b>(<code>post</code>): 벡터로 상위 5개를 찾은 뒤, 조건(<code>match</code>, ‘전체’는 통과)에 맞지 않는 조각을 버립니다. 5개보다 적게 남을 수 있습니다.</li><li><b>사전 필터</b>(<code>pre</code>): 조건에 맞는 조각 번호만 <code>IDSelectorBatch</code>로 넘겨, 그 안에서만 상위 5개를 찾습니다. 늘 5개를 채웁니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>사전 · 사후 필터를 걸면 정답 합계(지금 9/17)는 늘까, 줄까, 그대로일까?</li><li>사후 필터에서 결과가 5개보다 적게 남는 질문은 어느 것일까? (조건이 많은 질문을 보세요)</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>정답 합계는 <b>세 방법 모두 9/17 그대로</b>였습니다. 결과가 줄어든 질문은 Q-028(디지털 · 제주, 3개만 남음)뿐이었습니다. 조건이 많아도(Q-001, 조건 3개) 상위 결과가 이미 조건에 맞으면 줄지 않습니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_14_filter.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>질문     조건                                     벡터만     사후 필터  남은 수     사전 필터   후보 조각
+Q-017  product_type=일반                        1/1       1/1     5       1/1     138
+Q-009  product_type=주문제작                      1/1       1/1     5       1/1     129
+Q-013  -                                      2/2       2/2     5       2/2     196
+Q-002  region=제주, customer_grade=VIP          2/2       2/2     5       2/2     187
+Q-028  product_type=디지털, region=제주            1/2       1/2     3       1/2     112
+Q-001  product_type=냉장식품, region=제주, customer_grade=VIP     2/5       2/5     5       2/5     127
+Q-030  -                                      0/4       0/4     5       0/4     196
+합계                                           9/17      9/17    33      9/17
+
+사후 필터는 상위 5개 중 조건에 맞는 것만 남겨 질문당 5개보다 적어질 수 있다 (남은 수). 사전 필터는 늘 5개를 채운다.</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_14_filter.py --detail Q-028</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>Q-028 고객은 제주인데 상품은 디지털 이용권입니다. 제주 배송비 규정을 적용하나요?
+조건 {&#x27;product_type&#x27;: &#x27;디지털&#x27;, &#x27;region&#x27;: &#x27;제주&#x27;} · 찾아야 할 정책 [&#x27;POL-RET-003&#x27;, &#x27;POL-FEE-001&#x27;]
+
+① 벡터만 상위 5
+     정답 POL-FEE-001#4   0.67  [전체/전체/전체] 배송비·추가배송비 환불 판단
+          EXC-001#1       0.64  [냉장식품/제주/전체] 제주 냉장식품 지연과 배송비
+          FAQ-096#1       0.63  [전체/제주/전체] 제주 주문이면 추가배송비를 내나요?
+          EXC-005#3       0.62  [전체/제주/VIP] VIP 제주 추가배송비
+          FAQ-018#1       0.62  [냉장식품/제주/전체] 제주 냉장식품이 변질됐으면 상품대금과 배송비를 모두 받나요?
+② 사후 필터 (상위 5개 중 조건에 맞는 것만)
+     정답 POL-FEE-001#4   0.67  [전체/전체/전체] 배송비·추가배송비 환불 판단
+          FAQ-096#1       0.63  [전체/제주/전체] 제주 주문이면 추가배송비를 내나요?
+          EXC-005#3       0.62  [전체/제주/VIP] VIP 제주 추가배송비
+③ 사전 필터 (조건에 맞는 조각 112개 안에서 상위 5)
+     정답 POL-FEE-001#4   0.67  [전체/전체/전체] 배송비·추가배송비 환불 판단
+          FAQ-096#1       0.63  [전체/제주/전체] 제주 주문이면 추가배송비를 내나요?
+          EXC-005#3       0.62  [전체/제주/VIP] VIP 제주 추가배송비
+          FAQ-002#1       0.62  [전체/제주/전체] 제주 배송은 수도권보다 늦나요?
+          EXC-005#4       0.61  [전체/제주/VIP] VIP 제주 추가배송비</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>Q-028에서 사후 필터가 버린 조각 2개는 무엇이고 왜 버렸나? 사전 필터는 그 자리를 무엇으로 채웠나?</li><li>필터를 걸었는데 정답 합계가 9/17 그대로인 이유는?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>사후 필터는 디지털 질문에 맞지 않는 <b>냉장식품</b> 조각(EXC-001#1, FAQ-018#1)을 버려 3개만 남겼습니다. 사전 필터는 그 자리를 조건에 맞는 다음 조각(FAQ-002, EXC-005#4)으로 채웠습니다. 엉뚱한 조각은 사라졌지만 빠진 정답 POL-RET-003(디지털 상품 환불)은 들어오지 않았습니다. <b>필터는 후보를 줄일 뿐, 없는 정답을 데려오지 못합니다</b>. 이 질문들은 상위 결과가 이미 조건에 맞아 필터가 바꿀 것이 거의 없었습니다.</p></details><div class="task"><h4>🧪 직접 바꿔 보기 — 상위 k를 10으로 늘리기</h4><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_14_filter.py -k 10</code></pre></div><ol><li>정답 합계는 몇이 되나?</li><li>사후 필터로 남은 조각 수(질문당 10개 중)는?</li></ol></div><details class="qa"><summary>🧪 실제 결과와 해설</summary><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>질문     조건                                     벡터만     사후 필터  남은 수     사전 필터   후보 조각
+Q-017  product_type=일반                        1/1       1/1     9       1/1     138
+Q-009  product_type=주문제작                      1/1       1/1    10       1/1     129
+Q-013  -                                      2/2       2/2    10       2/2     196
+Q-002  region=제주, customer_grade=VIP          2/2       2/2    10       2/2     187
+Q-028  product_type=디지털, region=제주            2/2       2/2     7       2/2     112
+Q-001  product_type=냉장식품, region=제주, customer_grade=VIP     2/5       2/5     9       2/5     127
+Q-030  -                                      1/4       1/4    10       1/4     196
+합계                                          11/17     11/17    65     11/17
+
+사후 필터는 상위 10개 중 조건에 맞는 것만 남겨 질문당 10개보다 적어질 수 있다 (남은 수). 사전 필터는 늘 10개를 채운다.</code></pre></div><p>k를 10으로 늘리면 정답 합계가 11/17로 오르지만, 늘어난 것은 필터가 아니라 <b>더 많이 가져온 덕</b>입니다. 사후 필터로 남은 조각은 합계 65개(질문당 평균 약 9개)입니다. 결국 필터는 엉뚱한 조각을 빼는 일을 하고, 정답을 늘리는 것은 다른 방법(더 가져오기, 정책 단위 순위, 관계로 넓히기)의 몫입니다.</p></details><div class="task"><h4>📝 스스로 설명해 보기 — 남에게 설명하듯 3~4문장으로</h4><ol><li>사전 필터와 사후 필터를 각각 언제 쓰는지, 이 탭의 Q-028을 예로 설명해 보세요.</li></ol></div><details class="qa"><summary>📝 모범 설명과 점검 기준</summary><p><b>1. 사전 필터와 사후 필터를 각각 언제 쓰는지, 이 탭의 Q-028을 예로 설명해 보세요.</b></p><p>사후 필터는 먼저 찾고 조건에 안 맞는 것을 버리므로 결과가 줄 수 있습니다(Q-028은 5개 중 3개). 사전 필터는 조건에 맞는 조각 안에서만 찾으므로 늘 k개를 채웁니다. 조건이 엄격하고 결과 개수가 중요하면 사전 필터, 후보가 많고 조건을 나중에 바꿔 보고 싶으면 사후 필터가 편합니다. 둘 다 순위 밖의 정답(Q-028의 POL-RET-003)을 데려오지는 못합니다.</p><p style="font-size:14px"><b>이것이 들어 있으면 충분합니다</b></p><ul style="font-size:14px"><li>사후 = 찾고 버림, 결과 수 줄어듦</li><li>사전 = 거르고 찾음, k개 채움</li><li>필터는 정답을 새로 데려오지 못함</li></ul></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 사후 필터의 단점은?</p><label><input type="radio" name="qz4_1" value="0"/> 느리다</label><label><input type="radio" name="qz4_1" value="1"/> 걸러진 만큼 결과가 k개보다 적어진다</label><label><input type="radio" name="qz4_1" value="2"/> 정확하지 않다</label><label><input type="radio" name="qz4_1" value="3"/> 조건을 못 건다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>Q-028은 5개 중 3개만 남았습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 필터만으로 정답 수가 늘지 않는 이유는?</p><label><input type="radio" name="qz4_2" value="0"/> FAISS 오류</label><label><input type="radio" name="qz4_2" value="1"/> 필터는 맞지 않는 것을 빼는 일만 하고, 순위 밖의 정답을 새로 찾지는 않아서</label><label><input type="radio" name="qz4_2" value="2"/> 조건이 없어서</label><label><input type="radio" name="qz4_2" value="3"/> 임베딩이 틀려서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>새로 찾으려면 넓히는 방법이 필요합니다.</p></div></div></div></section>
+<!-- 04 -->
+<section aria-labelledby="tab-u04" class="panel" hidden="" id="u04" role="tabpanel"><div class="crumb">Part 4. 실습 15 온톨로지 확장 동적 필터 · A5-M4</div><h1>04. 실습 15 · 정책 단위 순위와 온톨로지 확장 동적 필터</h1><p class="lead">같은 문서가 칸을 차지하는 문제를 정책 단위 순위로 풀고, 온톨로지 ‘함께적용’으로 후보를 넓혀 같은 정책 수에서 비교합니다.</p><p>실습 12~14에서 본 두 가지 문제를 차례로 다룹니다. ① 같은 문서가 여러 칸을 차지한다 → <b>정책 단위로 순위</b>를 매긴다. ② 필터는 줄이기만 한다 → 온톨로지 관계로 후보를 <b>넓힌 뒤</b> 그 안에서 고른다. 넓히는 범위가 질문마다 달라지므로 <b>동적 필터</b>라고 부릅니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>후보 넓히기</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>질문 벡터 + 그래프</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>상위 정책 → 함께적용 이웃</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>정책 N개</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>정답 · 정책 수</span></div></div><div class="codebox"><div class="codehead"><span>📄 m4_15_dynamic.py · 확장 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def policy_scores(i, cond=None):
+    &quot;&quot;&quot;정책마다 가장 가까운 조각의 점수 (cond가 있으면 조건에 맞는 조각만)&quot;&quot;&quot;
+    s = X @ Q[i]
+    best = {}
+    for j, v in enumerate(s):
+        c = chunks[ids[j]]
+        if c[&quot;kind&quot;] == &quot;policy&quot; and (cond is None or match(c[&quot;meta&quot;], cond)):
+            if float(v) &gt; best.get(c[&quot;doc_id&quot;], (-1, &quot;&quot;))[0]:
+                best[c[&quot;doc_id&quot;]] = (float(v), ids[j])
+    return best
+
+
+def together(p):
+    &quot;&quot;&quot;온톨로지 그래프에서 p와 &#x27;함께적용&#x27;으로 이어진 정책 (방향 무관)&quot;&quot;&quot;
+    out = set()
+    for s, o, k in list(G.out_edges(p, keys=True)) + list(G.in_edges(p, keys=True)):
+        if k == &quot;함께적용&quot;:
+            out.add(o if s == p else s)
+    return out
+
+
+def top(scores, n, allow=None):
+    keys = [d for d in scores if allow is None or d in allow]
+    return sorted(keys, key=lambda d: -scores[d][0])[:n]
+
+
+def expand(i):
+    sc = policy_scores(i)
+    seed = top(sc, a.seed)
+    added = {x: d for d in seed for x in together(d) if x not in seed}
+    cand = set(seed) | set(added)
+    return sc, seed, added, top(sc, a.keep, cand)</code></pre></div><ol class="steps"><li><code>policy_scores</code>: 정책마다 <b>가장 가까운 조각의 점수</b>를 그 정책의 점수로 씁니다. 같은 문서가 여러 칸을 차지하지 않습니다.</li><li><code>together</code>: 온톨로지 그래프에서 그 정책과 <b>함께적용</b>으로 이어진 정책을 찾습니다.</li><li><code>expand</code>: 상위 정책 5개(seed)와 그 이웃을 후보로 넓히고, 후보 안에서 벡터 점수 상위 7개(keep)를 남깁니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>조각 상위 5(9/17)를 ‘정책 단위 상위 7’로 바꾸면 정답이 몇 개가 될까요?</li><li>관계로 넓히는 확장(④)은 늘 ②보다 나을까요?</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>정책 단위로 바꾸자 <b>15/17</b>, 확장은 <b>16/17</b>입니다. 하지만 아래 ‘직접 바꿔 보기’처럼 seed · keep 값에 따라 확장이 오히려 <b>나빠지기도</b> 합니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_15_dynamic.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>질문          ① 조각 상위 5     ② 정책 상위 7     ③ 메타 제한 7     ③ 온톨 제한 7     ④ 확장 동적 7
+Q-017             1/1           1/1           1/1           1/1           1/1
+Q-009             1/1           1/1           1/1           1/1           1/1
+Q-013             2/2           2/2           2/2           2/2           2/2
+Q-002             2/2           2/2           2/2           2/2           2/2
+Q-028             1/2           2/2           2/2           2/2           2/2
+Q-001             2/5           5/5           5/5           5/5           5/5
+Q-030             0/4           2/4           2/4           2/4           3/4
+정답 합계            9/17         15/17         15/17         15/17         16/17
+정책 수               24            49            49            47            49
+
+확장 동적 필터: 상위 정책 5개 + 함께적용 이웃 → 그 안에서 7개</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_15_dynamic.py --detail Q-030</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>Q-030 배송지연과 반품이 관련돼 있는데 환불기간은 어떻게 계산하나요?
+찾아야 할 정책 [&#x27;POL-DEL-001&#x27;, &#x27;POL-CAN-001&#x27;, &#x27;POL-RET-001&#x27;, &#x27;POL-REF-001&#x27;]
+
+[1] 벡터로 정한 상위 정책 5개 (정책마다 가장 가까운 조각 점수)
+        POL-FEE-001  0.62  POL-FEE-001#5
+        EXC-003      0.61  EXC-003#1
+   정답 POL-RET-001  0.56  POL-RET-001#7
+        EXC-001      0.53  EXC-001#5
+   정답 POL-REF-001  0.53  POL-REF-001#1
+[2] 온톨로지 &#x27;함께적용&#x27;으로 더한 정책
+        EXC-005      0.50  ← POL-FEE-001
+        EXC-004      0.44  ← POL-FEE-001
+        EXC-002      0.53  ← POL-FEE-001
+   정답 POL-CAN-001  0.51  ← EXC-003
+        POL-RET-002  0.47  ← EXC-001
+        POL-DEL-002  0.46  ← EXC-001
+        EXC-007      0.44  ← POL-REF-001
+[3] 넓힌 후보 12개 안에서 벡터 점수 상위 7개
+        POL-FEE-001  0.62
+        EXC-003      0.61
+   정답 POL-RET-001  0.56
+        EXC-001      0.53
+   정답 POL-REF-001  0.53
+        EXC-002      0.53
+   정답 POL-CAN-001  0.51
+
+정답 3/4 · 빠진 정책 [&#x27;POL-DEL-001&#x27;]
+비교: 확장 없이 정책 상위 7개 → 정답 2/4</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>① → ②로 정답이 몇 개 늘었나? 모은 정책 수는?</li><li>③ 메타 · 온톨로지 ‘제한’ 필터는 ②와 비교해 무엇이 달라졌나?</li><li>④ 확장이 ②보다 나은 질문은 어느 것이고, 어떤 관계로 정답이 들어왔나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>정책 단위로 순위를 매기자 9/17 → <b>15/17</b>이 됩니다. 같은 문서가 칸을 독차지하던 문제가 사라졌기 때문입니다. 줄이는 필터(③)는 이번에도 정답 수를 바꾸지 못했습니다. 확장 동적 필터(④)는 같은 정책 수(49개)로 <b>16/17</b>입니다. Q-030에서 상위 정책과 함께적용으로 이어진 정책이 후보에 들어와 3/4가 되었습니다. 남은 하나(POL-DEL-001)는 질문과 뜻도 멀고 상위 정책과도 이어져 있지 않습니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_15_dynamic.py --detail Q-001</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>Q-001 제주 VIP가 냉장 케이크를 주문했는데 배송이 늦고 상품이 변질됐습니다. 배송비까지 환불되나요?
+찾아야 할 정책 [&#x27;EXC-001&#x27;, &#x27;POL-DEL-002&#x27;, &#x27;POL-RET-002&#x27;, &#x27;POL-FEE-001&#x27;, &#x27;EXC-005&#x27;]
+
+[1] 벡터로 정한 상위 정책 5개 (정책마다 가장 가까운 조각 점수)
+   정답 EXC-005      0.61  EXC-005#3
+   정답 EXC-001      0.61  EXC-001#4
+        POL-MEM-001  0.60  POL-MEM-001#4
+   정답 POL-RET-002  0.56  POL-RET-002#4
+        EXC-006      0.53  EXC-006#4
+[2] 온톨로지 &#x27;함께적용&#x27;으로 더한 정책
+   정답 POL-FEE-001  0.52  ← EXC-001
+   정답 POL-DEL-002  0.51  ← POL-RET-002
+        EXC-007      0.48  ← POL-RET-002
+        POL-RET-001  0.48  ← POL-RET-002
+        POL-CPN-001  0.43  ← EXC-006
+[3] 넓힌 후보 10개 안에서 벡터 점수 상위 7개
+   정답 EXC-005      0.61
+   정답 EXC-001      0.61
+        POL-MEM-001  0.60
+   정답 POL-RET-002  0.56
+        EXC-006      0.53
+   정답 POL-FEE-001  0.52
+   정답 POL-DEL-002  0.51
+
+정답 5/5 · 빠진 정책 없음
+비교: 확장 없이 정책 상위 7개 → 정답 5/5</code></pre></div><div class="note"><b>확장이 늘 이기는 것은 아니다</b><p>Q-001은 확장 없이 정책 상위 7개만으로도 5/5입니다. 확장은 벡터 순위 밖에 있는 정책을 관계로 데려올 때만 차이를 만듭니다. 그래서 비교는 <b>같은 정책 수</b>에서 합니다(② 49개 vs ④ 49개).</p></div><div class="task"><h4>🧪 직접 바꿔 보기 — 확장의 출발 정책 수(seed)와 남길 수(keep) 바꾸기</h4><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_15_dynamic.py --seed 3 --keep 5
+python m4_15_dynamic.py --seed 5 --keep 5</code></pre></div><ol><li>keep=5일 때 ② 정책 상위 5와 ④ 확장 동적 5 중 어느 쪽이 나은가?</li><li>seed=3과 seed=5의 차이는 어느 질문에서 나는가?</li></ol></div><details class="qa"><summary>🧪 실제 결과와 해설</summary><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>질문          ① 조각 상위 5     ② 정책 상위 5     ③ 메타 제한 5     ③ 온톨 제한 5     ④ 확장 동적 5
+Q-017             1/1           1/1           1/1           1/1           1/1
+Q-009             1/1           1/1           1/1           1/1           1/1
+Q-013             2/2           2/2           2/2           2/2           2/2
+Q-002             2/2           2/2           2/2           2/2           2/2
+Q-028             1/2           2/2           2/2           2/2           1/2
+Q-001             2/5           3/5           3/5           3/5           3/5
+Q-030             0/4           2/4           2/4           2/4           1/4
+정답 합계            9/17         13/17         13/17         13/17         11/17
+정책 수               24            35            35            35            35
+
+확장 동적 필터: 상위 정책 3개 + 함께적용 이웃 → 그 안에서 5개
+
+질문          ① 조각 상위 5     ② 정책 상위 5     ③ 메타 제한 5     ③ 온톨 제한 5     ④ 확장 동적 5
+Q-017             1/1           1/1           1/1           1/1           1/1
+Q-009             1/1           1/1           1/1           1/1           1/1
+Q-013             2/2           2/2           2/2           2/2           2/2
+Q-002             2/2           2/2           2/2           2/2           2/2
+Q-028             1/2           2/2           2/2           2/2           2/2
+Q-001             2/5           3/5           3/5           3/5           3/5
+Q-030             0/4           2/4           2/4           2/4           2/4
+정답 합계            9/17         13/17         13/17         13/17         13/17
+정책 수               24            35            35            35            35
+
+확장 동적 필터: 상위 정책 5개 + 함께적용 이웃 → 그 안에서 5개</code></pre></div><p>seed=3 · keep=5에서는 확장이 <b>11/17로 오히려 나쁩니다</b>(② 13/17). 함께적용 이웃이 후보로 들어와, 벡터로는 이미 5위 안에 있던 정답(Q-028의 POL-RET-003, Q-030의 하나)을 밀어냈습니다. seed=5 · keep=5는 13/17로 같습니다. 확장은 <b>남길 자리(keep)가 넉넉할 때</b> 득을 봅니다. 좋은 방법도 설정값에 따라 손해가 되므로, 값을 바꿀 때마다 같은 정책 수에서 비교합니다.</p></details><div class="task"><h4>🧭 이런 상황이라면 어떻게 하겠습니까?</h4><p>상담 화면에 근거 정책을 5개까지만 보여 줄 수 있습니다. 어떤 방법을 쓰겠습니까?</p><ol type="A"><li>④ 확장 동적 (seed 3, keep 5)</li><li>② 정책 상위 5</li><li>④ 확장 동적 (seed 5, keep 5)</li></ol><p style="margin:6px 0 0;font-size:14px">하나를 고르고, 이 탭의 숫자 중 무엇을 근거로 삼을지 한 줄로 적어 보세요.</p></div><details class="qa"><summary>🧭 판단의 근거 보기</summary><p>숫자로 보면 <b>B</b>와 <b>C</b>가 13/17로 같고 A는 11/17입니다. 같다면 단순한 B가 낫습니다. 확장은 계산 · 설명할 것이 늘어나는데 이득이 없기 때문입니다. 자리를 7개까지 쓸 수 있다면 확장(16/17)이 정책 상위 7(15/17)보다 낫습니다. <b>조건(몇 개를 보여 줄 수 있나)에 따라 고르는 방법이 달라집니다.</b></p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 정책 단위로 순위를 매기는 방법은?</p><label><input type="radio" name="qz5_1" value="0"/> 정책 제목 길이</label><label><input type="radio" name="qz5_1" value="1"/> 정책마다 가장 가까운 조각의 점수를 정책 점수로</label><label><input type="radio" name="qz5_1" value="2"/> 정책 ID 순서</label><label><input type="radio" name="qz5_1" value="3"/> 조각 수</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>policy_scores입니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 확장 동적 필터와 제한 필터의 차이는?</p><label><input type="radio" name="qz5_2" value="0"/> 같다</label><label><input type="radio" name="qz5_2" value="1"/> 제한 필터는 후보를 줄이고, 확장 동적 필터는 관계로 후보를 넓힌 뒤 고른다</label><label><input type="radio" name="qz5_2" value="2"/> 확장은 API를 쓴다</label><label><input type="radio" name="qz5_2" value="3"/> 제한은 그래프를 쓴다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>④는 함께적용 이웃을 더합니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q3.</b> 방법을 비교할 때 ‘같은 정책 수’로 맞추는 이유는?</p><label><input type="radio" name="qz5_3" value="0"/> 보기 좋아서</label><label><input type="radio" name="qz5_3" value="1"/> 많이 모으면 정답이 늘어나는 것은 당연해서, 같은 양에서 비교해야 공정하므로</label><label><input type="radio" name="qz5_3" value="2"/> FAISS 규칙</label><label><input type="radio" name="qz5_3" value="3"/> API 요금</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>②와 ④ 모두 49개입니다.</p></div></div></div></section>
+<!-- 05 -->
+<section aria-labelledby="tab-u05" class="panel" hidden="" id="u05" role="tabpanel"><div class="crumb">Part 5. 운영 — 캐시 · 추가 · 저장 · A5-M4</div><h1>05. 운영 1 · 임베딩 캐시 — 바뀐 것만 다시 만들기</h1><p class="lead">문서가 고쳐지거나 늘어날 때 전부 다시 임베딩하지 않도록, 캐시 열쇠와 무효화 규칙을 정합니다.</p><p>지금까지 임베딩은 <code>embeddings.npz</code> 하나에 통째로 저장했습니다. 파일이 있으면 쓰고, 없으면 196개를 모두 다시 만듭니다. 그런데 실제로는 정책 문서 하나만 고쳐지거나 FAQ가 하나 늘어나는 일이 대부분입니다. 그때마다 전부 다시 임베딩하면 시간과 요금이 낭비됩니다.</p><h3>캐시 정책 — 무엇을 열쇠로 할까</h3><div class="tablewrap"><table><thead><tr><th>열쇠 후보</th><th>문제</th></tr></thead><tbody><tr><td>조각 ID (POL-VER-001#2)</td><td>내용이 바뀌어도 ID는 같아서 <b>옛 벡터</b>를 계속 씀</td></tr><tr><td>글 내용만</td><td>모델을 바꿨는데 옛 모델의 벡터를 꺼내 씀 (차원 · 뜻 공간이 다름)</td></tr><tr class="hl"><td><b>모델 이름 + 글 내용의 해시</b></td><td>내용이 한 글자라도 바뀌거나 모델이 바뀌면 열쇠가 달라져 자동으로 새로 만듦</td></tr></tbody></table></div><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>바뀐 것만 임베딩</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>글 목록</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>열쇠로 캐시 찾기</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>벡터 · 적중/새로 만들 것</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>새로 만들 개수</span></div></div><div class="codebox"><div class="codehead"><span>📄 m4lib.py · 캐시 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def cache_key(text, model=None):
+    &quot;&quot;&quot;캐시 열쇠 = 모델 이름 + 글 내용의 해시. 글이 한 글자라도 바뀌거나 모델이 바뀌면 다른 열쇠가 된다.&quot;&quot;&quot;
+    return hashlib.sha256(f&quot;{model or EMBED_MODEL}\n{text}&quot;.encode(&quot;utf-8&quot;)).hexdigest()[:20]
+
+def embed_with_cache(texts, apply=False, model=None):
+    &quot;&quot;&quot;캐시에 있으면 꺼내 쓰고, 없는 것만 API로 임베딩한다. apply=False면 무엇을 임베딩할지만 알려 준다.&quot;&quot;&quot;
+    cache = load_cache()
+    keys = [cache_key(t, model) for t in texts]
+    miss = [i for i, k in enumerate(keys) if k not in cache]
+    tokens = 0
+    if miss and apply:
+        vecs, tokens = embed_texts([texts[i] for i in miss])
+        for i, v in zip(miss, vecs):
+            cache[keys[i]] = v
+        save_cache(cache)
+    vecs = [cache.get(k) for k in keys]
+    return vecs, {&quot;total&quot;: len(texts), &quot;hit&quot;: len(texts) - len(miss), &quot;miss&quot;: miss, &quot;tokens&quot;: tokens}</code></pre></div><ol class="steps"><li><code>cache_key</code>: <code>sha256(모델 + 글)</code>의 앞 20자리. 같은 글 · 같은 모델이면 늘 같은 열쇠입니다.</li><li><code>embed_with_cache</code>: 열쇠가 캐시에 있으면 꺼내 쓰고, 없는 것(<code>miss</code>)만 모아 API로 보냅니다. <code>apply=False</code>면 무엇을 보낼지만 알려 줍니다.</li><li>캐시는 <code>outputs_m4/cache/vectors.npz</code>에 열쇠 → 벡터로 저장합니다. 처음 실행하면 이미 만든 <code>embeddings.npz</code>로 채웁니다(API 호출 없음).</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_ops_cache.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>모델 text-embedding-3-small · 캐시에 저장된 벡터 226개
+예: FAQ-001#1 → 열쇠 c91fda4de2d41cc941dc
+
+전체 203개 · 캐시 적중 203개 · 새로 임베딩할 것 0개
+새로 보낼 글자 0자 · (--apply를 붙이면 이것만 API로 보냄)</code></pre></div><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>문서 하나를 고치고 FAQ 하나를 더하면, 204개 중 몇 개를 새로 임베딩해야 할까요?</li><li>같은 상황에서 열쇠를 ‘조각 ID’로 했다면 몇 개를 새로 만들까요? 그 결과 검색은 어떻게 될까요?</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>내용 해시를 열쇠로 하면 <b>2개</b>(고친 조각 1 + 새 FAQ 1)입니다. 조각 ID를 열쇠로 하면 새 FAQ <b>1개</b>만 만들고, 고친 POL-VER-001#2는 ID가 같아 옛 벡터를 씁니다. 비용은 더 적지만 <b>고친 내용이 검색에 반영되지 않는 오류</b>가 생깁니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_ops_cache.py --simulate</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>가정: POL-VER-001#2 조각에 문장 하나 추가 · FAQ-101 새로 추가
+
+모델 text-embedding-3-small · 캐시에 저장된 벡터 226개
+예: FAQ-001#1 → 열쇠 c91fda4de2d41cc941dc
+
+전체 204개 · 캐시 적중 202개 · 새로 임베딩할 것 2개
+   - POL-VER-001#2  (245자)
+   - FAQ-101#1  (94자)
+새로 보낼 글자 339자 · (--apply를 붙이면 이것만 API로 보냄)</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_ops_cache.py --model text-embedding-3-large</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>모델 text-embedding-3-large · 캐시에 저장된 벡터 226개
+예: FAQ-001#1 → 열쇠 2e6908cae8bba15ec96a
+
+전체 203개 · 캐시 적중 0개 · 새로 임베딩할 것 203개
+   - FAQ-001#1  (71자)
+   - FAQ-002#1  (75자)
+   - FAQ-004#1  (85자)
+   - FAQ-005#1  (69자)
+   - FAQ-006#1  (76자)
+   - FAQ-007#1  (69자)
+   - FAQ-010#1  (75자)
+   - FAQ-011#1  (68자)
+   - FAQ-012#1  (55자)
+   - FAQ-013#1  (69자)
+   … 외 193개
+새로 보낼 글자 27,890자 · (--apply를 붙이면 이것만 API로 보냄)</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>문서 하나를 고치고 FAQ 하나를 더했을 때 새로 임베딩할 것은 몇 개인가? 조각 ID를 열쇠로 했다면?</li><li>모델을 바꾸면 왜 전부 다시 만들어야 하나? 옛 벡터와 새 벡터를 섞어 쓰면 어떻게 될까?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>바뀐 조각 1개와 새 FAQ 1개, <b>2개만</b>(339자) 보내면 됩니다. 조각 ID를 열쇠로 했다면 POL-VER-001#2는 ID가 같아 옛 벡터를 그대로 써서 <b>고친 내용이 검색에 반영되지 않습니다</b>. 모델이 다르면 벡터의 뜻 공간이 달라 서로 비교할 수 없습니다(차원도 1536 → 3072). 그래서 모델을 바꾸면 질문까지 포함해 전부 다시 만들고, 캐시 열쇠에 모델 이름을 넣어 섞이지 않게 합니다.</p></details><h3>캐시 정책 정리</h3><div class="tablewrap"><table><thead><tr><th>바뀐 것</th><th>다시 임베딩</th><th>이유</th></tr></thead><tbody><tr><td>조각 내용</td><td>그 조각만</td><td>열쇠(내용 해시)가 바뀜</td></tr><tr><td>새 문서 추가</td><td>새 조각만</td><td>열쇠가 캐시에 없음</td></tr><tr><td>청킹 방법 (소제목 → 글자 300)</td><td>거의 전부</td><td>조각 글이 모두 바뀜</td></tr><tr><td>임베딩 모델</td><td>전부 (질문 포함)</td><td>벡터 공간이 다름</td></tr><tr><td>문서 삭제</td><td>없음 (인덱스에서 빼기만)</td><td>다음 탭</td></tr><tr><td>질문</td><td>새 질문만</td><td>같은 질문은 캐시 적중 — 자주 들어오는 질문은 응답이 빨라짐</td></tr></tbody></table></div><div class="ask"><b>🔍 더 알아보기</b><p><b>💬 LLM 채팅창에 물어보기</b> — 파일이 필요 없는 개념 질문입니다. 평소 쓰는 채팅창(ChatGPT, Claude 등)에 붙여 넣으면 됩니다.</p><div class="codebox"><div class="codehead"><span>채팅창에 붙여 넣기</span><button class="copy" type="button">코드 복사</button></div><pre><code>RAG에서 임베딩 캐시를 설계할 때 캐시 키를 무엇으로 해야 하는지, 캐시를 언제 무효화해야 하는지(문서 수정, 모델 변경, 청킹 변경), 그리고 질문 임베딩 캐시와 답변 캐시(semantic cache)의 차이를 설명해 줘.</code></pre></div><p><b>🌐 웹 검색창에 입력할 검색어</b> — 더 읽고 싶을 때: <code>embedding cache invalidation</code>, <code>content hash cache key</code>, <code>semantic cache LLM</code>, <code>OpenAI embeddings batch API 비용</code></p></div><div class="task"><h4>🧭 이런 상황이라면 어떻게 하겠습니까?</h4><p>임베딩 모델을 text-embedding-3-small에서 3-large로 바꾸려고 합니다. 서비스는 멈추면 안 됩니다.</p><ol type="A"><li>캐시를 지우고 그 자리에서 다시 임베딩한다</li><li>새 모델로 전부 다시 임베딩해 <b>새 인덱스</b>를 따로 만들고, 평가 질문으로 비교한 뒤 바꿔 끼운다</li><li>새로 들어오는 문서만 새 모델로 임베딩한다</li></ol><p style="margin:6px 0 0;font-size:14px">하나를 고르고, 이 탭의 숫자 중 무엇을 근거로 삼을지 한 줄로 적어 보세요.</p></div><details class="qa"><summary>🧭 판단의 근거 보기</summary><p><b>B</b>입니다. 이 탭의 결과처럼 모델을 바꾸면 203개 모두 캐시에 없고, 옛 벡터와 새 벡터는 비교할 수 없습니다. C는 두 모델의 벡터가 한 인덱스에 섞여 검색이 망가집니다. A는 다시 만드는 동안 검색이 안 됩니다. 새 인덱스를 따로 만들어 <b>평가 점수가 나빠지지 않는지</b> 확인한 뒤 바꾸고, 문제가 생기면 옛 인덱스로 되돌립니다(운영 3 탭).</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 캐시 열쇠에 모델 이름을 넣는 이유는?</p><label><input type="radio" name="qz6_1" value="0"/> 보기 좋아서</label><label><input type="radio" name="qz6_1" value="1"/> 모델을 바꿨을 때 옛 모델의 벡터가 섞여 나오지 않게</label><label><input type="radio" name="qz6_1" value="2"/> 해시가 짧아져서</label><label><input type="radio" name="qz6_1" value="3"/> API가 요구해서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>모델이 다르면 벡터를 비교할 수 없습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 조각 ID를 캐시 열쇠로 쓰면 생기는 문제는?</p><label><input type="radio" name="qz6_2" value="0"/> 느려진다</label><label><input type="radio" name="qz6_2" value="1"/> 내용을 고쳐도 옛 벡터를 계속 써서 수정이 검색에 반영되지 않는다</label><label><input type="radio" name="qz6_2" value="2"/> 용량이 커진다</label><label><input type="radio" name="qz6_2" value="3"/> 없다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>그래서 내용 해시를 씁니다.</p></div></div></div></section>
+<!-- 06 -->
+<section aria-labelledby="tab-u06" class="panel" hidden="" id="u06" role="tabpanel"><div class="crumb">Part 5. 운영 — 캐시 · 추가 · 저장 · A5-M4</div><h1>06. 운영 2 · 인덱스에 추가 · 삭제 · 교체</h1><p class="lead">문서가 늘거나 바뀔 때 인덱스를 처음부터 다시 만들지 않고 바꾸는 방법과, 인덱스 종류별로 되는 일과 안 되는 일을 봅니다.</p><p>캐시로 벡터를 아꼈다면, 인덱스도 처음부터 다시 만들지 않고 <b>바뀐 것만 넣고 빼는</b> 것이 좋습니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>증분 갱신</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>벡터 + 고정 번호</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>add · remove</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>Q-030 상위 5</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>한 번에 만든 것과 같은가</span></div></div><div class="codebox"><div class="codehead"><span>📄 m4_ops_update.py (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>full = faiss.IndexIDMap2(faiss.IndexFlatIP(X.shape[1]))
+full.add_with_ids(X, num)
+print(f&quot;[기준] 196개를 한 번에 넣은 인덱스 · Q-030 상위 {K}: {top(full)}\n&quot;)
+
+new = np.array([i for i, c in enumerate(ids) if c.startswith(&quot;EXC-003&quot;)], dtype=&quot;int64&quot;)
+old = np.array([i for i in num if i not in set(new)], dtype=&quot;int64&quot;)
+idx = faiss.IndexIDMap2(faiss.IndexFlatIP(X.shape[1]))
+idx.add_with_ids(X[old], old)
+print(f&quot;[1] EXC-003 조각 {len(new)}개를 빼고 {idx.ntotal}개로 시작 · Q-030 상위 {K}: {top(idx)}&quot;)
+idx.add_with_ids(X[new], new)
+print(f&quot;[2] EXC-003 조각 {len(new)}개 추가 → {idx.ntotal}개 · Q-030 상위 {K}: {top(idx)}&quot;)
+print(f&quot;    기준과 같은가: {top(idx) == top(full)}&quot;)
+
+target = ids.index(&quot;POL-FEE-001#5&quot;)
+idx.remove_ids(np.array([target], dtype=&quot;int64&quot;))
+print(f&quot;[3] POL-FEE-001#5 삭제 → {idx.ntotal}개 · Q-030 상위 {K}: {top(idx)}&quot;)
+idx.add_with_ids(X[target:target + 1], np.array([target], dtype=&quot;int64&quot;))
+print(f&quot;[4] 같은 번호로 다시 추가(교체) → {idx.ntotal}개 · 기준과 같은가: {top(idx) == top(full)}\n&quot;)</code></pre></div><ol class="steps"><li><code>IndexIDMap2</code>: 벡터마다 <b>우리가 정한 번호</b>를 붙여 넣습니다. 번호로 빼고(<code>remove_ids</code>) 다시 넣을 수 있습니다.</li><li>[1]~[2] EXC-003 조각을 빼고 만든 뒤 나중에 추가 → 한 번에 만든 인덱스와 결과가 같은지 봅니다.</li><li>[3]~[4] 조각 하나를 삭제했다가 같은 번호로 다시 넣습니다. 문서를 고쳤을 때 ‘교체’가 이렇게 됩니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>EXC-003 조각을 빼고 인덱스를 만든 뒤 나중에 추가하면, 처음부터 한 번에 만든 인덱스와 검색 결과가 같을까요?</li><li>HNSW에서 조각 하나를 지우면 어떻게 될까요?</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>Flat + 번호 붙이기(IDMap)에서는 나중에 추가해도 <b>결과가 같았습니다</b>(True). HNSW는 <b>삭제 자체가 에러</b>입니다(remove_ids not implemented).</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_ops_update.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[기준] 196개를 한 번에 넣은 인덱스 · Q-030 상위 5: [&#x27;POL-FEE-001#5&#x27;, &#x27;EXC-003#1&#x27;, &#x27;POL-FEE-001#3&#x27;, &#x27;EXC-003#2&#x27;, &#x27;POL-FEE-001#4&#x27;]
+
+[1] EXC-003 조각 6개를 빼고 190개로 시작 · Q-030 상위 5: [&#x27;POL-FEE-001#5&#x27;, &#x27;POL-FEE-001#3&#x27;, &#x27;POL-FEE-001#4&#x27;, &#x27;POL-FEE-001#2&#x27;, &#x27;POL-FEE-001#1&#x27;]
+[2] EXC-003 조각 6개 추가 → 196개 · Q-030 상위 5: [&#x27;POL-FEE-001#5&#x27;, &#x27;EXC-003#1&#x27;, &#x27;POL-FEE-001#3&#x27;, &#x27;EXC-003#2&#x27;, &#x27;POL-FEE-001#4&#x27;]
+    기준과 같은가: True
+[3] POL-FEE-001#5 삭제 → 195개 · Q-030 상위 5: [&#x27;EXC-003#1&#x27;, &#x27;POL-FEE-001#3&#x27;, &#x27;EXC-003#2&#x27;, &#x27;POL-FEE-001#4&#x27;, &#x27;EXC-003#6&#x27;]
+[4] 같은 번호로 다시 추가(교체) → 196개 · 기준과 같은가: True
+
+[인덱스 종류별로 되는 일]
+  IVF : 추가 됨 (196개) · 삭제 됨 (1개) · 단, 묶음(centroid)은 처음 train한 데이터 기준 그대로
+  HNSW: 추가는 됨 · 삭제는 안 됨 → &quot;remove_ids not implemented for this type of index&quot;</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>EXC-003을 추가하기 전과 후, Q-030 상위 5는 어떻게 달라졌나?</li><li>HNSW에서 삭제가 안 된다면, 문서가 자주 바뀌는 서비스에서는 어떻게 해야 할까?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>EXC-003(배송중 취소와 반품의 경계)을 넣자 상위 5에 EXC-003 조각 2개가 들어오고, 결과가 한 번에 만든 인덱스와 같아졌습니다. HNSW는 이 버전의 FAISS에서 삭제를 지원하지 않습니다. 삭제된 번호를 따로 기록해 검색 결과에서 걸러 내거나(사후 필터), 주기적으로 새로 만들어 바꿔 끼웁니다. IVF는 추가 · 삭제가 되지만 묶음(centroid)은 처음 학습한 데이터 그대로라, 문서가 많이 바뀌면 다시 학습해야 합니다.</p></details><div class="tablewrap"><table><thead><tr><th>인덱스</th><th>추가</th><th>삭제 · 교체</th><th>주의</th></tr></thead><tbody><tr><td>Flat + IDMap</td><td>됨</td><td>됨</td><td>느려지기 전까지는 가장 단순</td></tr><tr><td>IVF</td><td>됨</td><td>됨</td><td>묶음은 처음 데이터 기준 → 많이 바뀌면 다시 train</td></tr><tr><td>HNSW</td><td>됨</td><td><b>안 됨</b> (실행 결과)</td><td>삭제 목록으로 거르기 또는 주기적 재구성</td></tr></tbody></table></div><div class="ask"><b>🔍 더 알아보기</b><p><b>💬 LLM 채팅창에 물어보기</b> — 파일이 필요 없는 개념 질문입니다. 평소 쓰는 채팅창(ChatGPT, Claude 등)에 붙여 넣으면 됩니다.</p><div class="codebox"><div class="codehead"><span>채팅창에 붙여 넣기</span><button class="copy" type="button">코드 복사</button></div><pre><code>벡터 데이터베이스에서 문서가 추가·수정·삭제될 때 인덱스를 갱신하는 방법(증분 인덱싱, soft delete, 주기적 재구성, 버전 교체)을 비교해 줘. FAISS, Milvus, Qdrant, pgvector는 각각 어떻게 지원해?</code></pre></div><p><b>🌐 웹 검색창에 입력할 검색어</b> — 더 읽고 싶을 때: <code>FAISS IndexIDMap remove_ids</code>, <code>HNSW delete soft delete</code>, <code>incremental indexing vector database</code>, <code>Qdrant upsert</code>, <code>pgvector HNSW</code></p></div><div class="task"><h4>📝 스스로 설명해 보기 — 남에게 설명하듯 3~4문장으로</h4><ol><li>정책 문서 하나의 내용이 바뀌었을 때, 캐시와 인덱스에서 각각 무슨 일이 일어나야 하는지 순서대로 설명해 보세요.</li></ol></div><details class="qa"><summary>📝 모범 설명과 점검 기준</summary><p><b>1. 정책 문서 하나의 내용이 바뀌었을 때, 캐시와 인덱스에서 각각 무슨 일이 일어나야 하는지 순서대로 설명해 보세요.</b></p><p>① 바뀐 문서를 다시 청킹하고 조각마다 캐시 열쇠(모델 + 내용 해시)를 만듭니다. ② 열쇠가 캐시에 없는 조각(바뀐 것)만 임베딩합니다. ③ 인덱스에서 그 문서의 옛 조각 번호를 지우고(remove_ids) 새 벡터를 같은 · 새 번호로 넣습니다. ④ 조각 표(번호 → 원문)도 함께 바꿉니다. HNSW라면 지울 수 없으니 삭제 목록으로 거르거나 다시 만듭니다. ⑤ 평가 질문으로 나빠지지 않았는지 확인합니다.</p><p style="font-size:14px"><b>이것이 들어 있으면 충분합니다</b></p><ul style="font-size:14px"><li>바뀐 조각만 임베딩 (캐시)</li><li>옛 조각 삭제 + 새 조각 추가 (번호)</li><li>원문 표도 갱신</li><li>인덱스 종류의 제약(HNSW)</li><li>평가로 확인</li></ul></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> IndexIDMap2를 쓰는 이유는?</p><label><input type="radio" name="qz7_1" value="0"/> 빨라서</label><label><input type="radio" name="qz7_1" value="1"/> 벡터에 우리가 정한 번호를 붙여 그 번호로 삭제 · 교체할 수 있어서</label><label><input type="radio" name="qz7_1" value="2"/> 용량이 작아서</label><label><input type="radio" name="qz7_1" value="3"/> HNSW 때문에</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>번호가 있어야 무엇을 뺄지 알 수 있습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> HNSW 인덱스에서 문서를 지워야 할 때 쓸 수 있는 방법은?</p><label><input type="radio" name="qz7_2" value="0"/> remove_ids</label><label><input type="radio" name="qz7_2" value="1"/> 삭제 목록을 두고 결과에서 거르거나, 주기적으로 새로 만들어 교체</label><label><input type="radio" name="qz7_2" value="2"/> 임베딩 모델 변경</label><label><input type="radio" name="qz7_2" value="3"/> nprobe 늘리기</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>실행 결과처럼 remove_ids는 지원되지 않습니다.</p></div></div></div></section>
+<!-- 07 -->
+<section aria-labelledby="tab-u07" class="panel" hidden="" id="u07" role="tabpanel"><div class="crumb">Part 5. 운영 — 캐시 · 추가 · 저장 · A5-M4</div><h1>07. 운영 3 · 인덱스를 객체 저장소에 버전으로 저장하기</h1><p class="lead">인덱스 · 조각 표 · manifest를 버전 폴더로 저장하고 다시 불러와 같은 결과가 나오는지 확인합니다. 실제 객체 저장소는 찾아보며 정리합니다.</p><p>인덱스는 지금 내 PC의 파일입니다. 서비스에서는 인덱스를 만든 곳과 검색하는 서버가 다르고, 서버가 여러 대일 수도 있습니다. 그래서 인덱스를 <b>객체 저장소</b>(Amazon S3, Google Cloud Storage, Azure Blob 등)에 올려 두고, 검색 서버가 내려받아 씁니다. 객체 저장소는 ‘버킷’ 안에 ‘경로처럼 생긴 이름(키)’으로 파일을 넣고 꺼내는 저장소입니다.</p><pre class="diagram">인덱스 만드는 곳                     객체 저장소 (버킷)                         검색 서버 (여러 대)
+임베딩 · FAISS ──올리기──▶  a5-rag/index/v1/index.faiss       ──내려받기──▶  불러와서 검색
+                           a5-rag/index/v1/chunks.jsonl
+                           a5-rag/index/v1/manifest.json
+                           a5-rag/index/v2/…  (새 버전)</pre><p>이 실습에서는 <code>outputs_m4/store/</code> 폴더를 버킷으로 보고 같은 모양으로 저장합니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>인덱스 배포</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>인덱스 + 조각 표</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>버전 폴더에 파일 3개</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>v1, v2 …</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>해시 · 같은 검색 결과</span></div></div><div class="codebox"><div class="codehead"><span>📄 m4_ops_store.py · 저장과 불러오기 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>ver = len(list(PREFIX.glob(&quot;v*&quot;))) + 1
+d = PREFIX / f&quot;v{ver}&quot;
+d.mkdir(parents=True)
+(d / &quot;index.faiss&quot;).write_bytes(faiss.serialize_index(index).tobytes())
+with open(d / &quot;chunks.jsonl&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as f:
+    for n, cid in enumerate(E[&quot;chunk_ids&quot;]):
+        f.write(json.dumps({&quot;n&quot;: n, &quot;chunk_id&quot;: cid, &quot;doc_id&quot;: by_id[cid][&quot;doc_id&quot;], &quot;section&quot;: by_id[cid].get(&quot;section&quot;)}, ensure_ascii=False) + &quot;\n&quot;)
+manifest = {&quot;version&quot;: ver, &quot;created&quot;: datetime.datetime.now().isoformat(timespec=&quot;seconds&quot;), &quot;model&quot;: E[&quot;info&quot;][&quot;model&quot;],
+            &quot;dims&quot;: int(X.shape[1]), &quot;count&quot;: int(index.ntotal), &quot;index_type&quot;: &quot;IndexIDMap2(IndexFlatIP)&quot;, &quot;chunking&quot;: &quot;section&quot;,
+            &quot;files&quot;: {f: sha(d / f) for f in (&quot;index.faiss&quot;, &quot;chunks.jsonl&quot;)}}
+(d / &quot;manifest.json&quot;).write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding=&quot;utf-8&quot;)</code></pre></div><ol class="steps"><li><code>faiss.serialize_index</code>: 인덱스를 바이트로 바꿔 파일 하나로 저장합니다.</li><li><code>chunks.jsonl</code>: 벡터 번호 → 조각 ID · 문서 ID · 소제목. 이것이 없으면 찾은 번호가 어느 원문인지 알 수 없습니다.</li><li><code>manifest.json</code>: 모델 · 차원 · 개수 · 청킹 방법 · 파일 해시. 내려받은 쪽은 해시로 파일이 온전한지, 모델이 질문 임베딩과 같은지 확인합니다.</li><li>버전마다 새 폴더(<code>v1</code>, <code>v2</code> …)에 둡니다. 덮어쓰지 않으므로 문제가 생기면 이전 버전으로 돌아갈 수 있습니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_ops_store.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>저장: outputs_m4/store/a5-rag/index/v1
+   chunks.jsonl      16,663 bytes
+   index.faiss    1,205,882 bytes
+   manifest.json        288 bytes
+
+불러오기 · 파일 해시 확인 통과 · 모델 text-embedding-3-small · 196개
+Q-017 상위 3 · 저장 전 [&#x27;POL-RET-001#2&#x27;, &#x27;POL-RET-001#4&#x27;, &#x27;POL-RET-001#3&#x27;] · 불러온 뒤 [&#x27;POL-RET-001#2&#x27;, &#x27;POL-RET-001#4&#x27;, &#x27;POL-RET-001#3&#x27;]
+같은 결과: True</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m4_ops_store.py --list</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>a5-rag/index/v1  · 2026-11-04T03:33:15 · text-embedding-3-small · 196개
+    chunks.jsonl      16,663 bytes
+    index.faiss    1,205,882 bytes
+    manifest.json        288 bytes</code></pre></div><div class="codebox"><div class="codehead"><span>참고 — 실제 S3에 올리고 내려받기 (boto3, 실행하지 않음)</span><button class="copy" type="button">코드 복사</button></div><pre><code>import boto3
+s3 = boto3.client(&quot;s3&quot;)
+for f in (&quot;index.faiss&quot;, &quot;chunks.jsonl&quot;, &quot;manifest.json&quot;):
+    s3.upload_file(f&quot;outputs_m4/store/a5-rag/index/v1/{f}&quot;, &quot;my-bucket&quot;, f&quot;a5-rag/index/v1/{f}&quot;)
+
+# 검색 서버
+s3.download_file(&quot;my-bucket&quot;, &quot;a5-rag/index/v1/index.faiss&quot;, &quot;index.faiss&quot;)</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>manifest.json의 model이 검색 서버의 질문 임베딩 모델과 다르면 어떻게 해야 하나?</li><li>새 버전(v2)을 올렸는데 검색 품질이 나빠졌다. 버전 폴더 방식이면 어떻게 대응할 수 있나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>모델이 다르면 질문 벡터와 문서 벡터를 비교할 수 없으므로 그 인덱스를 쓰지 않고 멈춰야 합니다. manifest를 먼저 읽어 확인하는 이유입니다. 버전을 덮어쓰지 않았으므로 검색 서버가 가리키는 버전을 v1로 되돌리면 됩니다. 어느 버전을 쓸지는 ‘현재 버전’을 적은 작은 파일(예: <code>a5-rag/index/CURRENT</code>)로 관리하기도 합니다.</p></details><div class="task"><h4>🧭 이런 상황이라면 어떻게 하겠습니까?</h4><p>v2 인덱스를 배포한 다음 날, 상담원이 ‘9월 주문 질문에 엉뚱한 정책이 나온다’고 알려 왔습니다. v1 때는 괜찮았습니다.</p><ol type="A"><li>v2 파일을 지우고 다시 만든다</li><li>검색 서버가 가리키는 버전을 v1로 되돌리고, v1 · v2를 같은 평가 질문으로 비교해 원인을 찾는다</li><li>manifest를 고친다</li></ol><p style="margin:6px 0 0;font-size:14px">하나를 고르고, 이 탭의 숫자 중 무엇을 근거로 삼을지 한 줄로 적어 보세요.</p></div><details class="qa"><summary>🧭 판단의 근거 보기</summary><p><b>B</b>입니다. 버전 폴더로 저장했기 때문에 되돌리기가 가장 빠르고 안전합니다. 그다음 두 버전의 manifest(모델 · 개수 · 청킹 방법)를 비교하고, 평가 질문 중 날짜 질문의 결과를 나란히 봅니다. A는 원인을 찾을 근거를 지우고, C는 파일과 manifest가 어긋나 해시 검사에서 걸립니다.</p></details><h3>스스로 찾아보기</h3><div class="tablewrap"><table><thead><tr><th>주제</th><th>찾아볼 것</th><th>검색어</th></tr></thead><tbody><tr><td>객체 저장소</td><td>버킷 · 키 · 버전 관리(versioning) · 수명 주기(오래된 버전 자동 삭제)</td><td><code>S3 versioning</code>, <code>S3 lifecycle rule</code>, <code>GCS object versioning</code></td></tr><tr><td>인덱스 저장 형식</td><td>FAISS 파일 저장과 메모리 매핑(큰 인덱스를 다 읽지 않고 쓰기)</td><td><code>faiss write_index read_index IO_FLAG_MMAP</code></td></tr><tr><td>벡터 DB</td><td>인덱스 저장 · 추가 · 삭제 · 백업을 대신 해 주는 서비스</td><td><code>Milvus</code>, <code>Qdrant snapshot</code>, <code>pgvector</code>, <code>Pinecone</code></td></tr><tr><td>배포</td><td>새 인덱스를 무중단으로 바꿔 끼우기</td><td><code>blue green deployment index</code>, <code>alias swap vector index</code></td></tr></tbody></table></div><div class="ask"><b>🔍 더 알아보기</b><p><b>💬 LLM 채팅창에 물어보기</b> — 파일이 필요 없는 개념 질문입니다. 평소 쓰는 채팅창(ChatGPT, Claude 등)에 붙여 넣으면 됩니다.</p><div class="codebox"><div class="codehead"><span>채팅창에 붙여 넣기</span><button class="copy" type="button">코드 복사</button></div><pre><code>RAG 서비스에서 FAISS 인덱스를 S3 같은 객체 저장소에 버전별로 저장하고 검색 서버가 내려받아 쓰는 구조를 설계하려고 해. manifest에 무엇을 적어야 하는지, 새 버전으로 바꿀 때 무중단으로 바꾸는 방법, 되돌리는 방법을 알려 줘.</code></pre></div></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> chunks.jsonl을 인덱스와 함께 저장하는 이유는?</p><label><input type="radio" name="qz8_1" value="0"/> 용량을 줄이려고</label><label><input type="radio" name="qz8_1" value="1"/> 인덱스가 돌려주는 벡터 번호를 조각 ID · 문서 · 소제목(원문)으로 바꾸려고</label><label><input type="radio" name="qz8_1" value="2"/> API 키 저장</label><label><input type="radio" name="qz8_1" value="3"/> 속도</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>번호만으로는 근거를 보여 줄 수 없습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 버전 폴더(v1, v2 …)로 저장하는 장점은?</p><label><input type="radio" name="qz8_2" value="0"/> 용량이 준다</label><label><input type="radio" name="qz8_2" value="1"/> 덮어쓰지 않아 문제가 생기면 이전 버전으로 돌아갈 수 있다</label><label><input type="radio" name="qz8_2" value="2"/> 검색이 빨라진다</label><label><input type="radio" name="qz8_2" value="3"/> 임베딩이 필요 없다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>되돌리기가 쉬워집니다.</p></div></div></div></section>
+<!-- 08 -->
+<section aria-labelledby="tab-u08" class="panel" hidden="" id="u08" role="tabpanel"><div class="crumb">Part 6. 정리 · A5-M4</div><h1>08. 정리 · 미션 · 종합 점검</h1><h3>질문 7개, 방법별 정답</h3><div class="tablewrap"><table><thead><tr><th>방법</th><th>정답</th><th>모은 문서 수</th></tr></thead><tbody><tr><td>벡터 조각 상위 5 (Flat · IVF nprobe≥4 · HNSW 거의 같음)</td><td>9/17</td><td>24 (FAQ 포함)</td></tr><tr><td>+ 사전 · 사후 필터</td><td>9/17</td><td>-</td></tr><tr><td>정책 단위 상위 7</td><td>15/17</td><td>49</td></tr><tr><td>정책 단위 + 메타 · 온톨로지 제한</td><td>15/17</td><td>47~49</td></tr><tr class="hl"><td><b>온톨로지 확장 동적 필터</b> (상위 5 + 함께적용 → 7)</td><td><b>16/17</b></td><td>49</td></tr></tbody></table></div><h3>만든 파일</h3><div class="tablewrap"><table><thead><tr><th>파일</th><th>내용</th></tr></thead><tbody><tr><td><code>m4lib.py</code></td><td>조각 불러오기 · 임베딩 만들기와 저장 · 길이 맞추기</td></tr><tr><td><code>m4_12_ivf.py</code> ~ <code>m4_15_dynamic.py</code></td><td>실습 12~15</td></tr><tr><td><code>outputs_m4/embeddings.npz</code> · <code>ivf.index</code></td><td>조각 196 + 질문 7의 임베딩, IVF 인덱스</td></tr><tr><td><code>m4_ops_cache.py</code> · <code>m4_ops_update.py</code> · <code>m4_ops_store.py</code></td><td>운영: 임베딩 캐시 · 인덱스 추가/삭제/교체 · 객체 저장소 모양으로 버전 저장</td></tr><tr><td><code>outputs_m4/cache/</code> · <code>outputs_m4/store/</code></td><td>캐시(열쇠 = 모델 + 내용 해시), 버전별 인덱스</td></tr></tbody></table></div><h3>한 장 요약</h3><div class="tablewrap"><table><thead><tr><th>하고 싶은 것</th><th>명령</th></tr></thead><tbody><tr><td>임베딩할 내용 보기</td><td><code>python m4_12_ivf.py --dry-run</code></td></tr><tr><td>임베딩 + Flat · IVF</td><td><code>python m4_12_ivf.py [--nlist 8]</code></td></tr><tr><td>HNSW</td><td><code>python m4_13_hnsw.py</code></td></tr><tr><td>필터 비교</td><td><code>python m4_14_filter.py [--detail Q-028]</code></td></tr><tr><td>동적 필터</td><td><code>python m4_15_dynamic.py [--seed 5 --keep 7] [--detail Q-030]</code></td></tr><tr><td>캐시</td><td><code>python m4_ops_cache.py [--simulate] [--model 모델] [--apply]</code></td></tr><tr><td>추가 · 삭제</td><td><code>python m4_ops_update.py</code></td></tr><tr><td>저장 · 불러오기</td><td><code>python m4_ops_store.py [--list]</code></td></tr></tbody></table></div><h3>에러가 나면</h3><div class="tablewrap"><table><thead><tr><th>메시지</th><th>원인</th><th>할 일</th></tr></thead><tbody><tr><td><code>ModuleNotFoundError: No module named 'faiss'</code></td><td>패키지 미설치</td><td><code>pip install faiss-cpu</code></td></tr><tr><td><code>WARNING clustering 196 points to 8 centroids</code></td><td>조각 수에 비해 묶음이 많다는 경고</td><td>실습에서는 무시해도 됨, <code>--nlist 4</code>로 줄이면 사라짐</td></tr><tr><td><code>KeyError: 'OPENAI_API_KEY'</code></td><td>임베딩 파일이 없어 API를 부르려는데 키가 없음</td><td>.env 확인</td></tr><tr><td><code>ModuleNotFoundError: No module named 'networkx'</code> (실습 15)</td><td>그래프 패키지 미설치</td><td><code>pip install networkx</code></td></tr></tbody></table></div><h3>실습 미션</h3><div class="tablewrap"><table><thead><tr><th>미션</th><th>할 일</th><th>완료 기준</th></tr></thead><tbody><tr><td>1</td><td><code>--nlist 4</code>, <code>16</code>으로 IVF를 다시 만들어 nprobe별 결과 비교</td><td>nlist별 표</td></tr><tr><td>2</td><td><code>--seed 3 --keep 5</code> 등 값을 바꿔 확장 동적 필터와 정책 상위 N 비교 (같은 정책 수에서)</td><td>가장 좋은 값과 이유</td></tr><tr><td>3</td><td>Q-030의 POL-DEL-001이 왜 끝까지 안 들어오는지, 질문과 그 문서의 가장 가까운 조각 점수로 설명</td><td>점수와 근거 문장</td></tr><tr><td>4</td><td>확장 관계에 함께적용 외에 ‘인정사유’ 등을 더해 보고 결과 비교</td><td>정답 · 정책 수 비교</td></tr><tr><td>5</td><td>dataset/faq.csv에 FAQ 한 줄을 더하고 <code>m4_ops_cache.py --apply</code> → 새로 임베딩된 개수 확인</td><td>새로 만든 것 1개</td></tr><tr><td>6 (조사)</td><td>07탭 ‘스스로 찾아보기’ 표의 네 주제 중 둘을 골라, 이 실습의 store 폴더 구조를 실제 서비스(S3 · 벡터 DB)로 옮기는 방법 정리</td><td>한 쪽 정리 + 출처</td></tr></tbody></table></div><h3>종합 이해 평가</h3><div class="task"><h4>📝 스스로 설명해 보기 — 남에게 설명하듯 3~4문장으로</h4><ol><li>이 모듈에서 정답 수를 가장 크게 늘린 것은 무엇이고, 인덱스(IVF · HNSW)를 바꾸는 것은 왜 정답 수를 거의 바꾸지 못했는지 설명해 보세요.</li><li>‘필터를 걸면 정확해진다’는 말이 이 자료에서 맞는지, 근거를 들어 판단해 보세요.</li><li>운영에서 임베딩 모델을 바꾸는 일이 왜 큰 작업인지, 캐시 · 인덱스 · 저장의 관점에서 설명해 보세요.</li></ol></div><details class="qa"><summary>📝 모범 설명과 점검 기준</summary><p><b>1. 이 모듈에서 정답 수를 가장 크게 늘린 것은 무엇이고, 인덱스(IVF · HNSW)를 바꾸는 것은 왜 정답 수를 거의 바꾸지 못했는지 설명해 보세요.</b></p><p>정책 단위로 순위를 매긴 것(9/17 → 15/17)입니다. 조각 단위 상위 5에서는 같은 문서의 조각이 여러 칸을 차지해 다른 정답이 들어올 자리가 없었습니다. 인덱스는 ‘가장 가까운 조각을 얼마나 빨리 찾나’의 문제라, 찾는 대상(조각)과 순위 기준이 같으면 결과도 같습니다. 정답을 놓친 원인은 속도가 아니라 순위의 단위였습니다.</p><p style="font-size:14px"><b>이것이 들어 있으면 충분합니다</b></p><ul style="font-size:14px"><li>정책 단위 순위 + 숫자</li><li>같은 문서가 칸을 차지한 원인</li><li>인덱스는 속도 문제</li></ul><p><b>2. ‘필터를 걸면 정확해진다’는 말이 이 자료에서 맞는지, 근거를 들어 판단해 보세요.</b></p><p>반만 맞습니다. 필터는 조건에 안 맞는 조각(Q-028의 냉장식품 조각)을 빼서 엉뚱한 근거를 줄였지만, 정답 합계는 9/17 그대로였습니다. 순위 밖의 정답을 데려오지 못하기 때문입니다. 정답을 늘린 것은 정책 단위 순위와 관계로 넓히기였습니다.</p><p style="font-size:14px"><b>이것이 들어 있으면 충분합니다</b></p><ul style="font-size:14px"><li>엉뚱한 것을 뺌 (근거)</li><li>정답 수는 그대로 (숫자)</li><li>넓히는 방법이 따로 필요</li></ul><p><b>3. 운영에서 임베딩 모델을 바꾸는 일이 왜 큰 작업인지, 캐시 · 인덱스 · 저장의 관점에서 설명해 보세요.</b></p><p>모델이 바뀌면 벡터 공간이 달라 캐시가 모두 무효(203/203 새로 만들기)이고, 질문 벡터와 문서 벡터를 섞을 수 없어 인덱스를 새로 만들어야 합니다. 그래서 새 버전 폴더에 따로 만들고, 평가로 비교한 뒤 바꿔 끼우고, 문제가 생기면 이전 버전으로 되돌립니다.</p><p style="font-size:14px"><b>이것이 들어 있으면 충분합니다</b></p><ul style="font-size:14px"><li>캐시 전부 무효</li><li>인덱스 새로</li><li>버전 · 평가 · 되돌리기</li></ul></details><div class="task"><h4>🧭 이런 상황이라면 어떻게 하겠습니까?</h4><p>팀장이 ‘HNSW로 바꾸면 검색이 더 정확해지죠?’라고 묻습니다. 이 모듈의 결과로 어떻게 답하겠습니까?</p><ol type="A"><li>네, HNSW가 더 정확합니다</li><li>이 자료에서는 Flat · IVF(nprobe≥4) · HNSW의 정답 수가 같았습니다(9/17). HNSW는 데이터가 커질 때 속도를 지키는 도구이고, 정확도를 올린 것은 정책 단위 순위(15/17)였습니다</li><li>인덱스는 상관없습니다</li></ol><p style="margin:6px 0 0;font-size:14px">하나를 고르고, 이 탭의 숫자 중 무엇을 근거로 삼을지 한 줄로 적어 보세요.</p></div><details class="qa"><summary>🧭 판단의 근거 보기</summary><p><b>B</b>처럼 <b>측정한 숫자로</b> 답합니다. ‘더 정확하다’는 일반론 대신 이 자료에서 무엇이 정확도를 바꿨는지를 말하고, 인덱스를 고를 이유(규모 · 속도 · 삭제 지원)를 따로 설명합니다.</p></details><div class="quizbox"><h3 class="qz-title">🧪 종합 점검</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 임베딩 검색이 키워드 검색보다 나은 경우는?</p><label><input type="radio" name="qz9_1" value="0"/> 글자가 똑같을 때</label><label><input type="radio" name="qz9_1" value="1"/> 뜻은 같지만 쓰는 말이 다를 때</label><label><input type="radio" name="qz9_1" value="2"/> 숫자를 찾을 때</label><label><input type="radio" name="qz9_1" value="3"/> 파일 이름을 찾을 때</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>마음이 바뀌었다 ↔ 단순 변심.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> IVF · HNSW를 쓰는 주된 이유는?</p><label><input type="radio" name="qz9_2" value="0"/> 정답을 늘리려고</label><label><input type="radio" name="qz9_2" value="1"/> 데이터가 많아져도 빠르게 찾으려고</label><label><input type="radio" name="qz9_2" value="2"/> 임베딩을 줄이려고</label><label><input type="radio" name="qz9_2" value="3"/> 필터를 걸려고</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>이 자료에서는 정답 수가 거의 같았습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q3.</b> 사전 필터와 사후 필터 중 결과 개수를 늘 채우는 것은?</p><label><input type="radio" name="qz9_3" value="0"/> 사후 필터</label><label><input type="radio" name="qz9_3" value="1"/> 사전 필터</label><label><input type="radio" name="qz9_3" value="2"/> 둘 다</label><label><input type="radio" name="qz9_3" value="3"/> 둘 다 아님</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>후보 안에서 k개를 찾습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q4.</b> 문서 하나를 고쳤을 때 캐시 정책으로 맞는 것은?</p><label><input type="radio" name="qz9_4" value="0"/> 전부 다시 임베딩</label><label><input type="radio" name="qz9_4" value="1"/> 고친 조각만 다시 임베딩 (열쇠 = 모델 + 내용 해시)</label><label><input type="radio" name="qz9_4" value="2"/> 아무것도 안 함</label><label><input type="radio" name="qz9_4" value="3"/> 모델을 바꾼다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>05탭입니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q5.</b> IVF에서 nlist를 16으로 늘리고 nprobe=1로 두면?</p><label><input type="radio" name="qz9_5" value="0"/> 더 정확해진다</label><label><input type="radio" name="qz9_5" value="1"/> 묶음이 작아져 놓치는 것이 많아진다 (Flat과 같은 결과 22/35)</label><label><input type="radio" name="qz9_5" value="2"/> 변화 없음</label><label><input type="radio" name="qz9_5" value="3"/> 에러</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>nlist를 늘리면 nprobe도 늘려야 합니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q6.</b> 확장 동적 필터가 정책 상위 N보다 나빠진 경우는?</p><label><input type="radio" name="qz9_6" value="0"/> keep이 넉넉할 때</label><label><input type="radio" name="qz9_6" value="1"/> seed=3 · keep=5처럼 남길 자리가 적을 때 — 이웃이 이미 있던 정답을 밀어냄</label><label><input type="radio" name="qz9_6" value="2"/> 항상</label><label><input type="radio" name="qz9_6" value="3"/> 없음</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>11/17 vs 13/17.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q7.</b> HNSW 인덱스에서 문서를 지워야 할 때 가장 알맞은 것은?</p><label><input type="radio" name="qz9_7" value="0"/> remove_ids</label><label><input type="radio" name="qz9_7" value="1"/> 삭제 목록으로 결과를 거르거나 주기적으로 새로 만든다</label><label><input type="radio" name="qz9_7" value="2"/> nprobe를 늘린다</label><label><input type="radio" name="qz9_7" value="3"/> 캐시를 지운다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>remove_ids는 지원되지 않습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q8.</b> 이 모듈에서 정답을 가장 크게 늘린 것은?</p><label><input type="radio" name="qz9_8" value="0"/> IVF nprobe</label><label><input type="radio" name="qz9_8" value="1"/> 정책 단위로 순위 매기기</label><label><input type="radio" name="qz9_8" value="2"/> 사후 필터</label><label><input type="radio" name="qz9_8" value="3"/> HNSW M</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>9/17 → 15/17.</p></div></div></div></section>
+</main></div>
+<footer class="footer">© 2026 부성순. All rights reserved.<small>교안의 자체 해설 및 실습 예제에 대한 저작권 표시입니다. 실습 데이터는 교육용 합성 데이터이며 실제 법률 또는 쇼핑몰 약관이 아닙니다. 교안 속 실행 출력은 실습 스크립트를 실제로 실행한 결과입니다.</small></footer>
+<script>(function(){
+const tabs=[...document.querySelectorAll('[role="tab"]')];
+function setTab(i,focus=false){tabs.forEach((t,j)=>{const on=i===j;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});if(focus)tabs[i].focus({preventScroll:true});history.replaceState(null,'','#'+tabs[i].getAttribute('aria-controls'));window.scrollTo({top:0});}
+tabs.forEach((t,i)=>{t.addEventListener('click',()=>setTab(i));t.addEventListener('keydown',e=>{if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();setTab((i+(e.key==='ArrowDown'||e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length,true);}})});
+const index=tabs.findIndex(t=>'#'+t.getAttribute('aria-controls')===location.hash);if(index>=0)setTab(index);
+document.querySelectorAll('.copy').forEach(b=>{b.dataset.label=b.textContent;b.addEventListener('click',async()=>{const code=b.closest('.codebox').querySelector('pre').textContent;try{await navigator.clipboard.writeText(code);b.textContent='복사됨';}catch(e){b.textContent='복사 실패';}setTimeout(()=>b.textContent=b.dataset.label||'코드 복사',1500);});});
+document.querySelectorAll('.quiz').forEach(q=>{const btn=q.querySelector('.qz-check'),fb=q.querySelector('.qz-fb'),res=q.querySelector('.qz-res');
+btn.addEventListener('click',()=>{const c=q.querySelector('input:checked');q.querySelectorAll('label').forEach(l=>l.classList.remove('right','wrong'));
+if(!c){fb.hidden=false;fb.className='qz-fb';res.textContent='보기를 하나 고른 뒤 확인하세요.';fb.querySelectorAll('p')[1].hidden=true;return;}
+fb.querySelectorAll('p')[1].hidden=false;const ok=c.value===q.dataset.answer;const right=q.querySelector('input[value="'+q.dataset.answer+'"]').closest('label');
+right.classList.add('right');if(!ok)c.closest('label').classList.add('wrong');fb.hidden=false;fb.className='qz-fb '+(ok?'ok':'no');res.textContent=ok?'✔ 정답입니다.':'✘ 다시 생각해 보세요. 초록색이 정답입니다.';});});
+})();</script></body></html>

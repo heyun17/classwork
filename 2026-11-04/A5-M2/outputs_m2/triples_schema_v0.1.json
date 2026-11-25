@@ -1,0 +1,1318 @@
+{
+  "mode": "schema",
+  "schema": "design/m2_schema_v0.1.json",
+  "schema_version": "0.1",
+  "triples": [
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "냉장식품",
+      "object_type": "상품유형",
+      "evidence": "이 지침은 제주로 배송되는 냉장식품이 약속한 날짜보다 늦게 도착했을 때 상품대금과 배송비를 어떻게 처리할지 정한 예외 규정이다.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "제주",
+      "object_type": "지역",
+      "evidence": "이 지침은 제주로 배송되는 냉장식품이 약속한 날짜보다 늦게 도착했을 때 상품대금과 배송비를 어떻게 처리할지 정한 예외 규정이다.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "판매자 귀책 지연으로 품질 훼손이 확정되면 상품대금과 실제 결제한 기본배송비·추가배송비를 함께 검토한다.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "배송 예정일",
+      "object_type": "확인항목",
+      "evidence": "주문할 때 약속한 배송 예정일과 실제 도착일을 비교해 지연이 있었는지 확인한다.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "실제 출고시각",
+      "object_type": "확인항목",
+      "evidence": "판매자가 실제로 출고한 시각을 확인해 판매자 쪽에서 늦어진 것인지, 운송 중에 늦어진 것인지 구분한다.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "기상 영향",
+      "object_type": "확인항목",
+      "evidence": "해당 기간의 항공편·선박 운항 중단이나 기상 특보 같은 외부 요인이 있었는지 확인한다.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "온도 기록",
+      "object_type": "확인항목",
+      "evidence": "온도 기록과 고객이 보낸 상품 사진으로 온도 이탈과 품질 훼손 여부를 확인한다.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-DEL-002",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-DEL-002, POL-RET-002, POL-FEE-001.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-RET-002",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-DEL-002, POL-RET-002, POL-FEE-001.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-001",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-FEE-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-DEL-002, POL-RET-002, POL-FEE-001.",
+      "doc_id": "EXC-001"
+    },
+    {
+      "subject": "EXC-002",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "도서산간",
+      "object_type": "지역",
+      "evidence": "이 지침은 폭설이나 태풍 같은 기상 악화로 도서산간 지역 배송이 늦어졌을 때의 처리 기준을 정한 예외 규정이다.",
+      "doc_id": "EXC-002"
+    },
+    {
+      "subject": "EXC-002",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "배송비환불",
+      "object_type": "처리",
+      "evidence": "그래서 보상이나 배송비 환불을 먼저 약속하지 않고 사실 확인부터 한다.",
+      "doc_id": "EXC-002"
+    },
+    {
+      "subject": "EXC-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "배송 추적 이력",
+      "object_type": "확인항목",
+      "evidence": "배송 추적 이력과 운송사의 공지를 확인해 기상 때문에 운송이 멈췄는지 확인한다.",
+      "doc_id": "EXC-002"
+    },
+    {
+      "subject": "EXC-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "운송사의 공지",
+      "object_type": "확인항목",
+      "evidence": "배송 추적 이력과 운송사의 공지를 확인해 기상 때문에 운송이 멈췄는지 확인한다.",
+      "doc_id": "EXC-002"
+    },
+    {
+      "subject": "EXC-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "지연 기간",
+      "object_type": "확인항목",
+      "evidence": "지연 기간과 원래 약속한 배송 예정일을 비교한다.",
+      "doc_id": "EXC-002"
+    },
+    {
+      "subject": "EXC-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "품질 훼손",
+      "object_type": "확인항목",
+      "evidence": "상품에 품질 훼손이 있었는지 확인한다.",
+      "doc_id": "EXC-002"
+    },
+    {
+      "subject": "EXC-002",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-DEL-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-DEL-001, POL-DEL-002, POL-FEE-001.",
+      "doc_id": "EXC-002"
+    },
+    {
+      "subject": "EXC-002",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-DEL-002",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-DEL-001, POL-DEL-002, POL-FEE-001.",
+      "doc_id": "EXC-002"
+    },
+    {
+      "subject": "EXC-002",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-FEE-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-DEL-001, POL-DEL-002, POL-FEE-001.",
+      "doc_id": "EXC-002"
+    },
+    {
+      "subject": "EXC-003",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "일반상품",
+      "object_type": "상품유형",
+      "evidence": "출고된 일반상품을 단순 변심으로 취소하려 한다 → 즉시 취소 완료가 아니며 회수·반품 절차를 확인해야 한다.",
+      "doc_id": "EXC-003"
+    },
+    {
+      "subject": "EXC-003",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "배송중",
+      "object_type": "주문상태",
+      "evidence": "주문 상태가 배송중인지 확인한다.",
+      "doc_id": "EXC-003"
+    },
+    {
+      "subject": "EXC-003",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "주문취소",
+      "object_type": "처리",
+      "evidence": "고객이 배송중 상품을 취소 요청한 경우, 택배 회수 여부와 수령 여부를 확인한다.",
+      "doc_id": "EXC-003"
+    },
+    {
+      "subject": "EXC-003",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "반품",
+      "object_type": "처리",
+      "evidence": "고객이 배송중 상품을 취소 요청한 경우, 택배 회수 여부와 수령 여부를 확인한다.",
+      "doc_id": "EXC-003"
+    },
+    {
+      "subject": "단순변심",
+      "subject_type": "사유",
+      "predicate": "허용",
+      "object": "회수비",
+      "object_type": "처리",
+      "evidence": "취소 사유가 단순 변심이면 회수비가 적용될 수 있음을 알린다.",
+      "doc_id": "EXC-003"
+    },
+    {
+      "subject": "EXC-003",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "제작 단계 확인",
+      "object_type": "확인항목",
+      "evidence": "주문제작 상품은 제작 단계 확인을 선행한다.",
+      "doc_id": "EXC-003"
+    },
+    {
+      "subject": "EXC-004",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "주문제작상품",
+      "object_type": "상품유형",
+      "evidence": "기본 정책은 제작이 시작된 뒤 단순 변심 취소를 제한하지만, 그 제한은 고객의 마음이 바뀐 경우에 대한 것이다.",
+      "doc_id": "EXC-004"
+    },
+    {
+      "subject": "EXC-004",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "환불이나 재제작이 결정되면 실제로 낸 배송비의 환불 여부도 함께 검토한다.",
+      "doc_id": "EXC-004"
+    },
+    {
+      "subject": "EXC-004",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-CAN-002",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-CAN-002, POL-FEE-001.",
+      "doc_id": "EXC-004"
+    },
+    {
+      "subject": "EXC-004",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "사양 승인 기록",
+      "object_type": "확인항목",
+      "evidence": "사양 승인 기록, 제작 착수시각과 문제 사진을 확보한다.",
+      "doc_id": "EXC-004"
+    },
+    {
+      "subject": "EXC-004",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "제작 착수시각",
+      "object_type": "확인항목",
+      "evidence": "사양 승인 기록, 제작 착수시각과 문제 사진을 확보한다.",
+      "doc_id": "EXC-004"
+    },
+    {
+      "subject": "EXC-004",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "문제 사진",
+      "object_type": "확인항목",
+      "evidence": "사양 승인 기록, 제작 착수시각과 문제 사진을 확보한다.",
+      "doc_id": "EXC-004"
+    },
+    {
+      "subject": "단순변심",
+      "subject_type": "사유",
+      "predicate": "제한",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "제작이 시작된 뒤 단순 변심 취소를 제한하지만, 그 제한은 고객의 마음이 바뀐 경우에 대한 것이다.",
+      "doc_id": "EXC-004"
+    },
+    {
+      "subject": "판매자귀책",
+      "subject_type": "사유",
+      "predicate": "검토대상",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "제작 시작 후라도 오제작·파손·사양 불일치가 확인되면 단순 변심과 달리 판매자 귀책으로 검토한다.",
+      "doc_id": "EXC-004"
+    },
+    {
+      "subject": "EXC-005",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "VIP",
+      "object_type": "회원등급",
+      "evidence": "이 지침은 VIP 회원이 제주로 주문했을 때 무료배송 혜택이 어디까지 적용되는지 정한 예외 규정이다.",
+      "doc_id": "EXC-005"
+    },
+    {
+      "subject": "EXC-005",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "제주",
+      "object_type": "지역",
+      "evidence": "이 지침은 VIP 회원이 제주로 주문했을 때 무료배송 혜택이 어디까지 적용되는지 정한 예외 규정이다.",
+      "doc_id": "EXC-005"
+    },
+    {
+      "subject": "EXC-005",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "주문취소",
+      "object_type": "처리",
+      "evidence": "실제 결제한 추가배송비는 주문취소 사유 및 귀책에 따라 환불 여부를 판단한다.",
+      "doc_id": "EXC-005"
+    },
+    {
+      "subject": "EXC-005",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "회원 등급",
+      "object_type": "확인항목",
+      "evidence": "회원 등급과 할인 전 상품금액을 확인해 VIP 기본배송비 무료 조건을 충족하는지 본다.",
+      "doc_id": "EXC-005"
+    },
+    {
+      "subject": "EXC-005",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "배송지",
+      "object_type": "확인항목",
+      "evidence": "배송지가 제주인지 확인한다.",
+      "doc_id": "EXC-005"
+    },
+    {
+      "subject": "EXC-005",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "쿠폰",
+      "object_type": "확인항목",
+      "evidence": "해당 주문에 제주 추가배송비 면제 쿠폰이나 행사가 있는지 확인한다.",
+      "doc_id": "EXC-005"
+    },
+    {
+      "subject": "EXC-005",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-MEM-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-MEM-001, POL-FEE-001.",
+      "doc_id": "EXC-005"
+    },
+    {
+      "subject": "EXC-005",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-FEE-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-MEM-001, POL-FEE-001.",
+      "doc_id": "EXC-005"
+    },
+    {
+      "subject": "EXC-006",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "일반상품",
+      "object_type": "상품유형",
+      "evidence": "이 지침은 쿠폰을 쓴 주문을 일부 취소해 남은 금액이 쿠폰 조건과 무료배송 조건 아래로 떨어지는 경우를 실제 숫자로 정한 예외 규정이다.",
+      "doc_id": "EXC-006"
+    },
+    {
+      "subject": "EXC-006",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "쿠폰 재산정",
+      "object_type": "처리",
+      "evidence": "쿠폰 재산정 기본 정책을 구체적인 금액에 적용하는 방법과, 무료배송 조건까지 함께 다시 확인해야 한다는 점을 다룬다.",
+      "doc_id": "EXC-006"
+    },
+    {
+      "subject": "EXC-006",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-CPN-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-CPN-001, POL-MEM-001.",
+      "doc_id": "EXC-006"
+    },
+    {
+      "subject": "EXC-006",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-MEM-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-CPN-001, POL-MEM-001.",
+      "doc_id": "EXC-006"
+    },
+    {
+      "subject": "단순변심",
+      "subject_type": "사유",
+      "predicate": "검토대상",
+      "object": "쿠폰 재산정",
+      "object_type": "처리",
+      "evidence": "쿠폰 조건과 무료배송 조건은 서로 다르므로 둘 다 다시 확인한다.",
+      "doc_id": "EXC-006"
+    },
+    {
+      "subject": "EXC-007",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "냉장식품",
+      "object_type": "상품유형",
+      "evidence": "냉장식품 품질 이상 접수 기한이 9월과 10월에 서로 다르다.",
+      "doc_id": "EXC-007"
+    },
+    {
+      "subject": "EXC-007",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "VIP",
+      "object_type": "회원등급",
+      "evidence": "VIP 기본배송 무료 기준 50000원",
+      "doc_id": "EXC-007"
+    },
+    {
+      "subject": "EXC-007",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "카드 환불 기간, VIP 무료배송 기준, 냉장식품 품질 이상 접수 기한이 9월과 10월에 서로 다르다.",
+      "doc_id": "EXC-007"
+    },
+    {
+      "subject": "EXC-007",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "주문일",
+      "object_type": "확인항목",
+      "evidence": "주문일이 2026-09-01~2026-09-30이면 v1 기준을 적용한다.",
+      "doc_id": "EXC-007"
+    },
+    {
+      "subject": "EXC-007",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-VER-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-VER-001, POL-REF-001, POL-MEM-001, POL-RET-002.",
+      "doc_id": "EXC-007"
+    },
+    {
+      "subject": "EXC-007",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-REF-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-VER-001, POL-REF-001, POL-MEM-001, POL-RET-002.",
+      "doc_id": "EXC-007"
+    },
+    {
+      "subject": "EXC-007",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-MEM-001",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-VER-001, POL-REF-001, POL-MEM-001, POL-RET-002.",
+      "doc_id": "EXC-007"
+    },
+    {
+      "subject": "EXC-007",
+      "subject_type": "정책",
+      "predicate": "함께적용",
+      "object": "POL-RET-002",
+      "object_type": "정책",
+      "evidence": "적용 정책: POL-VER-001, POL-REF-001, POL-MEM-001, POL-RET-002.",
+      "doc_id": "EXC-007"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "일반상품",
+      "object_type": "상품유형",
+      "evidence": "결제완료 상태의 일반상품을 단순 변심으로 취소했다 → 출고 전이므로 취소를 요청할 수 있다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "주문제작상품",
+      "object_type": "상품유형",
+      "evidence": "주문제작 상품은 제작 단계 기준이 우선하므로 이 정책만으로 판단하지 않는다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "디지털상품",
+      "object_type": "상품유형",
+      "evidence": "주문제작품과 디지털 상품은 별도 특례가 우선한다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "결제완료",
+      "object_type": "주문상태",
+      "evidence": "주문 상태가 결제완료, 상품준비중, 배송중, 배송완료 중 무엇인지 확인한다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "상품준비중",
+      "object_type": "주문상태",
+      "evidence": "주문 상태가 결제완료, 상품준비중, 배송중, 배송완료 중 무엇인지 확인한다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "배송중",
+      "object_type": "주문상태",
+      "evidence": "주문 상태가 결제완료, 상품준비중, 배송중, 배송완료 중 무엇인지 확인한다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "배송완료",
+      "object_type": "주문상태",
+      "evidence": "주문 상태가 결제완료, 상품준비중, 배송중, 배송완료 중 무엇인지 확인한다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "주문취소",
+      "object_type": "처리",
+      "evidence": "이 정책은 고객이 결제한 주문을 취소하려는 경우의 기본 기준을 정한다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "반품",
+      "object_type": "처리",
+      "evidence": "이미 출고되어 배송 중이거나 배송이 끝난 주문은 취소가 아니라 반품 절차로 이어진다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "주문상태",
+      "object_type": "확인항목",
+      "evidence": "주문상태가 결제완료·상품준비중·배송중·배송완료 중 무엇인지 검증한다.",
+      "doc_id": "POL-CAN-001"
+    },
+    {
+      "subject": "POL-CAN-002",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "주문제작상품",
+      "object_type": "상품유형",
+      "evidence": "이 정책은 각인 텀블러, 맞춤 액자, 맞춤 운동복, 수제 목걸이처럼 고객의 요청에 맞춰 만드는 주문제작 상품의 취소 기준을 정한다.",
+      "doc_id": "POL-CAN-002"
+    },
+    {
+      "subject": "POL-CAN-002",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "주문취소",
+      "object_type": "처리",
+      "evidence": "주문제작 상품은 제작 착수 전 취소가 가능하다.",
+      "doc_id": "POL-CAN-002"
+    },
+    {
+      "subject": "POL-CAN-002",
+      "subject_type": "정책",
+      "predicate": "제한",
+      "object": "단순변심",
+      "object_type": "사유",
+      "evidence": "제작이 시작된 뒤 단순 변심 취소는 제한되며 파손·오제작·계약 불일치 등 판매자 책임 사유는 별도 조사한다.",
+      "doc_id": "POL-CAN-002"
+    },
+    {
+      "subject": "단순변심",
+      "subject_type": "사유",
+      "predicate": "검토대상",
+      "object": "취소",
+      "object_type": "처리",
+      "evidence": "제작이 시작된 뒤라면 취소 사유가 단순 변심인지 확인한다.",
+      "doc_id": "POL-CAN-002"
+    },
+    {
+      "subject": "POL-CAN-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "제작시작시각",
+      "object_type": "확인항목",
+      "evidence": "취소 요청이 들어오면 제작 시작 시각 기록을 확인한다.",
+      "doc_id": "POL-CAN-002"
+    },
+    {
+      "subject": "POL-CPN-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "일반상품",
+      "object_type": "상품유형",
+      "evidence": "상품금액 50000원 이상 주문에 5000원 쿠폰이 적용되는 경우",
+      "doc_id": "POL-CPN-001"
+    },
+    {
+      "subject": "POL-CPN-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "재산정",
+      "object_type": "처리",
+      "evidence": "쿠폰 할인을 다시 계산하는 기준을 정한다",
+      "doc_id": "POL-CPN-001"
+    },
+    {
+      "subject": "POL-CPN-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "부분 취소 전후 상품금액",
+      "object_type": "확인항목",
+      "evidence": "부분 취소 전후 상품금액, 사용 쿠폰의 최소금액, 주문 시점의 쿠폰 규칙을 확인한다",
+      "doc_id": "POL-CPN-001"
+    },
+    {
+      "subject": "POL-CPN-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "사용 쿠폰의 최소금액",
+      "object_type": "확인항목",
+      "evidence": "부분 취소 전후 상품금액, 사용 쿠폰의 최소금액, 주문 시점의 쿠폰 규칙을 확인한다",
+      "doc_id": "POL-CPN-001"
+    },
+    {
+      "subject": "POL-CPN-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "주문 시점의 쿠폰 규칙",
+      "object_type": "확인항목",
+      "evidence": "부분 취소 전후 상품금액, 사용 쿠폰의 최소금액, 주문 시점의 쿠폰 규칙을 확인한다",
+      "doc_id": "POL-CPN-001"
+    },
+    {
+      "subject": "POL-DEL-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "일반상품",
+      "object_type": "상품유형",
+      "evidence": "이 정책은 일반상품이 결제된 뒤 출고되고 고객에게 도착하기까지의 기본 기준을 정한다.",
+      "doc_id": "POL-DEL-001"
+    },
+    {
+      "subject": "POL-DEL-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "출고까지 걸리는 기간",
+      "object_type": "처리",
+      "evidence": "일반 배송은 결제 완료 후 2~3영업일 내 출고를 목표로 한다.",
+      "doc_id": "POL-DEL-001"
+    },
+    {
+      "subject": "POL-DEL-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "지역별 운송 기간",
+      "object_type": "처리",
+      "evidence": "수도권 통상 배송은 출고 후 1~2일, 제주 및 도서산간은 1~2일 추가 소요될 수 있다.",
+      "doc_id": "POL-DEL-001"
+    },
+    {
+      "subject": "POL-DEL-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "배송예정일",
+      "object_type": "확인항목",
+      "evidence": "운송장 추적 이력과 약속된 배송예정일을 확인한다.",
+      "doc_id": "POL-DEL-001"
+    },
+    {
+      "subject": "POL-DEL-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "출고일",
+      "object_type": "확인항목",
+      "evidence": "고객은 주문별 배송예정일과 출고일을 확인해야 한다.",
+      "doc_id": "POL-DEL-001"
+    },
+    {
+      "subject": "POL-DEL-002",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "냉장식품",
+      "object_type": "상품유형",
+      "evidence": "이 정책은 냉장식품의 배송과 온도 관리 기준을 정한다.",
+      "doc_id": "POL-DEL-002"
+    },
+    {
+      "subject": "POL-DEL-002",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "훼손이 확인되면 냉장식품 환불 예외 규정을 우선 검토한다.",
+      "doc_id": "POL-DEL-002"
+    },
+    {
+      "subject": "POL-DEL-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "온도 이력",
+      "object_type": "확인항목",
+      "evidence": "온도 이력, 출고 시각, 실제 도착 시각 및 상품 사진을 확인한다.",
+      "doc_id": "POL-DEL-002"
+    },
+    {
+      "subject": "POL-DEL-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "출고 시각",
+      "object_type": "확인항목",
+      "evidence": "온도 이력, 출고 시각, 실제 도착 시각 및 상품 사진을 확인한다.",
+      "doc_id": "POL-DEL-002"
+    },
+    {
+      "subject": "POL-DEL-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "실제 도착 시각",
+      "object_type": "확인항목",
+      "evidence": "온도 이력, 출고 시각, 실제 도착 시각 및 상품 사진을 확인한다.",
+      "doc_id": "POL-DEL-002"
+    },
+    {
+      "subject": "POL-DEL-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "상품 사진",
+      "object_type": "확인항목",
+      "evidence": "온도 이력, 출고 시각, 실제 도착 시각 및 상품 사진을 확인한다.",
+      "doc_id": "POL-DEL-002"
+    },
+    {
+      "subject": "POL-FEE-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "제주",
+      "object_type": "지역",
+      "evidence": "배송비에는 모든 주문에 붙는 기본배송비와, 제주·도서산간처럼 운송이 어려운 지역에 붙는 추가배송비가 있다.",
+      "doc_id": "POL-FEE-001"
+    },
+    {
+      "subject": "POL-FEE-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "도서산간",
+      "object_type": "지역",
+      "evidence": "배송비에는 모든 주문에 붙는 기본배송비와, 제주·도서산간처럼 운송이 어려운 지역에 붙는 추가배송비가 있다.",
+      "doc_id": "POL-FEE-001"
+    },
+    {
+      "subject": "POL-FEE-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "이 정책은 주문을 취소하거나 반품할 때 이미 낸 배송비를 돌려줄지 판단하는 기준을 정한다.",
+      "doc_id": "POL-FEE-001"
+    },
+    {
+      "subject": "POL-FEE-001",
+      "subject_type": "정책",
+      "predicate": "허용",
+      "object": "판매자귀책",
+      "object_type": "사유",
+      "evidence": "판매자 귀책으로 계약상 의무를 이행하지 못한 경우 기본 배송비 환불을 검토한다.",
+      "doc_id": "POL-FEE-001"
+    },
+    {
+      "subject": "POL-FEE-001",
+      "subject_type": "정책",
+      "predicate": "허용",
+      "object": "단순변심",
+      "object_type": "사유",
+      "evidence": "단순 변심 반품은 왕복 회수비 공제가 가능하다.",
+      "doc_id": "POL-FEE-001"
+    },
+    {
+      "subject": "POL-FEE-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "결제내역",
+      "object_type": "확인항목",
+      "evidence": "해당 주문의 결제내역에서 실제로 청구된 기본배송비와 추가배송비를 확인한다.",
+      "doc_id": "POL-FEE-001"
+    },
+    {
+      "subject": "POL-FEE-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "귀책 증빙",
+      "object_type": "확인항목",
+      "evidence": "배송 실패나 지연, 상품 문제에 대해 판매자 귀책 증빙이 있는지 확인한다.",
+      "doc_id": "POL-FEE-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "VIP",
+      "object_type": "회원등급",
+      "evidence": "이 정책은 회원 등급(VIP, 일반)에 따른 무료배송 기준을 정한다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "일반회원",
+      "object_type": "회원등급",
+      "evidence": "이 정책은 회원 등급(VIP, 일반)에 따른 무료배송 기준을 정한다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "제주",
+      "object_type": "지역",
+      "evidence": "제주·도서산간 추가배송비는 따로 다룬다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "도서산간",
+      "object_type": "지역",
+      "evidence": "제주·도서산간 추가배송비는 따로 다룬다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "무료배송",
+      "object_type": "처리",
+      "evidence": "무료배송은 기본배송비에만 적용되며, 제주·도서산간 추가배송비는 따로 다룬다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "회원 등급",
+      "object_type": "확인항목",
+      "evidence": "회원 등급은 주문 시점에 확정된 등급을 기준으로 판단한다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "허용",
+      "object": "VIP",
+      "object_type": "회원등급",
+      "evidence": "VIP는 30000원 이상, 일반 회원은 50000원 이상이면 기본배송비를 무료로 한다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "허용",
+      "object": "일반회원",
+      "object_type": "회원등급",
+      "evidence": "VIP는 30000원 이상, 일반 회원은 50000원 이상이면 기본배송비를 무료로 한다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "제한",
+      "object": "제주",
+      "object_type": "지역",
+      "evidence": "배송지가 제주·도서산간이면 추가배송비는 무료 대상에서 제외하고, 별도 프로모션이 있는지 확인한다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-MEM-001",
+      "subject_type": "정책",
+      "predicate": "제한",
+      "object": "도서산간",
+      "object_type": "지역",
+      "evidence": "배송지가 제주·도서산간이면 추가배송비는 무료 대상에서 제외하고, 별도 프로모션이 있는지 확인한다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "subject": "POL-REF-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "일반상품",
+      "object_type": "상품유형",
+      "evidence": "2026-10-01 이후 적용 대상 주문은 환불 승인 이후 카드 결제 3~5영업일, 계좌이체 2영업일을 예상한다.",
+      "doc_id": "POL-REF-001"
+    },
+    {
+      "subject": "POL-REF-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "이 정책은 환불이 승인된 뒤 고객에게 돈이 돌아가기까지 걸리는 기간을 결제수단별로 정한다.",
+      "doc_id": "POL-REF-001"
+    },
+    {
+      "subject": "POL-REF-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "환불 승인 시각",
+      "object_type": "확인항목",
+      "evidence": "지급 수단·환불 승인 시각·영업일을 확인한다.",
+      "doc_id": "POL-REF-001"
+    },
+    {
+      "subject": "POL-REF-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "영업일",
+      "object_type": "확인항목",
+      "evidence": "지급 수단·환불 승인 시각·영업일을 확인한다.",
+      "doc_id": "POL-REF-001"
+    },
+    {
+      "subject": "POL-REF-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "지급 수단",
+      "object_type": "확인항목",
+      "evidence": "지급 수단·환불 승인 시각·영업일을 확인한다.",
+      "doc_id": "POL-REF-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "일반상품",
+      "object_type": "상품유형",
+      "evidence": "이 정책은 의류, 잡화, 생활용품처럼 냉장 보관이나 개별 제작이 필요 없는 일반상품을 받은 뒤 반품하거나 교환하려는 경우의 기준을 정한다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "반품",
+      "object_type": "처리",
+      "evidence": "일반상품은 수령 후 7일 이내 반품 신청을 받는다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "교환",
+      "object_type": "처리",
+      "evidence": "교환은 반품과 같은 기간 안에 신청하며, 재고가 있고 상품 상태 조건이 충족될 때 진행한다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "수령일",
+      "object_type": "확인항목",
+      "evidence": "고객이 반품 또는 교환을 신청하면 수령일과 신청일을 확인해 수령 후 7일 이내인지 판단한다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "반품 접수일",
+      "object_type": "확인항목",
+      "evidence": "반품 접수일, 수령일, 귀책, 상품 상태를 확인한다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "상품 상태",
+      "object_type": "확인항목",
+      "evidence": "반품 접수일, 수령일, 귀책, 상품 상태를 확인한다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "허용",
+      "object": "단순 변심",
+      "object_type": "사유",
+      "evidence": "단순 변심 반품은 사용·훼손 여부를 확인하고 고객에게 왕복 회수비 3000원을 부과할 수 있다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "허용",
+      "object": "오배송",
+      "object_type": "사유",
+      "evidence": "판매자 오배송 또는 불량으로 확정되면 회수비는 판매자가 부담한다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "허용",
+      "object": "불량",
+      "object_type": "사유",
+      "evidence": "판매자 오배송 또는 불량으로 확정되면 회수비는 판매자가 부담한다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-001",
+      "subject_type": "정책",
+      "predicate": "제한",
+      "object": "단순 변심",
+      "object_type": "사유",
+      "evidence": "이미 사용했거나 훼손된 상품은 단순 변심 교환이 제한될 수 있다.",
+      "doc_id": "POL-RET-001"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "냉장식품",
+      "object_type": "상품유형",
+      "evidence": "이 정책은 생크림 케이크, 요거트, 신선 연어처럼 냉장 상태로 배송되는 냉장식품의 반품과 품질 이상 처리 기준을 정한다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "품질 훼손이 확인되면 환불 또는 재배송 중 하나로 처리한다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "재배송",
+      "object_type": "처리",
+      "evidence": "품질 훼손이 확인되면 환불 또는 재배송 중 하나로 처리한다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "수령시각",
+      "object_type": "확인항목",
+      "evidence": "수령시각, 접수시각, 보관 상태, 사진과 온도 기록을 비교한다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "접수시각",
+      "object_type": "확인항목",
+      "evidence": "수령시각, 접수시각, 보관 상태, 사진과 온도 기록을 비교한다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "보관 상태",
+      "object_type": "확인항목",
+      "evidence": "수령시각, 접수시각, 보관 상태, 사진과 온도 기록을 비교한다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "사진과 온도 기록",
+      "object_type": "확인항목",
+      "evidence": "수령시각, 접수시각, 보관 상태, 사진과 온도 기록을 비교한다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "허용",
+      "object": "오배송",
+      "object_type": "사유",
+      "evidence": "포장을 열어 보니 주문하지 않은 다른 냉장식품이 왔다(오배송) → 기한 안에 접수하면 환불 또는 재배송을 검토한다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "허용",
+      "object": "변질",
+      "object_type": "사유",
+      "evidence": "받은 지 48시간이 지나서 변질을 신고했다 → 접수 기한을 넘겼다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-002",
+      "subject_type": "정책",
+      "predicate": "제한",
+      "object": "단순 변심",
+      "object_type": "사유",
+      "evidence": "맛이 생각과 달라 반품하고 싶다(단순 변심) → 냉장식품은 단순 변심 반품이 원칙적으로 불가하다.",
+      "doc_id": "POL-RET-002"
+    },
+    {
+      "subject": "POL-RET-003",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "디지털상품",
+      "object_type": "상품유형",
+      "evidence": "이 정책은 영상 강의권, 전자책 구독권, 디자인 템플릿, 음원 편집 라이선스 같은 디지털 상품의 환불 조건을 정한다.",
+      "doc_id": "POL-RET-003"
+    },
+    {
+      "subject": "POL-RET-003",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "환불",
+      "object_type": "처리",
+      "evidence": "그래서 반품과 회수 대신 이용 기록과 결제 기록으로 환불 여부를 판단한다.",
+      "doc_id": "POL-RET-003"
+    },
+    {
+      "subject": "POL-RET-003",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "이용 시작 기록",
+      "object_type": "확인항목",
+      "evidence": "환불 요청이 들어오면 이용 시작 기록(다운로드, 재생, 열람)이 있는지 확인한다.",
+      "doc_id": "POL-RET-003"
+    },
+    {
+      "subject": "POL-RET-003",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "결제 로그",
+      "object_type": "확인항목",
+      "evidence": "이용 오류, 미제공, 중복 결제는 접수 후 7일 이내에 결제 로그와 이용 로그를 확인해 심사한다.",
+      "doc_id": "POL-RET-003"
+    },
+    {
+      "subject": "POL-RET-003",
+      "subject_type": "정책",
+      "predicate": "제한",
+      "object": "단순변심",
+      "object_type": "사유",
+      "evidence": "이용 시작 후 단순 변심 환불은 제한된다.",
+      "doc_id": "POL-RET-003"
+    },
+    {
+      "subject": "POL-RET-003",
+      "subject_type": "정책",
+      "predicate": "제한",
+      "object": "이용시작",
+      "object_type": "주문상태",
+      "evidence": "주문 상태가 이용시작이면 단순 변심 환불 제한이 적용된다는 뜻이다.",
+      "doc_id": "POL-RET-003"
+    },
+    {
+      "subject": "POL-VER-001",
+      "subject_type": "정책",
+      "predicate": "적용대상",
+      "object": "주문상태",
+      "object_type": "주문상태",
+      "evidence": "정책 버전은 원칙적으로 주문일에 유효했던 규정을 사용한다.",
+      "doc_id": "POL-VER-001"
+    },
+    {
+      "subject": "POL-VER-001",
+      "subject_type": "정책",
+      "predicate": "다룸",
+      "object": "처리",
+      "object_type": "처리",
+      "evidence": "고객용 답변의 근거로 쓰려는 자료가 공개(public) 자료인지 확인한다.",
+      "doc_id": "POL-VER-001"
+    },
+    {
+      "subject": "POL-VER-001",
+      "subject_type": "정책",
+      "predicate": "확인필요",
+      "object": "주문일",
+      "object_type": "확인항목",
+      "evidence": "주문일이 속한 기간의 정책 버전을 고른다.",
+      "doc_id": "POL-VER-001"
+    }
+  ],
+  "properties": [
+    {
+      "entity": "EXC-006",
+      "name": "금액",
+      "value": "50000원",
+      "evidence": "남은 상품금액이 44000원이 되어 최소 50000원 쿠폰 조건을 잃으므로 쿠폰 재산정이 필요하다.",
+      "doc_id": "EXC-006"
+    },
+    {
+      "entity": "EXC-006",
+      "name": "금액",
+      "value": "56000원",
+      "evidence": "56000원 주문에 5000원 쿠폰을 쓰고 12000원 상품을 취소했다.",
+      "doc_id": "EXC-006"
+    },
+    {
+      "entity": "EXC-006",
+      "name": "금액",
+      "value": "5000원",
+      "evidence": "주문금액 56000원에 5000원 쿠폰을 적용한 뒤 일부 12000원 상품을 취소하면 남은 상품금액은 44000원이 된다.",
+      "doc_id": "EXC-006"
+    },
+    {
+      "entity": "EXC-006",
+      "name": "금액",
+      "value": "12000원",
+      "evidence": "주문금액 56000원에 5000원 쿠폰을 적용한 뒤 일부 12000원 상품을 취소하면 남은 상품금액은 44000원이 된다.",
+      "doc_id": "EXC-006"
+    },
+    {
+      "entity": "EXC-007",
+      "name": "기한",
+      "value": "5~7영업일",
+      "evidence": "v1은 카드 환불 승인 후 5~7영업일",
+      "doc_id": "EXC-007"
+    },
+    {
+      "entity": "EXC-007",
+      "name": "금액",
+      "value": "50000원",
+      "evidence": "VIP 기본배송 무료 기준 50000원",
+      "doc_id": "EXC-007"
+    },
+    {
+      "entity": "EXC-007",
+      "name": "기한",
+      "value": "24시간",
+      "evidence": "냉장식품 품질 이상 접수 기한 24시간이었다.",
+      "doc_id": "EXC-007"
+    },
+    {
+      "entity": "EXC-007",
+      "name": "기한",
+      "value": "3~5영업일",
+      "evidence": "2026-10-01부터 v2는 각각 카드 3~5영업일",
+      "doc_id": "EXC-007"
+    },
+    {
+      "entity": "EXC-007",
+      "name": "금액",
+      "value": "30000원",
+      "evidence": "VIP 기준 30000원",
+      "doc_id": "EXC-007"
+    },
+    {
+      "entity": "EXC-007",
+      "name": "기한",
+      "value": "48시간",
+      "evidence": "냉장식품 48시간으로 바뀌었다.",
+      "doc_id": "EXC-007"
+    },
+    {
+      "entity": "VIP",
+      "name": "금액",
+      "value": "30000원",
+      "evidence": "2026-10-01 이후 VIP 회원은 할인 전 상품금액 30000원 이상일 때 기본 배송비 무료 혜택을 받는다.",
+      "doc_id": "POL-MEM-001"
+    },
+    {
+      "entity": "일반회원",
+      "name": "금액",
+      "value": "50000원",
+      "evidence": "일반 회원 무료배송은 상품금액 50000원 이상이다.",
+      "doc_id": "POL-MEM-001"
+    }
+  ],
+  "entities": []
+}

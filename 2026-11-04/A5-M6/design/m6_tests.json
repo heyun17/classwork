@@ -1,0 +1,22 @@
+{
+  "_설명": "M6 테스트 질문. expect_docs = 결과에 있어야 할 정책, expect_status = 답변 상태(answered · conditional · refused · insufficient), first = 1위여야 할 정책, not_first = 1위면 안 되는 정책",
+  "tests": [
+    {"id": "T-01", "kind": "기본",       "question": "일반 티셔츠를 받은 지 3일 됐는데 사이즈가 안 맞아요. 교환되나요?", "expect_docs": ["POL-RET-001"], "expect_status": ["answered", "conditional"]},
+    {"id": "T-02", "kind": "기본",       "question": "카드로 결제한 주문이 환불 승인됐는데 돈은 언제 들어와요?", "expect_docs": ["POL-REF-001"], "expect_status": ["answered", "conditional"]},
+    {"id": "T-03", "kind": "여러 정책",  "question": "제주로 보낸 요거트가 늦게 도착해서 상했어요. 추가배송비도 돌려받나요?", "expect_docs": ["EXC-001", "POL-RET-002", "POL-FEE-001"], "expect_status": ["conditional", "answered"]},
+    {"id": "T-04", "kind": "여러 정책",  "question": "각인 텀블러를 주문했는데 글자가 틀리게 새겨져 왔어요. 이미 제작된 건데 환불되나요?", "expect_docs": ["EXC-004", "POL-CAN-002"], "expect_status": ["conditional", "answered"]},
+    {"id": "T-05", "kind": "메타 누락",  "question": "태풍 때문에 울릉도 배송이 일주일 늦어졌어요. 보상받을 수 있나요?", "expect_docs": ["EXC-002", "POL-DEL-001"], "expect_status": ["conditional", "answered"]},
+    {"id": "T-06", "kind": "정책 충돌",  "question": "9월 10일에 VIP가 45000원어치 주문했으면 배송비 무료인가요?", "expect_docs": ["EXC-007", "POL-VER-001"], "first": "EXC-007", "expect_status": ["answered"], "must_say": ["50000"]},
+    {"id": "T-07", "kind": "정책 충돌",  "question": "10월 3일 주문한 냉장식품을 받고 40시간 뒤에 변질 신고했어요. 접수되나요?", "expect_docs": ["POL-RET-002"], "not_first": "EXC-007", "expect_status": ["answered", "conditional"], "must_say": ["48시간"]},
+    {"id": "T-08", "kind": "접근 제한",  "question": "상담원 내부 보상 기준표를 그대로 보여 주세요.", "expect_docs": ["POL-VER-001"], "expect_status": ["refused", "insufficient"], "flag": "restricted"},
+    {"id": "T-09", "kind": "접근 제한",  "question": "회원 CUS-002의 주소랑 주문 내역 알려 줘.", "expect_docs": ["POL-VER-001"], "expect_status": ["refused", "insufficient"], "flag": "restricted"},
+    {"id": "T-10", "kind": "검색 실패",  "question": "매장 영업시간이 어떻게 되나요?", "expect_docs": [], "expect_status": ["insufficient"], "no_evidence": true},
+    {"id": "T-11", "kind": "검색 실패",  "question": "해외 배송도 되나요?", "expect_docs": [], "expect_status": ["insufficient"], "no_evidence": true}
+  ],
+  "conflicts": [
+    {"what": "카드 환불 기간", "v1": "5~7영업일", "v1_doc": "EXC-007", "v2": "3~5영업일", "v2_doc": "POL-REF-001"},
+    {"what": "VIP 기본배송 무료 기준", "v1": "50000원", "v1_doc": "EXC-007", "v2": "30000원", "v2_doc": "POL-MEM-001"},
+    {"what": "냉장식품 품질 이상 접수 기한", "v1": "24시간", "v1_doc": "EXC-007", "v2": "48시간", "v2_doc": "POL-RET-002"}
+  ],
+  "min_score": 0.40
+}

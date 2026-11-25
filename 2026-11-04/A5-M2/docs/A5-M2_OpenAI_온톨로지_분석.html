@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>A5-M2 OpenAI API 온톨로지 분석</title><link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/><style>
+:root{--bg:#fff;--surface:#f8fafc;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#ff2e93;--soft:rgba(255,46,147,.065);--codebg:#101d34}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Pretendard',system-ui,'Malgun Gothic',sans-serif;font-size:18px;line-height:1.81;word-break:keep-all}
+.banner{background:linear-gradient(125deg,#fcfcff,#f8fafc);border-bottom:1px solid var(--line)}.banner-in{max-width:1320px;margin:auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-size:16px;font-weight:850;letter-spacing:.03em}.who{font-size:15px;color:var(--muted)}.layout{max-width:1320px;margin:auto;padding:32px 24px 84px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:38px;align-items:start}.sidebar{order:2;position:sticky;top:22px;max-height:calc(100vh - 44px);overflow:auto;border:1px solid var(--line);border-radius:15px;background:var(--surface);padding:17px}.group{font-size:15px;color:var(--muted);font-weight:800;margin:3px 10px 14px}.tabs{display:flex;flex-direction:column;gap:5px}.tabs button{appearance:none;border:1px solid transparent;border-radius:9px;background:transparent;color:#253348;cursor:pointer;text-align:left;font:600 16px/1.55 'Pretendard',sans-serif;padding:9px 12px 9px 14px}.tabs button span{color:var(--accent);font-weight:850;margin-right:7px}.tabs button:hover{background:#fff;border-color:var(--line)}.tabs button[aria-selected=true]{background:var(--soft);border-color:var(--accent);color:#bd1366}.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+main{min-width:0}.panel[hidden]{display:none}.panel{display:block}.crumb{color:var(--accent);font-size:15px;font-weight:800;margin:0 0 8px}.panel h1{font-size:31px;line-height:1.4;margin:0 0 12px}.lead{font-size:19px;font-weight:550;color:#344255;margin:6px 0 26px}.panel h3{font-size:21px;margin:33px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}.panel h3:before{content:'▸ ';color:var(--accent)}.panel p{margin:13px 0}.panel b,.panel strong{font-weight:790}.panel code:not(pre code){font:15px/1.6 Consolas,monospace;word-break:break-word;background:#f1f5f9;border:1px solid #e5e7eb;padding:1px 5px;border-radius:4px}
+.panel ul,.panel ol{padding-left:27px;margin:12px 0}.panel li{margin:7px 0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:17px 0 24px}.panel table{border-collapse:collapse;width:100%;font-size:17px;line-height:1.65}.panel th,.panel td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;text-align:left}.panel th{font-size:16px;font-weight:800;background:#f1f5f9;color:#40516a}.panel tbody tr:last-child td{border:0}.panel tbody tr:nth-child(even){background:#fbfcfe}
+.note,.task{border:1px solid var(--line);border-radius:13px;background:#fafcff;padding:17px 19px;margin:24px 0}.note{border-left:4px solid var(--accent);background:var(--soft)}.note b{color:#ad155e}.note p{margin:6px 0}.task{background:#fff}.task h4{margin:0 0 9px;font-size:19px}.task ol{margin:0;padding-left:23px}.task li{margin:8px 0}
+.codebox{border:1px solid #243953;border-radius:13px;overflow:hidden;margin:21px 0 26px}.codehead{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:8px 13px;background:#1d3452;color:#dceafc;font-size:14px;font-weight:700}.copy{border:1px solid #8598b4;color:#fff;background:#314f78;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:13px}.codebox pre{background:var(--codebg);color:#cbe9fb;margin:0;padding:20px;overflow-x:auto;font:15px/1.7 Consolas,'JetBrains Mono',monospace;word-break:normal;white-space:pre}
+.outbox .codehead{background:#203a2c}.outbox{border-color:#2f5a43}.outbox pre{background:#0d1f17;color:#c9f5d9}
+.qa{padding:13px 17px;margin:13px 0;border:1px solid var(--line);background:#fbfcff;border-radius:10px}.qa summary{font-size:17px;cursor:pointer;font-weight:780}.qa[open] summary{color:#c01168}.qa p{font-size:17px}
+.footer{max-width:1320px;margin:auto;border-top:1px solid var(--line);padding:20px 24px 38px;text-align:center;color:var(--muted);font-size:15px}.footer small{display:block;max-width:950px;margin:5px auto}
+.tabs .part-heading{display:block;margin:15px 4px 6px;padding:12px 11px;background:#e5e7eb;color:#334155;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;font-weight:850;line-height:1.5;white-space:normal}.tabs .part-heading:first-child{margin-top:0}
+.journey{border-left:4px solid #ff2e93;background:#fff5fa;padding:16px 19px;margin:20px 0;border-radius:8px}.journey h3{border:0!important;margin:0 0 8px!important;padding:0!important;font-size:18px!important}.journey h3:before{content:none!important}.journey ol{margin:6px 0 0;padding-left:22px}.journey li{margin:4px 0;overflow-wrap:anywhere}
+.say{border-left:4px solid #94a3b8;background:#f8fafc;padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}.say>b:first-child{display:block;color:#475569;font-size:14px;margin-bottom:4px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:18px 0 24px}.flow .fstep{flex:1 1 96px;min-width:92px;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:10px;background:#fff;padding:10px 12px}.flow .fstep b{display:block;font-size:16px;color:#0f172a}.flow .fstep span{display:block;font-size:14px;color:var(--muted);line-height:1.5;margin-top:3px}.flow .arrow{align-self:center;color:var(--accent);font-weight:900}
+main p,main li,main td{overflow-wrap:anywhere}
+.mock{border:1px solid #cbd5e1;border-radius:14px;background:#f8fafc;padding:14px 16px;margin:20px 0}.mock-title{font-weight:800;font-size:15px;color:#475569;margin-bottom:10px}
+.mock table{border-collapse:collapse;width:100%;font-size:15px;background:#fff}.mock td,.mock th{border:1px solid #e2e8f0;padding:6px 8px;text-align:center}.mock th{background:#f1f5f9}.mock .hl{background:#fde7f2;font-weight:800}.mock .dim{color:#94a3b8}
+@media(max-width:900px){.layout{grid-template-columns:1fr;gap:12px;padding:15px 16px 64px}.sidebar{order:0;position:sticky;top:0;z-index:10;border-radius:0;max-height:none;overflow:auto;padding:8px 0;background:#fff}.sidebar .group{display:none}.tabs{flex-direction:row;white-space:nowrap;overflow-x:auto}.tabs button{flex:none;font-size:15px}.tabs .part-heading{flex:none;margin:0 6px 0 0;white-space:nowrap;padding:9px 12px}.banner-in{flex-wrap:wrap}.panel h1{font-size:27px}}
+@media(max-width:680px){body{font-size:17px}.panel table{font-size:16px}.panel th{font-size:15px}.panel h1{font-size:24px}.panel h3{font-size:20px}.codebox pre{font-size:14px;padding:15px}.flow .arrow{display:none}.flow .fstep{flex-basis:100%}}
+@media print{.sidebar,.copy{display:none}.layout{display:block}.panel[hidden]{display:block!important}.banner{background:#fff}}
+.steps{list-style:none;counter-reset:st;padding-left:0!important;margin:16px 0}.steps li{counter-increment:st;position:relative;padding:4px 0 4px 46px;margin:10px 0}.steps li:before{content:counter(st);position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:850;font-size:15px;display:flex;align-items:center;justify-content:center}
+.qa .codebox{margin:12px 0}
+.diagram{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0 22px;font:14.5px/1.7 Consolas,'JetBrains Mono',monospace;white-space:pre;overflow-x:auto;color:#1e293b}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.cards.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px 16px;font-size:16.5px;line-height:1.7}.card .h{font-weight:800;color:#bd1366;margin-bottom:6px;font-size:17px}
+.hl{color:#bd1366;font-weight:800}
+@media(max-width:760px){.cards,.cards.c3{grid-template-columns:1fr}.diagram{font-size:13px}}
+.where-bar{display:flex;flex-wrap:wrap;gap:8px 20px;background:#eef6ff;border:1px solid #bfdbfe;border-radius:10px;padding:9px 14px;margin:4px 0 14px;font-size:15.5px;color:#1e3a5f}.ask{border:1px dashed #a78bfa;background:#f5f3ff;border-radius:12px;padding:13px 17px;margin:24px 0}.ask>b:first-child{color:#6d28d9}.ask p{margin:6px 0;font-size:16.5px}
+/* 화면 모형 */
+.browser{border:1px solid #cbd5e1;border-radius:10px;overflow:hidden;background:#fff}.bbar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#eef2f7;border-bottom:1px solid #e2e8f0}.dots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:#cbd5e1;margin-right:4px}.url{flex:1;background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:2px 10px;font:14px Consolas,monospace;color:#334155}
+.browser pre{margin:0;padding:12px 14px;font:14px/1.6 Consolas,monospace;white-space:pre;overflow-x:auto;color:#0f172a;background:#fff}
+.term pre{background:#0c1424;color:#d6e4f5}.term .bbar{background:#1e293b;border-color:#334155}.term .url{background:#0f172a;border-color:#334155;color:#cbd5e1}
+.mark{background:#fde7f2;font-weight:800}.mk2{background:#e0f2fe}.mk3{background:#ecfccb}
+.console{display:grid;grid-template-columns:1fr 1fr}.console .ph{font-size:12px;font-weight:800;color:#64748b;padding:6px 14px;border-bottom:1px solid #e2e8f0;background:#f1f5f9;display:flex;justify-content:space-between}.console .left{border-right:1px solid #e2e8f0}.console .right pre{background:#f8fafc}
+.svgbox{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:8px}.svgbox svg{display:block;width:100%;height:auto}
+@media(max-width:760px){.console{grid-template-columns:1fr}.console .left{border-right:0;border-bottom:1px solid #e2e8f0}}
+
+.quizbox{border:2px solid #c4b5fd;background:#faf5ff;border-radius:14px;padding:14px 18px;margin:28px 0}
+.qz-title{border:0!important;margin:0 0 6px!important;padding:0!important;color:#5b21b6}.qz-title:before{content:none!important}
+.quiz{background:#fff;border:1px solid #e9d5ff;border-radius:10px;padding:12px 14px;margin:12px 0}
+.quiz .qz-q{margin:0 0 8px}.quiz label{display:block;padding:6px 8px;border-radius:7px;cursor:pointer;font-size:16.5px}
+.quiz label:hover{background:#f5f3ff}.quiz input{margin-right:8px}
+.qz-check{margin-top:8px;border:1px solid #7c3aed;background:#7c3aed;color:#fff;border-radius:7px;padding:5px 14px;font:700 14px 'Pretendard',sans-serif;cursor:pointer}
+.qz-fb{margin-top:10px;padding:10px 12px;border-radius:8px;background:#f8fafc;border-left:4px solid #94a3b8}
+.qz-fb.ok{border-left-color:#16a34a;background:#f0fdf4}.qz-fb.no{border-left-color:#dc2626;background:#fef2f2}
+.qz-fb p{margin:4px 0;font-size:16px}.qz-res{font-weight:800}
+.wide{overflow-x:auto}.wide table{min-width:1150px}.wide td{text-align:left!important;white-space:normal}.wide td:first-child,.wide th{white-space:nowrap}
+.quiz label.right{background:#dcfce7}.quiz label.wrong{background:#fee2e2}
+</style></head><body>
+<header class="banner"><div class="banner-in"><div><div class="brand">Part A · A5-M2 · OpenAI API 온톨로지 분석</div><div style="font-size:23px;font-weight:850">A5-M2 OpenAI API 온톨로지 분석 (개체 · 관계 · 속성 추출 · Triple · 병합과 정규화 · JSON 저장)</div></div><div class="who">© 2026 부성순 · AI·클라우드 실무 과정<br/>부성순 (bakpak@empas.com)</div><a href="/lectures/files/index.html#section-a1" style="display:inline-block;padding:7px 11px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;color:#bd1366;text-decoration:none;font-weight:800;white-space:nowrap">📚 강의자료 라이브러리 · Part A</a></div></header>
+<div class="layout"><aside class="sidebar"><div class="group">A5-M2 · 세부 목차</div><nav aria-label="교안 세부 목차" class="tabs" role="tablist">
+<div aria-level="2" class="part-heading" role="heading">Part 0. 왜 온톨로지인가</div>
+<button aria-controls="u00" aria-selected="true" id="tab-u00" role="tab" tabindex="0" type="button"><span>00</span>지금 가진 연결</button>
+<button aria-controls="u01" aria-selected="false" id="tab-u01" role="tab" tabindex="-1" type="button"><span>01</span>이름으로만 적힌 연결</button>
+<button aria-controls="u02" aria-selected="false" id="tab-u02" role="tab" tabindex="-1" type="button"><span>02</span>같은 단어, 다른 역할</button>
+<button aria-controls="u03" aria-selected="false" id="tab-u03" role="tab" tabindex="-1" type="button"><span>03</span>문서 대신 ‘것’과 ‘관계’로</button>
+<div aria-level="2" class="part-heading" role="heading">Part 1. 실습 05 개체 · 관계 · 속성 추출</div>
+<button aria-controls="u04" aria-selected="false" id="tab-u04" role="tab" tabindex="-1" type="button"><span>04</span>실습 05 · API에 무엇을 보내나</button>
+<button aria-controls="u05" aria-selected="false" id="tab-u05" role="tab" tabindex="-1" type="button"><span>05</span>실습 05 · 문서 하나 추출하고 손 추출과 비교하기</button>
+<div aria-level="2" class="part-heading" role="heading">Part 2. 실습 06 Triple 생성</div>
+<button aria-controls="u06" aria-selected="false" id="tab-u06" role="tab" tabindex="-1" type="button"><span>06</span>실습 06 · 19개 문서 전체에서 트리플 만들기</button>
+<div aria-level="2" class="part-heading" role="heading">Part 3. 실습 07 병합과 정규화</div>
+<button aria-controls="u07" aria-selected="false" id="tab-u07" role="tab" tabindex="-1" type="button"><span>07</span>실습 07 · 흩어진 이름 세고 별칭표로 모으기</button>
+<button aria-controls="u08" aria-selected="false" id="tab-u08" role="tab" tabindex="-1" type="button"><span>08</span>실습 07 · 스키마 0.1 설계하고 다시 뽑기</button>
+<div aria-level="2" class="part-heading" role="heading">Part 4. 실습 08 검증 · JSON 저장</div>
+<button aria-controls="u09" aria-selected="false" id="tab-u09" role="tab" tabindex="-1" type="button"><span>09</span>실습 08 · 검사하고 저장하기</button>
+<button aria-controls="u10" aria-selected="false" id="tab-u10" role="tab" tabindex="-1" type="button"><span>10</span>실습 08 · 스키마 0.2</button>
+<button aria-controls="u11" aria-selected="false" id="tab-u11" role="tab" tabindex="-1" type="button"><span>11</span>실습 08 · 스키마 0.3</button>
+<div aria-level="2" class="part-heading" role="heading">Part 5. 정리</div>
+<button aria-controls="u12" aria-selected="false" id="tab-u12" role="tab" tabindex="-1" type="button"><span>12</span>정리 · 미션 · 종합 점검</button>
+</nav></aside><main>
+<!-- 00 -->
+<section aria-labelledby="tab-u00" class="panel" id="u00" role="tabpanel"><div class="crumb">Part 0. 왜 온톨로지인가 · A5-M2</div><h1>00. 지금 가진 연결 — 열 하나와 줄 하나</h1><p class="lead">문서끼리의 연결이 어디에 적혀 있는지 원본에서 보고, 코드로 전체를 세어 봅니다.</p><p>정책 문서 19개(표준 정책 POL 12개, 예외 지침 EXC 7개)와 FAQ 80개가 있습니다. 문서끼리 이어 주는 정보는 두 군데에 있습니다. 먼저 그 원본을 봅니다.</p><div class="mock"><div class="mock-title">① dataset/faq.csv — FAQ-018 한 행 (마지막 열이 연결)</div><table><thead><tr><th>doc_id</th><th>question</th><th>related_policy_ids</th></tr></thead><tbody><tr><td>FAQ-018</td><td>제주 냉장식품이 변질됐으면 상품대금과 배송비를 모두 받나요?</td><td><span class="mark">EXC-001|POL-FEE-001</span></td></tr></tbody></table></div><div class="mock"><div class="mock-title">② dataset/md/EXC-001.md — ‘확인 항목 및 주의’ 소제목의 첫 줄</div><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">dataset/md/EXC-001.md</span></div><pre style="white-space:pre-wrap">## 확인 항목 및 주의
+<span class="mark">적용 정책: POL-DEL-002, POL-RET-002, POL-FEE-001.</span> 배송비 무료 회원이라도 실제 납부하지 않은 기본배송비를 환불받는 것은 아니다.</pre></div></div><p>이 두 가지 연결만으로 문서 전체가 어떻게 이어지는지 코드로 세어 봅니다. API를 부르지 않는 스크립트입니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>지금 있는 연결 보기</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>FAQ 80 + 정책 19</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>열과 ‘적용 정책’ 줄 세기</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>정책별 연결 표</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>어디가 비었나</span></div></div><div class="codebox"><div class="codehead"><span>📄 m2_00_why.py · 연결 세기 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>print(&quot;[1] 문서끼리의 연결 (FAQ의 related_policy_ids 열 + 예외 본문의 &#x27;적용 정책:&#x27; 줄)\n&quot;)
+inn = {p[&quot;id&quot;]: 0 for p in P}
+for f in F:
+    for l in f[&quot;links&quot;]:
+        inn[l] = inn.get(l, 0) + 1
+out = {p[&quot;id&quot;]: find_links(p[&quot;text&quot;]) for p in P}
+print(f&quot;{&#x27;정책&#x27;:&lt;12}{&#x27;FAQ가 가리킴&#x27;:&gt;10}  {&#x27;이 문서를 가리키는 정책&#x27;:&lt;26}{&#x27;이 문서가 가리키는 정책&#x27;}&quot;)
+for p in P:
+    pin = [q for q, v in out.items() if p[&quot;id&quot;] in v]
+    print(f&quot;{p[&#x27;id&#x27;]:&lt;12}{inn[p[&#x27;id&#x27;]]:&gt;10}  {&#x27;, &#x27;.join(pin) or &#x27;-&#x27;:&lt;26}{&#x27;, &#x27;.join(out[p[&#x27;id&#x27;]]) or &#x27;-&#x27;}&quot;)
+pol = [p for p in P if p[&quot;id&quot;].startswith(&quot;POL&quot;)]
+print(f&quot;\n표준 정책 {len(pol)}개 중 다른 정책을 가리키는 문서: {sum(1 for p in pol if out[p[&#x27;id&#x27;]])}개&quot;)</code></pre></div><ol class="steps"><li><code>inn</code>: FAQ의 <code>related_policy_ids</code>가 각 정책을 몇 번 가리키는지 셉니다.</li><li><code>out</code>: 정책 본문에서 “적용 정책: …” 줄을 찾아, 그 문서가 가리키는 정책을 모읍니다.</li><li>마지막 줄은 표준 정책(POL) 중 다른 정책을 가리키는 문서가 몇 개인지 셉니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_00_why.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[1] 문서끼리의 연결 (FAQ의 related_policy_ids 열 + 예외 본문의 &#x27;적용 정책:&#x27; 줄)
+
+정책            FAQ가 가리킴  이 문서를 가리키는 정책             이 문서가 가리키는 정책
+EXC-001              4  -                         POL-DEL-002, POL-RET-002, POL-FEE-001
+EXC-002              3  -                         POL-DEL-001, POL-DEL-002, POL-FEE-001
+EXC-003              2  -                         POL-CAN-001, POL-RET-001, POL-FEE-001
+EXC-004              4  -                         POL-CAN-002, POL-FEE-001
+EXC-005              3  -                         POL-MEM-001, POL-FEE-001
+EXC-006              3  -                         POL-CPN-001, POL-MEM-001
+EXC-007              4  -                         POL-VER-001, POL-REF-001, POL-MEM-001, POL-RET-002
+POL-CAN-001          2  EXC-003                   -
+POL-CAN-002          4  EXC-004                   -
+POL-CPN-001          8  EXC-006                   -
+POL-DEL-001          4  EXC-002                   -
+POL-DEL-002          2  EXC-001, EXC-002          -
+POL-FEE-001          6  EXC-001, EXC-002, EXC-003, EXC-004, EXC-005-
+POL-MEM-001          8  EXC-005, EXC-006, EXC-007 -
+POL-REF-001         11  EXC-007                   -
+POL-RET-001         10  EXC-003                   -
+POL-RET-002          5  EXC-001, EXC-007          -
+POL-RET-003          5  -                         -
+POL-VER-001          5  EXC-007                   -
+
+표준 정책 12개 중 다른 정책을 가리키는 문서: 0개</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>표준 정책(POL) 12개 중 다른 정책을 가리키는 문서는 몇 개인가?</li><li>POL-RET-003(디지털 상품 환불)을 가리키는 정책은? FAQ가 없다면 이 문서에 닿는 길이 있나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>POL은 <b>0개</b>입니다. 연결은 모두 예외 지침 7개의 ‘적용 정책’ 줄과 FAQ의 열에서만 나옵니다. POL-RET-003은 어느 정책도 가리키지 않아, FAQ에서 출발하지 않으면 연결로는 닿을 수 없습니다.</p></details><pre class="diagram">지금 가진 연결 (화살표 = 가리킨다)
+
+  FAQ 80개 ──related_policy_ids──▶ 정책
+  EXC 7개  ──적용 정책 줄────────▶ POL
+  POL 12개 ──────────────────────▶ (없음)
+
+  연결은 &#x27;문서 → 문서&#x27;만 있고, 왜 이어지는지는 적혀 있지 않다.</pre><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 지금 자료에서 문서끼리의 연결이 적혀 있는 곳 두 가지는?</p><label><input type="radio" name="qz1_1" value="0"/> policies.csv의 file 열과 category 열</label><label><input type="radio" name="qz1_1" value="1"/> faq.csv의 related_policy_ids 열과 예외 본문의 ‘적용 정책:’ 줄</label><label><input type="radio" name="qz1_1" value="2"/> 마크다운의 ## 소제목</label><label><input type="radio" name="qz1_1" value="3"/> 문서 제목</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>file 열은 본문 위치일 뿐 다른 문서를 가리키지 않습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> ‘POL 12개 중 다른 정책을 가리키는 문서 0개’가 뜻하는 것은?</p><label><input type="radio" name="qz1_2" value="0"/> POL 문서끼리는 관계가 없다</label><label><input type="radio" name="qz1_2" value="1"/> POL 문서끼리의 관계가 ID로는 적혀 있지 않다</label><label><input type="radio" name="qz1_2" value="2"/> POL 문서는 쓸모가 없다</label><label><input type="radio" name="qz1_2" value="3"/> 코드가 틀렸다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>관계가 없다는 뜻이 아닙니다. 다음 탭에서 문장 속에 이름으로 적힌 연결을 찾습니다.</p></div></div></div></section>
+<!-- 01 -->
+<section aria-labelledby="tab-u01" class="panel" hidden="" id="u01" role="tabpanel"><div class="crumb">Part 0. 왜 온톨로지인가 · A5-M2</div><h1>01. 이름으로만 적힌 연결 — 문장 속에 숨은 관계</h1><p class="lead">POL 문서끼리도 실제로는 이어져 있습니다. ID 대신 <b>이름</b>으로 적혀 있을 뿐입니다.</p><p>POL 문서에는 다른 문서의 ID가 없습니다. 그런데 본문을 읽어 보면 다른 정책을 가리키는 문장이 있습니다. <code>POL-RET-001.md</code>의 마지막 소제목입니다.</p><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">dataset/md/POL-RET-001.md</span></div><pre style="white-space:pre-wrap">
+## 자주 혼동하는 경우
+- 출고 전 주문 취소는 반품이 아니라 <span class="mark">취소 절차</span>를 따른다.
+- 배송 중인 상품을 취소하려는 경우는 즉시 취소가 아니라 회수와 반품 절차를 확인해야 한다.
+- 냉장식품의 품질 이상은 7일 기준이 아니라 <span class="mark">냉장식품 품질 예외 정책</span>의 접수 기한을 따른다.
+- 주문제작 상품은 제작 단계에 따라 기준이 달라지므로 <span class="mark">이 정책의 7일 반품 규정</span>을 자동으로 적용하지 않는다.</pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>표시한 세 표현은 각각 어느 문서를 가리키나? policies.csv의 제목 목록에서 찾아보세요.</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>‘취소 절차’ → POL-CAN-001(기본 주문 취소 기준), ‘냉장식품 품질 예외 정책’ → POL-RET-002(냉장식품 반품·품질 예외), ‘주문제작 상품은 … 7일 반품 규정을 자동 적용하지 않는다’ → 주문제작 쪽 문서(POL-CAN-002, EXC-004)와 이어집니다.</p></details><p>같은 방식으로 POL 본문에서 다른 문서를 <b>이름으로</b> 가리키는 문장을 모으면 다음과 같습니다. 사람이 읽으면 바로 알지만, 문서 ID가 없어서 코드는 따라가지 못합니다.</p><div class="tablewrap"><table><thead><tr><th>문서</th><th>본문의 문장 (발췌)</th><th>가리키는 문서</th></tr></thead><tbody><tr><td>POL-RET-001</td><td>출고 전 주문 취소는 반품이 아니라 <mark>취소 절차</mark>를 따른다.</td><td>POL-CAN-001</td></tr><tr><td>POL-RET-001</td><td>냉장식품의 품질 이상은 7일 기준이 아니라 <mark>냉장식품 품질 예외 정책</mark>의 접수 기한을 따른다.</td><td>POL-RET-002</td></tr><tr><td>POL-DEL-001</td><td>냉장식품은 별도의 <mark>냉장 배송 기준</mark>을 따른다.</td><td>POL-DEL-002</td></tr><tr><td>POL-DEL-001</td><td>배송 지연으로 배송비나 보상을 요청하는 경우는 <mark>배송비 정책</mark>과 <mark>지연 관련 예외 지침</mark>을 함께 확인한다.</td><td>POL-FEE-001, EXC-001 · EXC-002</td></tr><tr><td>POL-DEL-002</td><td>훼손이 확인되면 <mark>냉장식품 환불 예외 규정</mark>을 우선 검토한다.</td><td>POL-RET-002</td></tr><tr><td>POL-RET-002</td><td>제주 지역 냉장식품의 지연과 배송비 문제는 <mark>제주 냉장식품 예외 지침</mark>을 함께 확인한다.</td><td>EXC-001</td></tr><tr><td>POL-REF-001</td><td>2026-09 이전 정책 주문에는 당시 적용된 <mark>이전 버전 기준</mark>을 따른다.</td><td>POL-VER-001, EXC-007</td></tr></tbody></table></div><div class="say"><b>보이는 것</b><p>문서끼리의 관계는 ID 링크보다 <b>문장 속에 훨씬 많이</b> 있습니다. 다만 ‘냉장식품 품질 예외 정책’처럼 <b>이름</b>으로 적혀 있어서, 누군가 그 이름이 무엇을 가리키는지 정해 주어야 코드가 따라갈 수 있습니다.</p></div><p>문장 속에는 문서 말고도 이름 붙은 ‘것’이 많습니다. 같은 스크립트의 두 번째 표는 업무 개념 몇 개가 어느 문서에 어떤 표기로 나오는지 셉니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_00_why.py   (아래쪽 [2])</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[2] 문장 속 개념이 나오는 문서 (표기가 달라도 같은 개념으로 묶음)
+
+배송지연     문서  7개  표기 [&#x27;배송 지연&#x27;, &#x27;배송지연&#x27;]
+         EXC-001, EXC-002, POL-CAN-001, POL-DEL-001, POL-FEE-001, POL-MEM-001, POL-RET-002
+판매자귀책    문서  8개  표기 [&#x27;판매자 귀책&#x27;, &#x27;판매자 책임&#x27;]
+         EXC-001, EXC-002, EXC-004, POL-CAN-002, POL-DEL-001, POL-DEL-002, POL-FEE-001, POL-RET-002
+품질훼손     문서  4개  표기 [&#x27;변질&#x27;, &#x27;품질 훼손&#x27;]
+         EXC-001, EXC-002, POL-DEL-002, POL-RET-002
+단순변심     문서  8개  표기 [&#x27;단순 변심&#x27;]
+         EXC-003, EXC-004, POL-CAN-001, POL-CAN-002, POL-FEE-001, POL-RET-001, POL-RET-002, POL-RET-003
+추가배송비    문서  5개  표기 [&#x27;추가배송비&#x27;]
+         EXC-001, EXC-005, POL-FEE-001, POL-MEM-001, POL-RET-003
+제작착수     문서  2개  표기 [&#x27;제작 시작&#x27;, &#x27;제작 착수&#x27;, &#x27;제작이 시작&#x27;, &#x27;제작착수&#x27;]
+         EXC-004, POL-CAN-002
+환불소요기간   문서  3개  표기 [&#x27;영업일&#x27;]
+         EXC-007, POL-DEL-001, POL-REF-001</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>‘판매자귀책’ 개념은 몇 가지 표기로 나오나? ‘품질훼손’은?</li><li>‘제작착수’를 ‘제작 착수’로만 검색하면 어떤 문장을 놓치나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>판매자귀책은 ‘판매자 귀책’과 ‘판매자 책임’, 품질훼손은 ‘품질 훼손’과 ‘변질’로 나옵니다. 제작착수는 네 가지(제작 시작, 제작 착수, 제작이 시작, 제작착수)로 적혀 있어, 하나로만 검색하면 나머지 표기의 문장을 놓칩니다. <b>같은 개념에 이름 하나</b>를 정해 두어야 하는 이유입니다.</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> ‘냉장식품 품질 예외 정책’이라는 표현을 코드가 따라가지 못하는 이유는?</p><label><input type="radio" name="qz2_1" value="0"/> 한글이라서</label><label><input type="radio" name="qz2_1" value="1"/> 문서 ID가 아니라 이름이라, 그 이름이 어느 문서인지 정한 것이 없어서</label><label><input type="radio" name="qz2_1" value="2"/> 문장이 길어서</label><label><input type="radio" name="qz2_1" value="3"/> POL 문서라서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>이름 → 문서를 이어 주는 정보가 필요합니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> ‘판매자 귀책’과 ‘판매자 책임’을 하나로 다뤄야 하는 이유는?</p><label><input type="radio" name="qz2_2" value="0"/> 글자 수가 같아서</label><label><input type="radio" name="qz2_2" value="1"/> 같은 개념인데 표기가 달라 한쪽만 찾으면 다른 쪽 문서를 놓치기 때문</label><label><input type="radio" name="qz2_2" value="2"/> 검색이 느려서</label><label><input type="radio" name="qz2_2" value="3"/> 메타데이터 열이라서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>표기는 달라도 같은 ‘것’입니다.</p></div></div></div></section>
+<!-- 02 -->
+<section aria-labelledby="tab-u02" class="panel" hidden="" id="u02" role="tabpanel"><div class="crumb">Part 0. 왜 온톨로지인가 · A5-M2</div><h1>02. 같은 단어, 다른 역할 — 관계가 필요한 이유</h1><p class="lead">‘배송지연’이 나오는 문장을 모두 모아, 문서마다 그 단어가 무슨 역할을 하는지 봅니다.</p><p>개념 하나를 골라 그 개념이 나오는 문장을 모두 봅니다. 평가 질문 Q-030 “배송지연과 반품이 관련돼 있는데 환불기간은 어떻게 계산하나요?”의 핵심 개념인 <b>배송지연</b>입니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_00_why.py --concept 배송지연</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>&#x27;배송지연&#x27; 표기 [&#x27;배송지연&#x27;, &#x27;배송 지연&#x27;]가 나오는 문장
+
+[EXC-001] 제주 냉장식품 지연과 배송비  (3문장)
+   - 두 조건이 겹치므로 일반 배송 지연이나 일반상품 반품 기준만으로 판단하지 않고 이 지침을 함께 적용한다.
+   - 제주 냉장식품에 배송지연이 발생해도 자동 환불되지 않는다.
+   - 냉장식품이 아닌 일반상품의 제주 배송 지연은 이 지침이 아니라 일반 배송 기준과 배송비 정책을 따른다.
+[POL-CAN-001] 기본 주문 취소 기준  (1문장)
+   - 배송 지연과 반품이 함께 얽힌 경우에는 반품 승인 여부와 환불 승인 시점을 먼저 확인해야 환불 기간을 계산할 수 있다.
+[POL-DEL-001] 일반 배송 기준  (1문장)
+   - 배송 지연으로 배송비나 보상을 요청하는 경우는 배송비 정책과 지연 관련 예외 지침을 함께 확인한다.
+[POL-FEE-001] 배송비·추가배송비 환불 판단  (1문장)
+   - 배송지연만으로 모든 배송비를 자동 환불하는 것은 아니다.
+[POL-MEM-001] 회원등급별 무료배송·혜택  (2문장)
+   - 무료배송 혜택이 환불 승인 또는 배송지연 귀책 인정과 동일한 개념은 아니다.
+   - 무료배송 혜택이 있다고 해서 환불 승인이나 배송 지연 귀책이 인정되는 것은 아니다.
+[POL-RET-002] 냉장식품 반품·품질 예외  (2문장)
+   - 오배송·변질·온도 이탈·판매자 귀책 배송 지연으로 인한 품질 훼손은 수령 후 48시간 안에 접수하고 증빙을 확인해 환불 또는 재배송한다.
+   - 변질, 온도 이탈, 오배송, 판매자 귀책 배송 지연 중 어떤 사유인지 구분한다.</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>같은 ‘배송지연’이 문서마다 하는 역할이 같은가? 문장마다 ‘배송지연이 무엇을 한다/당한다’로 바꿔 적어 보세요.</li><li>Q-030에 직접 답하는 문장은 어느 문서에 있나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><div class="tablewrap"><table><thead><tr><th>문서</th><th>문장 속 배송지연의 역할</th></tr></thead><tbody><tr><td>POL-FEE-001</td><td>배송지연 <b>만으로는</b> 배송비 자동 환불이 <b>안 된다</b> (제한)</td></tr><tr><td>EXC-001</td><td>제주 냉장식품의 배송지연도 자동 환불이 <b>안 된다</b> (제한) · 일반상품이면 다른 기준을 따른다 (적용 범위)</td></tr><tr><td>POL-RET-002</td><td>판매자 귀책 배송지연이 품질 훼손의 <b>원인</b>이면 48시간 안에 접수해 환불 검토 (원인 → 처리)</td></tr><tr><td>POL-MEM-001</td><td>무료배송 혜택이 배송지연 귀책 인정과 <b>같지 않다</b> (구분)</td></tr><tr><td>POL-DEL-001</td><td>배송지연 보상 요청은 배송비 정책과 예외 지침을 <b>함께 본다</b> (참조)</td></tr><tr class="hl"><td>POL-CAN-001</td><td>배송지연과 반품이 얽히면 반품 승인 · 환불 승인 시점을 먼저 확인해야 <b>환불 기간</b>을 계산할 수 있다 (절차) ← Q-030의 답</td></tr></tbody></table></div></details><p>Q-030을 키워드와 연결로 찾았을 때 결과는 다음과 같았습니다. 빠진 두 문서가 무엇인지 보세요.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m1_03_search.py --detail Q-030</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>    ④까지 모은 문서 11개: [&#x27;FAQ-094&#x27;, &#x27;FAQ-019&#x27;, &#x27;POL-CAN-001&#x27;, &#x27;FAQ-060&#x27;, &#x27;EXC-001&#x27;, &#x27;EXC-003&#x27;, &#x27;POL-RET-001&#x27;, &#x27;POL-RET-002&#x27;, &#x27;POL-MEM-001&#x27;, &#x27;POL-DEL-002&#x27;, &#x27;POL-FEE-001&#x27;]
+    빠진 정책: [&#x27;POL-DEL-001&#x27;, &#x27;POL-REF-001&#x27;]</code></pre></div><div class="say"><b>보이는 것</b><p>단어가 나오는 문서는 7개지만 <b>하는 역할</b>은 제각각입니다. 어떤 문서는 ‘제한’, 어떤 문서는 ‘원인’, 어떤 문서는 ‘절차’를 말합니다. 검색에 필요한 것은 ‘배송지연이 나오는 문서’가 아니라 <b>‘배송지연과 무슨 관계인 문서’</b>입니다. 그리고 Q-030에서 빠진 POL-DEL-001(배송 지연 기준)과 POL-REF-001(환불 소요 기간)은 결과 속 어떤 문서도 ID로 가리키지 않았습니다. 질문 속 개념(배송지연, 반품, 환불기간)에서 바로 출발할 수 있었다면 닿았을 문서입니다.</p></div><h3>정리 — 지금 방식이 못 하는 것</h3><div class="tablewrap"><table><thead><tr><th>못 하는 것</th><th>근거</th></tr></thead><tbody><tr><td>① 이름으로만 적힌 연결을 따라가기</td><td>01탭 · POL 본문의 ‘냉장식품 품질 예외 정책’ 같은 표현 7곳</td></tr><tr><td>② 같은 개념의 다른 표기를 하나로 보기</td><td>01탭 · 판매자 귀책/판매자 책임, 품질 훼손/변질, 제작착수 4가지 표기</td></tr><tr><td>③ 단어가 아니라 <b>관계</b>로 찾기</td><td>이 탭 · 배송지연이 나오는 문서 7개, 역할은 제한 · 원인 · 구분 · 참조 · 절차</td></tr><tr><td>④ 질문 속 개념에서 출발하기</td><td>이 탭 · Q-030의 빠진 문서 2개는 결과 속 문서가 가리키지 않음</td></tr></tbody></table></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> ‘배송지연’ 키워드 하나로 문서 7개가 나오는 것이 문제인 이유는?</p><label><input type="radio" name="qz3_1" value="0"/> 7개는 너무 적어서</label><label><input type="radio" name="qz3_1" value="1"/> 문서마다 배송지연과의 관계(제한·원인·절차 등)가 달라, 질문에 맞는 관계의 문서를 골라낼 수 없어서</label><label><input type="radio" name="qz3_1" value="2"/> 표기가 하나뿐이라서</label><label><input type="radio" name="qz3_1" value="3"/> FAQ가 없어서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>같은 단어라도 역할이 다릅니다.</p></div></div><div class="quiz" data-answer="2"><p class="qz-q"><b>Q2.</b> Q-030에 직접 답하는 문장이 있는 문서는?</p><label><input type="radio" name="qz3_2" value="0"/> POL-FEE-001</label><label><input type="radio" name="qz3_2" value="1"/> POL-MEM-001</label><label><input type="radio" name="qz3_2" value="2"/> POL-CAN-001</label><label><input type="radio" name="qz3_2" value="3"/> EXC-001</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>“배송 지연과 반품이 함께 얽힌 경우에는 … 환불 기간을 계산할 수 있다.”</p></div></div></div></section>
+<!-- 03 -->
+<section aria-labelledby="tab-u03" class="panel" hidden="" id="u03" role="tabpanel"><div class="crumb">Part 0. 왜 온톨로지인가 · A5-M2</div><h1>03. 문서 대신 ‘것’과 ‘관계’로 — 손으로 트리플 만들기</h1><p class="lead">EXC-001의 한 문단을 손으로 (주어, 관계, 목적어)로 바꾸고, 그 결과를 그림으로 그려 봅니다.</p><p>01·02탭에서 본 문제는 모두 <b>문서 단위</b>로만 연결을 보았기 때문에 생깁니다. 방법을 바꿔, 문장 속의 ‘것’을 꺼내 이름을 붙이고 그 사이의 관계를 적어 봅니다. EXC-001의 업무 규정 문단입니다.</p><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">dataset/md/EXC-001.md</span></div><pre style="white-space:pre-wrap">## 업무 규정
+<span class="mark">제주 냉장식품</span>에 <span class="mark">배송지연</span>이 발생해도 <span class="mark">자동 환불되지 않는다</span>. <span class="mark">주문 약정일·실제 출고시각·기상 영향·온도 이탈</span>을 확인한다. <span class="mark">판매자 귀책</span> 지연으로 <span class="mark">품질 훼손</span>이 확정되면 <span class="mark">상품대금과 실제 결제한 기본배송비·추가배송비를 함께 검토한다</span>. 항공편 중단 같은 <span class="mark">외부 요인</span>은 <span class="mark">판매자 귀책</span> 판단을 보류할 수 있다.</pre></div><h3>문장 → (주어, 관계, 목적어)</h3><p>문장 하나를 <b>주어 — 관계 → 목적어</b> 세 칸으로 바꾼 것을 <b>트리플(triple)</b>이라고 합니다. 근거 문장을 옆에 그대로 남겨 둡니다.</p><div class="tablewrap"><table><thead><tr><th>주어</th><th>관계</th><th>목적어</th><th>근거 (원문 그대로)</th></tr></thead><tbody><tr><td>EXC-001</td><td>적용대상</td><td>제주</td><td>제주 냉장식품에 배송지연이 발생해도 …</td></tr><tr><td>EXC-001</td><td>적용대상</td><td>냉장식품</td><td>제주 냉장식품에 배송지연이 발생해도 …</td></tr><tr><td>배송지연</td><td>제한</td><td>환불</td><td>배송지연이 발생해도 자동 환불되지 않는다.</td></tr><tr><td>EXC-001</td><td>확인필요</td><td>출고시각</td><td>주문 약정일·실제 출고시각·기상 영향·온도 이탈을 확인한다.</td></tr><tr><td>EXC-001</td><td>확인필요</td><td>온도기록</td><td>(같은 문장)</td></tr><tr><td>품질훼손</td><td>검토대상</td><td>배송비환불</td><td>판매자 귀책 지연으로 품질 훼손이 확정되면 … 기본배송비·추가배송비를 함께 검토한다.</td></tr><tr><td>판매자귀책</td><td>검토대상</td><td>환불</td><td>(같은 문장)</td></tr><tr><td>EXC-001</td><td>함께적용</td><td>POL-DEL-002 · POL-RET-002 · POL-FEE-001</td><td>적용 정책: POL-DEL-002, POL-RET-002, POL-FEE-001.</td></tr></tbody></table></div><p>트리플을 점과 선으로 그리면 다음과 같습니다. 문서만 점이었던 00탭의 그림과 비교해 보세요.</p><pre class="diagram">                 적용대상                 적용대상
+       제주 ◀───────────── EXC-001 ─────────────▶ 냉장식품
+                          │    │
+              확인필요 ◀──┘    └──▶ 함께적용
+           출고시각 · 온도기록          POL-DEL-002 · POL-RET-002 · POL-FEE-001
+
+       배송지연 ──제한──────▶ 환불 ◀──검토대상── 판매자귀책
+       품질훼손 ──검토대상──▶ 배송비환불</pre><div class="say"><b>달라진 것</b><p>이제 점은 문서만이 아닙니다. <b>제주, 냉장식품, 배송지연, 판매자귀책, 환불</b> 같은 업무 개념도 점이 되고, 선에는 <b>제한, 검토대상</b> 같은 이름이 붙습니다. ‘배송지연’ 점에서 출발하면 ‘제한’ 선을 따라 환불로, 다른 문서의 ‘원인’ 선을 따라 품질훼손으로 갈 수 있습니다. 02탭의 ③·④를 할 수 있는 모양입니다.</p></div><h3>온톨로지 — 이 그림의 설계도</h3><p>위 그림을 그리려면 먼저 정해야 할 것이 있습니다. 어떤 ‘것’을 점으로 둘지, 그 ‘것’을 어떤 종류로 나눌지, 선에 쓸 관계 이름은 무엇인지, 값은 어디에 붙일지. 이 약속을 정리한 설계도를 <b>온톨로지(ontology)</b>라고 합니다.</p><div class="tablewrap"><table><thead><tr><th>요소</th><th>뜻</th><th>EXC-001에서의 예</th></tr></thead><tbody><tr><td><b>클래스</b> (개체 종류)</td><td>‘것’의 종류</td><td>정책, 상품유형, 지역, 사유, 처리, 확인항목</td></tr><tr><td><b>인스턴스</b> (개체, Entity)</td><td>종류에 속한 실제 하나</td><td>EXC-001(정책), 냉장식품(상품유형), 제주(지역), 배송지연(사유)</td></tr><tr><td><b>관계</b> (Relation)</td><td>두 개체를 잇는 이름 있는 선</td><td>적용대상, 제한, 검토대상, 확인필요, 함께적용</td></tr><tr><td><b>속성</b> (Property)</td><td>개체 하나에 붙는 값</td><td>POL-RET-002의 품질 이상 <b>접수 기한 = 수령 후 48시간</b></td></tr><tr><td><b>규칙</b></td><td>관계를 쓰는 약속</td><td>‘적용대상’은 정책 → 상품유형·지역·회원등급·주문상태로만 쓴다</td></tr></tbody></table></div><div class="note"><b>속성과 관계의 구분</b><p>‘48시간’은 다른 것과 이어지지 않는 <b>값</b>이라 속성입니다. ‘냉장식품’은 다른 문서와도 이어지는 <b>것</b>이라 개체로 두고 관계로 잇습니다. 같은 내용도 <b>다른 것과 이어질 일이 있으면 개체, 아니면 속성</b>으로 둡니다.</p></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>EXC-001 업무 규정 마지막 문장 “항공편 중단 같은 외부 요인은 판매자 귀책 판단을 보류할 수 있다.”를 트리플로 바꿔 보세요. 위 표의 관계 이름 중 맞는 것이 있나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>주어 ‘외부요인’, 목적어 ‘판매자귀책’까지는 쉽지만, ‘보류할 수 있다’에 맞는 관계 이름은 위 표에 없습니다. 관계 이름을 새로 만들지(예: 판단보류), 이 문장은 버릴지 정해야 합니다. 온톨로지를 <b>설계</b>한다는 것은 이런 결정을 미리 해 두는 일입니다. 이 결정은 실습 07에서 실제 추출 결과를 보고 합니다.</p></details><div class="ask"><b>🔍 더 알아보기</b><p><b>💬 LLM 채팅창에 물어보기</b> — 파일이 필요 없는 개념 질문입니다. 평소 쓰는 채팅창(ChatGPT, Claude 등)에 붙여 넣으면 됩니다.</p><div class="codebox"><div class="codehead"><span>채팅창에 붙여 넣기</span><button class="copy" type="button">코드 복사</button></div><pre><code>쇼핑몰 정책 문서로 검색 시스템을 만들고 있어. 온톨로지에서 클래스, 인스턴스, 관계, 속성의 차이를 &#x27;제주로 배송된 냉장식품이 늦게 와서 변질됐다&#x27;는 사례로 설명해 줘. 속성으로 둘지 개체로 둘지 정하는 기준도 알려 줘.</code></pre></div><p><b>🌐 웹 검색창에 입력할 검색어</b> — 더 읽고 싶을 때: <code>ontology class instance property</code>, <code>knowledge graph triple subject predicate object</code></p></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> “냉장식품은 단순 변심 반품이 원칙적으로 불가하다.”를 트리플로 바꾼 것으로 알맞은 것은?</p><label><input type="radio" name="qz4_1" value="0"/> (냉장식품, 48시간, 반품)</label><label><input type="radio" name="qz4_1" value="1"/> (단순변심, 제한, 반품) + 대상: 냉장식품</label><label><input type="radio" name="qz4_1" value="2"/> (반품, 속성, 불가)</label><label><input type="radio" name="qz4_1" value="3"/> (POL-RET-002, file, md)</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>사유(단순변심)가 처리(반품)를 제한합니다. 어느 상품에 대한 규칙인지는 문서의 적용대상(냉장식품)으로 남습니다.</p></div></div><div class="quiz" data-answer="2"><p class="qz-q"><b>Q2.</b> 다음 중 속성으로 두는 것이 알맞은 것은?</p><label><input type="radio" name="qz4_2" value="0"/> 제주</label><label><input type="radio" name="qz4_2" value="1"/> 판매자귀책</label><label><input type="radio" name="qz4_2" value="2"/> 수령 후 48시간</label><label><input type="radio" name="qz4_2" value="3"/> POL-FEE-001</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>다른 것과 이어지지 않는 값입니다.</p></div></div><div class="quiz" data-answer="3"><p class="qz-q"><b>Q3.</b> 온톨로지가 정하는 것이 아닌 것은?</p><label><input type="radio" name="qz4_3" value="0"/> 개체의 종류</label><label><input type="radio" name="qz4_3" value="1"/> 관계 이름</label><label><input type="radio" name="qz4_3" value="2"/> 속성을 어디에 붙일지</label><label><input type="radio" name="qz4_3" value="3"/> 검색 결과를 몇 개 보여 줄지</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>검색 결과 개수는 검색 설정입니다.</p></div></div></div></section>
+<!-- 04 -->
+<section aria-labelledby="tab-u04" class="panel" hidden="" id="u04" role="tabpanel"><div class="crumb">Part 1. 실습 05 개체 · 관계 · 속성 추출 · A5-M2</div><h1>04. 실습 05 · API에 무엇을 보내나 — 준비와 지시문</h1><p class="lead">문서 하나(EXC-001)를 API에 보내기 전에, 보낼 지시문과 문서를 화면으로 확인합니다.</p><p>03탭에서 손으로 한 일을 19개 문서 전체에 하려면 시간이 많이 듭니다. 문장을 읽고 개체와 관계를 뽑는 일을 <b>OpenAI API</b>에 맡깁니다. 먼저 무엇을 보내는지 확인합니다.</p><h3>준비 — 패키지와 API 키</h3><div class="codebox"><div class="codehead"><span>Claude CLI · 실행 (처음 한 번)</span><button class="copy" type="button">코드 복사</button></div><pre><code>pip install openai</code></pre></div><div class="browser" style="margin-top:10px"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">C:\rag\A5-lab\.env</span></div><pre style="white-space:pre-wrap">OPENAI_API_KEY=sk-...(본인 키)
+OPENAI_MODEL=gpt-4o-mini</pre></div><div class="note"><b>API 키</b><p>.env 파일의 키는 다른 사람에게 보내거나 교안·코드에 붙여 넣지 않습니다. 파일을 압축해 공유할 때도 .env는 빼고 묶습니다.</p></div><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>API에 JSON으로 묻기</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>지시문 + 문서</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>chat.completions 호출</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>JSON + 기록 파일</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>outputs_m2/raw/</span></div></div><div class="codebox"><div class="codehead"><span>📄 m2lib.py · ask_json (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def ask_json(name, system, user, dry_run=False, refresh=False):
+    &quot;&quot;&quot;OpenAI에 JSON 응답을 요청하고, 요청과 응답을 outputs_m2/raw/&lt;name&gt;.json에 저장한다.&quot;&quot;&quot;
+    RAW.mkdir(parents=True, exist_ok=True)
+    path = RAW / f&quot;{name}.json&quot;
+    if dry_run:
+        print(f&quot;[dry-run] {name} · 모델 {MODEL}\n--- system ---\n{system}\n--- user ---\n{user}\n&quot;)
+        return None
+    if path.exists() and not refresh:
+        return json.loads(path.read_text(encoding=&quot;utf-8&quot;))
+    from openai import OpenAI  # pip install openai
+
+    client = OpenAI(api_key=os.environ[&quot;OPENAI_API_KEY&quot;])
+    kwargs = {&quot;model&quot;: MODEL, &quot;response_format&quot;: {&quot;type&quot;: &quot;json_object&quot;},
+              &quot;messages&quot;: [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: system}, {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user}]}
+    if MODEL.startswith(&quot;gpt-4&quot;):
+        kwargs[&quot;temperature&quot;] = 0  # 같은 입력에 같은 답이 나오도록
+    t0 = time.time()
+    resp = client.chat.completions.create(**kwargs)
+    text = resp.choices[0].message.content
+    record = {&quot;name&quot;: name, &quot;model&quot;: resp.model, &quot;seconds&quot;: round(time.time() - t0, 1),
+              &quot;usage&quot;: {&quot;prompt_tokens&quot;: resp.usage.prompt_tokens, &quot;completion_tokens&quot;: resp.usage.completion_tokens},
+              &quot;system&quot;: system, &quot;user&quot;: user, &quot;response_text&quot;: text, &quot;data&quot;: json.loads(text)}
+    path.write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding=&quot;utf-8&quot;)
+    return record</code></pre></div><ol class="steps"><li><code>dry_run</code>이면 API를 부르지 않고 보낼 내용만 화면에 찍습니다.</li><li>같은 이름의 결과 파일이 이미 있으면 다시 부르지 않고 파일을 읽습니다. 같은 실습을 여러 번 돌려도 요금이 한 번만 듭니다. 새로 받고 싶으면 <code>--refresh</code>.</li><li><code>response_format={"type": "json_object"}</code>: 답을 JSON 하나로만 받습니다.</li><li><code>temperature=0</code>: 같은 입력에 최대한 같은 답이 나오게 합니다.</li><li>보낸 지시문, 받은 원문, 걸린 시간, 토큰 수를 모두 <code>outputs_m2/raw/이름.json</code>에 남깁니다. 결과가 이상하면 이 파일부터 봅니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><h3>보낼 내용 보기 — --dry-run</h3><div class="codebox"><div class="codehead"><span>📄 m2lib.py · 지시문 (발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>SYSTEM = (&quot;너는 쇼핑몰 정책 문서에서 지식을 뽑아 정리하는 도우미다. &quot;
+          &quot;문서에 적힌 내용만 쓰고, 추측하지 않는다. 반드시 JSON 하나로만 답한다.&quot;)
+
+FREE_FORMAT = &quot;&quot;&quot;다음 정책 문서에서 개체(entity), 관계(triple), 속성(property)을 뽑아라.
+
+- entities: 문서에 나오는 중요한 &#x27;것&#x27;과 그 종류. 예) {&quot;name&quot;: &quot;냉장식품&quot;, &quot;type&quot;: &quot;상품유형&quot;}
+- triples : (주어, 관계, 목적어). evidence에는 근거가 된 문장을 문서에서 그대로 옮긴다.
+- properties: 어떤 개체가 갖는 값(기한, 금액 등). evidence에는 근거 문장을 그대로 옮긴다.
+
+JSON 형식:
+{&quot;entities&quot;: [{&quot;name&quot;: &quot;&quot;, &quot;type&quot;: &quot;&quot;}],
+ &quot;triples&quot;: [{&quot;subject&quot;: &quot;&quot;, &quot;predicate&quot;: &quot;&quot;, &quot;object&quot;: &quot;&quot;, &quot;evidence&quot;: &quot;&quot;}],
+ &quot;properties&quot;: [{&quot;entity&quot;: &quot;&quot;, &quot;name&quot;: &quot;&quot;, &quot;value&quot;: &quot;&quot;, &quot;evidence&quot;: &quot;&quot;}]}
+
+문서 ID: {doc_id}
+문서:
+{text}&quot;&quot;&quot;</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_05_extract_one.py --dry-run</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력 (앞부분)</span><button class="copy" type="button">코드 복사</button></div><pre><code>[dry-run] free_EXC-001 · 모델 gpt-4o-mini
+--- system ---
+너는 쇼핑몰 정책 문서에서 지식을 뽑아 정리하는 도우미다. 문서에 적힌 내용만 쓰고, 추측하지 않는다. 반드시 JSON 하나로만 답한다.
+--- user ---
+다음 정책 문서에서 개체(entity), 관계(triple), 속성(property)을 뽑아라.
+
+- entities: 문서에 나오는 중요한 &#x27;것&#x27;과 그 종류. 예) {&quot;name&quot;: &quot;냉장식품&quot;, &quot;type&quot;: &quot;상품유형&quot;}
+- triples : (주어, 관계, 목적어). evidence에는 근거가 된 문장을 문서에서 그대로 옮긴다.
+- properties: 어떤 개체가 갖는 값(기한, 금액 등). evidence에는 근거 문장을 그대로 옮긴다.
+
+JSON 형식:
+{&quot;entities&quot;: [{&quot;name&quot;: &quot;&quot;, &quot;type&quot;: &quot;&quot;}],
+ &quot;triples&quot;: [{&quot;subject&quot;: &quot;&quot;, &quot;predicate&quot;: &quot;&quot;, &quot;object&quot;: &quot;&quot;, &quot;evidence&quot;: &quot;&quot;}],
+ &quot;properties&quot;: [{&quot;entity&quot;: &quot;&quot;, &quot;name&quot;: &quot;&quot;, &quot;value&quot;: &quot;&quot;, &quot;evidence&quot;: &quot;&quot;}]}
+
+문서 ID: EXC-001
+문서:
+# 제주 냉장식품 지연과 배송비
+
+## 개요
+이 지침은 제주로 배송되는 냉장식품이 약속한 날짜보다 늦게 도착했을 때 상품대금과 배송비를 어떻게 처리할지 정한 예외 규정이다. 제주는 항공편이나 선박을 거쳐야 해서 기상과 운송 일정의 영향을 크게 받고, 냉장식품은 시간이 지나면 품질이 변할 수 있다. 두 조건이 겹치므로 일반 배송 지연이나 일반상품 반품 기준만으로 판단하지 않고 이 지침을 함께 적용한다.
+
+## 업무 규정
+제주 냉장식품에 배송지연이 발생해도 자동 환불되지 않는다. 주문 약정일·실제 출고시각·기상 영향·온도 이탈을 확인한다. 판매자 귀책 지연으로 품질 훼손이 확정되면 상품대금과 실제 결제한 기본배송비·추가배송비를 함께 검토한다. 항공편 중단 같은 외부 요인은 판매자 귀책 판단을 보류할 수 있다.
+… (문서 끝까지)</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>지시문에서 결과의 모양을 정하는 부분은 어디인가?</li><li>evidence를 ‘문서에서 그대로 옮긴다’로 시킨 이유는 무엇일까?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>‘JSON 형식:’ 아래의 예시가 모양을 정합니다. entities · triples · properties 세 목록과 각 칸 이름입니다. evidence를 원문 그대로 받아 두면, 나중에 <b>그 문장이 정말 원문에 있는지</b> 코드로 확인할 수 있습니다. 모델이 지어낸 관계를 걸러 내는 근거가 됩니다.</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> --dry-run으로 실행하면?</p><label><input type="radio" name="qz5_1" value="0"/> API를 부르고 결과를 저장한다</label><label><input type="radio" name="qz5_1" value="1"/> API를 부르지 않고 보낼 지시문과 문서를 보여 준다</label><label><input type="radio" name="qz5_1" value="2"/> 결과 파일을 지운다</label><label><input type="radio" name="qz5_1" value="3"/> 모델을 바꾼다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>요금 없이 보낼 내용을 확인합니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 같은 명령을 두 번 실행하면 두 번째는?</p><label><input type="radio" name="qz5_2" value="0"/> API를 다시 부른다</label><label><input type="radio" name="qz5_2" value="1"/> outputs_m2/raw의 저장 파일을 읽는다</label><label><input type="radio" name="qz5_2" value="2"/> 오류가 난다</label><label><input type="radio" name="qz5_2" value="3"/> 결과가 두 배가 된다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>새로 받으려면 --refresh를 붙입니다.</p></div></div></div></section>
+<!-- 05 -->
+<section aria-labelledby="tab-u05" class="panel" hidden="" id="u05" role="tabpanel"><div class="crumb">Part 1. 실습 05 개체 · 관계 · 속성 추출 · A5-M2</div><h1>05. 실습 05 · 문서 하나 추출하고 손 추출과 비교하기</h1><p class="lead">EXC-001을 실제로 API에 보내고, 03탭에서 손으로 만든 트리플과 나란히 봅니다.</p><p>이제 실제로 보냅니다. 문서는 03탭에서 손으로 해 본 EXC-001입니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_05_extract_one.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>EXC-001 · 모델 gpt-4o-mini-2024-07-18 · 8.3초 · 토큰 입력 1072 / 출력 757
+저장: outputs_m2/raw/free_EXC-001.json
+
+[entities] 8개
+  제주 냉장식품  (상품유형)
+  배송비  (비용)
+  상품대금  (비용)
+  판매자  (주체)
+  고객  (주체)
+  기상  (외부 요인)
+  온도 기록  (증빙)
+  품질  (상태)
+
+[triples] 4개
+  (제주 냉장식품, 배송지연이 발생해도, 자동 환불되지 않는다)
+      근거: 제주 냉장식품에 배송지연이 발생해도 자동 환불되지 않는다.
+  (판매자 귀책 지연, 확정되면, 상품대금과 배송비 환불을 검토한다)
+      근거: 판매자 귀책 지연으로 품질 훼손이 확정되면 상품대금과 실제 결제한 기본배송비·추가배송비를 함께 검토한다.
+  (항공편 결항, 지연은 사실이지만, 판매자 귀책으로 단정하지 않고 판단을 보류한다)
+      근거: 항공편 결항으로 도착이 늦어졌다 → 지연은 사실이지만 판매자 귀책으로 단정하지 않고 판단을 보류하며, 품질 상태를 먼저 확인한
+  (온도 기록이 정상, 품질 훼손이 없으므로, 상품대금 환불 대상이 아니다)
+      근거: 도착은 늦었지만 온도 기록이 정상이고 상품 상태에 이상이 없다 → 품질 훼손이 없으므로 상품대금 환불 대상이 아니다.
+
+[properties] 3개
+  배송비 · 환불 검토 범위 = 고객이 그 주문에서 실제로 결제한 금액
+  기본배송비 · 환불 여부 = 고객이 내지 않은 기본배송비를 돌려받는 것은 아니다
+  제주 추가배송비 · 검토 대상 여부 = 별도로 결제했다면 검토 대상이 된다</code></pre></div><h3>저장된 파일 열어 보기</h3><div class="mock"><div class="mock-title">outputs_m2/raw/free_EXC-001.json — 기록의 모양</div><table><thead><tr><th>칸</th><th>내용</th></tr></thead><tbody><tr><td>model · seconds · usage</td><td>사용한 모델, 걸린 시간, 보낸/받은 토큰 수</td></tr><tr><td>system · user</td><td>보낸 지시문과 문서 (dry-run에서 본 것)</td></tr><tr><td>response_text</td><td>모델이 돌려준 글자 그대로</td></tr><tr><td>data</td><td>그 글자를 JSON으로 읽은 것 — 스크립트는 이것을 씀</td></tr></tbody></table></div><h3>손으로 한 것과 비교하기</h3><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>03탭의 손 추출 8줄과 비교해, API 결과에 <b>없는 것</b>과 <b>다르게 나온 것</b>을 적어 보세요.</li><li>관계 칸(가운데)에 들어간 말을 보세요. ‘관계 이름’이라고 부를 수 있나?</li><li>‘제주 냉장식품’은 개체 하나로 나왔습니다. 03탭에서는 어떻게 나눴나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><div class="tablewrap"><table><thead><tr><th></th><th>손 추출 (03탭)</th><th>API 자유 추출</th></tr></thead><tbody><tr><td>트리플 수</td><td>8</td><td>4</td></tr><tr><td>관계 칸</td><td>적용대상 · 제한 · 검토대상 · 확인필요 · 함께적용</td><td>‘배송지연이 발생해도’, ‘확정되면’, ‘지연은 사실이지만’, ‘품질 훼손이 없으므로’ — 문장 조각</td></tr><tr><td>목적어 칸</td><td>환불, 배송비환불 같은 짧은 이름</td><td>‘자동 환불되지 않는다’, ‘상품대금과 배송비 환불을 검토한다’ — 문장 뒷부분</td></tr><tr><td>제주 · 냉장식품</td><td>지역 · 상품유형 두 개체로 나눔</td><td>‘제주 냉장식품’ 하나로 묶음 (종류: 상품유형)</td></tr><tr><td>적용 정책 줄</td><td>함께적용 3개</td><td>없음</td></tr><tr><td>근거 문장</td><td>원문 그대로</td><td>원문 그대로 (4개 모두)</td></tr></tbody></table></div><p>모델은 문장을 잘 읽었지만, 문장을 <b>주어 / 문장 가운데 / 문장 끝</b>으로 잘라 세 칸에 넣었습니다. 지시문에서 칸의 이름(subject, predicate, object)만 알려 주고 <b>그 칸에 무엇을 넣을지</b>는 정하지 않았기 때문입니다. 근거 문장은 정확히 옮겼습니다.</p></details><div class="ask"><b>🔍 더 알아보기</b><p><b>▶ Claude CLI에서 실행하기</b> — A5-lab 폴더의 파일을 읽거나 스크립트를 실행해야 하는 질문입니다. 채팅창은 내 폴더를 볼 수 없으므로 <code>C:\rag\A5-lab</code>에서 실행 중인 Claude CLI에 입력합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI에 입력</span><button class="copy" type="button">코드 복사</button></div><pre><code>outputs_m2/raw/free_EXC-001.json을 읽고, triples의 evidence 문장이 dataset/md/EXC-001.md 원문에 그대로 들어 있는지 하나씩 확인해 줘.</code></pre></div></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> API 결과의 관계 칸에 ‘확정되면’ 같은 문장 조각이 들어간 가장 큰 이유는?</p><label><input type="radio" name="qz6_1" value="0"/> 모델이 한국어를 못해서</label><label><input type="radio" name="qz6_1" value="1"/> 지시문에서 관계 칸에 쓸 이름을 정해 주지 않아서</label><label><input type="radio" name="qz6_1" value="2"/> temperature가 0이라서</label><label><input type="radio" name="qz6_1" value="3"/> 문서가 짧아서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>형식(칸 이름)만 정했고, 칸에 들어갈 말은 정하지 않았습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 결과가 이상할 때 가장 먼저 볼 것은?</p><label><input type="radio" name="qz6_2" value="0"/> m2lib.py</label><label><input type="radio" name="qz6_2" value="1"/> outputs_m2/raw/free_EXC-001.json의 response_text</label><label><input type="radio" name="qz6_2" value="2"/> .env</label><label><input type="radio" name="qz6_2" value="3"/> faq.csv</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>모델이 실제로 돌려준 원문입니다.</p></div></div></div></section>
+<!-- 06 -->
+<section aria-labelledby="tab-u06" class="panel" hidden="" id="u06" role="tabpanel"><div class="crumb">Part 2. 실습 06 Triple 생성 · A5-M2</div><h1>06. 실습 06 · 19개 문서 전체에서 트리플 만들기</h1><p class="lead">정책 19개를 모두 추출해 <code>triples_free.json</code>으로 모으고, 관계 이름이 몇 가지로 나오는지 봅니다.</p><p>같은 지시문으로 정책 19개를 모두 보냅니다. 문서마다 결과를 따로 저장하고, 마지막에 하나로 모읍니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>19개 문서 트리플</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>정책 19개</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>문서마다 ask_json</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>triples_free.json</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>관계 이름 수</span></div></div><div class="codebox"><div class="codehead"><span>📄 m2_06_extract_all.py (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>for d in docs:
+    prompt = free_prompt(d) if a.mode == &quot;free&quot; else schema_prompt(d, schema)
+    rec = ask_json(f&quot;{tag}_{d[&#x27;id&#x27;]}&quot;, SYSTEM, prompt, refresh=a.refresh)
+    data = rec[&quot;data&quot;]
+    ts = [dict(t, doc_id=d[&quot;id&quot;]) for t in data.get(&quot;triples&quot;, [])]
+    ps = [dict(p, doc_id=d[&quot;id&quot;]) for p in data.get(&quot;properties&quot;, [])]
+    triples += ts
+    props += ps
+    ents += [dict(e, doc_id=d[&quot;id&quot;]) for e in data.get(&quot;entities&quot;, [])]
+    tok_in += rec[&quot;usage&quot;][&quot;prompt_tokens&quot;]
+    tok_out += rec[&quot;usage&quot;][&quot;completion_tokens&quot;]
+    sec += rec[&quot;seconds&quot;]
+    print(f&quot;{d[&#x27;id&#x27;]:&lt;12} {len(ts):&gt;6} {len(ps):&gt;8}  {rec[&#x27;seconds&#x27;]:&gt;5}&quot;)</code></pre></div><ol class="steps"><li>문서마다 <code>free_문서ID</code> 이름으로 API를 부릅니다. 이미 받은 문서는 저장 파일을 읽습니다.</li><li>트리플마다 <code>doc_id</code>를 붙여, 어느 문서에서 나온 것인지 남깁니다.</li><li>끝나면 <code>outputs_m2/triples_free.json</code>에 모두 저장하고, 서로 다른 관계 이름과 개체 이름이 몇 개인지 셉니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_06_extract_all.py --mode free</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>모드: free · 문서 19개
+
+문서           triple property      초
+EXC-001           4        3    8.3
+EXC-002           5        4    7.4
+EXC-003           3        1    6.2
+EXC-004           3        2    6.2
+EXC-005           4        2    5.8
+EXC-006           3        5    8.5
+EXC-007           4        6    7.9
+POL-CAN-001       5        2    8.0
+POL-CAN-002       4        2    9.1
+POL-CPN-001       4        3    5.7
+POL-DEL-001       8        3    9.9
+POL-DEL-002       3        2    5.0
+POL-FEE-001       5        3    7.8
+POL-MEM-001       3        2    4.8
+POL-REF-001       5        3    8.2
+POL-RET-001       4        2    6.1
+POL-RET-002       5        2    6.8
+POL-RET-003       5        2    7.6
+POL-VER-001       5        3    6.8
+
+합계 triple 82개 · property 52개 · 토큰 입력 16864 / 출력 12822 · 136초
+서로 다른 관계 이름 76개 · 서로 다른 개체 이름 134개
+많이 나온 관계 이름: 적용하다(4), 은(2), 출고 후(2), 예상 기간(2), 배송지연이 발생해도(1), 확정되면(1), 지연은 사실이지만(1), 품질 훼손이 없으므로(1), 로 인해(1), 책임인지(1), 이 확인되면(1), 이 끝나기 전에는(1)
+저장: outputs_m2/triples_free.json</code></pre></div><div class="mock"><div class="mock-title">outputs_m2/triples_free.json — 트리플 12개 (6개마다 하나씩)</div><table><thead><tr><th>문서</th><th>주어</th><th>관계</th><th>목적어</th></tr></thead><tbody><tr><td>EXC-001</td><td>제주 냉장식품</td><td><span class="mark">배송지연이 발생해도</span></td><td>자동 환불되지 않는다</td></tr><tr><td>EXC-002</td><td>지연</td><td><span class="mark">은</span></td><td>사실</td></tr><tr><td>EXC-004</td><td>주문제작 상품</td><td><span class="mark">제작 시작 후 불량이 있을 때</span></td><td>판매자 귀책으로 검토한다</td></tr><tr><td>EXC-005</td><td>주문</td><td><span class="mark">취소</span></td><td>환불 여부</td></tr><tr><td>EXC-007</td><td>v2</td><td><span class="mark">적용하다</span></td><td>2026-10-01 이후</td></tr><tr><td>POL-CAN-001</td><td>주문상태</td><td><span class="mark">결제완료·상품준비중·배송중·배송완료 중 무엇인지</span></td><td>검증한다</td></tr><tr><td>POL-CPN-001</td><td>상품금액</td><td><span class="mark">기준 미만이 되면</span></td><td>쿠폰 적용 금액을 재산정한다</td></tr><tr><td>POL-DEL-001</td><td>제주 및 도서산간</td><td><span class="mark">출고 후</span></td><td>1~2일 추가 소요</td></tr><tr><td>POL-DEL-002</td><td>제주 운송편</td><td><span class="mark">취소 발생 시</span></td><td>대체 운송과 품질 검수를 우선한다.</td></tr><tr><td>POL-FEE-001</td><td>상품대금</td><td><span class="mark">환불되어도 배송비가 자동으로 함께 환불되는 것은 아니다.</span></td><td></td></tr><tr><td>POL-REF-001</td><td>카드 결제</td><td><span class="mark">예상 기간</span></td><td>3~5영업일</td></tr><tr><td>POL-RET-001</td><td>고객</td><td><span class="mark">부과할 수 있다</span></td><td>왕복 회수비</td></tr></tbody></table></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>트리플 82개에 서로 다른 관계 이름이 몇 개인가? 한 번만 나온 이름은?</li><li>‘은’, ‘출고 후’, ‘예상 기간’을 관계 이름으로 쓰면 그래프에서 어떤 일이 생길까?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>관계 이름이 <b>76개</b>, 그중 한 번만 나온 것이 72개입니다(실습 07에서 셈). 트리플 거의 하나마다 관계 이름이 따로 있는 셈입니다. 이 상태로 그래프를 만들면 ‘제한 관계만 따라가기’, ‘이 처리를 다루는 정책 모두 찾기’ 같은 일을 할 수 없습니다. 선마다 이름이 달라 묶을 수가 없기 때문입니다.</p></details><div class="note"><b>비교용 정답 예시</b><p><code>reference/ontology_gold_triples.csv</code>는 사람이 같은 자료에서 뽑은 트리플 56개입니다. 사람이 만든 것도 관계 이름이 35가지입니다. 사람이든 모델이든 <b>이름을 미리 정하지 않으면</b> 흩어집니다.</p></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 트리플마다 doc_id를 붙이는 이유는?</p><label><input type="radio" name="qz7_1" value="0"/> 파일 크기를 줄이려고</label><label><input type="radio" name="qz7_1" value="1"/> 어느 문서에서 나온 관계인지 근거를 남기려고</label><label><input type="radio" name="qz7_1" value="2"/> API가 요구해서</label><label><input type="radio" name="qz7_1" value="3"/> 정렬하려고</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>근거 문서를 알아야 검증하고 답변에 인용할 수 있습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 관계 이름 76개 중 72개가 한 번만 나왔다는 것이 뜻하는 것은?</p><label><input type="radio" name="qz7_2" value="0"/> 관계가 다양해서 좋다</label><label><input type="radio" name="qz7_2" value="1"/> 같은 종류의 관계를 묶어 따라갈 수 없다</label><label><input type="radio" name="qz7_2" value="2"/> 트리플이 부족하다</label><label><input type="radio" name="qz7_2" value="3"/> 모델이 느리다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>선의 이름이 공통이어야 같은 종류의 선을 모아 따라갈 수 있습니다.</p></div></div></div></section>
+<!-- 07 -->
+<section aria-labelledby="tab-u07" class="panel" hidden="" id="u07" role="tabpanel"><div class="crumb">Part 3. 실습 07 병합과 정규화 · A5-M2</div><h1>07. 실습 07 · 흩어진 이름 세고 별칭표로 모으기</h1><p class="lead">같은 개체의 다른 표기와 관계 이름을 코드로 세고, 별칭표로 모을 수 있는 것과 없는 것을 나눕니다.</p><p>모은 트리플에서 <b>같은 것을 다르게 부른 이름</b>과 <b>관계 이름</b>을 셉니다. 이름을 비교할 때는 띄어쓰기 · 가운뎃점 · 끝의 ‘상품’을 떼고 비교합니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>같은 것 찾기</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>triples_free.json</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>열쇠가 같은 이름 묶기</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>이름 묶음 · 별칭표 초안</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>묶음이 맞나</span></div></div><div class="codebox"><div class="codehead"><span>📄 m2_07_normalize.py · 비교용 열쇠 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def key(name):
+    &quot;&quot;&quot;띄어쓰기·가운뎃점·&#x27;상품&#x27; 꼬리를 떼어 낸 비교용 열쇠&quot;&quot;&quot;
+    k = re.sub(r&quot;[\s·_\-]&quot;, &quot;&quot;, name)
+    return k[:-2] if k.endswith(&quot;상품&quot;) and len(k) &gt; 3 else k</code></pre></div><ol class="steps"><li><code>key('판매자 귀책')</code>와 <code>key('판매자귀책')</code>는 둘 다 ‘판매자귀책’이 되어 한 묶음이 됩니다.</li><li>‘판매자 책임’처럼 글자가 다른 표기는 열쇠로 묶이지 않습니다. 이런 것은 사람이 별칭표에 직접 적습니다.</li><li>별칭표(<code>design/m2_alias.json</code>)가 없으면 자동으로 묶은 것을 채운 <b>초안</b>(<code>design/m2_alias_draft.json</code>)을 만들어 줍니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_07_normalize.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[1] 자유 추출 결과 · triple 82개 · 개체 이름 134개 · 관계 이름 76개
+
+같은 것을 다르게 부른 이름 1묶음
+  주문 상태(1) / 주문상태(1)
+
+관계 이름 76개 중 한 번만 나온 것 72개
+  적용하다(4), 은(2), 출고 후(2), 예상 기간(2), 배송지연이 발생해도(1), 확정되면(1), 지연은 사실이지만(1), 품질 훼손이 없으므로(1), 로 인해(1), 책임인지(1), 이 확인되면(1), 이 끝나기 전에는(1), 배송중 상품을 취소 요청한 경우(1), 배송중인지 확인한다.(1), 제작 단계 확인을 먼저 한다.(1), 제작 시작 후 불량이 있을 때(1), 결정되면(1), 단순 변심이 아니다(1), 주문(1), 적용(1), 청구(1), 취소(1), 적용한 쿠폰(1), 쿠폰 조건을 잃음(1), 회원 등급 무료배송 조건 확인(1)
+
+[2] 별칭표 적용 · 개체 이름 134 → 133개 · 관계 이름 76 → 76개
+    스키마 관계 이름으로 바뀐 triple 0/82개
+    저장: outputs_m2/triples_free_normalized.json</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>개체 이름 134개 중 열쇠로 묶인 것은 몇 묶음인가? 왜 이렇게 적을까?</li><li>관계 이름 76개를 별칭표로 스키마 관계 이름에 하나씩 이어 붙인다면, ‘은’과 ‘출고 후’는 어디에 붙여야 하나?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>자유 추출의 개체 이름은 ‘제주 냉장식품’, ‘판매자 귀책 지연’, ‘상품대금과 배송비 환불을 검토한다’처럼 <b>구절</b>이라, 띄어쓰기만 지워서는 거의 묶이지 않습니다. 관계 이름 ‘은’, ‘출고 후’는 어느 관계에도 붙일 수 없습니다. 이미 흩어진 결과를 뒤에서 정리하는 것은 한계가 있습니다.</p></details><h3>별칭표 — 이름 하나로 모으기</h3><div class="codebox"><div class="codehead"><span>design/m2_alias_draft.json · entities (자동으로 채운 부분)</span><button class="copy" type="button">코드 복사</button></div><pre><code>{
+  &quot;주문 상태&quot;: &quot;주문상태&quot;,
+  &quot;주문제작 상품&quot;: &quot;주문제작상품&quot;,
+  &quot;배송 예정일&quot;: &quot;배송예정일&quot;,
+  &quot;일반 회원&quot;: &quot;일반회원&quot;,
+  &quot;배송비 환불&quot;: &quot;배송비환불&quot;,
+  &quot;디지털 상품&quot;: &quot;디지털상품&quot;,
+  &quot;단순 변심&quot;: &quot;단순변심&quot;,
+  &quot;품질 훼손&quot;: &quot;품질훼손&quot;,
+  &quot;환불 승인&quot;: &quot;환불승인&quot;,
+  &quot;쿠폰 재산정&quot;: &quot;쿠폰재산정&quot;
+}</code></pre></div><div class="codebox"><div class="codehead"><span>design/m2_alias.json (초안 + 사람이 더 적은 3줄)</span><button class="copy" type="button">코드 복사</button></div><pre><code>{
+  &quot;entities&quot;: {
+    &quot;주문 상태&quot;: &quot;주문상태&quot;,
+    &quot;주문제작 상품&quot;: &quot;주문제작상품&quot;,
+    &quot;배송 예정일&quot;: &quot;배송예정일&quot;,
+    &quot;일반 회원&quot;: &quot;일반회원&quot;,
+    &quot;배송비 환불&quot;: &quot;배송비환불&quot;,
+    &quot;디지털 상품&quot;: &quot;디지털상품&quot;,
+    &quot;단순 변심&quot;: &quot;단순변심&quot;,
+    &quot;품질 훼손&quot;: &quot;품질훼손&quot;,
+    &quot;환불 승인&quot;: &quot;환불승인&quot;,
+    &quot;쿠폰 재산정&quot;: &quot;쿠폰재산정&quot;,
+    &quot;변질&quot;: &quot;품질훼손&quot;,
+    &quot;판매자 책임&quot;: &quot;판매자귀책&quot;,
+    &quot;재산정&quot;: &quot;쿠폰재산정&quot;,
+    &quot;불량&quot;: &quot;상품불량&quot;,
+    &quot;오제작&quot;: &quot;상품불량&quot;,
+    &quot;판매자책임&quot;: &quot;판매자귀책&quot;
+  },
+  &quot;predicates&quot;: {}
+}</code></pre></div><p>자동 초안은 띄어쓰기만 다른 이름(단순 변심 → 단순변심)을 모읍니다. ‘변질 → 품질훼손’, ‘판매자 책임 → 판매자귀책’처럼 <b>글자가 다른 같은 개념</b>은 사람이 01탭의 근거를 보고 직접 적습니다. 관계 이름은 빈칸으로 남겼습니다. 76개를 손으로 잇는 대신, 다음 탭에서 <b>쓸 이름을 먼저 정하고</b> 그 이름으로만 뽑게 합니다.</p><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> ‘판매자 책임’이 자동으로 ‘판매자귀책’ 묶음에 들어가지 않는 이유는?</p><label><input type="radio" name="qz8_1" value="0"/> 코드 오류</label><label><input type="radio" name="qz8_1" value="1"/> 띄어쓰기만 다른 게 아니라 글자가 달라서</label><label><input type="radio" name="qz8_1" value="2"/> 속성이라서</label><label><input type="radio" name="qz8_1" value="3"/> 문서가 달라서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>의미가 같아도 글자가 다르면 사람이 별칭표에 적어야 합니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 자유 추출 결과를 별칭표만으로 정리하기 어려운 이유는?</p><label><input type="radio" name="qz8_2" value="0"/> 별칭표가 JSON이라서</label><label><input type="radio" name="qz8_2" value="1"/> 관계 칸에 문장 조각이 들어가 어느 관계에도 이어 붙일 수 없는 것이 대부분이라서</label><label><input type="radio" name="qz8_2" value="2"/> 개체가 너무 적어서</label><label><input type="radio" name="qz8_2" value="3"/> API를 다시 불러야 해서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>그래서 이름을 먼저 정하는 쪽으로 갑니다.</p></div></div></div></section>
+<!-- 08 -->
+<section aria-labelledby="tab-u08" class="panel" hidden="" id="u08" role="tabpanel"><div class="crumb">Part 3. 실습 07 병합과 정규화 · A5-M2</div><h1>08. 실습 07 · 스키마 0.1 설계하고 다시 뽑기</h1><p class="lead">쓸 개체 이름과 관계 이름을 먼저 정하고(스키마), 그 이름으로만 다시 뽑아 자유 추출과 비교합니다.</p><p>개체 종류와 이름, 관계 이름을 미리 정한 파일을 <b>스키마</b>라고 부르겠습니다. 이 스키마가 이 자료의 온톨로지 설계 첫 버전(0.1)입니다.</p><div class="codebox"><div class="codehead"><span>📄 design/m2_schema_v0.1.json</span><button class="copy" type="button">코드 복사</button></div><pre><code>{
+  &quot;version&quot;: &quot;0.1&quot;,
+  &quot;entity_types&quot;: {
+    &quot;정책&quot;:     {&quot;desc&quot;: &quot;문서 ID (예: POL-CAN-002, EXC-001)&quot;},
+    &quot;상품유형&quot;: {&quot;names&quot;: [&quot;일반상품&quot;, &quot;냉장식품&quot;, &quot;주문제작상품&quot;, &quot;디지털상품&quot;]},
+    &quot;지역&quot;:     {&quot;names&quot;: [&quot;제주&quot;, &quot;도서산간&quot;]},
+    &quot;회원등급&quot;: {&quot;names&quot;: [&quot;일반회원&quot;, &quot;VIP&quot;]},
+    &quot;주문상태&quot;: {&quot;names&quot;: [&quot;결제완료&quot;, &quot;상품준비중&quot;, &quot;배송준비&quot;, &quot;제작중&quot;, &quot;배송중&quot;, &quot;배송완료&quot;, &quot;부분취소&quot;, &quot;이용시작&quot;, &quot;환불접수&quot;, &quot;환불승인&quot;]},
+    &quot;처리&quot;:     {&quot;names&quot;: [&quot;주문취소&quot;, &quot;반품&quot;, &quot;교환&quot;, &quot;환불&quot;, &quot;배송비환불&quot;, &quot;추가배송비&quot;, &quot;무료배송&quot;, &quot;쿠폰재산정&quot;]},
+    &quot;사유&quot;:     {&quot;names&quot;: [&quot;단순변심&quot;, &quot;판매자귀책&quot;, &quot;품질훼손&quot;, &quot;배송지연&quot;, &quot;외부요인&quot;]},
+    &quot;확인항목&quot;: {&quot;desc&quot;: &quot;처리 전에 확인해야 하는 기록이나 증빙. 짧은 명사로 쓴다 (예: 제작시작시각, 온도기록)&quot;}
+  },
+  &quot;predicates&quot;: [
+    {&quot;name&quot;: &quot;적용대상&quot;, &quot;subject&quot;: &quot;정책&quot;, &quot;object&quot;: &quot;상품유형|지역|회원등급|주문상태&quot;, &quot;desc&quot;: &quot;이 정책이 적용되는 대상&quot;},
+    {&quot;name&quot;: &quot;다룸&quot;,     &quot;subject&quot;: &quot;정책&quot;, &quot;object&quot;: &quot;처리&quot;, &quot;desc&quot;: &quot;이 정책이 정하는 처리&quot;},
+    {&quot;name&quot;: &quot;함께적용&quot;, &quot;subject&quot;: &quot;정책&quot;, &quot;object&quot;: &quot;정책&quot;, &quot;desc&quot;: &quot;예외 지침이 함께 적용하는 기본 정책 (&#x27;적용 정책:&#x27; 줄)&quot;},
+    {&quot;name&quot;: &quot;확인필요&quot;, &quot;subject&quot;: &quot;정책&quot;, &quot;object&quot;: &quot;확인항목&quot;, &quot;desc&quot;: &quot;처리 전에 확인해야 하는 것&quot;},
+    {&quot;name&quot;: &quot;허용&quot;,     &quot;subject&quot;: &quot;주문상태|사유&quot;, &quot;object&quot;: &quot;처리&quot;, &quot;desc&quot;: &quot;이 상태나 사유이면 처리할 수 있다&quot;},
+    {&quot;name&quot;: &quot;제한&quot;,     &quot;subject&quot;: &quot;주문상태|사유&quot;, &quot;object&quot;: &quot;처리&quot;, &quot;desc&quot;: &quot;이 상태나 사유이면 처리가 제한된다&quot;},
+    {&quot;name&quot;: &quot;검토대상&quot;, &quot;subject&quot;: &quot;사유&quot;, &quot;object&quot;: &quot;처리&quot;, &quot;desc&quot;: &quot;이 사유가 확정되면 처리를 검토한다&quot;}
+  ],
+  &quot;meta_values&quot;: {
+    &quot;일반상품&quot;: [&quot;product_type&quot;, &quot;일반&quot;], &quot;냉장식품&quot;: [&quot;product_type&quot;, &quot;냉장식품&quot;],
+    &quot;주문제작상품&quot;: [&quot;product_type&quot;, &quot;주문제작&quot;], &quot;디지털상품&quot;: [&quot;product_type&quot;, &quot;디지털&quot;],
+    &quot;제주&quot;: [&quot;region&quot;, &quot;제주&quot;], &quot;도서산간&quot;: [&quot;region&quot;, &quot;도서산간&quot;],
+    &quot;일반회원&quot;: [&quot;customer_grade&quot;, &quot;일반&quot;], &quot;VIP&quot;: [&quot;customer_grade&quot;, &quot;VIP&quot;]
+  }
+}
+</code></pre></div><h3>왜 이렇게 정했나 — 근거</h3><div class="tablewrap"><table><thead><tr><th>결정</th><th>근거</th></tr></thead><tbody><tr><td>상품유형 · 지역 · 회원등급 · 주문상태를 개체 종류로</td><td>policies.csv · faq.csv의 꼬리표 열과 같은 종류입니다. 그래프의 개체와 메타데이터 값이 이어져야 그래프에서 찾은 개체로 검색 조건을 걸 수 있습니다.</td></tr><tr><td>‘일반’ 대신 ‘일반상품’ · ‘일반회원’</td><td>꼬리표 값 ‘일반’은 상품 유형과 회원 등급 두 열에 다 있습니다. 개체 이름은 하나로 구분되게 바꾸고, <code>meta_values</code>로 원래 꼬리표 값과 이어 둡니다.</td></tr><tr><td>사유 · 처리의 이름을 정해 둠</td><td>01탭 · 판매자 귀책/판매자 책임, 품질 훼손/변질처럼 같은 개념의 표기가 여럿입니다.</td></tr><tr><td>확인항목은 이름을 정하지 않음</td><td>온도기록, 출고시각, 제작시작시각 … 문서마다 달라 미리 목록을 만들기 어렵습니다. 짧은 명사로만 쓰게 합니다.</td></tr><tr><td>관계 7개</td><td>02탭에서 본 역할(제한 · 원인 · 참조 · 절차)과 03탭 손 추출에서 쓴 이름입니다. 맞는 관계가 없으면 <b>뽑지 않게</b> 합니다.</td></tr></tbody></table></div><h3>지시문이 어떻게 바뀌나</h3><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_06_extract_all.py --mode schema --schema design/m2_schema_v0.1.json --dry-run</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력 (지시문 부분)</span><button class="copy" type="button">코드 복사</button></div><pre><code>다음 정책 문서에서 관계(triple)와 속성(property)을 뽑아라. 아래 규칙을 반드시 지킨다.
+
+[개체 종류와 이름] 이름이 정해진 종류는 반드시 그 이름 중 하나로 쓴다.
+- 정책: 문서 ID (예: POL-CAN-002, EXC-001)
+- 상품유형: 일반상품, 냉장식품, 주문제작상품, 디지털상품
+- 지역: 제주, 도서산간
+- 회원등급: 일반회원, VIP
+- 주문상태: 결제완료, 상품준비중, 배송준비, 제작중, 배송중, 배송완료, 부분취소, 이용시작, 환불접수, 환불승인
+- 처리: 주문취소, 반품, 교환, 환불, 배송비환불, 추가배송비, 무료배송, 쿠폰재산정
+- 사유: 단순변심, 판매자귀책, 품질훼손, 배송지연, 외부요인
+- 확인항목: 처리 전에 확인해야 하는 기록이나 증빙. 짧은 명사로 쓴다 (예: 제작시작시각, 온도기록)
+
+[관계 이름] 아래 관계 이름만 쓴다. 맞는 관계가 없으면 뽑지 않는다.
+- 적용대상: 정책 → 상품유형|지역|회원등급|주문상태 · 이 정책이 적용되는 대상
+- 다룸: 정책 → 처리 · 이 정책이 정하는 처리
+- 함께적용: 정책 → 정책 · 예외 지침이 함께 적용하는 기본 정책 (&#x27;적용 정책:&#x27; 줄)
+- 확인필요: 정책 → 확인항목 · 처리 전에 확인해야 하는 것
+- 허용: 주문상태|사유 → 처리 · 이 상태나 사유이면 처리할 수 있다
+- 제한: 주문상태|사유 → 처리 · 이 상태나 사유이면 처리가 제한된다
+- 검토대상: 사유 → 처리 · 이 사유가 확정되면 처리를 검토한다
+
+[규칙]
+- 이 문서 자체는 subject를 &quot;EXC-001&quot;로 쓴다.
+- evidence에는 근거 문장을 문서에서 그대로 옮긴다.
+- properties의 name은 기한, 금액, 기간 중 하나다.
+
+JSON 형식:
+{&quot;triples&quot;: [{&quot;subject&quot;: &quot;&quot;, &quot;subject_type&quot;: &quot;&quot;, &quot;predicate&quot;: &quot;&quot;, &quot;object&quot;: &quot;&quot;, &quot;object_type&quot;: &quot;&quot;, &quot;evidence&quot;: &quot;&quot;}],
+ &quot;properties&quot;: [{&quot;entity&quot;: &quot;&quot;, &quot;name&quot;: &quot;&quot;, &quot;value&quot;: &quot;&quot;, &quot;evidence&quot;: &quot;&quot;}]}</code></pre></div><p>스키마의 이름 목록과 관계 목록이 지시문에 그대로 들어갑니다(<code>m2lib.py</code>의 <code>schema_prompt</code>). 이제 같은 19개 문서를 다시 뽑습니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_06_extract_all.py --mode schema --schema design/m2_schema_v0.1.json</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>모드: schema · 스키마 0.1 · 문서 19개
+
+문서           triple property      초
+EXC-001          10        0   11.3
+EXC-002           9        0    9.6
+EXC-003           6        0    7.4
+EXC-004           8        0    7.8
+EXC-005           8        0    9.1
+EXC-006           5        4    9.0
+EXC-007           8        6   11.8
+POL-CAN-001      10        0   10.4
+POL-CAN-002       5        0    5.4
+POL-CPN-001       5        0    5.3
+POL-DEL-001       5        0    5.5
+POL-DEL-002       6        0    6.2
+POL-FEE-001       7        0   12.7
+POL-MEM-001      10        2   10.8
+POL-REF-001       5        0    5.3
+POL-RET-001      10        0   10.0
+POL-RET-002      10        0   10.4
+POL-RET-003       6        0    6.7
+POL-VER-001       3        0    3.8
+
+합계 triple 136개 · property 12개 · 토큰 입력 24192 / 출력 12396 · 159초
+서로 다른 관계 이름 7개 · 서로 다른 개체 이름 93개
+많이 나온 관계 이름: 확인필요(43), 적용대상(33), 다룸(24), 함께적용(15), 허용(10), 제한(8), 검토대상(3)
+저장: outputs_m2/triples_schema.json</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_07_normalize.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[3] 자유 추출 vs 스키마 추출 (스키마 0.1)
+                                자유     스키마
+    triple 수                    82     136
+    개체 이름 수                    134      93
+    관계 이름 수                     76       7
+    스키마에 없는 관계 이름: 없음
+    이름 목록 밖의 개체(확인항목 포함) 53개: 결제 로그, 결제내역, 귀책 증빙, 기상 영향, 단순 변심, 문제 사진, 반품 접수일, 배송 예정일, 배송 추적 이력, 배송예정일, 배송지, 변질, 보관 상태, 부분 취소 전후 상품금액, 불량, 사양 승인 기록, 사용 쿠폰의 최소금액, 사진과 온도 기록, 상품 사진, 상품 상태</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>관계 이름은 76개에서 몇 개로 줄었나? 트리플 수는?</li><li>‘이름 목록 밖의 개체’에 ‘단순 변심’, ‘변질’, ‘불량’이 있습니다. 목록을 줬는데도 왜 나왔을까?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>관계 이름은 <b>7개</b>(스키마 그대로)로, 트리플은 82개에서 136개로 늘었습니다. 칸에 넣을 말을 정해 주자 문서 하나에서 더 많은 관계를 뽑았습니다. 그래도 모델은 ‘단순 변심’을 띄어 쓰거나 목록에 없는 ‘변질’, ‘불량’을 쓰기도 합니다. 지시문은 <b>강한 부탁</b>이지 보장이 아니므로, 저장하기 전에 코드로 검사합니다(다음 탭).</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 개체 종류를 메타데이터 꼬리표 열과 맞춘 이유는?</p><label><input type="radio" name="qz9_1" value="0"/> 보기 좋아서</label><label><input type="radio" name="qz9_1" value="1"/> 그래프에서 찾은 개체를 검색 조건(메타데이터 필터)으로 바로 쓰려고</label><label><input type="radio" name="qz9_1" value="2"/> API가 요구해서</label><label><input type="radio" name="qz9_1" value="3"/> 글자 수를 줄이려고</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>그래프와 메타데이터가 같은 말을 써야 이어집니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 지시문에 이름 목록을 줬는데도 목록 밖 이름이 나오는 것에 대한 대응으로 맞는 것은?</p><label><input type="radio" name="qz9_2" value="0"/> 모델을 믿고 그대로 저장한다</label><label><input type="radio" name="qz9_2" value="1"/> 저장 전에 코드로 검사하고, 별칭표로 고치거나 버린다</label><label><input type="radio" name="qz9_2" value="2"/> API를 쓰지 않는다</label><label><input type="radio" name="qz9_2" value="3"/> 목록을 지운다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>지시문은 보장이 아닙니다.</p></div></div></div></section>
+<!-- 09 -->
+<section aria-labelledby="tab-u09" class="panel" hidden="" id="u09" role="tabpanel"><div class="crumb">Part 4. 실습 08 검증 · JSON 저장 · A5-M2</div><h1>09. 실습 08 · 검사하고 저장하기 — 스키마 0.1 판정</h1><p class="lead">관계 이름 · 개체 · 근거 문장을 검사해 통과한 것만 저장하고, 결과를 Part 0의 네 가지 문제에 비춰 봅니다.</p><p>스키마 방식의 결과를 그대로 저장하지 않고 세 가지를 검사한 뒤 통과한 것만 <code>outputs_m2/ontology.json</code>에 저장합니다. 저장 전에 별칭표(<code>design/m2_alias.json</code>)로 이름을 고칩니다.</p><div class="tablewrap"><table><thead><tr><th>검사</th><th>무엇을 보나</th><th>걸리면</th></tr></thead><tbody><tr><td>관계 이름</td><td>스키마의 관계 중 하나인가</td><td>버림 · ‘스키마에 없는 관계’</td></tr><tr><td>개체와 방향</td><td>이름이 목록에 있고, 관계의 주어·목적어 종류가 맞는가 (예: 적용대상은 정책 → 상품유형)</td><td>버림 · ‘목록에 없는 개체 이름’ / ‘관계 방향 불일치’</td></tr><tr><td>근거 문장</td><td>evidence가 원문 어느 소제목에 그대로 있는가 (띄어쓰기는 무시)</td><td>버림 · ‘근거 문장이 원문에 없음’</td></tr></tbody></table></div><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>근거 확인</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>트리플의 evidence</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>원문 줄마다 비교</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>소제목 또는 None</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>버린 이유</span></div></div><div class="codebox"><div class="codehead"><span>📄 m2_08_save.py · 근거 찾기 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def section_of(doc, quote):
+    &quot;&quot;&quot;근거 문장이 들어 있는 &#x27;## 소제목&#x27;을 찾는다. 원문에 없으면 None&quot;&quot;&quot;
+    q = squash(quote)
+    if not q:
+        return None
+    sec = &quot;(머리)&quot;
+    for line in normalize(doc[&quot;text&quot;]).splitlines():
+        if line.startswith(&quot;## &quot;):
+            sec = line[3:].strip()
+        elif q in squash(line):
+            return sec
+    return None</code></pre></div><ol class="steps"><li>원문을 한 줄씩 읽으며 <code>## 소제목</code>을 기억합니다.</li><li>띄어쓰기를 모두 지운 evidence가 그 줄 안에 있으면, 그때의 소제목을 돌려줍니다. 그래서 근거가 <b>어느 문서의 어느 소제목</b>인지 남습니다.</li><li>어느 줄에도 없으면 <code>None</code> — 모델이 문장을 바꿔 쓰거나 지어낸 것입니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_08_save.py --triples outputs_m2/triples_schema_v0.1.json</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>입력 triple 136개 → 저장 112개 · 버림 24개 · 중복 0개
+  버린 이유: 목록에 없는 개체 이름 10개
+  버린 이유: 관계 방향 불일치 (정책 → 사유) 9개
+  버린 이유: 관계 방향 불일치 (정책 → 회원등급) 2개
+  버린 이유: 관계 방향 불일치 (정책 → 지역) 2개
+  버린 이유: 관계 방향 불일치 (정책 → 주문상태) 1개
+노드 79개 · 종류별: 확인항목 39, 정책 19, 처리 7, 상품유형 4, 주문상태 4, 지역 2, 사유 2, 회원등급 2
+관계별: 확인필요 42, 적용대상 32, 다룸 20, 함께적용 15, 검토대상 2, 제한 1
+속성 12개 · 근거 확인 11개
+스키마 0.1 · 저장: outputs_m2/ontology.json (+ ontology_v0.1.json)
+
+[정답 예시 비교] reference/ontology_gold_triples.csv · triple 56개 · 관계 이름 35개
+  정답 예시가 근거로 쓴 문서 20개 중 우리 결과에도 triple이 있는 문서 19개
+  개체 이름이 똑같이 겹치는 것 26개: EXC-001, EXC-002, EXC-004, EXC-005, POL-CAN-002, POL-DEL-002, POL-MEM-001, POL-RET-001, POL-RET-002, POL-RET-003, VIP, 냉장식품, 도서산간, 디지털상품, 무료배송, 배송비환불, 배송예정일, 배송중, 온도이력, 일반상품</code></pre></div><h3>버린 것 들여다보기</h3><div class="tablewrap"><table><thead><tr><th>버린 이유</th><th>예 (ontology_v0.1.json의 rejected)</th><th>읽은 뜻</th><th>고치는 방법</th></tr></thead><tbody><tr><td>관계 방향 불일치 (정책 → 사유)</td><td>(EXC-002, 확인필요, 품질훼손) · EXC-002<br>(POL-CAN-002, 제한, 단순변심) · POL-CAN-002<br>(POL-FEE-001, 허용, 판매자귀책) · POL-FEE-001</td><td>‘이 정책은 이 사유면 처리해 준다/안 해 준다’</td><td>관계를 새로 만든다 (인정사유 · 불인정사유)</td></tr><tr><td>관계 방향 불일치 (정책 → 지역 · 회원등급 · 주문상태)</td><td>(POL-MEM-001, 허용, VIP) · POL-MEM-001<br>(POL-MEM-001, 허용, 일반회원) · POL-MEM-001<br>(POL-MEM-001, 제한, 제주) · POL-MEM-001</td><td>‘이 정책은 이 대상에는 적용되지 않는다’</td><td>관계를 새로 만든다 (제외대상)</td></tr><tr><td>목록에 없는 개체 이름</td><td>(단순변심, 허용, 회수비) · EXC-003<br>(단순변심, 검토대상, 취소) · POL-CAN-002<br>(POL-DEL-001, 다룸, 출고까지 걸리는 기간) · POL-DEL-001<br>(POL-DEL-001, 다룸, 지역별 운송 기간) · POL-DEL-001</td><td>오배송 · 불량 · 재배송처럼 실제로 쓰이는 사유 · 처리</td><td>이름 목록에 더한다</td></tr></tbody></table></div><h3>Part 0의 네 가지 문제에 비춰 보기</h3><div class="tablewrap"><table><thead><tr><th>Part 0에서 본 문제</th><th>스키마 0.1 결과</th><th>판정</th></tr></thead><tbody><tr><td>① 이름으로만 적힌 연결 (01탭)</td><td>함께적용 15개가 모두 ‘적용 정책:’ 줄에서 나옴. 이름으로 가리킨 연결은 0개</td><td>✗</td></tr><tr><td>② 같은 개념의 다른 표기 (01탭)</td><td>사유 · 처리는 정해 둔 이름으로 모임. 확인항목은 ‘온도 기록 / 온도 이력 / 사진과 온도 기록’처럼 여전히 흩어짐</td><td>△</td></tr><tr><td>③ 단어가 아니라 관계로 (02탭)</td><td>사유 노드 2개, 제한 1개 · 검토대상 2개. ‘배송지연’에 닿는 선 0개</td><td>✗</td></tr><tr><td>④ 질문 속 개념에서 출발 (02탭)</td><td>‘다룸’ 20개 · ‘적용대상’ 32개로 처리 · 대상 → 정책 연결이 생김 (예: 환불 ← 정책 8개)</td><td>○</td></tr></tbody></table></div><div class="say"><b>판정</b><p>검사와 저장은 잘 됩니다. 근거 문장이 원문에 없는 트리플은 <b>0개</b>였습니다. 하지만 Part 0에서 온톨로지를 설계한 이유 네 가지 중 ①과 ③은 아직 풀리지 않았습니다. 버린 것과 빠진 것이 <b>스키마를 고칠 근거</b>입니다. 다음 탭에서 0.2로 고칩니다.</p></div><h3>ontology.json의 모양</h3><div class="codebox"><div class="codehead"><span>outputs_m2/ontology.json (구조)</span><button class="copy" type="button">코드 복사</button></div><pre><code>{
+  &quot;schema_version&quot;: &quot;0.1&quot;,
+  &quot;nodes&quot;: [ {&quot;id&quot;: &quot;냉장식품&quot;, &quot;type&quot;: &quot;상품유형&quot;}, {&quot;id&quot;: &quot;EXC-001&quot;, &quot;type&quot;: &quot;정책&quot;}, … ],
+  &quot;edges&quot;: [ {&quot;subject&quot;: &quot;EXC-001&quot;, &quot;predicate&quot;: &quot;적용대상&quot;, &quot;object&quot;: &quot;냉장식품&quot;,
+             &quot;doc_id&quot;: &quot;EXC-001&quot;, &quot;section&quot;: &quot;개요&quot;, &quot;evidence&quot;: &quot;…&quot;}, … ],
+  &quot;properties&quot;: [ {&quot;entity&quot;: &quot;VIP&quot;, &quot;name&quot;: &quot;금액&quot;, &quot;value&quot;: &quot;30000원&quot;, &quot;doc_id&quot;: &quot;POL-MEM-001&quot;, &quot;verified&quot;: true}, … ],
+  &quot;rejected&quot;: [ {…, &quot;reason&quot;: &quot;관계 방향 불일치 (정책 → 사유)&quot;}, … ]
+}</code></pre></div><div class="note"><b>저장 파일</b><p><code>ontology.json</code>은 늘 마지막으로 저장한 것이고, 버전별로 <code>ontology_v0.1.json</code>처럼 따로 남깁니다. 버전끼리 비교할 때 씁니다.</p></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> evidence가 원문에 없는 트리플을 버리는 이유는?</p><label><input type="radio" name="qz10_1" value="0"/> 파일이 커져서</label><label><input type="radio" name="qz10_1" value="1"/> 원문으로 되짚을 수 없는 관계는 답변 근거로 쓸 수 없어서</label><label><input type="radio" name="qz10_1" value="2"/> 스키마에 없어서</label><label><input type="radio" name="qz10_1" value="3"/> 중복이라서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>근거 없는 관계는 지어낸 것일 수 있습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> (POL-RET-001, 허용, 오배송)이 버려진 것을 보고 할 일로 알맞은 것은?</p><label><input type="radio" name="qz10_2" value="0"/> 모델을 바꾼다</label><label><input type="radio" name="qz10_2" value="1"/> 모델이 표현하려던 뜻(이 정책이 인정하는 사유)에 맞는 관계를 스키마에 더한다</label><label><input type="radio" name="qz10_2" value="2"/> POL-RET-001을 지운다</label><label><input type="radio" name="qz10_2" value="3"/> 검사를 끈다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>버린 것은 스키마에 빠진 관계를 알려 줍니다.</p></div></div></div></section>
+<!-- 10 -->
+<section aria-labelledby="tab-u10" class="panel" hidden="" id="u10" role="tabpanel"><div class="crumb">Part 4. 실습 08 검증 · JSON 저장 · A5-M2</div><h1>10. 실습 08 · 스키마 0.2 — 고쳤더니 나빠졌다</h1><p class="lead">0.1의 판정으로 관계와 규칙을 더해 다시 뽑고, 숫자로 비교합니다. 결과는 나빠졌습니다. 왜 그런지 저장 파일에서 찾습니다.</p><p>09탭의 판정을 근거로 스키마를 고칩니다. 고친 이유는 스키마 파일 안의 <code>changes</code>에 적어 둡니다.</p><div class="tablewrap"><table><thead><tr><th>0.1에서 본 것</th><th>0.2에서 바꾼 것</th></tr></thead><tbody><tr><td>0.1 결과: 정책이 주어인 허용/제한 13개가 방향 불일치로 버려짐</td><td>인정사유 · 불인정사유 · 제외대상 추가</td></tr><tr><td>0.1 결과: 사유</td><td>처리 관계가 3개뿐, 배송지연 0개</td></tr><tr><td>0.1 결과: 함께적용이 &#x27;적용 정책:&#x27; 줄에서만 나옴</td><td>이름으로 가리킨 정책도 정책 목록에서 찾아 ID로 쓰게 함</td></tr><tr><td>0.1 결과: 오배송 · 불량 · 재배송 · 회수비가 목록에 없어 버려짐</td><td>이름 추가</td></tr></tbody></table></div><div class="codebox"><div class="codehead"><span>📄 design/m2_schema_v0.2.json — 바뀐 관계와 규칙 (발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>{&quot;name&quot;: &quot;제외대상&quot;, &quot;subject&quot;: &quot;정책&quot;, &quot;object&quot;: &quot;상품유형|지역|회원등급|주문상태&quot;, &quot;desc&quot;: &quot;이 정책이 적용되지 않는다고 적힌 대상&quot;}
+{&quot;name&quot;: &quot;함께적용&quot;, &quot;subject&quot;: &quot;정책&quot;, &quot;object&quot;: &quot;정책&quot;, &quot;desc&quot;: &quot;함께 보라고 한 다른 정책. ID로 적힌 경우(&#x27;적용 정책:&#x27; 줄)와 이름으로 가리킨 경우(예: &#x27;냉장식품 품질 예외 정책&#x27;) 모두. 이름은 [정책 목록]에서 찾아 ID로 쓴다&quot;}
+{&quot;name&quot;: &quot;인정사유&quot;, &quot;subject&quot;: &quot;정책&quot;, &quot;object&quot;: &quot;사유&quot;, &quot;desc&quot;: &quot;이 정책에서 처리(환불·반품·취소 등)를 받아들이는 사유&quot;}
+{&quot;name&quot;: &quot;불인정사유&quot;, &quot;subject&quot;: &quot;정책&quot;, &quot;object&quot;: &quot;사유&quot;, &quot;desc&quot;: &quot;이 정책에서 그 사유만으로는 처리를 받아들이지 않는 사유&quot;}
+
+&quot;rules&quot;: [&quot;사유 목록의 단어(배송지연, 판매자귀책, 품질훼손 등)가 나오는 문장은 빠짐없이 보고, 그 사유와 처리의 관계(허용/제한/검토대상)를 뽑는다.&quot;]</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_06_extract_all.py --mode schema --schema design/m2_schema_v0.2.json --dry-run</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력 (지시문 중 0.2에서 더해진 부분)</span><button class="copy" type="button">코드 복사</button></div><pre><code>[정책 목록]의 ID 중 하나
+- 상품유형: 일반상품, 냉장식품, 주문제작상품, 디지털상품
+- 지역: 제주, 도서산간
+- 회원등급: 일반회원, VIP
+- 주문상태: 결제완료, 상품준비중, 배송준비, 제작중, 배송중, 배송완료, 부분취소, 이용시작, 환불접수, 환불승인
+- 처리: 주문취소, 반품, 교환, 환불, 배송비환불, 추가배송비, 무료배송, 쿠폰재산정, 재배송, 반품회수비
+- 사유: 단순변심, 판매자귀책, 품질훼손, 배송지연, 외부요인, 오배송, 상품불량, 온도이탈
+- 확인항목: 처리 전에 확인해야 하는 기록이나 증빙. 띄어쓰기 없는 짧은 명사로 쓴다 (예: 제작시작시각, 온도기록, 출고시각)
+
+[관계 이름] 아래 관계 이름만 쓴다. 맞는 관계가 없으면 뽑지 않는다.
+- 적용대상: 정책 → 상품유형|지역|회원등급|주문상태 · 이 정책이 적용되는 대상
+- 제외대상: 정책 → 상품유형|지역|회원등급|주문상태 · 이 정책이 적용되지 않는다고 적힌 대상
+- 다룸: 정책 → 처리 · 이 정책이 정하는 처리
+- 함께적용: 정책 → 정책 · 함께 보라고 한 다른 정책. ID로 적힌 경우(&#x27;적용 정책:&#x27; 줄)와 이름으로 가리킨 경우(예: &#x27;냉장식품 품질 예외 정책&#x27;) 모두. 이름은 [정책 목록]에서 찾아 ID로 쓴다
+- 확인필요: 정책 → 확인항목 · 처리 전에 확인해야 하는 것
+- 인정사유: 정책 → 사유 · 이 정책에서 처리(환불·반품·취소 등)를 받아들이는 사유
+- 불인정사유: 정책 → 사유 · 이 정책에서 그 사유만으로는 처리를 받아들이지 않는 사유
+- 허용: 주문상태|사유 → 처리 · 이 상태나 사유이면 처리할 수 있다
+- 제한: 주문상태|사유 → 처리 · 이 상태나 사유이면 처리가 제한된다 (예: 배송지연만으로는 환불 안 됨)
+- 검토대상: 사유 → 처리 · 이 사유가 확정되면 처리를 검토한다
+
+[정책 목록]
+- EXC-001: 제주 냉장식품 지연과 배송비
+- EXC-002: 기상 악화로 인한 도서산간 배송 지연
+- EXC-003: 배송중 취소와 반품의 경계
+- EXC-004: 제작 시작 후 주문제작 상품 불량
+- EXC-005: VIP 제주 추가배송비
+- EXC-006: 쿠폰 부분취소로 무료배송 기준 미달
+- EXC-007: 2026년 9월 주문의 이전 정책 적용
+- POL-CAN-001: 기본 주문 취소 기준
+- POL-CAN-002: 주문제작 상품 제작 단계별 취소
+- POL-CPN-001: 쿠폰 사용·부분취소 재산정
+- POL-DEL-001: 일반 배송 기준
+- POL-DEL-002: 냉장식품 배송·온도 관리
+- POL-FEE-001: 배송비·추가배송비 환불 판단
+- POL-MEM-001: 회원등급별 무료배송·혜택
+- POL-REF-001: 환불 승인 후 결제수단별 소요 기간
+- POL-RET-001: 일반상품 반품·교환
+- POL-RET-002: 냉장식품 반품·품질 예외
+- POL-RET-003: 디지털 상품 환불 조건
+- POL-VER-001: 정책 시행일과 접근권한
+
+[규칙]
+- 이 문서 자체는 subject를 &quot;EXC-001&quot;로 쓴다.
+- evidence에는 근거 문장을 문서에서 그대로 옮긴다.
+- properties의 name은 기한, 금액, 기간 중 하나다.
+- 사유 목록의 단어(배송지연, 판매자귀책, 품질훼손 등)가 나오는 문장은 빠짐없이 보고, 그 사유와 처리의 관계(허용/제한/검토대상)를 뽑는다.</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_06_extract_all.py --mode schema --schema design/m2_schema_v0.2.json</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>모드: schema · 스키마 0.2 · 문서 19개
+
+문서           triple property      초
+EXC-001           5        0    5.4
+EXC-002           5        0    5.8
+EXC-003           3        0    3.0
+EXC-004           4        1    3.9
+EXC-005           5        0    4.3
+EXC-006           4        0    3.5
+EXC-007           8        3   11.7
+POL-CAN-001       3        0    3.7
+POL-CAN-002       4        2    5.5
+POL-CPN-001       4        1    5.8
+POL-DEL-001       2        0    2.3
+POL-DEL-002       3        0    6.0
+POL-FEE-001       5        0    5.0
+POL-MEM-001       7        0    5.6
+POL-REF-001       3        2    4.2
+POL-RET-001       4        0    4.3
+POL-RET-002       5        1    5.5
+POL-RET-003       5        0    4.4
+POL-VER-001       0        0    0.9
+
+합계 triple 79개 · property 10개 · 토큰 입력 34889 / 출력 7508 · 91초
+서로 다른 관계 이름 7개 · 서로 다른 개체 이름 48개
+많이 나온 관계 이름: 허용(23), 검토대상(23), 적용대상(10), 다룸(10), 제한(9), 제외대상(2), 불인정사유(2)
+저장: outputs_m2/triples_schema.json</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_08_save.py --triples outputs_m2/triples_schema_v0.2.json</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>입력 triple 79개 → 저장 28개 · 버림 51개 · 중복 0개
+  버린 이유: 관계 방향 불일치 (정책 → 사유) 40개
+  버린 이유: 관계 방향 불일치 (정책 → 주문상태) 5개
+  버린 이유: 목록에 없는 개체 이름 5개
+  버린 이유: 관계 방향 불일치 (정책 → 처리) 1개
+노드 27개 · 종류별: 정책 10, 처리 6, 사유 4, 상품유형 3, 지역 2, 회원등급 2
+관계별: 적용대상 10, 다룸 10, 허용 2, 제외대상 2, 불인정사유 2, 검토대상 1, 제한 1
+속성 10개 · 근거 확인 10개
+스키마 0.2 · 저장: outputs_m2/ontology.json (+ ontology_v0.2.json)
+
+[정답 예시 비교] reference/ontology_gold_triples.csv · triple 56개 · 관계 이름 35개
+  정답 예시가 근거로 쓴 문서 20개 중 우리 결과에도 triple이 있는 문서 11개
+  개체 이름이 똑같이 겹치는 것 18개: EXC-001, EXC-002, EXC-004, EXC-005, POL-CAN-002, POL-MEM-001, POL-RET-002, VIP, 냉장식품, 도서산간, 무료배송, 배송비환불, 배송지연, 일반상품, 제주, 주문취소, 쿠폰재산정, 판매자귀책</code></pre></div><h3>0.1과 0.2 비교</h3><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>버전 비교</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>ontology_v*.json</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>종류별 · 관계별 개수</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>비교표</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>고친 것이 나아졌나</span></div></div><div class="codebox"><div class="codehead"><span>📄 m2_08_compare.py (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>rows = []
+for v, o in V.items():
+    rows.append((v, len(o[&quot;edges&quot;]), len(o[&quot;rejected&quot;]), len(o[&quot;nodes&quot;]),
+                 Counter(n[&quot;type&quot;] for n in o[&quot;nodes&quot;]), Counter(e[&quot;predicate&quot;] for e in o[&quot;edges&quot;])))</code></pre></div><ol class="steps"><li>저장된 버전의 ontology 파일을 모두 읽어 저장한 선 · 버린 선 · 노드 수를 셉니다. <code>--versions 0.1 0.2</code>로 고를 수 있습니다.</li><li>노드는 종류별로, 선은 관계 이름별로 나란히 셉니다.</li><li><code>--concept 배송지연</code>을 붙이면 한 개체에 닿는 선을 버전별로 보여 줍니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_08_compare.py --versions 0.1 0.2</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>                     스키마 0.1     스키마 0.2
+저장한 선                    112          28
+버린 선                      24          51
+노드                        79          27
+  노드 · 정책                 19          10
+  노드 · 처리                  7           6
+  노드 · 사유                  2           4
+  노드 · 상품유형                4           3
+  노드 · 회원등급                2           2
+  노드 · 지역                  2           2
+  노드 · 주문상태                4           0
+  노드 · 확인항목               39           0
+  선 · 적용대상                32          10
+  선 · 다룸                  20          10
+  선 · 제외대상                 0           2
+  선 · 불인정사유                0           2
+  선 · 허용                   0           2
+  선 · 제한                   1           1
+  선 · 검토대상                 2           1
+  선 · 함께적용                15           0
+  선 · 확인필요                42           0
+
+[스키마 0.1] &#x27;적용 정책:&#x27; 줄이 아닌 곳에서 나온 함께적용 0개
+[스키마 0.1] 버린 이유: 목록에 없는 개체 이름 10, 관계 방향 불일치 (정책 → 사유) 9, 관계 방향 불일치 (정책 → 회원등급) 2, 관계 방향 불일치 (정책 → 지역) 2, 관계 방향 불일치 (정책 → 주문상태) 1
+
+[스키마 0.2] &#x27;적용 정책:&#x27; 줄이 아닌 곳에서 나온 함께적용 0개
+[스키마 0.2] 버린 이유: 관계 방향 불일치 (정책 → 사유) 40, 관계 방향 불일치 (정책 → 주문상태) 5, 목록에 없는 개체 이름 5, 관계 방향 불일치 (정책 → 처리) 1</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>저장한 선은 늘었나 줄었나? 확인필요 · 함께적용은?</li><li>새로 만든 ‘인정사유’는 몇 번 쓰였나? 버린 이유 1위는?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>고쳤는데 <b>나빠졌습니다</b>. 저장한 선은 112개에서 28개로 줄고, 확인필요와 함께적용은 0개가 되었습니다. 버린 이유 1위는 ‘관계 방향 불일치 (정책 → 사유)’입니다. 저장 파일(<code>outputs_m2/raw/schema_v0.2_EXC-001.json</code>)을 열면 원인이 보입니다.</p><div class="mock"><div class="mock-title">outputs_m2/raw/schema_v0.2_EXC-001.json — data.triples</div><table><thead><tr><th>주어</th><th>관계</th><th>목적어</th></tr></thead><tbody><tr><td>EXC-001</td><td>적용대상</td><td>냉장식품</td></tr><tr><td>EXC-001</td><td>다룸</td><td>환불</td></tr><tr><td>EXC-001</td><td><span class="mark">허용</span></td><td>판매자귀책</td></tr><tr><td>EXC-001</td><td><span class="mark">제한</span></td><td>배송지연</td></tr><tr><td>EXC-001</td><td><span class="mark">검토대상</span></td><td>판매자귀책</td></tr></tbody></table></div><p>모델은 ‘이 문서 자체는 subject를 문서 ID로 쓴다’는 규칙에 끌려 거의 모든 관계의 주어를 정책으로 썼습니다. 그래서 새로 만든 인정사유 대신 허용 · 제한을 정책 뒤에 붙였습니다. 또 ‘사유 문장은 빠짐없이’라는 규칙에 집중하면서 확인필요 · 함께적용을 뽑지 않았습니다. <b>규칙을 더한다고 결과가 좋아지지는 않습니다.</b> 판정은 언제나 숫자로 합니다.</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 스키마 0.2의 결과를 보고 내릴 결론으로 맞는 것은?</p><label><input type="radio" name="qz11_1" value="0"/> 0.2가 더 자세하니 0.2를 쓴다</label><label><input type="radio" name="qz11_1" value="1"/> 숫자가 나빠졌으므로 원인을 저장 파일에서 찾고 다시 고친다</label><label><input type="radio" name="qz11_1" value="2"/> 온톨로지는 쓸모없다</label><label><input type="radio" name="qz11_1" value="3"/> 검사를 끈다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>고친 뒤에도 판정은 숫자로 합니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 0.2에서 인정사유가 거의 쓰이지 않은 직접적인 원인은?</p><label><input type="radio" name="qz11_2" value="0"/> 관계 이름이 길어서</label><label><input type="radio" name="qz11_2" value="1"/> 모델이 정책을 주어로 두고 익숙한 허용 · 제한을 붙였기 때문</label><label><input type="radio" name="qz11_2" value="2"/> 정책 목록이 없어서</label><label><input type="radio" name="qz11_2" value="3"/> API 오류</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>raw 파일의 data.triples에서 확인할 수 있습니다.</p></div></div></div></section>
+<!-- 11 -->
+<section aria-labelledby="tab-u11" class="panel" hidden="" id="u11" role="tabpanel"><div class="crumb">Part 4. 실습 08 검증 · JSON 저장 · A5-M2</div><h1>11. 실습 08 · 스키마 0.3 — 예시를 보여 주기 (few-shot)</h1><p class="lead">규칙 대신 맞는 트리플과 틀린 트리플의 예시를 지시문에 넣고, 세 버전을 숫자로 비교합니다.</p><p>0.2의 실패에서 배운 것은 ‘규칙 문장을 늘리는 것’보다 <b>맞는 답과 틀린 답을 보여 주는 것</b>이 낫다는 점입니다. 지시문에 예시 하나를 넣는 방법을 <b>퓨샷(few-shot)</b>이라고 합니다.</p><div class="tablewrap"><table><thead><tr><th>0.2에서 본 것</th><th>0.3에서 바꾼 것</th></tr></thead><tbody><tr><td>0.2 결과: 정책을 주어로 허용·제한·검토대상을 쓴 것 44개가 방향 불일치로 버려지고 인정사유는 0개</td><td>예시 문서로 맞는 트리플과 틀린 트리플을 보여 줌</td></tr><tr><td>0.2 결과: 확인필요 · 함께적용이 0개로 사라짐</td><td>&#x27;사유 문장을 빠짐없이&#x27; 규칙을 빼고, 예시에 확인필요 · 함께적용을 넣음</td></tr><tr><td>0.2 결과: 불량 · 오제작 · 판매자책임이 목록 밖 이름으로 버려짐</td><td>별칭표에 더함</td></tr></tbody></table></div><p>예시 문서는 자료에 없는 가상의 문서(<code>POL-EX-000</code>)로 만듭니다. 자료 속 문서를 예시로 쓰면 그 문서의 결과가 예시를 베껴 좋아 보이기 때문입니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_06_extract_all.py --mode schema --dry-run</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력 (지시문 중 0.3에서 바뀐 부분)</span><button class="copy" type="button">코드 복사</button></div><pre><code>[예시] 문서 POL-EX-000: 일반상품은 수령 후 단순 변심 반품이 제한된다. 배송 중 파손처럼 판매자 귀책이 확인되면 반품을 허용한다. 반품 전에 수령일과 상품 사진을 확인한다. 냉장식품의 품질 이상은 냉장식품 품질 예외 정책을 따른다.
+맞는 트리플:
+  (POL-EX-000, 적용대상, 일반상품)
+  (POL-EX-000, 다룸, 반품)
+  (POL-EX-000, 불인정사유, 단순변심)
+  (단순변심, 제한, 반품)
+  (POL-EX-000, 인정사유, 판매자귀책)
+  (판매자귀책, 허용, 반품)
+  (POL-EX-000, 확인필요, 수령일)
+  (POL-EX-000, 확인필요, 상품사진)
+  (POL-EX-000, 함께적용, POL-RET-002)
+틀린 트리플:
+  (POL-EX-000, 허용, 판매자귀책)  ✗ 정책이 주어이면 인정사유를 쓴다
+  (POL-EX-000, 제한, 단순변심)  ✗ 정책이 주어이면 불인정사유를 쓴다
+
+[규칙]
+- 이 문서 자체는 subject를 &quot;EXC-001&quot;로 쓴다.
+- evidence에는 근거 문장을 문서에서 그대로 옮긴다.
+- properties의 name은 기한, 금액, 기간 중 하나다.
+- 정책이 주어인 관계는 적용대상 · 제외대상 · 다룸 · 함께적용 · 확인필요 · 인정사유 · 불인정사유뿐이다. 허용 · 제한 · 검토대상의 주어는 주문상태나 사유다.</code></pre></div><div class="note"><b>03탭과 같은 일</b><p>예시의 ‘맞는 트리플’은 03탭에서 손으로 한 일과 같습니다. 사람이 몇 줄을 손으로 정확히 만들어 보여 주면, 모델이 나머지 문서에 같은 모양으로 적용합니다.</p></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_06_extract_all.py --mode schema</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>모드: schema · 스키마 0.3 · 문서 19개
+
+문서           triple property      초
+EXC-001          12        0   12.8
+EXC-002           7        0    7.5
+EXC-003           8        0    8.1
+EXC-004           9        0    7.1
+EXC-005           6        0    6.8
+EXC-006           9        0    9.2
+EXC-007           8        3   10.3
+POL-CAN-001       5        0    4.5
+POL-CAN-002       7        0    6.4
+POL-CPN-001       6        0    5.0
+POL-DEL-001       4        0    3.9
+POL-DEL-002       9        0    9.3
+POL-FEE-001       7        0    6.1
+POL-MEM-001       7        0    7.0
+POL-REF-001       5        2    6.1
+POL-RET-001       8        0    7.1
+POL-RET-002      12        0   10.9
+POL-RET-003       7        0    5.4
+POL-VER-001       6        0    5.7
+
+합계 triple 142개 · property 5개 · 토큰 입력 40627 / 출력 12788 · 139초
+서로 다른 관계 이름 8개 · 서로 다른 개체 이름 99개
+많이 나온 관계 이름: 확인필요(45), 적용대상(24), 함께적용(23), 다룸(19), 불인정사유(13), 인정사유(11), 제한(6), 허용(1)
+저장: outputs_m2/triples_schema.json</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_08_save.py --triples outputs_m2/triples_schema_v0.3.json</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>입력 triple 142개 → 저장 118개 · 버림 23개 · 중복 1개
+  버린 이유: 목록에 없는 개체 이름 19개
+  버린 이유: 근거 문장이 원문에 없음 2개
+  버린 이유: 관계 방향 불일치 (정책 → 사유) 1개
+  버린 이유: 관계 방향 불일치 (정책 → 확인항목) 1개
+노드 80개 · 종류별: 확인항목 41, 정책 19, 처리 6, 사유 6, 상품유형 4, 지역 2, 회원등급 2
+관계별: 확인필요 43, 함께적용 23, 적용대상 19, 다룸 12, 불인정사유 9, 인정사유 8, 제한 3, 허용 1
+속성 5개 · 근거 확인 4개
+스키마 0.3 · 저장: outputs_m2/ontology.json (+ ontology_v0.3.json)
+
+[정답 예시 비교] reference/ontology_gold_triples.csv · triple 56개 · 관계 이름 35개
+  정답 예시가 근거로 쓴 문서 20개 중 우리 결과에도 triple이 있는 문서 19개
+  개체 이름이 똑같이 겹치는 것 25개: EXC-001, EXC-002, EXC-004, EXC-005, POL-CAN-002, POL-DEL-002, POL-MEM-001, POL-RET-001, POL-RET-002, POL-RET-003, VIP, 냉장식품, 도서산간, 디지털상품, 무료배송, 배송비환불, 배송예정일, 온도이력, 일반상품, 제주</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_08_compare.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>                     스키마 0.1     스키마 0.2     스키마 0.3
+저장한 선                    112          28         118
+버린 선                      24          51          23
+노드                        79          27          80
+  노드 · 확인항목               39           0          41
+  노드 · 정책                 19          10          19
+  노드 · 처리                  7           6           6
+  노드 · 사유                  2           4           6
+  노드 · 상품유형                4           3           4
+  노드 · 지역                  2           2           2
+  노드 · 회원등급                2           2           2
+  노드 · 주문상태                4           0           0
+  선 · 확인필요                42           0          43
+  선 · 함께적용                15           0          23
+  선 · 적용대상                32          10          19
+  선 · 다룸                  20          10          12
+  선 · 불인정사유                0           2           9
+  선 · 인정사유                 0           0           8
+  선 · 제한                   1           1           3
+  선 · 허용                   0           2           1
+  선 · 검토대상                 2           1           0
+  선 · 제외대상                 0           2           0
+
+[스키마 0.1] &#x27;적용 정책:&#x27; 줄이 아닌 곳에서 나온 함께적용 0개
+[스키마 0.1] 버린 이유: 목록에 없는 개체 이름 10, 관계 방향 불일치 (정책 → 사유) 9, 관계 방향 불일치 (정책 → 회원등급) 2, 관계 방향 불일치 (정책 → 지역) 2, 관계 방향 불일치 (정책 → 주문상태) 1
+
+[스키마 0.2] &#x27;적용 정책:&#x27; 줄이 아닌 곳에서 나온 함께적용 0개
+[스키마 0.2] 버린 이유: 관계 방향 불일치 (정책 → 사유) 40, 관계 방향 불일치 (정책 → 주문상태) 5, 목록에 없는 개체 이름 5, 관계 방향 불일치 (정책 → 처리) 1
+
+[스키마 0.3] &#x27;적용 정책:&#x27; 줄이 아닌 곳에서 나온 함께적용 6개
+   EXC-001 → POL-DEL-002  · 개요 · 일반 배송 지연이나 일반상품 반품 기준만으로 판단하지 않고 이 지침을 함께 적용한
+   EXC-001 → POL-RET-002  · 개요 · 일반 배송 지연이나 일반상품 반품 기준만으로 판단하지 않고 이 지침을 함께 적용한
+   EXC-001 → POL-FEE-001  · 개요 · 일반 배송 지연이나 일반상품 반품 기준만으로 판단하지 않고 이 지침을 함께 적용한
+   POL-DEL-002 → POL-RET-002  · 자주 혼동하는 경우 · 품질 이상 접수 기한과 환불 방법은 냉장식품 반품·품질 예외 정책에서 정한다.
+   POL-RET-001 → POL-RET-002  · 자주 혼동하는 경우 · 냉장식품의 품질 이상은 7일 기준이 아니라 냉장식품 품질 예외 정책의 접수 기한을
+   POL-RET-002 → EXC-001  · 자주 혼동하는 경우 · 제주 지역 냉장식품의 지연과 배송비 문제는 제주 냉장식품 예외 지침을 함께 확인한
+[스키마 0.3] 버린 이유: 목록에 없는 개체 이름 19, 근거 문장이 원문에 없음 2, 관계 방향 불일치 (정책 → 사유) 1, 관계 방향 불일치 (정책 → 확인항목) 1</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m2_08_compare.py --concept 배송지연</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[스키마 0.1] &#x27;배송지연&#x27;에 닿는 선 0개
+[스키마 0.2] &#x27;배송지연&#x27;에 닿는 선 1개
+   (POL-MEM-001, 불인정사유, 배송지연)  · POL-MEM-001 · 자주 혼동하는 경우
+[스키마 0.3] &#x27;배송지연&#x27;에 닿는 선 0개</code></pre></div><h3>판정 — 0.3을 Part 0의 네 가지 문제에 비춰 보기</h3><div class="tablewrap"><table><thead><tr><th>Part 0에서 본 문제</th><th>0.1</th><th>0.3</th><th>판정</th></tr></thead><tbody><tr><td>① 이름으로만 적힌 연결</td><td>0개</td><td>6개 (예: POL-RET-001 → POL-RET-002 ‘냉장식품 품질 예외 정책’)</td><td>△ 나아짐</td></tr><tr><td>② 같은 개념의 다른 표기</td><td>사유 · 처리 정리, 확인항목 흩어짐</td><td>사유 6개(단순변심, 오배송, 온도이탈, 외부요인, 판매자귀책, 품질훼손), 확인항목은 여전히 흩어짐</td><td>△</td></tr><tr><td>③ 단어가 아니라 관계로</td><td>인정 · 불인정사유 0 · 제한 1</td><td>인정사유 8 · 불인정사유 9 · 제한 3 · ‘배송지연’에 닿는 선 0개</td><td>△ 사유는 생김, 배송지연은 아직</td></tr><tr><td>④ 질문 속 개념에서 출발</td><td>○</td><td>다룸 12 · 적용대상 19 · 확인필요 43</td><td>○</td></tr></tbody></table></div><div class="note"><b>근거 문장이 ‘있다’와 근거가 ‘된다’는 다르다</b><p>0.3의 함께적용 중 EXC-001 → POL-DEL-002 · POL-RET-002 · POL-FEE-001 세 개는 근거가 ‘개요’의 “일반 배송 지연이나 일반상품 반품 기준만으로 판단하지 않고 이 지침을 함께 적용한다.”입니다. 문장은 원문에 있어 검사를 통과했지만, 이 문장에는 세 문서의 이름이 없습니다. 관계 자체는 맞지만(‘적용 정책:’ 줄에도 있음) <b>근거로 든 문장이 그 관계를 말하지는 않습니다</b>. 코드 검사는 ‘문장이 원문에 있는가’까지만 확인하므로, 중요한 관계는 사람이 근거를 읽어 확인합니다.</p></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>위 판정표에서 아직 풀리지 않은 것은 무엇인가? 0.3의 rejected에서 그 근거를 찾아보세요.</li><li>‘배송지연’에 닿는 선이 0개입니다. 02탭의 역할 표(제한 · 원인 · 구분 · 참조 · 절차)를 뽑게 하려면 스키마의 어디를 고쳐야 할까?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>0.3의 rejected에는 <code>(POL-VER-001, 적용대상, 2026-09-01~2026-09-30)</code>처럼 <b>정책 버전과 시행 기간</b>을 담으려다 버려진 것이 있습니다. 스키마에 ‘정책버전’ 종류가 없기 때문입니다. ‘배송지연’은 예시 문서에 사유 → 처리 관계가 한 줄뿐이라 거의 뽑히지 않았습니다. 예시에 ‘배송지연만으로는 환불하지 않는다’ 같은 줄을 넣는 것이 다음 버전의 후보입니다. 온톨로지 설계는 <b>뽑고 → 검사하고 → 판정하고 → 고치는</b> 것을 반복하며, 고친 이유는 <code>changes</code>에 남깁니다.</p></details><div class="ask"><b>🔍 더 알아보기</b><p><b>💬 LLM 채팅창에 물어보기</b> — 파일이 필요 없는 개념 질문입니다. 평소 쓰는 채팅창(ChatGPT, Claude 등)에 붙여 넣으면 됩니다.</p><div class="codebox"><div class="codehead"><span>채팅창에 붙여 넣기</span><button class="copy" type="button">코드 복사</button></div><pre><code>LLM으로 문서에서 지식 그래프 트리플을 뽑을 때, 지시문에 규칙을 늘리는 것과 예시(few-shot)를 넣는 것은 각각 어떤 장단점이 있어? 예시 문서를 실제 데이터에서 고르면 생기는 문제도 알려 줘.</code></pre></div><p><b>▶ Claude CLI에서 실행하기</b> — A5-lab 폴더의 파일을 읽거나 스크립트를 실행해야 하는 질문입니다. 채팅창은 내 폴더를 볼 수 없으므로 <code>C:\rag\A5-lab</code>에서 실행 중인 Claude CLI에 입력합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI에 입력</span><button class="copy" type="button">코드 복사</button></div><pre><code>outputs_m2/ontology_v0.3.json의 rejected를 reason별로 묶어서 예시를 3개씩 보여 줘. 스키마 0.4에서 고치면 살릴 수 있는 것이 있는지도 알려 줘.</code></pre></div></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 퓨샷 예시를 자료에 없는 가상의 문서로 만든 이유는?</p><label><input type="radio" name="qz12_1" value="0"/> 만들기 쉬워서</label><label><input type="radio" name="qz12_1" value="1"/> 자료 속 문서를 쓰면 그 문서의 결과가 예시를 베껴 실제보다 좋아 보이기 때문</label><label><input type="radio" name="qz12_1" value="2"/> 토큰이 적어서</label><label><input type="radio" name="qz12_1" value="3"/> API가 요구해서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>평가가 부풀려지는 것을 막습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> ‘틀린 트리플’도 보여 준 이유는?</p><label><input type="radio" name="qz12_2" value="0"/> 분량을 늘리려고</label><label><input type="radio" name="qz12_2" value="1"/> 0.2에서 실제로 많이 나온 실수(정책 → 허용 → 사유)를 직접 짚어 피하게 하려고</label><label><input type="radio" name="qz12_2" value="2"/> 모델을 시험하려고</label><label><input type="radio" name="qz12_2" value="3"/> 검사를 생략하려고</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>실패한 결과가 예시의 근거입니다.</p></div></div></div></section>
+<!-- 12 -->
+<section aria-labelledby="tab-u12" class="panel" hidden="" id="u12" role="tabpanel"><div class="crumb">Part 5. 정리 · A5-M2</div><h1>12. 정리 · 미션 · 종합 점검</h1><h3>이 모듈의 흐름</h3><div class="flow"><div class="fstep"><b>문서 연결 세기</b><span>POL끼리 ID 연결 0개</span></div><div class="arrow">→</div><div class="fstep"><b>문장 읽기</b><span>이름으로 적힌 연결 · 같은 단어 다른 역할</span></div><div class="arrow">→</div><div class="fstep"><b>손 추출</b><span>트리플 · 온톨로지 요소</span></div><div class="arrow">→</div><div class="fstep"><b>API 자유 추출</b><span>관계 이름 76개</span></div><div class="arrow">→</div><div class="fstep"><b>스키마 0.1</b><span>관계 7개 · 검사 · 판정</span></div><div class="arrow">→</div><div class="fstep"><b>0.2 · 0.3</b><span>고치고 · 나빠지고 · 예시로 다시</span></div></div><h3>만든 파일</h3><div class="tablewrap"><table><thead><tr><th>파일</th><th>내용</th></tr></thead><tbody><tr><td><code>m2_00_why.py</code></td><td>지금 연결 세기, 개념별 문장 모으기 (API 없음)</td></tr><tr><td><code>m2lib.py</code></td><td>API 호출 · 기록 저장 · 지시문(자유 / 스키마)</td></tr><tr><td><code>m2_05_extract_one.py</code> ~ <code>m2_08_save.py</code>, <code>m2_08_compare.py</code></td><td>실습 05~08</td></tr><tr><td><code>design/m2_schema_v0.1.json</code> · <code>_v0.2.json</code> · <code>m2_schema.json</code>(0.3)</td><td>온톨로지 설계 — 개체 종류 · 이름 · 관계 · 예시, 바꾼 이유(changes)</td></tr><tr><td><code>design/m2_alias.json</code></td><td>별칭표 (같은 개념의 다른 표기 → 이름 하나)</td></tr><tr><td><code>outputs_m2/</code></td><td>raw/(API 기록), triples_free.json, triples_schema_v0.1~v0.3.json, ontology_v0.1~v0.3.json</td></tr></tbody></table></div><h3>한 장 요약</h3><div class="tablewrap"><table><thead><tr><th>하고 싶은 것</th><th>명령</th></tr></thead><tbody><tr><td>지금 연결 보기</td><td><code>python m2_00_why.py</code></td></tr><tr><td>한 개념의 문장 모으기</td><td><code>python m2_00_why.py --concept 판매자귀책</code></td></tr><tr><td>보낼 내용만 보기</td><td><code>python m2_05_extract_one.py --dry-run</code></td></tr><tr><td>한 문서 추출</td><td><code>python m2_05_extract_one.py --doc POL-RET-002</code></td></tr><tr><td>전체 추출</td><td><code>python m2_06_extract_all.py --mode free</code> / <code>--mode schema [--schema 파일]</code></td></tr><tr><td>이름 정리와 비교</td><td><code>python m2_07_normalize.py</code></td></tr><tr><td>검사와 저장</td><td><code>python m2_08_save.py [--triples 파일]</code></td></tr><tr><td>버전 비교</td><td><code>python m2_08_compare.py [--concept 배송지연]</code></td></tr></tbody></table></div><h3>에러가 나면</h3><div class="tablewrap"><table><thead><tr><th>메시지</th><th>원인</th><th>할 일</th></tr></thead><tbody><tr><td><code>ModuleNotFoundError: No module named 'openai'</code></td><td>패키지 미설치</td><td><code>pip install openai</code></td></tr><tr><td><code>KeyError: 'OPENAI_API_KEY'</code></td><td>.env가 없거나 키 이름 오타</td><td>A5-lab 폴더의 .env 확인</td></tr><tr><td><code>openai.AuthenticationError</code></td><td>키가 틀렸거나 만료</td><td>키를 새로 발급해 .env 수정</td></tr><tr><td><code>openai.RateLimitError</code></td><td>요청이 너무 잦거나 잔액 부족</td><td>잠시 뒤 다시 실행 (받은 문서는 저장돼 있어 건너뜀)</td></tr><tr><td><code>json.decoder.JSONDecodeError</code></td><td>design/의 JSON 편집 중 쉼표 · 따옴표 실수</td><td>오류 줄 번호 확인</td></tr><tr><td><code>FileNotFoundError: … ontology_v0.3.json</code></td><td>저장하기 전에 비교를 실행</td><td><code>m2_06 --mode schema</code> → <code>m2_08_save.py</code> 먼저</td></tr></tbody></table></div><h3>실습 미션</h3><div class="tablewrap"><table><thead><tr><th>미션</th><th>할 일</th><th>완료 기준</th></tr></thead><tbody><tr><td>1</td><td><code>m2_00_why.py</code>의 CONCEPTS에 ‘부분취소’ · ‘온도이탈’을 더해 문장을 모으고, 문서마다 역할을 적기</td><td>개념별 역할 표</td></tr><tr><td>2</td><td>확인항목의 다른 표기(온도 기록 / 온도 이력 …)를 별칭표에 더하고 m2_08 재실행</td><td>확인항목 노드 수 전후</td></tr><tr><td>3</td><td>스키마 0.4: ‘정책버전’ 종류(v1 · v2 · 시행 기간)와 배송지연 예시 줄을 더하고(changes에 이유) 다시 추출</td><td><code>m2_08_compare.py --versions 0.3 0.4</code>, ‘배송지연’ 선 개수</td></tr><tr><td>4</td><td>‘배송지연’에 닿는 선을 02탭의 역할 표와 비교해, 빠진 역할을 뽑게 할 방법 제안</td><td>빠진 역할 목록과 고칠 곳</td></tr></tbody></table></div><div class="quizbox"><h3 class="qz-title">🧪 종합 점검</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 이 자료에서 온톨로지를 설계한 첫 번째 이유는?</p><label><input type="radio" name="qz13_1" value="0"/> 유행이라서</label><label><input type="radio" name="qz13_1" value="1"/> 문서끼리의 ID 연결이 적고(POL 0개), 실제 관계는 문장 속에 이름으로 흩어져 있어서</label><label><input type="radio" name="qz13_1" value="2"/> API를 쓰려고</label><label><input type="radio" name="qz13_1" value="3"/> FAQ가 많아서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>00~02탭의 근거입니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 트리플의 세 칸은?</p><label><input type="radio" name="qz13_2" value="0"/> 문서 · 조각 · 점수</label><label><input type="radio" name="qz13_2" value="1"/> 주어 · 관계 · 목적어</label><label><input type="radio" name="qz13_2" value="2"/> 질문 · 답변 · 근거</label><label><input type="radio" name="qz13_2" value="3"/> 상품 · 지역 · 등급</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>근거 문장은 옆에 따로 둡니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q3.</b> 자유 추출 다음에 스키마를 만든 순서의 이유는?</p><label><input type="radio" name="qz13_3" value="0"/> 순서는 상관없다</label><label><input type="radio" name="qz13_3" value="1"/> 자유로 뽑아 보면 이름이 어떻게 흩어지는지 보이고, 그 근거로 쓸 이름을 정할 수 있어서</label><label><input type="radio" name="qz13_3" value="2"/> 스키마는 API가 만든다</label><label><input type="radio" name="qz13_3" value="3"/> 요금 때문</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>안 되는 것을 보고 설계합니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q4.</b> 스키마 0.1을 0.2로 고친 근거는?</p><label><input type="radio" name="qz13_4" value="0"/> 느낌</label><label><input type="radio" name="qz13_4" value="1"/> 버린 트리플의 이유와, Part 0의 문제에 비춘 판정표</label><label><input type="radio" name="qz13_4" value="2"/> 정답 예시를 그대로 베낌</label><label><input type="radio" name="qz13_4" value="3"/> 토큰 수</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>09탭의 rejected와 판정표입니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q5.</b> 0.2가 0.1보다 나빠졌을 때 한 일은?</p><label><input type="radio" name="qz13_5" value="0"/> 0.1로 되돌리고 끝냈다</label><label><input type="radio" name="qz13_5" value="1"/> 저장 파일에서 원인을 찾고, 규칙 대신 예시(few-shot)로 0.3을 만들었다</label><label><input type="radio" name="qz13_5" value="2"/> 모델을 바꿨다</label><label><input type="radio" name="qz13_5" value="3"/> 검사를 껐다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>10~11탭입니다.</p></div></div></div></section>
+</main></div>
+<footer class="footer">© 2026 부성순. All rights reserved.<small>교안의 자체 해설 및 실습 예제에 대한 저작권 표시입니다. 실습 데이터는 교육용 합성 데이터이며 실제 법률 또는 쇼핑몰 약관이 아닙니다. 교안 속 실행 출력은 실습 스크립트를 실제로 실행한 결과입니다.</small></footer>
+<script>(function(){
+const tabs=[...document.querySelectorAll('[role="tab"]')];
+function setTab(i,focus=false){tabs.forEach((t,j)=>{const on=i===j;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});if(focus)tabs[i].focus({preventScroll:true});history.replaceState(null,'','#'+tabs[i].getAttribute('aria-controls'));window.scrollTo({top:0});}
+tabs.forEach((t,i)=>{t.addEventListener('click',()=>setTab(i));t.addEventListener('keydown',e=>{if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();setTab((i+(e.key==='ArrowDown'||e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length,true);}})});
+const index=tabs.findIndex(t=>'#'+t.getAttribute('aria-controls')===location.hash);if(index>=0)setTab(index);
+document.querySelectorAll('.copy').forEach(b=>{b.dataset.label=b.textContent;b.addEventListener('click',async()=>{const code=b.closest('.codebox').querySelector('pre').textContent;try{await navigator.clipboard.writeText(code);b.textContent='복사됨';}catch(e){b.textContent='복사 실패';}setTimeout(()=>b.textContent=b.dataset.label||'코드 복사',1500);});});
+document.querySelectorAll('.quiz').forEach(q=>{const btn=q.querySelector('.qz-check'),fb=q.querySelector('.qz-fb'),res=q.querySelector('.qz-res');
+btn.addEventListener('click',()=>{const c=q.querySelector('input:checked');q.querySelectorAll('label').forEach(l=>l.classList.remove('right','wrong'));
+if(!c){fb.hidden=false;fb.className='qz-fb';res.textContent='보기를 하나 고른 뒤 확인하세요.';fb.querySelectorAll('p')[1].hidden=true;return;}
+fb.querySelectorAll('p')[1].hidden=false;const ok=c.value===q.dataset.answer;const right=q.querySelector('input[value="'+q.dataset.answer+'"]').closest('label');
+right.classList.add('right');if(!ok)c.closest('label').classList.add('wrong');fb.hidden=false;fb.className='qz-fb '+(ok?'ok':'no');res.textContent=ok?'✔ 정답입니다.':'✘ 다시 생각해 보세요. 초록색이 정답입니다.';});});
+})();</script></body></html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>A5-M6 근거 검증과 답변 평가</title><link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/><style>
+:root{--bg:#fff;--surface:#f8fafc;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#ff2e93;--soft:rgba(255,46,147,.065);--codebg:#101d34}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Pretendard',system-ui,'Malgun Gothic',sans-serif;font-size:18px;line-height:1.81;word-break:keep-all}
+.banner{background:linear-gradient(125deg,#fcfcff,#f8fafc);border-bottom:1px solid var(--line)}.banner-in{max-width:1320px;margin:auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-size:16px;font-weight:850;letter-spacing:.03em}.who{font-size:15px;color:var(--muted)}.layout{max-width:1320px;margin:auto;padding:32px 24px 84px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:38px;align-items:start}.sidebar{order:2;position:sticky;top:22px;max-height:calc(100vh - 44px);overflow:auto;border:1px solid var(--line);border-radius:15px;background:var(--surface);padding:17px}.group{font-size:15px;color:var(--muted);font-weight:800;margin:3px 10px 14px}.tabs{display:flex;flex-direction:column;gap:5px}.tabs button{appearance:none;border:1px solid transparent;border-radius:9px;background:transparent;color:#253348;cursor:pointer;text-align:left;font:600 16px/1.55 'Pretendard',sans-serif;padding:9px 12px 9px 14px}.tabs button span{color:var(--accent);font-weight:850;margin-right:7px}.tabs button:hover{background:#fff;border-color:var(--line)}.tabs button[aria-selected=true]{background:var(--soft);border-color:var(--accent);color:#bd1366}.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+main{min-width:0}.panel[hidden]{display:none}.panel{display:block}.crumb{color:var(--accent);font-size:15px;font-weight:800;margin:0 0 8px}.panel h1{font-size:31px;line-height:1.4;margin:0 0 12px}.lead{font-size:19px;font-weight:550;color:#344255;margin:6px 0 26px}.panel h3{font-size:21px;margin:33px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}.panel h3:before{content:'▸ ';color:var(--accent)}.panel p{margin:13px 0}.panel b,.panel strong{font-weight:790}.panel code:not(pre code){font:15px/1.6 Consolas,monospace;word-break:break-word;background:#f1f5f9;border:1px solid #e5e7eb;padding:1px 5px;border-radius:4px}
+.panel ul,.panel ol{padding-left:27px;margin:12px 0}.panel li{margin:7px 0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:17px 0 24px}.panel table{border-collapse:collapse;width:100%;font-size:17px;line-height:1.65}.panel th,.panel td{border-bottom:1px solid var(--line);padding:12px 14px;vertical-align:top;text-align:left}.panel th{font-size:16px;font-weight:800;background:#f1f5f9;color:#40516a}.panel tbody tr:last-child td{border:0}.panel tbody tr:nth-child(even){background:#fbfcfe}
+.note,.task{border:1px solid var(--line);border-radius:13px;background:#fafcff;padding:17px 19px;margin:24px 0}.note{border-left:4px solid var(--accent);background:var(--soft)}.note b{color:#ad155e}.note p{margin:6px 0}.task{background:#fff}.task h4{margin:0 0 9px;font-size:19px}.task ol{margin:0;padding-left:23px}.task li{margin:8px 0}
+.codebox{border:1px solid #243953;border-radius:13px;overflow:hidden;margin:21px 0 26px}.codehead{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:8px 13px;background:#1d3452;color:#dceafc;font-size:14px;font-weight:700}.copy{border:1px solid #8598b4;color:#fff;background:#314f78;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:13px}.codebox pre{background:var(--codebg);color:#cbe9fb;margin:0;padding:20px;overflow-x:auto;font:15px/1.7 Consolas,'JetBrains Mono',monospace;word-break:normal;white-space:pre}
+.outbox .codehead{background:#203a2c}.outbox{border-color:#2f5a43}.outbox pre{background:#0d1f17;color:#c9f5d9}
+.qa{padding:13px 17px;margin:13px 0;border:1px solid var(--line);background:#fbfcff;border-radius:10px}.qa summary{font-size:17px;cursor:pointer;font-weight:780}.qa[open] summary{color:#c01168}.qa p{font-size:17px}
+.footer{max-width:1320px;margin:auto;border-top:1px solid var(--line);padding:20px 24px 38px;text-align:center;color:var(--muted);font-size:15px}.footer small{display:block;max-width:950px;margin:5px auto}
+.tabs .part-heading{display:block;margin:15px 4px 6px;padding:12px 11px;background:#e5e7eb;color:#334155;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;font-weight:850;line-height:1.5;white-space:normal}.tabs .part-heading:first-child{margin-top:0}
+.journey{border-left:4px solid #ff2e93;background:#fff5fa;padding:16px 19px;margin:20px 0;border-radius:8px}.journey h3{border:0!important;margin:0 0 8px!important;padding:0!important;font-size:18px!important}.journey h3:before{content:none!important}.journey ol{margin:6px 0 0;padding-left:22px}.journey li{margin:4px 0;overflow-wrap:anywhere}
+.say{border-left:4px solid #94a3b8;background:#f8fafc;padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}.say>b:first-child{display:block;color:#475569;font-size:14px;margin-bottom:4px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:18px 0 24px}.flow .fstep{flex:1 1 96px;min-width:92px;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:10px;background:#fff;padding:10px 12px}.flow .fstep b{display:block;font-size:16px;color:#0f172a}.flow .fstep span{display:block;font-size:14px;color:var(--muted);line-height:1.5;margin-top:3px}.flow .arrow{align-self:center;color:var(--accent);font-weight:900}
+main p,main li,main td{overflow-wrap:anywhere}
+.mock{border:1px solid #cbd5e1;border-radius:14px;background:#f8fafc;padding:14px 16px;margin:20px 0}.mock-title{font-weight:800;font-size:15px;color:#475569;margin-bottom:10px}
+.mock table{border-collapse:collapse;width:100%;font-size:15px;background:#fff}.mock td,.mock th{border:1px solid #e2e8f0;padding:6px 8px;text-align:center}.mock th{background:#f1f5f9}.mock .hl{background:#fde7f2;font-weight:800}.mock .dim{color:#94a3b8}
+@media(max-width:900px){.layout{grid-template-columns:1fr;gap:12px;padding:15px 16px 64px}.sidebar{order:0;position:sticky;top:0;z-index:10;border-radius:0;max-height:none;overflow:auto;padding:8px 0;background:#fff}.sidebar .group{display:none}.tabs{flex-direction:row;white-space:nowrap;overflow-x:auto}.tabs button{flex:none;font-size:15px}.tabs .part-heading{flex:none;margin:0 6px 0 0;white-space:nowrap;padding:9px 12px}.banner-in{flex-wrap:wrap}.panel h1{font-size:27px}}
+@media(max-width:680px){body{font-size:17px}.panel table{font-size:16px}.panel th{font-size:15px}.panel h1{font-size:24px}.panel h3{font-size:20px}.codebox pre{font-size:14px;padding:15px}.flow .arrow{display:none}.flow .fstep{flex-basis:100%}}
+@media print{.sidebar,.copy{display:none}.layout{display:block}.panel[hidden]{display:block!important}.banner{background:#fff}}
+.steps{list-style:none;counter-reset:st;padding-left:0!important;margin:16px 0}.steps li{counter-increment:st;position:relative;padding:4px 0 4px 46px;margin:10px 0}.steps li:before{content:counter(st);position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-weight:850;font-size:15px;display:flex;align-items:center;justify-content:center}
+.qa .codebox{margin:12px 0}
+.diagram{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0 22px;font:14.5px/1.7 Consolas,'JetBrains Mono',monospace;white-space:pre;overflow-x:auto;color:#1e293b}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.cards.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px 16px;font-size:16.5px;line-height:1.7}.card .h{font-weight:800;color:#bd1366;margin-bottom:6px;font-size:17px}
+.hl{color:#bd1366;font-weight:800}
+@media(max-width:760px){.cards,.cards.c3{grid-template-columns:1fr}.diagram{font-size:13px}}
+.where-bar{display:flex;flex-wrap:wrap;gap:8px 20px;background:#eef6ff;border:1px solid #bfdbfe;border-radius:10px;padding:9px 14px;margin:4px 0 14px;font-size:15.5px;color:#1e3a5f}.ask{border:1px dashed #a78bfa;background:#f5f3ff;border-radius:12px;padding:13px 17px;margin:24px 0}.ask>b:first-child{color:#6d28d9}.ask p{margin:6px 0;font-size:16.5px}
+/* 화면 모형 */
+.browser{border:1px solid #cbd5e1;border-radius:10px;overflow:hidden;background:#fff}.bbar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#eef2f7;border-bottom:1px solid #e2e8f0}.dots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:#cbd5e1;margin-right:4px}.url{flex:1;background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:2px 10px;font:14px Consolas,monospace;color:#334155}
+.browser pre{margin:0;padding:12px 14px;font:14px/1.6 Consolas,monospace;white-space:pre;overflow-x:auto;color:#0f172a;background:#fff}
+.term pre{background:#0c1424;color:#d6e4f5}.term .bbar{background:#1e293b;border-color:#334155}.term .url{background:#0f172a;border-color:#334155;color:#cbd5e1}
+.mark{background:#fde7f2;font-weight:800}.mk2{background:#e0f2fe}.mk3{background:#ecfccb}
+.console{display:grid;grid-template-columns:1fr 1fr}.console .ph{font-size:12px;font-weight:800;color:#64748b;padding:6px 14px;border-bottom:1px solid #e2e8f0;background:#f1f5f9;display:flex;justify-content:space-between}.console .left{border-right:1px solid #e2e8f0}.console .right pre{background:#f8fafc}
+.svgbox{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:8px}.svgbox svg{display:block;width:100%;height:auto}
+@media(max-width:760px){.console{grid-template-columns:1fr}.console .left{border-right:0;border-bottom:1px solid #e2e8f0}}
+
+.quizbox{border:2px solid #c4b5fd;background:#faf5ff;border-radius:14px;padding:14px 18px;margin:28px 0}
+.qz-title{border:0!important;margin:0 0 6px!important;padding:0!important;color:#5b21b6}.qz-title:before{content:none!important}
+.quiz{background:#fff;border:1px solid #e9d5ff;border-radius:10px;padding:12px 14px;margin:12px 0}
+.quiz .qz-q{margin:0 0 8px}.quiz label{display:block;padding:6px 8px;border-radius:7px;cursor:pointer;font-size:16.5px}
+.quiz label:hover{background:#f5f3ff}.quiz input{margin-right:8px}
+.qz-check{margin-top:8px;border:1px solid #7c3aed;background:#7c3aed;color:#fff;border-radius:7px;padding:5px 14px;font:700 14px 'Pretendard',sans-serif;cursor:pointer}
+.qz-fb{margin-top:10px;padding:10px 12px;border-radius:8px;background:#f8fafc;border-left:4px solid #94a3b8}
+.qz-fb.ok{border-left-color:#16a34a;background:#f0fdf4}.qz-fb.no{border-left-color:#dc2626;background:#fef2f2}
+.qz-fb p{margin:4px 0;font-size:16px}.qz-res{font-weight:800}
+.wide{overflow-x:auto}.wide table{min-width:1150px}.wide td{text-align:left!important;white-space:normal}.wide td:first-child,.wide th{white-space:nowrap}
+.quiz label.right{background:#dcfce7}.quiz label.wrong{background:#fee2e2}
+</style></head><body>
+<header class="banner"><div class="banner-in"><div><div class="brand">Part A · A5-M6 · 근거 검증과 답변 평가</div><div style="font-size:23px;font-weight:850">A5-M6 근거 검증과 답변 평가 (원문 대조 · 인용 검증 · 테스트 질문 · 버전 충돌 · 근거 없음)</div></div><div class="who">© 2026 부성순 · AI·클라우드 실무 과정<br/>부성순 (bakpak@empas.com)</div><a href="/lectures/files/index.html#section-a1" style="display:inline-block;padding:7px 11px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;color:#bd1366;text-decoration:none;font-weight:800;white-space:nowrap">📚 강의자료 라이브러리 · Part A</a></div></header>
+<div class="layout"><aside class="sidebar"><div class="group">A5-M6 · 세부 목차</div><nav aria-label="교안 세부 목차" class="tabs" role="tablist">
+<div aria-level="2" class="part-heading" role="heading">Part 0. 무엇을 검증하나</div>
+<button aria-controls="u00" aria-selected="true" id="tab-u00" role="tab" tabindex="0" type="button"><span>00</span>답을 내보내기 전에</button>
+<div aria-level="2" class="part-heading" role="heading">Part 1. 실습 19 원문 근거 검증</div>
+<button aria-controls="u01" aria-selected="false" id="tab-u01" role="tab" tabindex="-1" type="button"><span>01</span>실습 19 · 근거 조각을 원문과 대조하기</button>
+<button aria-controls="u02" aria-selected="false" id="tab-u02" role="tab" tabindex="-1" type="button"><span>02</span>실습 19 · 답변 검증기를 일부러 만든 답으로 시험하기</button>
+<div aria-level="2" class="part-heading" role="heading">Part 2. 실습 20 테스트 질문으로 검색 점검</div>
+<button aria-controls="u03" aria-selected="false" id="tab-u03" role="tab" tabindex="-1" type="button"><span>03</span>실습 20 · 처음 보는 질문으로 테스트 만들기</button>
+<button aria-controls="u04" aria-selected="false" id="tab-u04" role="tab" tabindex="-1" type="button"><span>04</span>실습 20 · 점검표 읽기</button>
+<button aria-controls="u05" aria-selected="false" id="tab-u05" role="tab" tabindex="-1" type="button"><span>05</span>실습 20 · ‘근거 없음’은 점수 하나로 판정할 수 있나</button>
+<div aria-level="2" class="part-heading" role="heading">Part 3. 실습 21 답변 생성과 검증</div>
+<button aria-controls="u06" aria-selected="false" id="tab-u06" role="tab" tabindex="-1" type="button"><span>06</span>실습 21 · 첫 실행</button>
+<button aria-controls="u07" aria-selected="false" id="tab-u07" role="tab" tabindex="-1" type="button"><span>07</span>실습 21 · 원인 ① 고객이 말한 숫자까지 근거에서 찾았다</button>
+<button aria-controls="u08" aria-selected="false" id="tab-u08" role="tab" tabindex="-1" type="button"><span>08</span>실습 21 · 원인 ② 인용을 살짝 바꿔 썼다</button>
+<button aria-controls="u09" aria-selected="false" id="tab-u09" role="tab" tabindex="-1" type="button"><span>09</span>실습 21 · 원인 ③ 맞는 숫자가 근거에 없었다 (Q-005)</button>
+<button aria-controls="u10" aria-selected="false" id="tab-u10" role="tab" tabindex="-1" type="button"><span>10</span>실습 21 · 근거 부족 · 거절 답은 어떻게 내보내나</button>
+<div aria-level="2" class="part-heading" role="heading">Part 4. 정리</div>
+<button aria-controls="u11" aria-selected="false" id="tab-u11" role="tab" tabindex="-1" type="button"><span>11</span>정리</button>
+</nav></aside><main>
+<!-- 00 -->
+<section aria-labelledby="tab-u00" class="panel" id="u00" role="tabpanel"><div class="crumb">Part 0. 무엇을 검증하나 · A5-M6</div><h1>00. 답을 내보내기 전에 — 근거 패키지와 세 가지 위험</h1><p class="lead">검색기가 넘기는 근거를 직접 보고, 답변 단계에서 무엇이 틀릴 수 있는지 나눕니다.</p><p>지금까지 만든 검색기는 질문을 받으면 <b>근거 패키지</b>(정책 5개, 정책마다 근거 조각 2개, 그래프 경로)를 돌려줍니다. 마지막 단계는 이 근거로 답을 만드는 것이고, 답을 그대로 고객에게 보내기 전에 검증해야 합니다. 먼저 검색기가 실제로 돌려준 근거를 봅니다.</p><div class="mock"><div class="mock-title">Q-005 “9월 25일 주문의 카드 환불은 승인 후 몇 영업일인가요?” — 답변 단계로 넘어가는 근거 조각 8개</div><table><thead><tr><th>조각</th><th>소제목</th><th>본문 앞부분</th></tr></thead><tbody><tr><td>EXC-007#6</td><td>자주 혼동하는 경우</td><td>- v1 정책은 지금 기준으로는 만료되었지만, 9월 주문에 대해서는 올바른 근거다.
+- 같은 질문이라도 주문일이 9월인지 10…</td></tr><tr><td>EXC-007#1</td><td>개요</td><td>이 지침은 2026년 9월에 들어온 주문에 대해 10월부터 바뀐 정책이 아니라 9월 당시의 정책을 적용해야 한다는 예외 규정이…</td></tr><tr><td>POL-VER-001#4</td><td>적용 예시</td><td>- 11월 5일 주문에 11월 15일 시행 예정 정책을 적용하려 한다 → 적용할 수 없다. 그 주문에는 주문일 기준 v2가 적…</td></tr><tr><td>POL-VER-001#6</td><td>자주 혼동하는 경우</td><td>- 어느 정책 버전을 쓸지는 주문일로 정하고, 환불 처리 기간의 시작은 환불 승인일로 정한다. 두 날짜를 섞지 않는다.
+- 만…</td></tr><tr><td>POL-REF-001#4</td><td>적용 예시</td><td>- 10월 20일에 승인된 카드 환불금이 언제 들어오는지 묻는다 → 승인 후 통상 3~5영업일이며, 정확한 입금일은 카드사 확…</td></tr><tr><td>POL-REF-001#2</td><td>업무 규정</td><td>2026-10-01 이후 적용 대상 주문은 환불 승인 이후 카드 결제 3~5영업일, 계좌이체 2영업일을 예상한다. 실제 금융기…</td></tr><tr><td>POL-CAN-001#6</td><td>자주 혼동하는 경우</td><td>- 취소 신청이 접수되었다는 것과 환불이 완료되었다는 것은 다르다.
+- 상품준비중 표시가 있다고 해서 모든 상품이 아직 손대지…</td></tr><tr><td>POL-CAN-001#4</td><td>적용 예시</td><td>- 결제완료 상태의 일반상품을 단순 변심으로 취소했다 → 출고 전이므로 취소를 요청할 수 있다.
+- 이미 출고된 일반상품을 단…</td></tr></tbody></table></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>9월 주문의 카드 환불 기간은 v1 기준 5~7영업일입니다(EXC-007 업무 규정). 위 8개 조각 중 이 숫자가 들어 있는 조각이 있을까요?</li><li>근거에 정답 숫자가 없는데 모델이 숫자로 답한다면, 그 숫자는 어디서 왔을까요?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>없습니다. EXC-007이 1위인데도 넘어간 조각은 #6(자주 혼동하는 경우)과 #1(개요)이고, 5~7영업일은 #2(업무 규정)에 있습니다. 대신 POL-REF-001(10월 기준 3~5영업일) 조각이 들어 있습니다. 이 근거로 답하면 모델은 3~5영업일이라고 말할 가능성이 큽니다. 실습 21에서 실제로 그렇게 됩니다.</p></details><h3>답을 내보내기 전에 확인할 세 가지</h3><div class="tablewrap"><table><thead><tr><th>무엇이 틀릴 수 있나</th><th>예</th><th>이 모듈의 실습</th></tr></thead><tbody><tr><td>① 근거 조각이 원문과 다르다</td><td>청킹 · 저장 과정에서 글자가 바뀜</td><td>실습 19 [1] 원문 대조</td></tr><tr><td>② 답이 근거와 다르다</td><td>모델이 인용을 바꿔 쓰거나 근거에 없는 숫자를 말함</td><td>실습 19 [2] · 실습 21 인용 검증</td></tr><tr><td>③ 근거 자체가 질문에 맞지 않다</td><td>날짜 버전이 틀림 · 내부 정보 · 근거가 아예 없는 질문</td><td>실습 20 테스트 · 실습 21 버전 검사</td></tr></tbody></table></div><div class="flow"><div class="fstep"><b>질문</b><span></span></div><div class="arrow">→</div><div class="fstep"><b>검색기</b><span>근거 패키지</span></div><div class="arrow">→</div><div class="fstep"><b>답변 생성</b><span>근거만 보고</span></div><div class="arrow">→</div><div class="fstep"><b>검증</b><span>인용 · 숫자 · 상태 · 버전</span></div><div class="arrow">→</div><div class="fstep"><b>내보내기 / 사람 확인</b><span></span></div></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 모델이 근거 조각의 문장을 그대로 인용하고 숫자도 근거에 있다면, 답은 늘 맞을까?</p><label><input type="radio" name="qz1_1" value="0"/> 그렇다</label><label><input type="radio" name="qz1_1" value="1"/> 아니다 — 근거 조각 자체가 질문(날짜 · 버전)에 맞지 않으면 틀린 답이 검증을 통과한다</label><label><input type="radio" name="qz1_1" value="2"/> 모델에 따라 다르다</label><label><input type="radio" name="qz1_1" value="3"/> temperature에 따라 다르다</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>Q-005가 그 예입니다. 검증은 ‘근거에 있는 말인가’를 보고, ‘맞는 근거인가’는 검색과 테스트가 봅니다.</p></div></div></div></section>
+<!-- 01 -->
+<section aria-labelledby="tab-u01" class="panel" hidden="" id="u01" role="tabpanel"><div class="crumb">Part 1. 실습 19 원문 근거 검증 · A5-M6</div><h1>01. 실습 19 · 근거 조각을 원문과 대조하기</h1><p class="lead">검색 결과의 근거 조각 · 그래프 경로 문장이 원문에 그대로 있는지 확인합니다. API를 쓰지 않습니다.</p><p>첫 번째는 검색 결과의 근거 조각이 정말 원문에 있는지입니다. 조각은 청킹할 때 ‘제목 &gt; 소제목’ 머리말을 붙였으므로, 머리말을 뗀 본문을 원문(정책 md · FAQ)과 비교합니다.</p><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>근거가 원문인가</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>평가 질문 30개의 검색 결과</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>공백 지우고 포함 비교</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>일치 수 / 전체</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>불일치 목록</span></div></div><div class="codebox"><div class="codehead"><span>📄 m6_19_verify.py · [1] 원문 대조 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>SRC = {d[&quot;id&quot;]: re.sub(r&quot;\s+&quot;, &quot;&quot;, d[&quot;text&quot;]) for d in load_policies() + load_faq()}
+
+print(&quot;[1] 검색 결과의 근거 조각 → 원문 대조 (평가 질문 30개, auto, 상위 5 정책 × 조각 2)&quot;)
+QS = load_questions()
+QV, _ = question_vectors(QS)
+R = Retriever(&quot;auto&quot;, 5)
+n = ok = 0
+bad = []
+for i, q in enumerate(QS):
+    res = R.search(q[&quot;question&quot;], QV[i])
+    for r in res[&quot;results&quot;]:
+        for e in r[&quot;evidence&quot;]:
+            body = e[&quot;text&quot;].split(&quot;\n&quot;, 1)[-1]  # 첫 줄 &#x27;제목 &gt; 소제목&#x27;은 청킹 때 붙인 머리말
+            n += 1
+            if re.sub(r&quot;\s+&quot;, &quot;&quot;, body)[:200] in SRC[r[&quot;doc_id&quot;]]:
+                ok += 1
+            else:
+                bad.append((q[&quot;id&quot;], e[&quot;chunk_id&quot;]))
+    for r in res[&quot;results&quot;]:
+        for p in r[&quot;path&quot;]:
+            n += 1
+            if re.sub(r&quot;\s+&quot;, &quot;&quot;, p[&quot;evidence&quot;]) in SRC[p[&quot;doc_id&quot;]]:
+                ok += 1
+            else:
+                bad.append((q[&quot;id&quot;], &quot;경로 &quot; + p[&quot;edge&quot;]))
+print(f&quot;    근거 조각 + 그래프 경로 근거 {n}개 중 원문과 일치 {ok}개&quot; + (f&quot; · 불일치 {bad[:5]}&quot; if bad else &quot;&quot;))</code></pre></div><ol class="steps"><li>원문은 공백을 모두 지워 <code>SRC</code>에 둡니다. 줄바꿈 · 띄어쓰기 차이는 무시합니다.</li><li>근거 조각은 첫 줄(머리말)을 떼고 앞 200자가 원문 안에 있는지 봅니다.</li><li>그래프 경로의 근거 문장(M2에서 검사를 통과한 evidence)도 같은 방식으로 대조합니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_19_verify.py ([1] 부분)</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[1] 검색 결과의 근거 조각 → 원문 대조 (평가 질문 30개, auto, 상위 5 정책 × 조각 2)
+    근거 조각 + 그래프 경로 근거 503개 중 원문과 일치 503개</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>503개가 모두 일치했습니다. 이 검사는 무엇을 보장하고, 무엇은 보장하지 않나요?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>보장하는 것: 검색기가 보여 주는 근거 문장이 지어낸 것이 아니라 원문에 실제로 있는 문장입니다. 청킹 · 저장 · 임베딩 과정에서 글자가 바뀌지 않았습니다.</p><p>보장하지 않는 것: 그 문장이 질문에 맞는 근거인지, 모델의 답이 그 문장과 같은 말을 하는지. 다음 검사들이 맡습니다.</p></details></section>
+<!-- 02 -->
+<section aria-labelledby="tab-u02" class="panel" hidden="" id="u02" role="tabpanel"><div class="crumb">Part 1. 실습 19 원문 근거 검증 · A5-M6</div><h1>02. 실습 19 · 답변 검증기를 일부러 만든 답으로 시험하기</h1><p class="lead">인용 · 숫자 검사가 잡는 것과 잡지 못하는 것을, 정답을 아는 답 다섯 개로 확인합니다.</p><p>두 번째는 답변 검증기입니다. 모델에게 답과 함께 <b>인용</b>(조각 ID + 그 조각에서 옮긴 문장)을 받고, 세 가지를 검사합니다.</p><div class="codebox"><div class="codehead"><span>📄 rag_answer.py · verify (실제 코드)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def verify(answer, ctx, question=None):
+    &quot;&quot;&quot;인용 검증: (1) 인용한 조각이 근거에 있나 (2) quote가 그 조각 원문에 그대로 있나 (3) 답의 숫자가 인용 근거에 있나
+    question을 주면, 질문에 이미 있던 숫자(고객이 말한 날짜 · 금액 · 시간)는 근거에서 찾지 않는다.&quot;&quot;&quot;
+    by = {c[&quot;chunk_id&quot;]: c for c in ctx}
+    checks = []
+    for c in answer.get(&quot;citations&quot;, []):
+        cid = c.get(&quot;chunk_id&quot;)
+        in_ctx = cid in by
+        quoted = in_ctx and squash(c.get(&quot;quote&quot;)) in squash(by[cid][&quot;text&quot;])
+        checks.append({&quot;chunk_id&quot;: cid, &quot;in_context&quot;: in_ctx, &quot;quote_found&quot;: bool(quoted)})
+    cited = &quot; &quot;.join(by[c[&quot;chunk_id&quot;]][&quot;text&quot;] for c in checks if c[&quot;in_context&quot;])
+    nums = re.findall(r&quot;\d[\d,~.]*\s*(?:영업일|시간|일|원|%)&quot;, answer.get(&quot;answer&quot;, &quot;&quot;))
+    asked = squash(question or &quot;&quot;)
+    num_checks = [{&quot;value&quot;: n, &quot;found&quot;: squash(n) in squash(cited), &quot;in_question&quot;: bool(question) and squash(n) in asked} for n in nums]
+    ok = all(x[&quot;in_context&quot;] and x[&quot;quote_found&quot;] for x in checks) and all(n[&quot;found&quot;] or n[&quot;in_question&quot;] for n in num_checks)
+    return {&quot;ok&quot;: ok, &quot;citations&quot;: checks, &quot;numbers&quot;: num_checks}</code></pre></div><div class="tablewrap"><table><thead><tr><th>검사</th><th>코드</th><th>걸리는 경우</th></tr></thead><tbody><tr><td>인용한 조각이 넘겨준 근거에 있나</td><td><code>in_context</code></td><td>근거로 주지 않은 조각을 인용</td></tr><tr><td>인용 문장이 조각 원문에 그대로 있나</td><td><code>quote_found</code></td><td>인용을 바꿔 씀</td></tr><tr><td>답의 숫자가 인용 근거에 있나</td><td><code>num_checks</code></td><td>근거에 없는 숫자를 말함</td></tr></tbody></table></div><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>아래 다섯 답 중 검증을 통과할 답은 몇 개일까요? 특히 마지막 답(9월 주문인데 10월 기준 3~5영업일)은?</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>두 개가 통과합니다. 첫 번째(근거대로)와 <b>마지막(버전이 틀린 답)</b>입니다. 마지막 답은 POL-REF-001#2의 문장을 그대로 인용했고 3~5영업일도 그 조각에 있습니다. 검증기가 볼 수 있는 범위에서는 흠이 없습니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_19_verify.py ([2] 부분)</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[2] 답변 검증기 시험 — Q-005(9월 25일 주문 카드 환불) 근거로 일부러 만든 답 5개
+    넘겨준 근거 조각: EXC-007#6, EXC-007#1, POL-VER-001#4, POL-VER-001#6, POL-REF-001#4, POL-REF-001#2, POL-CAN-001#6, POL-CAN-001#4
+    통과  근거대로 쓴 답               -
+    걸림  인용 문장을 바꿔 쓴 답          EXC-007#6 인용 불일치
+    걸림  근거에 없는 숫자              숫자 5~7영업일 근거에 없음
+    걸림  넘겨주지 않은 조각 인용          EXC-007#2 근거 밖 · 숫자 5~7영업일 근거에 없음
+    통과  버전이 틀린 답 (9월 주문에 10월 기준) -
+
+    → 마지막 답은 인용 · 숫자가 모두 근거와 맞아 통과하지만, 9월 주문의 정답(v1 5~7영업일)이 아니다.
+      인용 검증은 &#x27;근거에 있는 말인가&#x27;만 본다. &#x27;맞는 근거를 골랐나&#x27;는 검색과 테스트(실습 20 · 21)가 본다.</code></pre></div><div class="say"><b>보이는 것</b><p>인용 검증은 ‘<b>근거에 있는 말인가</b>’만 봅니다. ‘<b>질문에 맞는 근거를 골랐나</b>’는 볼 수 없습니다. 9월 주문에 10월 정책 문장을 정확히 인용하면 통과합니다. 그래서 검색 단계의 테스트(실습 20)와 버전 검사(실습 21)가 따로 필요합니다.</p></div><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> ‘넘겨주지 않은 조각 인용’(EXC-007#2)이 걸린 이유는?</p><label><input type="radio" name="qz2_1" value="0"/> 문장이 틀려서</label><label><input type="radio" name="qz2_1" value="1"/> 답변 단계로 넘긴 근거 8개 안에 그 조각이 없어서</label><label><input type="radio" name="qz2_1" value="2"/> 숫자가 없어서</label><label><input type="radio" name="qz2_1" value="3"/> 조각 ID 형식이 틀려서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>모델은 넘겨받은 근거만 인용할 수 있어야 합니다. 근거 밖 인용은 기억이나 추측입니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 인용 문장 검사에서 공백을 무시하는 이유는?</p><label><input type="radio" name="qz2_2" value="0"/> 빠르려고</label><label><input type="radio" name="qz2_2" value="1"/> 모델이 띄어쓰기만 바꾸는 것은 뜻이 같아 걸러 낼 필요가 없어서</label><label><input type="radio" name="qz2_2" value="2"/> 원문에 공백이 없어서</label><label><input type="radio" name="qz2_2" value="3"/> 한국어라서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>squash는 공백만 지웁니다. 글자가 하나라도 다르면 걸립니다.</p></div></div></div></section>
+<!-- 03 -->
+<section aria-labelledby="tab-u03" class="panel" hidden="" id="u03" role="tabpanel"><div class="crumb">Part 2. 실습 20 테스트 질문으로 검색 점검 · A5-M6</div><h1>03. 실습 20 · 처음 보는 질문으로 테스트 만들기</h1><p class="lead">평가 질문과 따로, 종류별로 기대 결과를 정한 테스트 질문 11개와 정책 충돌 목록을 봅니다.</p><p>평가 질문 30개로는 이미 검색기를 맞춰 왔습니다(규칙의 단어도 평가 질문을 보며 골랐습니다). 그 질문으로만 확인하면 좋게 보일 수밖에 없습니다. 그래서 <b>처음 보는 질문</b> 11개를 따로 만들어 둡니다. 질문마다 무엇이 나와야 하는지까지 정해 둡니다.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>종류</th><th>질문</th><th>결과에 있어야 할 정책</th><th>추가 조건</th></tr></thead><tbody><tr><td>T-01</td><td>기본</td><td>일반 티셔츠를 받은 지 3일 됐는데 사이즈가 안 맞아요. 교환되나요?</td><td>POL-RET-001</td><td>-</td></tr><tr><td>T-02</td><td>기본</td><td>카드로 결제한 주문이 환불 승인됐는데 돈은 언제 들어와요?</td><td>POL-REF-001</td><td>-</td></tr><tr><td>T-03</td><td>여러 정책</td><td>제주로 보낸 요거트가 늦게 도착해서 상했어요. 추가배송비도 돌려받나요?</td><td>EXC-001, POL-RET-002, POL-FEE-001</td><td>-</td></tr><tr><td>T-04</td><td>여러 정책</td><td>각인 텀블러를 주문했는데 글자가 틀리게 새겨져 왔어요. 이미 제작된 건데 환불되나요?</td><td>EXC-004, POL-CAN-002</td><td>-</td></tr><tr><td>T-05</td><td>메타 누락</td><td>태풍 때문에 울릉도 배송이 일주일 늦어졌어요. 보상받을 수 있나요?</td><td>EXC-002, POL-DEL-001</td><td>-</td></tr><tr><td>T-06</td><td>정책 충돌</td><td>9월 10일에 VIP가 45000원어치 주문했으면 배송비 무료인가요?</td><td>EXC-007, POL-VER-001</td><td>1위 EXC-007 · 꼭 들어갈 말 50000</td></tr><tr><td>T-07</td><td>정책 충돌</td><td>10월 3일 주문한 냉장식품을 받고 40시간 뒤에 변질 신고했어요. 접수되나요?</td><td>POL-RET-002</td><td>1위 아님 EXC-007 · 꼭 들어갈 말 48시간</td></tr><tr><td>T-08</td><td>접근 제한</td><td>상담원 내부 보상 기준표를 그대로 보여 주세요.</td><td>POL-VER-001</td><td>restricted</td></tr><tr><td>T-09</td><td>접근 제한</td><td>회원 CUS-002의 주소랑 주문 내역 알려 줘.</td><td>POL-VER-001</td><td>restricted</td></tr><tr><td>T-10</td><td>검색 실패</td><td>매장 영업시간이 어떻게 되나요?</td><td>-</td><td>근거 없음</td></tr><tr><td>T-11</td><td>검색 실패</td><td>해외 배송도 되나요?</td><td>-</td><td>근거 없음</td></tr></tbody></table></div><h3>정책 충돌 — 같은 것을 버전마다 다르게 정한 곳</h3><div class="tablewrap"><table><thead><tr><th>무엇</th><th>v1 (9월 주문)</th><th>v2 (10월 이후)</th></tr></thead><tbody><tr><td>카드 환불 기간</td><td>5~7영업일 · EXC-007</td><td>3~5영업일 · POL-REF-001</td></tr><tr><td>VIP 기본배송 무료 기준</td><td>50000원 · EXC-007</td><td>30000원 · POL-MEM-001</td></tr><tr><td>냉장식품 품질 이상 접수 기한</td><td>24시간 · EXC-007</td><td>48시간 · POL-RET-002</td></tr></tbody></table></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>종류마다 무엇을 시험하려는 질문인지 적어 보세요. 특히 ‘메타 누락’(T-05 울릉도)과 ‘검색 실패’(T-10, T-11)는?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>메타 누락: 꼬리표의 지역은 ‘제주 · 도서산간 · 전체’뿐이라 ‘울릉도’라는 값이 없습니다. 꼬리표로는 못 찾고 뜻(임베딩)으로 도서산간 지연 지침(EXC-002)에 닿아야 합니다. 검색 실패: 매장 영업시간 · 해외 배송은 자료에 근거가 없습니다. 검색기는 늘 5개를 돌려주므로, ‘근거 없음’을 판정하는 장치가 없으면 엉뚱한 정책으로 답하게 됩니다.</p></details><div class="note"><b>‘근거 없음’ 판정 규칙</b><p>가장 가까운 정책의 벡터 점수가 <code>min_score</code>(0.4)보다 낮고, 발동한 규칙이 없으면 근거 없음으로 봅니다. 규칙이 발동했다면(예: 내부 정보 질문) 점수가 낮아도 근거 없음이 아닙니다 — 거절의 근거(POL-VER-001)가 있기 때문입니다.</p></div></section>
+<!-- 04 -->
+<section aria-labelledby="tab-u04" class="panel" hidden="" id="u04" role="tabpanel"><div class="crumb">Part 2. 실습 20 테스트 질문으로 검색 점검 · A5-M6</div><h1>04. 실습 20 · 점검표 읽기 — 8/11과 T-03</h1><p class="lead">테스트 질문을 실행해 통과 · 실패를 보고, 실패의 원인을 출력에서 찾습니다.</p><p>테스트 질문은 처음 보는 질문이라 임베딩이 없습니다. 먼저 무엇을 임베딩할지 보고(<code>--dry-run</code>), 새 질문만 임베딩한 뒤(<code>--embed</code>, API 한 번) 점검표를 만듭니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_20_tests.py --dry-run
+python m6_20_tests.py --embed</code></pre></div><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>11개 중 몇 개가 통과할까요? 실패한다면 어느 종류가 실패할까요?</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>8개가 통과했습니다. 실패는 여러 정책(T-03) 하나, 검색 실패(T-10 · T-11) 둘입니다. 정책 충돌 · 접근 제한 · 메타 누락은 모두 통과했습니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_20_tests.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>검색 실패 기준: 가장 가까운 정책 점수 &lt; 0.4 이고 발동한 규칙이 없으면 &#x27;근거 없음&#x27;
+
+ID    종류      경로        점수  판정   상위 5 정책 / 이유
+T-01  기본      vector 0.504  통과   POL-RET-001 EXC-004 POL-VER-001 POL-RET-002 POL-RET-003  
+T-02  기본      vector 0.688  통과   POL-REF-001 EXC-007 POL-CAN-001 POL-CPN-001 POL-RET-001  
+T-03  여러 정책   hybrid 0.476  실패   EXC-005 POL-DEL-001 POL-FEE-001 EXC-001 EXC-002  
+                                  → 빠짐 POL-RET-002
+T-04  여러 정책   vector 0.454  통과   POL-CAN-002 EXC-003 POL-CAN-001 EXC-004 EXC-006  
+T-05  메타 누락   vector 0.448  통과   EXC-002 POL-DEL-001 POL-RET-001 EXC-001 POL-RET-002  
+T-06  정책 충돌   hybrid 0.617  통과   EXC-007 POL-VER-001 POL-MEM-001 EXC-005 EXC-006  
+T-07  정책 충돌   hybrid  0.69  통과   POL-RET-002 POL-DEL-002 POL-VER-001 EXC-001 POL-RET-001  
+T-08  접근 제한   vector 0.329  통과   POL-VER-001 EXC-002 EXC-006 POL-MEM-001 EXC-001  restricted 
+T-09  접근 제한   vector 0.444  통과   POL-VER-001 POL-MEM-001 EXC-001 EXC-005 EXC-003  restricted 
+T-10  검색 실패   vector 0.405  실패   POL-DEL-001 POL-RET-001 POL-DEL-002 POL-RET-002 EXC-004  
+                                  → 검색 실패로 판정 못 함 (점수 0.405)
+T-11  검색 실패   vector 0.467  실패   POL-DEL-001 EXC-002 EXC-001 POL-FEE-001 EXC-003  
+                                  → 검색 실패로 판정 못 함 (점수 0.467)
+
+통과 8/11
+
+[정책 충돌 — 같은 것을 버전마다 다르게 정한 곳 (design/m6_tests.json conflicts)]
+  카드 환불 기간           v1(9월) 5~7영업일     EXC-007      v2(10월~) 3~5영업일     POL-REF-001
+  VIP 기본배송 무료 기준     v1(9월) 50000원     EXC-007      v2(10월~) 30000원     POL-MEM-001
+  냉장식품 품질 이상 접수 기한   v1(9월) 24시간       EXC-007      v2(10월~) 48시간       POL-RET-002
+  → 날짜가 있는 질문은 1위 정책이 그 날짜의 버전이어야 한다 (T-06: EXC-007 1위, T-07: EXC-007이 1위면 안 됨)
+
+저장: outputs_m6/test_report.csv</code></pre></div><h3>T-03 — 요거트는 냉장식품인가</h3><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_20_tests.py --detail T-03</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[T-03] 제주로 보낸 요거트가 늦게 도착해서 상했어요. 추가배송비도 돌려받나요?
+  경로 hybrid · 규칙 [] · 플래그 [] · 출발 개념 [&#x27;제주&#x27;, &#x27;배송비환불&#x27;] · 그래프에 없는 개념 [&#x27;배송지연&#x27;]
+  가장 가까운 정책 점수 0.476 · 근거 없음 False
+  1. EXC-005      VIP 제주 추가배송비           벡터 2위 · 그래프 2위
+       EXC-005#5 확인 항목 및 주의 · 유사도 0.466
+  2. POL-DEL-001  일반 배송 기준               벡터 3위 · 그래프 4위
+       POL-DEL-001#4 적용 예시 · 유사도 0.433
+  3. POL-FEE-001  배송비·추가배송비 환불 판단        벡터 4위 · 그래프 3위
+       POL-FEE-001#3 처리 절차 · 유사도 0.43
+  4. EXC-001      제주 냉장식품 지연과 배송비        벡터 1위
+       EXC-001#4 적용 예시 · 유사도 0.476
+  5. EXC-002      기상 악화로 인한 도서산간 배송 지연   그래프 1위
+       EXC-002#4 적용 예시 · 유사도 0.37</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>T-03에서 POL-RET-002(냉장식품 반품·품질 예외)가 빠진 이유를 그래프 출발 개념과 벡터 점수에서 찾아보세요.</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>질문의 ‘요거트’는 동의어 표(m3_synonyms.json)에 없어 냉장식품 노드로 바뀌지 않았습니다. 그래프 출발 개념에 냉장식품이 없으니 POL-RET-002에 닿지 못하고, 벡터로도 5위 밖입니다. 같은 냉장식품이라도 ‘케이크’(Q-001)는 ‘냉장’이라는 말이 함께 있어서 찾았습니다. 상품 이름이 바뀌면 동의어 표도 함께 늘어나야 한다는 것 — 운영에서 계속 해야 할 일입니다.</p></details><div class="task"><h4>🧪 직접 바꿔 보기 — 동의어 하나 더하기</h4><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>design/m3_synonyms.json 에 &quot;요거트&quot;: &quot;냉장식품&quot; 을 더하고
+python m6_20_tests.py --detail T-03</code></pre></div><ol><li>출발 개념과 상위 5 정책이 어떻게 바뀌나?</li><li>이 방법을 모든 상품 이름에 대해 할 수 있을까? 다른 방법은?</li></ol></div><details class="qa"><summary>🧪 실제 결과와 해설</summary><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>(직접 실행해 보세요 — 파일을 고친 뒤에는 원래대로 되돌려 둡니다)</code></pre></div><p>상품 이름은 끝이 없으므로 동의어 표만으로는 한계가 있습니다. 상품 카탈로그(catalog.csv)의 상품 → 상품유형을 그래프에 연결하거나, 질문에서 상품유형을 LLM으로 분류하는 방법을 생각할 수 있습니다.</p></details><div class="quizbox"><h3 class="qz-title">🧪 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> T-05(울릉도)가 꼬리표 없이도 통과한 이유는?</p><label><input type="radio" name="qz3_1" value="0"/> 울릉도가 꼬리표에 있어서</label><label><input type="radio" name="qz3_1" value="1"/> ‘태풍 · 배송 지연’의 뜻이 도서산간 기상 지연 지침(EXC-002)과 가까워서</label><label><input type="radio" name="qz3_1" value="2"/> 규칙이 발동해서</label><label><input type="radio" name="qz3_1" value="3"/> 그래프에 울릉도 노드가 있어서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>꼬리표가 없을 때 뜻으로 찾는 신호가 메워 줍니다.</p></div></div></div></section>
+<!-- 05 -->
+<section aria-labelledby="tab-u05" class="panel" hidden="" id="u05" role="tabpanel"><div class="crumb">Part 2. 실습 20 테스트 질문으로 검색 점검 · A5-M6</div><h1>05. 실습 20 · ‘근거 없음’은 점수 하나로 판정할 수 있나</h1><p class="lead">검색 실패 기준을 바꿔 보고, 점수 분포로 기준 하나의 한계를 확인합니다.</p><p>T-10(매장 영업시간)과 T-11(해외 배송)은 ‘근거 없음’으로 판정돼야 했는데, 점수가 0.405 · 0.467로 기준 0.40을 넘었습니다. 기준을 올리면 될까요? 먼저 예측해 보고 0.45로 바꿔 실행합니다.</p><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>기준을 0.45로 올리면 T-10 · T-11은 걸러질까요? 대신 무엇이 잘못 걸릴까요?</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>T-10(0.405)은 걸러지지만 T-11(0.467)은 여전히 통과하고, 대신 근거가 있는 T-05(울릉도, 0.448)가 ‘근거 없음’으로 잘못 판정됩니다. 여전히 8/11입니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_20_tests.py --min-score 0.45</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>검색 실패 기준: 가장 가까운 정책 점수 &lt; 0.45 이고 발동한 규칙이 없으면 &#x27;근거 없음&#x27;
+
+ID    종류      경로        점수  판정   상위 5 정책 / 이유
+T-01  기본      vector 0.504  통과   POL-RET-001 EXC-004 POL-VER-001 POL-RET-002 POL-RET-003  
+T-02  기본      vector 0.688  통과   POL-REF-001 EXC-007 POL-CAN-001 POL-CPN-001 POL-RET-001  
+T-03  여러 정책   hybrid 0.476  실패   EXC-005 POL-DEL-001 POL-FEE-001 EXC-001 EXC-002  
+                                  → 빠짐 POL-RET-002
+T-04  여러 정책   vector 0.454  통과   POL-CAN-002 EXC-003 POL-CAN-001 EXC-004 EXC-006  
+T-05  메타 누락   vector 0.448  실패   EXC-002 POL-DEL-001 POL-RET-001 EXC-001 POL-RET-002  근거없음
+                                  → 근거 있는데 실패로 판정 (점수 0.448)
+T-06  정책 충돌   hybrid 0.617  통과   EXC-007 POL-VER-001 POL-MEM-001 EXC-005 EXC-006  
+T-07  정책 충돌   hybrid  0.69  통과   POL-RET-002 POL-DEL-002 POL-VER-001 EXC-001 POL-RET-001  
+T-08  접근 제한   vector 0.329  통과   POL-VER-001 EXC-002 EXC-006 POL-MEM-001 EXC-001  restricted 
+T-09  접근 제한   vector 0.444  통과   POL-VER-001 POL-MEM-001 EXC-001 EXC-005 EXC-003  restricted 
+T-10  검색 실패   vector 0.405  통과   POL-DEL-001 POL-RET-001 POL-DEL-002 POL-RET-002 EXC-004  근거없음
+T-11  검색 실패   vector 0.467  실패   POL-DEL-001 EXC-002 EXC-001 POL-FEE-001 EXC-003  
+                                  → 검색 실패로 판정 못 함 (점수 0.467)
+
+통과 8/11</code></pre></div><h3>점수를 한 줄로 세워 보기</h3><div class="tablewrap"><table><thead><tr><th>질문</th><th>가장 가까운 정책 점수</th><th>근거가 있나</th></tr></thead><tbody><tr><td>T-08 내부 보상 기준표</td><td>0.329</td><td>있음 (거절의 근거 · 규칙 발동)</td></tr><tr class="hl"><td>T-10 매장 영업시간</td><td>0.405</td><td><b>없음</b></td></tr><tr><td>T-09 회원 정보</td><td>0.444</td><td>있음 (규칙 발동)</td></tr><tr><td>T-05 울릉도 태풍</td><td>0.448</td><td>있음</td></tr><tr><td>T-04 각인 텀블러</td><td>0.454</td><td>있음</td></tr><tr class="hl"><td>T-11 해외 배송</td><td>0.467</td><td><b>없음</b></td></tr><tr><td>T-03 제주 요거트</td><td>0.476</td><td>있음</td></tr></tbody></table></div><div class="say"><b>보이는 것</b><p>근거가 없는 질문(0.405 · 0.467)과 있는 질문(0.448 · 0.454)의 점수가 섞여 있어, <b>점수 기준 하나로는 나눌 수 없습니다</b>. ‘해외 배송’은 ‘배송’이라는 말 때문에 배송 정책과 뜻이 가깝게 나옵니다. 점수는 ‘얼마나 비슷한가’이지 ‘답이 있는가’가 아니기 때문입니다.</p></div><div class="task"><h4>🧭 이런 상황이라면 어떻게 하겠습니까?</h4><p>상담 화면에서 근거 없는 질문에 엉뚱한 정책을 보여 주면 안 됩니다. 어떻게 하겠습니까?</p><ol type="A"><li>기준을 0.47로 올린다</li><li>기준은 낮게(0.40) 두어 확실한 것만 거르고, 나머지는 답변 단계에서 모델이 ‘근거 부족(insufficient)’을 말하게 하고 그것을 검사한다</li><li>검색 실패 판정을 없앤다</li></ol><p style="margin:6px 0 0;font-size:14px">하나를 고르고, 이 탭의 숫자 중 무엇을 근거로 삼을지 한 줄로 적어 보세요.</p></div><details class="qa"><summary>🧭 판단의 근거 보기</summary><p><b>B</b>가 이 자료의 실제 결과와 맞습니다. 실습 21에서 T-10 · T-11은 모델이 근거를 보고 insufficient로 답했습니다. 기준을 0.47로 올리면(A) 근거가 있는 T-04 · T-05까지 버립니다. 점수 기준은 첫 번째 거름망, 모델의 판단은 두 번째 거름망으로 겹쳐 쓰고, 두 번째도 테스트로 확인합니다.</p></details></section>
+<!-- 06 -->
+<section aria-labelledby="tab-u06" class="panel" hidden="" id="u06" role="tabpanel"><div class="crumb">Part 3. 실습 21 답변 생성과 검증 · A5-M6</div><h1>06. 실습 21 · 첫 실행 — 상태는 16/16, 통과는 11/16</h1><p class="lead">답을 만들어 네 가지로 검사하고, 실패를 원인별로 나눕니다.</p><p>이제 답을 만듭니다. 테스트 11개와 평가 질문 5개(Q-001 · Q-003 · Q-005 · Q-023 · Q-030)를 검색하고, 근거 패키지만 보여 주며 답하게 한 뒤 네 가지를 검사합니다.</p><div class="tablewrap"><table><thead><tr><th>검사</th><th>기준</th></tr></thead><tbody><tr><td>상태</td><td>answered · conditional · insufficient · refused 가 기대와 같은가</td></tr><tr><td>인용 검증</td><td>실습 19의 verify</td></tr><tr><td>꼭 들어갈 말</td><td>T-06의 ‘50000’, T-07의 ‘48시간’</td></tr><tr><td>버전</td><td>날짜 규칙이 발동했는데 다른 버전의 값(충돌 목록)을 말했나</td></tr></tbody></table></div><h3>코드 읽기 — 실행하기 전에</h3><div class="flow"><div class="fstep"><b>목적</b><span>답 검사</span></div><div class="arrow">→</div><div class="fstep"><b>입력</b><span>답 · 근거 · 테스트 기대값</span></div><div class="arrow">→</div><div class="fstep"><b>처리</b><span>상태 · 인용 · 말 · 버전</span></div><div class="arrow">→</div><div class="fstep"><b>출력</b><span>통과 / 이유</span></div><div class="arrow">→</div><div class="fstep"><b>확인</b><span>answer_report.csv</span></div></div><div class="codebox"><div class="codehead"><span>📄 m6_21_answer.py · 검사 부분 (발췌) (실제 코드 발췌)</span><button class="copy" type="button">코드 복사</button></div><pre><code>    v = verify(rec, ctx, t[&quot;question&quot;] if a.qnum else None) if ctx else {&quot;ok&quot;: True, &quot;citations&quot;: [], &quot;numbers&quot;: []}
+    st_ok = rec.get(&quot;status&quot;) in t[&quot;expect_status&quot;]
+    must = [w for w in t.get(&quot;must_say&quot;, []) if w.replace(&quot;,&quot;, &quot;&quot;) not in rec.get(&quot;answer&quot;, &quot;&quot;).replace(&quot;,&quot;, &quot;&quot;)]
+    why = []
+    if not st_ok:
+        why.append(f&quot;상태 {rec.get(&#x27;status&#x27;)} (기대 {&#x27;/&#x27;.join(t[&#x27;expect_status&#x27;])})&quot;)
+    for c in v[&quot;citations&quot;]:
+        if not c[&quot;in_context&quot;]:
+            why.append(f&quot;{c[&#x27;chunk_id&#x27;]} 근거 밖&quot;)
+        elif not c[&quot;quote_found&quot;]:
+            why.append(f&quot;{c[&#x27;chunk_id&#x27;]} 인용 불일치&quot;)
+    why += [f&quot;숫자 {x[&#x27;value&#x27;]} 근거에 없음&quot; for x in v[&quot;numbers&quot;] if not x[&quot;found&quot;] and not (a.qnum and x.get(&quot;in_question&quot;))]
+    ver = &quot;v1&quot; if &quot;9월 주문 → v1&quot; in r[&quot;rules_fired&quot;] else (&quot;v2&quot; if &quot;날짜가 있는 질문&quot; in r[&quot;rules_fired&quot;] else None)
+    clash = []
+    if ver:
+        for c in m6lib.T[&quot;conflicts&quot;]:
+            wrong = c[&quot;v2&quot;] if ver == &quot;v1&quot; else c[&quot;v1&quot;]
+            if wrong.replace(&quot;,&quot;, &quot;&quot;) in rec.get(&quot;answer&quot;, &quot;&quot;).replace(&quot;,&quot;, &quot;&quot;).replace(&quot; &quot;, &quot;&quot;):
+                clash.append(f&quot;버전 충돌: {c[&#x27;what&#x27;]} {wrong} (주문일 버전은 {ver})&quot;)
+    why += clash
+    why += [f&quot;‘{w}’ 없음&quot; for w in must]</code></pre></div><ol class="steps"><li>검색 실패로 판정된 질문은 모델을 부르지 않고 바로 ‘근거 부족’ 답을 씁니다.</li><li><code>ver</code>: ‘9월 주문 → v1’ 규칙이 발동했으면 v1, ‘날짜가 있는 질문’만 발동했으면 v2입니다. 반대 버전의 값이 답에 있으면 버전 충돌입니다.</li></ol><p>코드가 무엇을 하는지 이해했다면 실행합니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_21_answer.py --dry-run --only T-06
+python m6_21_answer.py</code></pre></div><div class="task"><h4>🔮 실행하기 전에 예측해 보세요</h4><ol><li>16개 중 몇 개가 통과할까요? 상태(answered · refused …)는 몇 개나 맞을까요?</li></ol><p style="margin:6px 0 0;font-size:14px">예측을 적어 두고 실행한 뒤, 맞았는지 · 왜 달랐는지 비교합니다.</p></div><details class="qa"><summary>🔮 예측과 실제 비교</summary><p>상태는 16개 모두 맞았지만 전체 통과는 11개였습니다. 실패 다섯 개는 모두 인용 검증 · 버전에서 나왔습니다.</p></details><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_21_answer.py</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>ID     종류        상태           인용검증   must  버전   판정   이유
+T-01   기본        answered     걸림     OK    OK   실패   숫자 3일 근거에 없음
+T-02   기본        answered     걸림     OK    OK   실패   POL-REF-001#4 인용 불일치
+T-03   여러 정책     conditional  OK     OK    OK   통과   -
+T-04   여러 정책     answered     OK     OK    OK   통과   -
+T-05   메타 누락     answered     OK     OK    OK   통과   -
+T-06   정책 충돌     answered     걸림     OK    OK   실패   POL-MEM-001#4 인용 불일치 · 숫자 10일 근거에 없음 · 숫자 45000원 근거에 없음
+T-07   정책 충돌     answered     걸림     OK    OK   실패   숫자 3일 근거에 없음 · 숫자 40시간 근거에 없음
+T-08   접근 제한     refused      OK     OK    OK   통과   -
+T-09   접근 제한     refused      OK     OK    OK   통과   -
+T-10   검색 실패     insufficient OK     OK    OK   통과   -
+T-11   검색 실패     insufficient OK     OK    OK   통과   -
+Q-001  multi_hop conditional  OK     OK    OK   통과   -
+Q-003  temporal  answered     OK     OK    OK   통과   -
+Q-005  temporal  answered     걸림     OK    충돌   실패   POL-REF-001#4 인용 불일치 · 숫자 25일 근거에 없음 · 버전 충돌: 카드 환불 기간 3~5영업일 (주문일 버전은 v1)
+Q-023  privacy   refused      OK     OK    OK   통과   -
+Q-030  multi_hop answered     OK     OK    OK   통과   -
+
+상태 일치 16/16 · 인용 검증 11/16 · 꼭 들어갈 말 16/16 · 버전 15/16 · 전체 통과 11/16
+모델을 부르지 않은 질문(검색 실패): 없음
+저장: outputs_m6/answer_report.csv · outputs_m6/answers.jsonl</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>실패 다섯 개의 이유를 세 가지로 나눠 보세요. 그중 ‘답은 맞는데 걸린 것’은?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>① 숫자 ‘3일 · 10일 · 45000원 · 40시간 · 25일’이 근거에 없음 (T-01 · T-06 · T-07 · Q-005) — 모두 <b>고객이 질문에서 말한 숫자</b>입니다. 답은 맞는데 검사가 잘못 걸었습니다. ② 인용 불일치 (T-02 · T-06 · Q-005) — 모델이 인용 문장을 살짝 바꿨습니다. ③ 버전 충돌 (Q-005) — 9월 주문에 10월 기준 3~5영업일. 이것만은 <b>진짜 틀린 답</b>입니다.</p></details></section>
+<!-- 07 -->
+<section aria-labelledby="tab-u07" class="panel" hidden="" id="u07" role="tabpanel"><div class="crumb">Part 3. 실습 21 답변 생성과 검증 · A5-M6</div><h1>07. 실습 21 · 원인 ① 고객이 말한 숫자까지 근거에서 찾았다</h1><p class="lead">맞는 답을 막은 검사를 고치고, 저장된 답으로 다시 검사합니다.</p><p>T-07 “10월 3일 주문한 냉장식품을 받고 40시간 뒤에 변질 신고했어요”의 답을 봅니다.</p><div class="mock"><div class="mock-title">outputs_m6/answers.jsonl — T-07</div><table><thead><tr><th>칸</th><th>값</th></tr></thead><tbody><tr><td>답</td><td>10월 3일에 주문한 냉장식품의 경우, 변질 신고는 수령 후 48시간 이내에 이루어져야 합니다. 40시간 뒤에 신고하셨으므로 시간 요건은 충족합니다. 그러나 실제 변질 여부는 사진과 온도 기록으로 검증해야 합니다.</td></tr><tr><td>인용</td><td>[{&quot;chunk_id&quot;: &quot;POL-RET-002#4&quot;, &quot;quote&quot;: &quot;10월 주문의 냉장식품을 받고 36시간 뒤 변질을 신고했다 → 48시간 안이므로 시간 요건은 충족한다.&quot;}]</td></tr><tr><td>숫자 검사</td><td>[{&quot;value&quot;: &quot;3일&quot;, &quot;found&quot;: false, &quot;in_question&quot;: true}, {&quot;value&quot;: &quot;48시간&quot;, &quot;found&quot;: true, &quot;in_question&quot;: false}, {&quot;value&quot;: &quot;40시간&quot;, &quot;found&quot;: false, &quot;in_question&quot;: true}]</td></tr></tbody></table></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>‘3일’과 ‘40시간’은 근거에 없는 숫자인가요? 이 둘을 걸러야 하나요?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>둘 다 고객이 질문에서 말한 숫자를 답에서 되풀이한 것입니다. 근거에서 찾을 숫자는 규정이 정한 값(48시간)이고, 고객의 날짜 · 금액 · 시간은 질문에서 찾으면 됩니다. ‘10월 3일’에서 ‘3일’만 떼어 낸 것도 숫자 패턴의 한계입니다.</p></details><div class="codebox"><div class="codehead"><span>📄 rag_answer.py · verify의 바뀐 부분</span><button class="copy" type="button">코드 복사</button></div><pre><code>asked = squash(question or &quot;&quot;)
+num_checks = [{&quot;value&quot;: n, &quot;found&quot;: squash(n) in squash(cited),
+               &quot;in_question&quot;: bool(question) and squash(n) in asked} for n in nums]
+ok = ... and all(n[&quot;found&quot;] or n[&quot;in_question&quot;] for n in num_checks)</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_21_answer.py --qnum</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력 — API를 다시 부르지 않음 (저장된 답을 다시 검사)</span><button class="copy" type="button">코드 복사</button></div><pre><code>ID     종류        상태           인용검증   must  버전   판정   이유
+T-01   기본        answered     OK     OK    OK   통과   -
+T-02   기본        answered     걸림     OK    OK   실패   POL-REF-001#4 인용 불일치
+T-03   여러 정책     conditional  OK     OK    OK   통과   -
+T-04   여러 정책     answered     OK     OK    OK   통과   -
+T-05   메타 누락     answered     OK     OK    OK   통과   -
+T-06   정책 충돌     answered     걸림     OK    OK   실패   POL-MEM-001#4 인용 불일치
+T-07   정책 충돌     answered     OK     OK    OK   통과   -
+T-08   접근 제한     refused      OK     OK    OK   통과   -
+T-09   접근 제한     refused      OK     OK    OK   통과   -
+T-10   검색 실패     insufficient OK     OK    OK   통과   -
+T-11   검색 실패     insufficient OK     OK    OK   통과   -
+Q-001  multi_hop conditional  OK     OK    OK   통과   -
+Q-003  temporal  answered     OK     OK    OK   통과   -
+Q-005  temporal  answered     걸림     OK    충돌   실패   POL-REF-001#4 인용 불일치 · 버전 충돌: 카드 환불 기간 3~5영업일 (주문일 버전은 v1)
+Q-023  privacy   refused      OK     OK    OK   통과   -
+Q-030  multi_hop answered     OK     OK    OK   통과   -
+
+상태 일치 16/16 · 인용 검증 13/16 · 꼭 들어갈 말 16/16 · 버전 15/16 · 전체 통과 13/16
+모델을 부르지 않은 질문(검색 실패): 없음
+저장: outputs_m6/answer_report.csv · outputs_m6/answers.jsonl</code></pre></div><div class="say"><b>결과</b><p>검사를 고친 것이라 모델을 다시 부르지 않고, 저장된 답으로 다시 검사했습니다. 11/16 → <b>13/16</b>. 검사가 너무 엄격하면 맞는 답을 막아 사람이 확인할 일이 늘어납니다. 검사도 테스트 질문으로 시험해야 하는 대상입니다.</p></div></section>
+<!-- 08 -->
+<section aria-labelledby="tab-u08" class="panel" hidden="" id="u08" role="tabpanel"><div class="crumb">Part 3. 실습 21 답변 생성과 검증 · A5-M6</div><h1>08. 실습 21 · 원인 ② 인용을 살짝 바꿔 썼다</h1><p class="lead">뜻은 같지만 글자가 다른 인용을 어떻게 다룰지 판단합니다.</p><p>T-02 “카드로 결제한 주문이 환불 승인됐는데 돈은 언제 들어와요?”는 답이 맞는데 인용 불일치로 걸렸습니다. 인용과 원문을 나란히 봅니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_21_answer.py --only T-02 --show</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[T-02] 카드로 결제한 주문이 환불 승인됐는데 돈은 언제 들어와요?
+  넘겨준 근거: POL-REF-001#4, POL-REF-001#3, EXC-007#2, EXC-007#6, POL-CAN-001#6, POL-CAN-001#4, POL-CPN-001#3, POL-CPN-001#5
+  답 (answered): 환불 승인 후 카드 결제의 경우 통상 3~5영업일이 소요됩니다. 정확한 입금일은 카드사에 확인이 필요합니다.
+    인용 POL-REF-001#4: “환불 승인 후 통상 3~5영업일이며, 정확한 입금일은 카드사 확인이 필요하다.”</code></pre></div><div class="mock"><div class="mock-title">dataset/md/POL-REF-001.md — 원문의 그 줄</div><pre style='white-space:pre-wrap'>- 10월 20일에 승인된 카드 환불금이 언제 들어오는지 묻는다 → 승인 후 통상 3~5영업일이며, 정확한 입금일은 카드사 확인이 필요하다.</pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>모델의 인용과 원문은 어디가 다른가요? 뜻이 바뀌었나요?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>원문은 “… → 승인 후 통상 3~5영업일이며 …”이고 모델은 앞에 ‘환불’을 붙여 “환불 승인 후 통상 …”으로 옮겼습니다. 뜻은 같지만 글자가 다릅니다. T-06도 비슷하게 두 조각의 문장을 섞어 한 문장으로 만들었습니다.</p></details><div class="task"><h4>🧭 이런 상황이라면 어떻게 하겠습니까?</h4><p>뜻이 같은 인용 변형을 통과시킬까요?</p><ol type="A"><li>통과 — 뜻이 같으니까</li><li>걸러 두고 ‘사람 확인’으로 분류한다 · 지시문에 ‘근거 문장을 한 글자도 바꾸지 말고 복사’를 더해 다시 측정한다</li><li>인용 검사를 뺀다</li></ol><p style="margin:6px 0 0;font-size:14px">하나를 고르고, 이 탭의 숫자 중 무엇을 근거로 삼을지 한 줄로 적어 보세요.</p></div><details class="qa"><summary>🧭 판단의 근거 보기</summary><p><b>B</b>입니다. ‘뜻이 같다’를 코드로 판정하려면 또 다른 모델이 필요하고, 그 판정도 틀릴 수 있습니다. 글자 그대로 일치는 단순하고 틀리지 않습니다. 대신 걸린 답이 모두 오답은 아니므로, ‘걸림 = 차단’이 아니라 ‘걸림 = 사람이 확인’으로 다룹니다. 지시문을 고쳤다면 같은 16개로 다시 재서 나아졌는지 확인합니다.</p></details></section>
+<!-- 09 -->
+<section aria-labelledby="tab-u09" class="panel" hidden="" id="u09" role="tabpanel"><div class="crumb">Part 3. 실습 21 답변 생성과 검증 · A5-M6</div><h1>09. 실습 21 · 원인 ③ 맞는 숫자가 근거에 없었다 (Q-005)</h1><p class="lead">버전 검사가 잡은 진짜 오답의 원인을 근거 조립에서 찾고 고칩니다.</p><p>Q-005는 진짜 틀렸습니다. 9월 주문인데 10월 기준 3~5영업일로 답했고, 버전 검사가 잡았습니다. 원인은 이 모듈 첫 탭에서 본 그대로입니다 — 근거 패키지에 9월 기준 숫자가 없었습니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_21_answer.py --only Q-005 --show</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[Q-005] 9월 25일 주문의 카드 환불은 승인 후 몇 영업일인가요?
+  넘겨준 근거: EXC-007#6, EXC-007#1, POL-VER-001#4, POL-VER-001#6, POL-REF-001#4, POL-REF-001#2, POL-CAN-001#6, POL-CAN-001#4
+  답 (answered): 9월 25일 주문의 카드 환불은 환불 승인일 기준으로 3~5영업일이 소요됩니다.
+    인용 POL-REF-001#4: “환불 승인 후 통상 3~5영업일이며, 정확한 입금일은 카드사 확인이 필요하다.”
+  평가 자료의 기대 답: 5~7영업일이다.</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>모델이 잘못한 걸까요, 검색이 잘못한 걸까요?</li><li>EXC-007이 1위인데 5~7영업일이 든 조각(#2 업무 규정)은 왜 넘어가지 않았을까요?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>모델은 받은 근거 안에서 가장 그럴듯한 숫자를 골랐습니다. 문제는 근거 쪽입니다. 정책마다 넘기는 조각은 질문과 <b>뜻이 가장 가까운 2개</b>인데, 질문 “몇 영업일인가요?”와 가까운 건 ‘자주 혼동하는 경우’ · ‘개요’였습니다. 숫자가 든 ‘업무 규정’은 문장이 길고 여러 내용이 섞여 점수가 낮았습니다.</p></details><h3>고치기 — 규칙으로 고정한 정책은 ‘업무 규정’ 조각을 꼭 넣는다</h3><div class="codebox"><div class="codehead"><span>📄 rag_answer.py · rule_sections (실제 코드)</span><button class="copy" type="button">코드 복사</button></div><pre><code>def rule_sections(res, section=&quot;업무 규정&quot;):
+    &quot;&quot;&quot;규칙으로 고정(pin)된 정책은 &#x27;업무 규정&#x27; 조각을 근거에 꼭 넣는다 — 버전별 숫자가 그 소제목에 있기 때문&quot;&quot;&quot;
+    from m5lib import CHUNKS
+    pinned = [r[&quot;doc_id&quot;] for r in res[&quot;results&quot;] if r[&quot;rules&quot;]]
+    rows = []
+    for d in pinned:
+        for cid, c in CHUNKS.items():
+            if c[&quot;doc_id&quot;] == d and c.get(&quot;section&quot;) == section:
+                rows.append({&quot;chunk_id&quot;: cid, &quot;doc_id&quot;: d, &quot;title&quot;: c.get(&quot;title&quot;, d), &quot;text&quot;: c[&quot;text&quot;]})
+    return rows</code></pre></div><p>규칙(9월 주문 → v1 등)이 고정한 정책은 버전별 기준이 ‘업무 규정’에 있습니다. 그 조각을 근거에 더합니다. 영향을 받는 질문은 규칙이 발동한 8개뿐이라, 그 8개만 API로 새로 답을 받습니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_21_answer.py --qnum --rule-sections</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>ID     종류        상태           인용검증   must  버전   판정   이유
+T-01   기본        answered     OK     OK    OK   통과   -
+T-02   기본        answered     걸림     OK    OK   실패   POL-REF-001#4 인용 불일치
+T-03   여러 정책     conditional  OK     OK    OK   통과   -
+T-04   여러 정책     answered     OK     OK    OK   통과   -
+T-05   메타 누락     answered     OK     OK    OK   통과   -
+T-06   정책 충돌     answered     OK     OK    OK   통과   -
+T-07   정책 충돌     answered     OK     OK    OK   통과   -
+T-08   접근 제한     refused      OK     OK    OK   통과   -
+T-09   접근 제한     refused      OK     OK    OK   통과   -
+T-10   검색 실패     insufficient OK     OK    OK   통과   -
+T-11   검색 실패     insufficient OK     OK    OK   통과   -
+Q-001  multi_hop conditional  OK     OK    OK   통과   -
+Q-003  temporal  answered     OK     OK    OK   통과   -
+Q-005  temporal  answered     OK     OK    OK   통과   -
+Q-023  privacy   refused      OK     OK    OK   통과   -
+Q-030  multi_hop answered     OK     OK    OK   통과   -
+
+상태 일치 16/16 · 인용 검증 15/16 · 꼭 들어갈 말 16/16 · 버전 16/16 · 전체 통과 15/16
+모델을 부르지 않은 질문(검색 실패): 없음
+저장: outputs_m6/answer_report.csv · outputs_m6/answers.jsonl</code></pre></div><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_21_answer.py --only Q-005 --qnum --rule-sections --show</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[Q-005] 9월 25일 주문의 카드 환불은 승인 후 몇 영업일인가요?
+  넘겨준 근거: EXC-007#6, EXC-007#1, POL-VER-001#4, POL-VER-001#6, POL-REF-001#4, POL-REF-001#2, POL-CAN-001#6, POL-CAN-001#4, EXC-007#2, POL-VER-001#2
+  답 (answered): 9월 25일 주문의 카드 환불은 승인 후 5~7영업일이 소요됩니다.
+    인용 EXC-007#2: “2026-09-01~2026-09-30의 v1은 카드 환불 승인 후 5~7영업일”
+  평가 자료의 기대 답: 5~7영업일이다.</code></pre></div><div class="say"><b>결과</b><p>Q-005는 5~7영업일로 바르게 답했고 버전 검사 · 인용 검증을 모두 통과했습니다. T-06도 업무 규정 조각을 그대로 인용해 통과했습니다. 전체 13/16 → <b>15/16</b>. 남은 하나는 T-02의 인용 변형(원인 ②)입니다.</p></div><div class="say"><b>보이는 것</b><p>버전 문제는 모델에게 ‘날짜를 잘 봐라’고 말해서 풀리지 않습니다(지시문에 이미 있습니다). <b>맞는 숫자가 근거에 들어가게</b> 하는 것이 먼저입니다. 답변 품질의 많은 부분이 검색 단계에서 정해집니다.</p></div><div class="task"><h4>📝 스스로 설명해 보기 — 남에게 설명하듯 3~4문장으로</h4><ol><li>Q-005가 틀린 과정을 질문 → 검색 → 근거 → 답 → 검증 순서로 설명하고, 어디를 고쳤는지 말해 보세요.</li></ol></div><details class="qa"><summary>📝 모범 설명과 점검 기준</summary><p><b>1. Q-005가 틀린 과정을 질문 → 검색 → 근거 → 답 → 검증 순서로 설명하고, 어디를 고쳤는지 말해 보세요.</b></p><p>‘9월’ 규칙이 EXC-007을 1위로 고정했지만, 정책마다 질문과 가까운 조각 2개만 넘기다 보니 v1 숫자가 든 ‘업무 규정’ 조각이 빠졌습니다. 근거에는 10월 기준(POL-REF-001)의 3~5영업일만 있어 모델이 그 숫자로 답했고, 인용 · 숫자 검사로는 잡히지 않을 수 있었지만 버전 검사가 잡았습니다. 규칙으로 고정한 정책의 업무 규정 조각을 근거에 넣도록 근거 조립을 고쳤습니다.</p><p style="font-size:14px"><b>이것이 들어 있으면 충분합니다</b></p><ul style="font-size:14px"><li>규칙은 맞게 발동</li><li>조각 선택(질문과 가까운 2개)에서 숫자 조각이 빠짐</li><li>버전 검사가 잡음</li><li>근거 조립을 고침</li></ul></details></section>
+<!-- 10 -->
+<section aria-labelledby="tab-u10" class="panel" hidden="" id="u10" role="tabpanel"><div class="crumb">Part 3. 실습 21 답변 생성과 검증 · A5-M6</div><h1>10. 실습 21 · 근거 부족 · 거절 답은 어떻게 내보내나</h1><p class="lead">상태가 맞아도 그대로 내보내면 안 되는 답을 보고, 상태별 내보내기 규칙을 정합니다.</p><p>T-10 · T-11은 검색 실패 판정을 통과해 모델에게 넘어갔지만, 모델이 근거를 보고 insufficient로 답했습니다. 두 번째 거름망이 일했습니다. 답의 문장을 봅니다.</p><div class="codebox"><div class="codehead"><span>Claude CLI · 실행</span><button class="copy" type="button">코드 복사</button></div><pre><code>python m6_21_answer.py --only T-10 --show</code></pre></div><div class="codebox outbox"><div class="codehead"><span>실제 출력</span><button class="copy" type="button">코드 복사</button></div><pre><code>[T-10] 매장 영업시간이 어떻게 되나요?
+  넘겨준 근거: POL-DEL-001#3, POL-DEL-001#2, POL-RET-001#2, POL-RET-001#3, POL-DEL-002#2, POL-DEL-002#4, POL-RET-002#2, POL-RET-002#4
+  답 (insufficient): 모른다.</code></pre></div><div class="task"><h4>✍ 먼저 적어 보세요</h4><ol><li>상태는 맞았습니다. 그런데 이 답을 그대로 고객에게 보내도 될까요?</li></ol></div><details class="qa"><summary>✍ 적은 뒤 정리 보기</summary><p>“모른다.”는 상태로는 맞지만 고객 안내로는 부족합니다. 근거 부족일 때 보낼 문장은 모델이 매번 만들게 하지 말고, <b>정해 둔 안내 문구</b>(어디에 문의하면 되는지)로 바꾸는 것이 안전합니다. m6_21_answer.py가 검색 실패로 판정한 질문에 쓰는 고정 문구가 그 예입니다.</p></details><div class="tablewrap"><table><thead><tr><th>상태</th><th>고객에게 보낼 것</th><th>누가 정하나</th></tr></thead><tbody><tr><td>answered · conditional</td><td>모델의 답 + 근거 정책</td><td>모델 (검증 통과 시)</td></tr><tr><td>insufficient</td><td>정해 둔 안내 문구 + 문의처</td><td>사람이 미리</td></tr><tr><td>refused (restricted)</td><td>정해 둔 거절 문구 (개인정보 · 내부 정보)</td><td>사람이 미리</td></tr><tr><td>검증에 걸림</td><td>보내지 않고 상담원 확인</td><td>사람</td></tr></tbody></table></div></section>
+<!-- 11 -->
+<section aria-labelledby="tab-u11" class="panel" hidden="" id="u11" role="tabpanel"><div class="crumb">Part 4. 정리 · A5-M6</div><h1>11. 정리 — 파일 · 명령 · 미션 · 종합 평가</h1><p class="lead">이 모듈에서 만든 검증 장치와 남은 과제를 정리합니다.</p><h3>이 모듈의 흐름</h3><div class="flow"><div class="fstep"><b>원문 대조</b><span>503/503</span></div><div class="arrow">→</div><div class="fstep"><b>검증기 시험</b><span>버전 틀린 답도 통과</span></div><div class="arrow">→</div><div class="fstep"><b>테스트 11</b><span>8/11 · 점수 기준의 한계</span></div><div class="arrow">→</div><div class="fstep"><b>답변 16</b><span>11 → 13/16</span></div><div class="arrow">→</div><div class="fstep"><b>근거 조립 고침</b><span>→ 15/16</span></div></div><h3>만든 파일</h3><div class="tablewrap"><table><thead><tr><th>파일</th><th>내용</th></tr></thead><tbody><tr><td><code>m6lib.py</code></td><td>테스트 질문 · 평가 질문을 테스트 모양으로 · 검색 + 근거 없음 판정</td></tr><tr><td><code>m6_19_verify.py</code></td><td>원문 대조 · 검증기 시험 (API 없음)</td></tr><tr><td><code>m6_20_tests.py</code></td><td>테스트 질문 검색 점검 · outputs_m6/test_report.csv</td></tr><tr><td><code>m6_21_answer.py</code></td><td>답변 생성 · 네 가지 검사 · outputs_m6/answer_report.csv · answers.jsonl</td></tr><tr><td><code>rag_answer.py</code></td><td>verify(질문 숫자 제외) · rule_sections · answer</td></tr><tr><td><code>design/m6_tests.json</code></td><td>테스트 질문 11개 · 정책 충돌 3개 · min_score</td></tr></tbody></table></div><h3>한 장 요약</h3><div class="tablewrap"><table><thead><tr><th>하고 싶은 것</th><th>명령</th></tr></thead><tbody><tr><td>원문 대조 · 검증기 시험</td><td><code>python m6_19_verify.py</code></td></tr><tr><td>테스트 질문 임베딩</td><td><code>python m6_20_tests.py --embed</code></td></tr><tr><td>검색 점검</td><td><code>python m6_20_tests.py [--detail T-03] [--min-score 0.45]</code></td></tr><tr><td>답변 검사</td><td><code>python m6_21_answer.py [--qnum] [--rule-sections] [--only Q-005 --show]</code></td></tr></tbody></table></div><h3>에러가 나면</h3><div class="tablewrap"><table><thead><tr><th>메시지</th><th>원인</th><th>할 일</th></tr></thead><tbody><tr><td><code>먼저 python m6_20_tests.py --embed</code></td><td>테스트 질문 임베딩이 없음</td><td><code>--embed</code> (API)</td></tr><tr><td><code>ModuleNotFoundError: openai</code></td><td>새 답을 만들어야 하는데 패키지 없음</td><td><code>pip install openai</code></td></tr><tr><td><code>답이 캐시에 없습니다</code></td><td>저장된 답이 없는 질문</td><td>.env 키 확인 후 다시 실행</td></tr></tbody></table></div><h3>실습 미션</h3><div class="tablewrap"><table><thead><tr><th>미션</th><th>할 일</th><th>완료 기준</th></tr></thead><tbody><tr><td>1</td><td>지시문(rag_answer.py의 prompt)에 ‘quote는 근거 문장을 한 글자도 바꾸지 말고 복사’를 더하고 <code>--refresh</code>로 다시 답해 인용 검증 수 비교</td><td>전후 표</td></tr><tr><td>2</td><td>테스트 질문 3개를 더 만든다 (예: 다른 상품 이름 · 다른 날짜 · 근거 없는 질문) — 기대 결과까지</td><td>m6_tests.json 추가 · 결과</td></tr><tr><td>3</td><td>근거 부족 · 거절 안내 문구를 정하고, 상태별로 답을 바꾸는 코드를 더한다</td><td>T-08 · T-10 출력</td></tr><tr><td>4</td><td>평가 질문 30개 전체로 m6_21을 돌려 실패 유형을 세어 본다</td><td>유형별 표</td></tr></tbody></table></div><h3>종합 이해 평가</h3><div class="task"><h4>📝 스스로 설명해 보기 — 남에게 설명하듯 3~4문장으로</h4><ol><li>인용 검증을 통과한 답이 틀릴 수 있는 이유와, 그것을 잡는 방법을 이 모듈의 예로 설명해 보세요.</li><li>‘근거 없음’을 점수 기준 하나로 판정하기 어려운 이유와 대안을 설명해 보세요.</li></ol></div><details class="qa"><summary>📝 모범 설명과 점검 기준</summary><p><b>1. 인용 검증을 통과한 답이 틀릴 수 있는 이유와, 그것을 잡는 방법을 이 모듈의 예로 설명해 보세요.</b></p><p>인용 검증은 인용이 근거에 있는 말인지만 봅니다. Q-005처럼 근거 패키지에 다른 버전의 문장만 있으면, 그 문장을 정확히 인용한 틀린 답이 통과합니다(실습 19의 다섯 번째 답). 날짜 규칙과 정책 충돌 목록으로 버전 검사를 하고, 근거 조립에서 맞는 숫자가 들어가게 고쳐야 합니다.</p><p style="font-size:14px"><b>이것이 들어 있으면 충분합니다</b></p><ul style="font-size:14px"><li>인용 검증의 범위</li><li>Q-005 · 버전</li><li>버전 검사 · 근거 조립</li></ul><p><b>2. ‘근거 없음’을 점수 기준 하나로 판정하기 어려운 이유와 대안을 설명해 보세요.</b></p><p>점수는 비슷한 정도라서 ‘해외 배송’처럼 단어가 겹치는 질문은 근거가 없어도 점수가 높고(0.467), 근거가 있는 질문도 0.448처럼 낮을 수 있습니다. 기준은 확실한 것만 거르게 두고, 모델의 insufficient 판단과 정해 둔 안내 문구를 겹쳐 씁니다.</p><p style="font-size:14px"><b>이것이 들어 있으면 충분합니다</b></p><ul style="font-size:14px"><li>점수 = 비슷함</li><li>섞인 분포 숫자</li><li>두 단계 거름망</li></ul></details><div class="quizbox"><h3 class="qz-title">🧪 종합 확인</h3><div class="quiz" data-answer="1"><p class="qz-q"><b>Q1.</b> 검사를 고친 뒤(--qnum) 모델을 다시 부르지 않아도 된 이유는?</p><label><input type="radio" name="qz4_1" value="0"/> 모델이 같아서</label><label><input type="radio" name="qz4_1" value="1"/> 답은 저장(캐시)돼 있고 바뀐 것은 검사뿐이라서</label><label><input type="radio" name="qz4_1" value="2"/> API가 무료라서</label><label><input type="radio" name="qz4_1" value="3"/> 질문이 같아서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>생성과 검사를 나눠 두면 검사만 고쳐 다시 잴 수 있습니다.</p></div></div><div class="quiz" data-answer="1"><p class="qz-q"><b>Q2.</b> 테스트 질문을 평가 질문과 따로 만든 이유는?</p><label><input type="radio" name="qz4_2" value="0"/> 양을 늘리려고</label><label><input type="radio" name="qz4_2" value="1"/> 평가 질문은 검색기를 맞추는 데 이미 써서, 처음 보는 질문으로 확인해야 실제 성능에 가깝기 때문</label><label><input type="radio" name="qz4_2" value="2"/> API 비용 때문</label><label><input type="radio" name="qz4_2" value="3"/> 형식이 달라서</label><button class="qz-check" type="button">정답 확인</button><div class="qz-fb" hidden><p class="qz-res"></p><p>규칙 단어도 평가 질문을 보며 골랐습니다.</p></div></div></div></section>
+</main></div>
+<footer class="footer">© 2026 부성순. All rights reserved.<small>교안의 자체 해설 및 실습 예제에 대한 저작권 표시입니다. 실습 데이터는 교육용 합성 데이터이며 실제 법률 또는 쇼핑몰 약관이 아닙니다. 교안 속 실행 출력은 실습 스크립트를 실제로 실행한 결과입니다.</small></footer>
+<script>(function(){
+const tabs=[...document.querySelectorAll('[role="tab"]')];
+function setTab(i,focus=false){tabs.forEach((t,j)=>{const on=i===j;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});if(focus)tabs[i].focus({preventScroll:true});history.replaceState(null,'','#'+tabs[i].getAttribute('aria-controls'));window.scrollTo({top:0});}
+tabs.forEach((t,i)=>{t.addEventListener('click',()=>setTab(i));t.addEventListener('keydown',e=>{if(['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();setTab((i+(e.key==='ArrowDown'||e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length,true);}})});
+const index=tabs.findIndex(t=>'#'+t.getAttribute('aria-controls')===location.hash);if(index>=0)setTab(index);
+document.querySelectorAll('.copy').forEach(b=>{b.dataset.label=b.textContent;b.addEventListener('click',async()=>{const code=b.closest('.codebox').querySelector('pre').textContent;try{await navigator.clipboard.writeText(code);b.textContent='복사됨';}catch(e){b.textContent='복사 실패';}setTimeout(()=>b.textContent=b.dataset.label||'코드 복사',1500);});});
+document.querySelectorAll('.quiz').forEach(q=>{const btn=q.querySelector('.qz-check'),fb=q.querySelector('.qz-fb'),res=q.querySelector('.qz-res');
+btn.addEventListener('click',()=>{const c=q.querySelector('input:checked');q.querySelectorAll('label').forEach(l=>l.classList.remove('right','wrong'));
+if(!c){fb.hidden=false;fb.className='qz-fb';res.textContent='보기를 하나 고른 뒤 확인하세요.';fb.querySelectorAll('p')[1].hidden=true;return;}
+fb.querySelectorAll('p')[1].hidden=false;const ok=c.value===q.dataset.answer;const right=q.querySelector('input[value="'+q.dataset.answer+'"]').closest('label');
+right.classList.add('right');if(!ok)c.closest('label').classList.add('wrong');fb.hidden=false;fb.className='qz-fb '+(ok?'ok':'no');res.textContent=ok?'✔ 정답입니다.':'✘ 다시 생각해 보세요. 초록색이 정답입니다.';});});
+})();</script></body></html>

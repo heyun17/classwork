@@ -1,0 +1,12 @@
+﻿id,kind,route,top_score,no_evidence,flags,rules,results,pass,why
+T-01,기본,vector,0.504,False,,날짜가 있는 질문,POL-RET-001|EXC-004|POL-VER-001|POL-RET-002|POL-RET-003,True,
+T-02,기본,vector,0.688,False,,,POL-REF-001|EXC-007|POL-CAN-001|POL-CPN-001|POL-RET-001,True,
+T-03,여러 정책,hybrid,0.476,False,,,EXC-005|POL-DEL-001|POL-FEE-001|EXC-001|EXC-002,False,빠짐 POL-RET-002
+T-04,여러 정책,vector,0.454,False,,,POL-CAN-002|EXC-003|POL-CAN-001|EXC-004|EXC-006,True,
+T-05,메타 누락,vector,0.448,False,,,EXC-002|POL-DEL-001|POL-RET-001|EXC-001|POL-RET-002,True,
+T-06,정책 충돌,hybrid,0.617,False,,9월 주문 → v1|날짜가 있는 질문,EXC-007|POL-VER-001|POL-MEM-001|EXC-005|EXC-006,True,
+T-07,정책 충돌,hybrid,0.69,False,,날짜가 있는 질문,POL-RET-002|POL-DEL-002|POL-VER-001|EXC-001|POL-RET-001,True,
+T-08,접근 제한,vector,0.329,False,restricted,내부 · 개인 정보,POL-VER-001|EXC-002|EXC-006|POL-MEM-001|EXC-001,True,
+T-09,접근 제한,vector,0.444,False,restricted,내부 · 개인 정보,POL-VER-001|POL-MEM-001|EXC-001|EXC-005|EXC-003,True,
+T-10,검색 실패,vector,0.405,False,,,POL-DEL-001|POL-RET-001|POL-DEL-002|POL-RET-002|EXC-004,False,검색 실패로 판정 못 함 (점수 0.405)
+T-11,검색 실패,vector,0.467,False,,,POL-DEL-001|EXC-002|EXC-001|POL-FEE-001|EXC-003,False,검색 실패로 판정 못 함 (점수 0.467)
