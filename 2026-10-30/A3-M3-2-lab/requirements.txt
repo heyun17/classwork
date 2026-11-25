@@ -1,0 +1,5 @@
+chromadb>=1.0
+numpy
+pandas
+torch
+transformers>=4.40
