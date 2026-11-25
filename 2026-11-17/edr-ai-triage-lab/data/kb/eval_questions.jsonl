@@ -1,0 +1,21 @@
+{"id": "k1", "question": "호스트 네트워크 격리는 누가 승인해?", "source": "01_response_policy_tables.pdf", "expect": ["SOC 팀장"], "challenge": "표 안의 정답"}
+{"id": "k2", "question": "critical 알림은 트리아지를 몇 분 안에 끝내야 해?", "source": "01_response_policy_tables.pdf", "expect": ["15분"], "challenge": "표 안의 정답"}
+{"id": "k3", "question": "악성 판정을 내리려면 근거가 몇 개 필요해?", "source": "01_response_policy_tables.pdf", "expect": ["두 개"], "challenge": "일반 문단"}
+{"id": "k4", "question": "LSASS 덤프가 의심될 때 비밀번호 초기화는 누구 승인이 필요해?", "source": "02_playbook_credential_dump.pdf", "expect": ["계정 소유 부서장"], "challenge": "기준 문서"}
+{"id": "k5", "question": "랜섬웨어로 판정하는 파일 이름 변경 기준은?", "source": "03_playbook_ransomware_header_footer.pdf", "expect": ["30초", "20개"], "challenge": "머리말·꼬리말 노이즈"}
+{"id": "k6", "question": "백업 에이전트의 대량 이름 변경이 오탐인지 어떻게 구분해?", "source": "03_playbook_ransomware_header_footer.pdf", "expect": ["D:\\backup"], "challenge": "여러 쪽 중 마지막 쪽"}
+{"id": "k7", "question": "PowerShell -enc 옵션만으로 악성이라고 볼 수 있어?", "source": "04_playbook_macro_powershell_code.pdf", "expect": ["관리 스크립트"], "challenge": "코드 블록 주변 설명"}
+{"id": "k8", "question": "Run 키에 Updater라는 이름이 등록된 사례는 왜 악성으로 판정됐어?", "source": "05_newsletter_two_column.pdf", "expect": ["Users\\Public", "8443"], "challenge": "2단 레이아웃"}
+{"id": "k9", "question": "IT 운영팀의 PsExec 사용과 공격자의 측면 이동은 어떻게 구분해?", "source": "05_newsletter_two_column.pdf", "expect": ["변경 관리"], "challenge": "2단 레이아웃"}
+{"id": "k10", "question": "같은 패턴이 몇 번 오탐으로 종결되면 룰 예외 등록을 요청해?", "source": "06_false_positive_guide_scanned.pdf", "expect": ["세 번"], "challenge": "스캔본 OCR"}
+{"id": "k11", "question": "46주차에 AI 처리 실패가 많았던 이유는?", "source": "07_weekly_report_chart.pdf", "expect": ["LLM API 지연"], "challenge": "보고서 문단"}
+{"id": "k12", "question": "화요일 알림 건수는 몇 건이야?", "source": "07_weekly_report_chart.pdf", "expect": ["241"], "challenge": "차트 이미지 속 숫자 (텍스트로는 못 찾음)"}
+{"id": "k13", "question": "LSASS 메모리 덤프에 자주 쓰이는 DLL 기법은?", "source": "08_analyst_notes_attack_en.pdf", "expect": ["comsvcs"], "challenge": "한국어 질문 → 영어 문서 (02와 경쟁)"}
+{"id": "k14", "question": "관리자도 쓰는 PowerShell 옵션 때문에 판단할 때 무엇을 봐야 해?", "source": "08_analyst_notes_attack_en.pdf", "expect": ["parent process"], "challenge": "교차 언어 의미 검색"}
+{"id": "k15", "question": "핵심 서버(S등급)에서 high 알림이 야간에 났을 때 호스트 격리는 누가 승인해?", "source": "09_response_matrix_complex_tables.pdf", "expect": ["CISO"], "answer": "CISO", "challenge": "병합 셀(가로) + 2단 헤더: high 열 두 칸이 하나로 합쳐짐"}
+{"id": "k16", "question": "임원 PC에서 high 알림이 야간에 나면 격리는 언제 해?", "source": "09_response_matrix_complex_tables.pdf", "expect": ["익일 처리"], "answer": "익일 처리 (다음 날 업무 시간)", "challenge": "병합 셀(세로) + 행·열 교차 조회"}
+{"id": "k17", "question": "S등급 자산에 medium 알림이 나면 격리해야 해?", "source": "09_response_matrix_complex_tables.pdf", "expect": ["격리 금지"], "answer": "격리하지 않고 모니터링만 한다 (※1)", "challenge": "각주(※1)를 표 아래에서 찾아 연결"}
+{"id": "k18", "question": "주말에 critical 알림이 나면 2차 연락 대상은 누구야?", "source": "09_response_matrix_complex_tables.pdf", "expect": ["당직 팀장"], "answer": "당직 팀장", "challenge": "〃(위와 같음) 표기 해석: 표에는 '당직 팀장'이 아니라 '〃'만 있음"}
+{"id": "k19", "question": "공휴일에 high 알림의 1차 연락 대상은?", "source": "09_response_matrix_complex_tables.pdf", "expect": ["당직 L2 분석가"], "answer": "당직 L2 분석가", "challenge": "쪽을 넘어간 표 + 병합 칸이 잘림 + 〃 표기"}
+{"id": "k20", "question": "R004 룰의 최근 3개월 평균 오탐률은?", "source": "09_response_matrix_complex_tables.pdf", "expect": ["61.0%"], "answer": "61.0%", "challenge": "선 없는 고정폭 표: 숫자가 어느 열인지"}
+{"id": "k21", "question": "랜섬웨어 플레이북은 보고 기한이 얼마야?", "source": "09_response_matrix_complex_tables.pdf", "expect": ["30분"], "answer": "30분", "challenge": "가로 페이지의 넓은 표 (03번 PDF와 경쟁)"}
