@@ -1,0 +1,322 @@
+[
+  {
+    "type": "Header",
+    "element_id": "5a33d96319bbed0bef5281f17be317c8",
+    "text": "교육용 샘플 · 가상 데이터 | PDF 표 파싱 실습 (쉬움)",
+    "metadata": {
+      "detection_class_prob": 0.871407687664032,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            349.7040100097656
+          ],
+          [
+            306.24998723958333,
+            390.35965019168077
+          ],
+          [
+            1156.38720703125,
+            390.35965019168077
+          ],
+          [
+            1156.38720703125,
+            349.7040100097656
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:23",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_쉬움.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "ba780654e40842fee5636025524b5821",
+    "text": "보건의료데이터 결합 신청 현황",
+    "metadata": {
+      "detection_class_prob": 0.8694061040878296,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            304.07281494140625,
+            500.860107421875
+          ],
+          [
+            304.07281494140625,
+            614.1887817382812
+          ],
+          [
+            1431.0777587890625,
+            614.1887817382812
+          ],
+          [
+            1431.0777587890625,
+            500.860107421875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:23",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_쉬움.pdf",
+      "parent_id": "5a33d96319bbed0bef5281f17be317c8"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2f3ebdf16c9bea387aee865ad10a50e3",
+    "text": "아래 표는 2025년 상반기에 결합전문기관에 접수된 가명정보 결합 신청을 기관 유형별로 정리한 것이다. 수치 는 실습을 위해 만든 가상 값이다.",
+    "metadata": {
+      "detection_class_prob": 0.9045649766921997,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            304.6304626464844,
+            683.1400146484375
+          ],
+          [
+            304.6304626464844,
+            827.7207988449652
+          ],
+          [
+            2594.812255859375,
+            827.7207988449652
+          ],
+          [
+            2594.812255859375,
+            683.1400146484375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:23",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_쉬움.pdf",
+      "parent_id": "ba780654e40842fee5636025524b5821"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "eed6b352643c55e81f55cb4dfe33ec7a",
+    "text": "1. 기관 유형별 결합 신청 건수",
+    "metadata": {
+      "detection_class_prob": 0.5528735518455505,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            925.52099609375
+          ],
+          [
+            306.24998723958333,
+            1004.4824829101562
+          ],
+          [
+            1077.703857421875,
+            1004.4824829101562
+          ],
+          [
+            1077.703857421875,
+            925.52099609375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:23",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_쉬움.pdf",
+      "parent_id": "5a33d96319bbed0bef5281f17be317c8"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "1b1ce347c4cb7b39a9a71dddbf301d76",
+    "text": "기관 유형 신청 건수 승인 건수 반려 건수 승인율(%) 상급종합병원 42 37 5 종합병원 31 26 5 공공기관 18 17 1 연구소 25 19 6 제약·바이오 기업 36 27 9 대학교 14 12 2 합계 166 138 28 88.1 83.9 94.4 76.0 75.0 85.7 83.1",
+    "metadata": {
+      "detection_class_prob": 0.9430075883865356,
+      "is_extracted": "partial",
+      "coordinates": {
+        "points": [
+          [
+            307.15374755859375,
+            1035.690185546875
+          ],
+          [
+            307.15374755859375,
+            1985.58740234375
+          ],
+          [
+            2585.055908203125,
+            1985.58740234375
+          ],
+          [
+            2585.055908203125,
+            1035.690185546875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:23",
+      "text_as_html": "<table><thead><tr><th></th><th></th><th></th><th>승 인 율 (%)</th></tr></thead><tbody><tr><td></td><td></td><td></td><td>88.1</td></tr><tr><td></td><td></td><td></td><td>83.9</td></tr><tr><td></td><td></td><td></td><td>94.4</td></tr><tr><td>시 [ ㄴ 2.</td><td>' (시</td><td>' 은</td><td>76.0</td></tr><tr><td>제 약 ㆍ 바 이오 기업</td><td>학파</td><td></td><td>75.0</td></tr><tr><td></td><td></td><td></td><td>85.7</td></tr><tr><td></td><td></td><td></td><td>83.1</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_쉬움.pdf",
+      "parent_id": "eed6b352643c55e81f55cb4dfe33ec7a"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "3088798ee99ef15bad22185d966b8482",
+    "text": "※ 승인율 = 승인 건수 ÷ 신청 건수 × 100 (소수점 둘째 자리에서 반올림)",
+    "metadata": {
+      "detection_class_prob": 0.8365217447280884,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            2019.69873046875
+          ],
+          [
+            306.24998723958333,
+            2072.49574697934
+          ],
+          [
+            1649.2103510745656,
+            2072.49574697934
+          ],
+          [
+            1649.2103510745656,
+            2019.69873046875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:23",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_쉬움.pdf",
+      "parent_id": "eed6b352643c55e81f55cb4dfe33ec7a"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "84ca623efdc66a6a9b88b72804485af8",
+    "text": "2. 결과 요약",
+    "metadata": {
+      "detection_class_prob": 0.5349481701850891,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            302.0266418457031,
+            2181.57275390625
+          ],
+          [
+            302.0266418457031,
+            2248.742906092375
+          ],
+          [
+            620.5426635742188,
+            2248.742906092375
+          ],
+          [
+            620.5426635742188,
+            2181.57275390625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:23",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_쉬움.pdf",
+      "parent_id": "5a33d96319bbed0bef5281f17be317c8"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "995f96068402892a4d243876a637ad24",
+    "text": "공공기관의 승인율이 94.4%로 가장 높았고, 제약·바이오 기업은 75.0%로 가장 낮았다. 반려 사유는 대부분 활용 목적이 가명정보 활용 목적(통계작성, 과학적 연구, 공익적 기록보존)에 해당하는지 소명이 부족한 경우 였다.",
+    "metadata": {
+      "detection_class_prob": 0.9238805174827576,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            302.32562255859375,
+            2321.57666015625
+          ],
+          [
+            302.32562255859375,
+            2544.908227295486
+          ],
+          [
+            2567.1494140625,
+            2544.908227295486
+          ],
+          [
+            2567.1494140625,
+            2321.57666015625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:23",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_쉬움.pdf",
+      "parent_id": "84ca623efdc66a6a9b88b72804485af8"
+    }
+  }
+]

@@ -1,0 +1,684 @@
+[
+  {
+    "type": "Header",
+    "element_id": "18bc727b79df97c2aa44fc44b6f42044",
+    "text": "교육용 샘플 · 가상 데이터 | PDF 표 파싱 실습 (어려움)",
+    "metadata": {
+      "detection_class_prob": 0.886401891708374,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            350.4373474121094
+          ],
+          [
+            306.24998723958333,
+            390.35965019168077
+          ],
+          [
+            1192.137939453125,
+            390.35965019168077
+          ],
+          [
+            1192.137939453125,
+            350.4373474121094
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_어려움.pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "6211013210a3f9c06f805eaecc33713a",
+    "text": "가명처리 운영 현황 보고서",
+    "metadata": {
+      "detection_class_prob": 0.8667895793914795,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            303.677978515625,
+            507.2192077636719
+          ],
+          [
+            303.677978515625,
+            610.5425415039062
+          ],
+          [
+            1265.919189453125,
+            610.5425415039062
+          ],
+          [
+            1265.919189453125,
+            507.2192077636719
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "18bc727b79df97c2aa44fc44b6f42044"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "f321a13ff2b88968d96d07d000b454b2",
+    "text": "이 보고서는 기관 유형별 가명정보 처리 건수와 사용한 가명처리 기법, 담당자 점검 결과를 정리한 것이다. 모 든 수치는 실습을 위해 만든 가상 값이다.",
+    "metadata": {
+      "detection_class_prob": 0.8972307443618774,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            298.3945617675781,
+            685.6592407226562
+          ],
+          [
+            298.3945617675781,
+            827.7207988449652
+          ],
+          [
+            2569.724853515625,
+            827.7207988449652
+          ],
+          [
+            2569.724853515625,
+            685.6592407226562
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "6211013210a3f9c06f805eaecc33713a"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "b14e7ead302630b91e6b76a169c8ee10",
+    "text": "표 1. 기관 유형별 가명정보 처리 건수",
+    "metadata": {
+      "detection_class_prob": 0.5161048769950867,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            927.0623168945312
+          ],
+          [
+            306.24998723958333,
+            1002.8035888671875
+          ],
+          [
+            1249.5355224609375,
+            1002.8035888671875
+          ],
+          [
+            1249.5355224609375,
+            927.0623168945312
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "18bc727b79df97c2aa44fc44b6f42044"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "82f7374f07a55c8049376c073b960134",
+    "text": "2024년 2025년 기관 구분 세부 유형 비고 상반기 하반기 상반기 하반기 상급종합병원 1,204 1,388 1,512 - 2025 하반기 집계 중 의료기관 종합병원 876 941 1,027 - 병원 312 298 355 - 공공기관 645 702 688 - 통계작성 목적 위주 공공·연구 연구소 430 512 590 - 기업 제약·바이오 958 1,103 1,240 - 과학적 연구 (신약 효과 평가) 디지털헬스 221 267 340 - 합계 4,646 5,211 5,752 -",
+    "metadata": {
+      "detection_class_prob": 0.9371809959411621,
+      "is_extracted": "partial",
+      "coordinates": {
+        "points": [
+          [
+            301.0516662597656,
+            1040.2962646484375
+          ],
+          [
+            301.0516662597656,
+            2266.8828125
+          ],
+          [
+            2584.250244140625,
+            2266.8828125
+          ],
+          [
+            2584.250244140625,
+            1040.2962646484375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "text_as_html": "<table><thead><tr><th rowspan=\"2\"></th><th rowspan=\"2\"></th><th colspan=\"2\">2024 년</th><th colspan=\"2\">2025 년</th><th rowspan=\"2\">비고</th></tr><tr><th>상반기</th><th>하반기</th><th>상반기</th><th>하반기</th></tr></thead><tbody><tr><td rowspan=\"2\">의료기관</td><td></td><td>1,204</td><td>1388</td><td>1512</td><td>-</td><td>2025 하반기 집계 중</td></tr><tr><td></td><td></td><td></td><td>딱</td><td></td><td></td></tr><tr><td rowspan=\"2\">야 야 요</td><td></td><td>05|</td><td>70|</td><td>. 0 리</td><td></td><td></td></tr><tr><td>드 '</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td rowspan=\"2\"></td><td>자막: 바이오 에</td><td>|</td><td>피서 1109 |</td><td>의</td><td></td><td>6</td></tr><tr><td></td><td></td><td></td><td></td><td>-</td><td></td></tr><tr><td></td><td></td><td>4,646</td><td>5,211</td><td>4</td><td></td><td></td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "b14e7ead302630b91e6b76a169c8ee10"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "f0cd02398e286d0000531f9b0097f2e0",
+    "text": "※ \"-\"는 아직 집계되지 않은 값",
+    "metadata": {
+      "detection_class_prob": 0.8542910814285278,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            2287.635498046875
+          ],
+          [
+            306.24998723958333,
+            2347.00048828125
+          ],
+          [
+            876.8732299804688,
+            2347.00048828125
+          ],
+          [
+            876.8732299804688,
+            2287.635498046875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "b14e7ead302630b91e6b76a169c8ee10"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "316b0bc4f721a1ff883622e7a958bb4f",
+    "text": "표 2. 가명처리 기법 목록",
+    "metadata": {
+      "detection_class_prob": 0.7682828307151794,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            2445.1259765625
+          ],
+          [
+            306.24998723958333,
+            2518.5345615177225
+          ],
+          [
+            933.3092651367188,
+            2518.5345615177225
+          ],
+          [
+            933.3092651367188,
+            2445.1259765625
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "18bc727b79df97c2aa44fc44b6f42044"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "a7712f144e46feab187a29219f5d6fa8",
+    "text": "기관들이 사용한 가명처리 기법을 분류별로 정리했다. 재식별 위험과 데이터 유용성은 실습용 가상 평가다.",
+    "metadata": {
+      "detection_class_prob": 0.8238154649734497,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            299.7796325683594,
+            2594.3955078125
+          ],
+          [
+            299.7796325683594,
+            2654.2832227381946
+          ],
+          [
+            2525.4299409716627,
+            2654.2832227381946
+          ],
+          [
+            2525.4299409716627,
+            2594.3955078125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "316b0bc4f721a1ff883622e7a958bb4f"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "933fc55720be403839a045f765954005",
+    "text": "번호 분류 기법 설명 재식별 위험 1 삭제 식별자 삭제 이름, 주민등록번호 등 식별자를 삭제 보통 2 삭제 부분 삭제 주소의 상세 부분(동·호수)을 삭제 보통 3 삭제 레코드 삭제 희귀질환 등 특이값을 가진 행 전체를 삭제 낮음 4 삭제 식별요소 전부 삭 제 준식별자까지 모두 삭제 높음 5 대체 가명 대체 이름을 무작위 가명(P-xxxx)으로 바꿈 보통 6 대체 해시 함수 솔트를 붙인 일방향 해시값으로 바꿈 낮음 7 대체 토큰화 원래 값을 의미 없는 토큰으로 바꾸고 매핑표는 분리 보관 낮음 유용성 낮음 높음 낮음 낮음 높음 높음 낮음",
+    "metadata": {
+      "detection_class_prob": 0.933440089225769,
+      "is_extracted": "partial",
+      "coordinates": {
+        "points": [
+          [
+            280.5514221191406,
+            2714.937255859375
+          ],
+          [
+            280.5514221191406,
+            3786.696533203125
+          ],
+          [
+            2584.5068359375,
+            3786.696533203125
+          ],
+          [
+            2584.5068359375,
+            2714.937255859375
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "text_as_html": "<table><thead><tr><th>1 어 [ 귀</th><th>배 까</th><th></th><th>[11 1</th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td>01 3</td></tr><tr><td></td><td></td><td></td><td></td><td></td><td>0 깨</td></tr><tr><td></td><td></td><td></td><td>두 삭제 머 노 도 식 별 지</td><td></td><td>01 3</td></tr><tr><td></td><td></td><td>가명 대체</td><td>이 름 을 무작위 가 명 (『-&gt;0060 으 로 바꿈</td><td></td><td>0 깨</td></tr><tr><td></td><td></td><td></td><td>| 시 값 으로 바꿈</td><td></td><td></td></tr><tr><td></td><td></td><td></td><td>토 큰 으 로 바꾸고 매 핑 표 는 가 8 ㅅ 분리 보관</td><td>0 개</td><td>01 3</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 1,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "316b0bc4f721a1ff883622e7a958bb4f"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "c9f941dd7b617f635ae94b61442fe688",
+    "text": "번호 분류 기법 8 대체 암호화 9 범주화 범주화 10 범주화 라운딩 11 범주화 범위 방법 12 범주화 상·하단 코딩 13 마스킹 부분 마스킹 14 마스킹 전체 마스킹 15 무작위화 잡음 추가 16 무작위화 순열(치환) 17 무작위화 부분 총계 18 기타 표본 추출 19 기타 재현 데이터 20 기타 동형 비밀분산 설명 양방향 암호화로 바꾸고 키는 분리 보관 나이 37세를 30대로 바꿈 검사 수치를 소수점 첫째 자리에서 반올림 소득 3,450만원을 3,000~4,000만원으로 바꿈 90세 이상은 모두 90+로 묶음 전화번호 010-****-5678 주민등록번호 뒷자리 전체를 *로 측정값에 작은 무작위 값을 더함 특정 열의 값을 행끼리 무작위로 섞음 특이값을 그룹 평균으로 바꿈 전체 대신 일부 표본만 제공 원본의 통계적 성질을 닮은 가상 데이터를 생성 값을 여러 조각으로 나눠 따로 보관 재식별 위험 낮음 보통 낮음 높음 낮음 낮음 높음 높음 높음 보통 낮음 높음 보통 유용성 보통 낮음 낮음 보통 높음 낮음 높음 낮음 높음 낮음 낮음 낮음 보통",
+    "metadata": {
+      "detection_class_prob": 0.9273833632469177,
+      "is_extracted": "partial",
+      "coordinates": {
+        "points": [
+          [
+            280.68267822265625,
+            307.8648376464844
+          ],
+          [
+            280.68267822265625,
+            1870.7724609375
+          ],
+          [
+            2591.22265625,
+            1870.7724609375
+          ],
+          [
+            2591.22265625,
+            307.8648376464844
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "text_as_html": "<table><thead><tr><th>1 어 [ 귀</th><th>바 |</th><th></th><th>[11 1</th><th></th><th>0</th></tr></thead><tbody><tr><td></td><td>009</td><td>혀 어</td><td>오 대 퍼 그 | 배 더 그 버 | 원 10| 20| 0|</td><td>이 “|</td><td></td></tr><tr><td></td><td>범 주 화</td><td>| 5 | 바 0|309|12</td><td>×|0| | 폭 | = 8| 이 | 삐 은 0| | ㄱ ㅁ ㅋ</td><td>| 배 0 꺼</td><td></td></tr><tr><td></td><td>|</td><td>| 20 | 애 ㅁ</td><td>2 ㅁ 0 에 20 | | 혼 모 포 | 흐 &lt; 초 | 저 | 때 | 자 | | 포</td><td>| 00 |1 쿠</td><td>1246</td></tr><tr><td></td><td>|</td><td>픈 | 20 해</td><td>00 주 | 매 | 이 | 94 더 18|. | 우 | | 흐 || 으 0 | 월 | 회 음 로 | | 저</td><td>| 00 1 께</td><td>00|00|10|100100100|100|100|00|00|00 | 퍼</td></tr><tr><td></td><td>|</td><td>| 포 농 |130|&lt;0|</td><td>| | | 가 | 보 | 밤 | 모 인 | 증 | 으 증 |{6|</td><td>| 00 |</td><td></td></tr><tr><td></td><td></td><td>ㅁ | 패 과</td><td>|18 등 2|5| + *1 8| | 괴 0 쩌</td><td>| 00</td><td>|※|\\》|1</td></tr><tr><td></td><td></td><td>[진진 | ㅁ 효</td><td>| 폰 | | 핀 ㅋ 4 때 |816| 괴 |4|| | 머 바</td><td>| 00 1(|※|</td><td>뼈</td></tr><tr><td></td><td>작 위 화</td><td>| | 짜 |00| |60|@4|</td><td>| 호 | 블 누미 대 | 후 비 | |[ 마 이 |4| 혼 |40|18| |0|×| |0|0|</td><td>| 00 께</td><td>| 큐</td></tr><tr><td></td><td>작 위 화</td><td>해 | 헤 재</td><td>00 파 펀 | 요 마 | 프 후 | 헨 | 밀 매 | 일 해</td><td>| 0 | 꽤</td><td></td></tr><tr><td></td><td>작 위 화</td><td>효 |\" | 패 | 과</td><td>| 삐 [815 머 | 이 나 |8 | 더 | 에 | 죠 ㅎ 빼</td><td>| 배 0 | 퍼</td><td></td></tr><tr><td></td><td></td><td>| 베</td><td>| 뿔 | 도 | 머 버 1| 프 | 애 | 꼬 | ㅁ || |{ 찌</td><td>| 0 | 쿠</td><td>84716</td></tr><tr><td></td><td></td><td></td><td>30 30 0! 쁘 흐 2 전 인 | 패 | 에 30 ㅁ | 조 바 0 | 끼 해</td><td>| 00 | 꽤</td><td></td></tr><tr><td>20</td><td>기타</td><td></td><td>여러 조 각 으로 나뉘 따로 보관</td><td></td><td></td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 2,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "316b0bc4f721a1ff883622e7a958bb4f"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "3f69e2eb84c611a3da8dba3860ef586e",
+    "text": "※ 재식별 위험과 유용성은 실습을 위한 가상 평가임",
+    "metadata": {
+      "detection_class_prob": 0.7942447662353516,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            1909.1669921875
+          ],
+          [
+            306.24998723958333,
+            1964.9163818359375
+          ],
+          [
+            1242.623291015625,
+            1964.9163818359375
+          ],
+          [
+            1242.623291015625,
+            1909.1669921875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 2,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "316b0bc4f721a1ff883622e7a958bb4f"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "1c2212da243e136b28843dfd92716525",
+    "text": "표 3. 담당자 점검 결과",
+    "metadata": {
+      "detection_class_prob": 0.7482724189758301,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            305.90423583984375,
+            403.707763671875
+          ],
+          [
+            305.90423583984375,
+            473.22214673907575
+          ],
+          [
+            876.8404789920619,
+            473.22214673907575
+          ],
+          [
+            876.8404789920619,
+            403.707763671875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 3,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "18bc727b79df97c2aa44fc44b6f42044"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "53d3b527043d8782cfc5247552dfc440",
+    "text": "가명처리 담당자 6명이 체크리스트로 자체 점검한 결과다. 이 표는 세로선과 칸 테두리가 없는 형식이다.",
+    "metadata": {
+      "detection_class_prob": 0.56331866979599,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            551.0615844726562
+          ],
+          [
+            306.24998723958333,
+            608.9708079595472
+          ],
+          [
+            2474.843994140625,
+            608.9708079595472
+          ],
+          [
+            2474.843994140625,
+            551.0615844726562
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 3,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "1c2212da243e136b28843dfd92716525"
+    }
+  },
+  {
+    "type": "Table",
+    "element_id": "273139baeb37dc839e2e32788e8ad923",
+    "text": "담당자 소속 점검 항목 수 적합 부적합 점검일 김OO 의료정보팀 24 23 1 2025-03-04 이OO 연구지원팀 24 24 0 2025-03-05 박OO 정보보호팀 24 21 3 2025-03-05 최OO 데이터센터 24 22 2 2025-03-06 정OO 의료정보팀 24 24 0 2025-03-07 한OO 임상연구센터 24 20 4 2025-03-07",
+    "metadata": {
+      "detection_class_prob": 0.926035463809967,
+      "is_extracted": "partial",
+      "coordinates": {
+        "points": [
+          [
+            309.1335144042969,
+            662.6629638671875
+          ],
+          [
+            309.1335144042969,
+            1441.6485595703125
+          ],
+          [
+            2481.039794921875,
+            1441.6485595703125
+          ],
+          [
+            2481.039794921875,
+            662.6629638671875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "text_as_html": "<table><thead><tr><th>0 앞 4 &gt;</th><th></th><th>1 」 것 【 안</th><th>점 검 일</th></tr></thead><tbody><tr><td></td><td></td><td>-</td><td>2025-03-04</td></tr><tr><td></td><td></td><td>=</td><td>2025-03-05</td></tr><tr><td>24</td><td>21</td><td></td><td>2025-03-05</td></tr><tr><td>24</td><td>22</td><td></td><td>2025-03-06</td></tr><tr><td>24</td><td>24</td><td></td><td>2025-03-07</td></tr><tr><td>24</td><td>20</td><td></td><td>2025-03-07</td></tr></tbody></table>",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 3,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "1c2212da243e136b28843dfd92716525"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "8983fba1cc34a246af64437add551f5c",
+    "text": "※ 부적합 항목은 1개월 안에 재점검한다.",
+    "metadata": {
+      "detection_class_prob": 0.7937293648719788,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            1483.7899169921875
+          ],
+          [
+            306.24998723958333,
+            1536.5582693100682
+          ],
+          [
+            1054.3489990234375,
+            1536.5582693100682
+          ],
+          [
+            1054.3489990234375,
+            1483.7899169921875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 3,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "1c2212da243e136b28843dfd92716525"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "543d6bf5735820042143774a3cdabdd2",
+    "text": "정리",
+    "metadata": {
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            1648.4200151683285
+          ],
+          [
+            306.24998723958333,
+            1709.1595952416792
+          ],
+          [
+            417.9979432667515,
+            1709.1595952416792
+          ],
+          [
+            417.9979432667515,
+            1648.4200151683285
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 3,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "1c2212da243e136b28843dfd92716525"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "91f81827b8d6efeb58f41d65685a3965",
+    "text": "2025년 상반기 처리 건수는 5,752건으로 2024년 하반기보다 늘었다. 기법은 대체(가명 대체·해시)와 범주화 가 가장 많이 쓰였다.",
+    "metadata": {
+      "detection_class_prob": 0.8062441349029541,
+      "is_extracted": "true",
+      "coordinates": {
+        "points": [
+          [
+            306.24998723958333,
+            1788.9971923828125
+          ],
+          [
+            306.24998723958333,
+            1925.1165864534712
+          ],
+          [
+            2601.57861328125,
+            1925.1165864534712
+          ],
+          [
+            2601.57861328125,
+            1788.9971923828125
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 2893,
+        "layout_height": 4093
+      },
+      "last_modified": "2026-11-16T10:10:37",
+      "filetype": "application/pdf",
+      "languages": [
+        "kor"
+      ],
+      "page_number": 3,
+      "filename": "표샘플_어려움.pdf",
+      "parent_id": "1c2212da243e136b28843dfd92716525"
+    }
+  }
+]

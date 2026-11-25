@@ -1,0 +1,2 @@
+unstructured[pdf]>=0.18
+langchain-unstructured>=1.0

@@ -1,0 +1,3714 @@
+[
+  {
+    "page": 1,
+    "block": 0,
+    "line": 0,
+    "text": "02",
+    "font": "HCRDotum-Bold",
+    "size": 10.0,
+    "bold": true,
+    "color": "#898989",
+    "bbox": [
+      68.0,
+      43.1,
+      78.9,
+      56.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 0,
+    "line": 0,
+    "text": "  보건의료데이터 활용 가이드라인",
+    "font": "MalgunGothic",
+    "size": 7.5,
+    "bold": false,
+    "color": "#898989",
+    "bbox": [
+      78.9,
+      45.7,
+      190.8,
+      55.7
+    ]
+  },
+  {
+    "page": 1,
+    "block": 1,
+    "line": 0,
+    "text": "01",
+    "font": "HCRDotum-Bold",
+    "size": 29.0,
+    "bold": true,
+    "color": "#ffffff",
+    "bbox": [
+      101.2,
+      101.0,
+      133.1,
+      138.7
+    ]
+  },
+  {
+    "page": 1,
+    "block": 1,
+    "line": 0,
+    "text": "가이드라인 개요",
+    "font": "H2hdrM",
+    "size": 22.0,
+    "bold": false,
+    "color": "#ffffff",
+    "bbox": [
+      147.3,
+      110.7,
+      304.2,
+      132.7
+    ]
+  },
+  {
+    "page": 1,
+    "block": 3,
+    "line": 0,
+    "text": "1",
+    "font": "MalgunGothicBold",
+    "size": 16.0,
+    "bold": true,
+    "color": "#ffffff",
+    "bbox": [
+      77.1,
+      177.1,
+      86.4,
+      198.4
+    ]
+  },
+  {
+    "page": 1,
+    "block": 3,
+    "line": 1,
+    "text": "필요성 및 목적",
+    "font": "MalgunGothicBold",
+    "size": 12.0,
+    "bold": true,
+    "color": "#009c97",
+    "bbox": [
+      100.6,
+      180.1,
+      181.0,
+      196.0
+    ]
+  },
+  {
+    "page": 1,
+    "block": 6,
+    "line": 0,
+    "text": "개정된 개인정보 보호법(이하 ‘보호법’ 이라 함)이 시행(’20.8.5)됨에 따라, 데이터 활용의 핵심인 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      220.6,
+      491.8,
+      234.5
+    ]
+  },
+  {
+    "page": 1,
+    "block": 7,
+    "line": 0,
+    "text": "가명정보 활용에 대한 법적 근거 마련(제3절 특례조항 신설)",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      237.4,
+      343.9,
+      251.3
+    ]
+  },
+  {
+    "page": 1,
+    "block": 8,
+    "line": 0,
+    "text": "-",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      261.6,
+      80.8,
+      272.6
+    ]
+  },
+  {
+    "page": 1,
+    "block": 8,
+    "line": 0,
+    "text": "개인정보처리자가 개인정보를 가명처리하여 통계작성, 과학적 연구, 공익적 기록보존 등의 목적으로 ",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      85.7,
+      261.6,
+      490.5,
+      272.6
+    ]
+  },
+  {
+    "page": 1,
+    "block": 9,
+    "line": 0,
+    "text": "활용할 수 있는 기반 마련",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      85.7,
+      276.6,
+      193.0,
+      287.6
+    ]
+  },
+  {
+    "page": 1,
+    "block": 11,
+    "line": 0,
+    "text": "개인정보 보호 법령 등에서 구체적으로 정하지 않은 가명처리, 가명정보의 처리 및 결합 활용 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      304.2,
+      491.3,
+      318.1
+    ]
+  },
+  {
+    "page": 1,
+    "block": 12,
+    "line": 0,
+    "text": "등에 있어 보건의료데이터의 특수성 고려 필요",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      320.9,
+      286.5,
+      334.9
+    ]
+  },
+  {
+    "page": 1,
+    "block": 13,
+    "line": 0,
+    "text": "- 보건의료데이터의 분야",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      345.2,
+      177.6,
+      356.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 13,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      177.5,
+      345.1,
+      182.5,
+      355.1
+    ]
+  },
+  {
+    "page": 1,
+    "block": 13,
+    "line": 0,
+    "text": "유형",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      182.6,
+      345.2,
+      200.0,
+      356.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 13,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      200.0,
+      345.1,
+      205.0,
+      355.1
+    ]
+  },
+  {
+    "page": 1,
+    "block": 13,
+    "line": 0,
+    "text": "목적별 세부 방법과 절차를 제시하여 가명정보의 처리에 대한 이해를 ",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      205.0,
+      345.2,
+      490.5,
+      356.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 14,
+    "line": 0,
+    "text": "돕고, 자료 오남용 방지",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      85.7,
+      360.2,
+      182.3,
+      371.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 15,
+    "line": 0,
+    "text": "- 처리 과정 전반에 걸쳐 절차 및 거버넌스, 안전조치, 윤리적 사항 등을 정하여 정보 주체의 권익을 ",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      378.2,
+      490.5,
+      389.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 16,
+    "line": 0,
+    "text": "보호하고 안전한 개인정보 처리 도모",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      85.7,
+      393.2,
+      236.6,
+      404.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 17,
+    "line": 0,
+    "text": "2",
+    "font": "MalgunGothicBold",
+    "size": 16.0,
+    "bold": true,
+    "color": "#ffffff",
+    "bbox": [
+      77.1,
+      440.5,
+      86.4,
+      461.8
+    ]
+  },
+  {
+    "page": 1,
+    "block": 17,
+    "line": 1,
+    "text": "관련 근거",
+    "font": "MalgunGothicBold",
+    "size": 12.0,
+    "bold": true,
+    "color": "#009c97",
+    "bbox": [
+      100.6,
+      443.5,
+      152.5,
+      459.5
+    ]
+  },
+  {
+    "page": 1,
+    "block": 20,
+    "line": 0,
+    "text": "관련 법령",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      484.0,
+      127.0,
+      498.0
+    ]
+  },
+  {
+    "page": 1,
+    "block": 21,
+    "line": 0,
+    "text": "-",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      508.3,
+      80.8,
+      519.3
+    ]
+  },
+  {
+    "page": 1,
+    "block": 21,
+    "line": 0,
+    "text": "｢",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      85.7,
+      508.2,
+      90.8,
+      518.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 21,
+    "line": 0,
+    "text": "개인정보 보호법",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      90.8,
+      508.3,
+      156.8,
+      519.3
+    ]
+  },
+  {
+    "page": 1,
+    "block": 21,
+    "line": 0,
+    "text": "｣ ",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      156.8,
+      508.2,
+      165.2,
+      518.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 21,
+    "line": 0,
+    "text": "제2조(정의), 제3절 가명정보의 처리에 관한 특례",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      166.8,
+      508.3,
+      369.3,
+      519.3
+    ]
+  },
+  {
+    "page": 1,
+    "block": 22,
+    "line": 0,
+    "text": "-",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      526.3,
+      80.8,
+      537.3
+    ]
+  },
+  {
+    "page": 1,
+    "block": 22,
+    "line": 0,
+    "text": "｢",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      85.7,
+      526.2,
+      90.8,
+      536.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 22,
+    "line": 0,
+    "text": "개인정보 보호법 시행령",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      90.8,
+      526.3,
+      188.0,
+      537.3
+    ]
+  },
+  {
+    "page": 1,
+    "block": 22,
+    "line": 0,
+    "text": "｣ ",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      188.0,
+      526.2,
+      196.3,
+      536.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 22,
+    "line": 0,
+    "text": "제4장의2 가명정보의 처리에 관한 특례",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      197.9,
+      526.3,
+      360.0,
+      537.3
+    ]
+  },
+  {
+    "page": 1,
+    "block": 24,
+    "line": 0,
+    "text": "고시 등",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      553.8,
+      117.2,
+      567.8
+    ]
+  },
+  {
+    "page": 1,
+    "block": 25,
+    "line": 0,
+    "text": "-",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      578.1,
+      80.8,
+      589.1
+    ]
+  },
+  {
+    "page": 1,
+    "block": 25,
+    "line": 0,
+    "text": "｢",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      85.7,
+      578.0,
+      90.8,
+      588.0
+    ]
+  },
+  {
+    "page": 1,
+    "block": 25,
+    "line": 0,
+    "text": "가명정보의 결합 및 반출 등에 관한 고시",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      90.8,
+      578.1,
+      260.3,
+      589.1
+    ]
+  },
+  {
+    "page": 1,
+    "block": 25,
+    "line": 0,
+    "text": "｣",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      260.3,
+      578.0,
+      265.3,
+      588.0
+    ]
+  },
+  {
+    "page": 1,
+    "block": 26,
+    "line": 0,
+    "text": "-",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      596.1,
+      80.8,
+      607.1
+    ]
+  },
+  {
+    "page": 1,
+    "block": 26,
+    "line": 0,
+    "text": "｢",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      85.7,
+      596.0,
+      90.8,
+      606.0
+    ]
+  },
+  {
+    "page": 1,
+    "block": 26,
+    "line": 0,
+    "text": "가명정보 처리 가이드라인",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      90.8,
+      596.1,
+      196.7,
+      607.1
+    ]
+  },
+  {
+    "page": 1,
+    "block": 26,
+    "line": 0,
+    "text": "｣ ",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      196.7,
+      596.0,
+      205.0,
+      606.0
+    ]
+  },
+  {
+    "page": 1,
+    "block": 28,
+    "line": 0,
+    "text": "▷개인정보처리자가 법에 따른 규정을 준수한 경우 가이드라인 미준수를 사유로 처벌받지 않음, 따라서, 개인정보",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      79.4,
+      626.8,
+      476.3,
+      636.2
+    ]
+  },
+  {
+    "page": 1,
+    "block": 29,
+    "line": 0,
+    "text": "처리자는 데이터의 관련 분야 및 특수성 등을 고려하여 상황에 따라 유동적으로 처리 가능함",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      89.2,
+      639.5,
+      413.9,
+      648.9
+    ]
+  },
+  {
+    "page": 1,
+    "block": 30,
+    "line": 0,
+    "text": "    ※ 가명정보 처리 가이드라인(개인정보보호위원회(’24.2.))",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      79.4,
+      654.3,
+      297.1,
+      663.7
+    ]
+  },
+  {
+    "page": 2,
+    "block": 0,
+    "line": 0,
+    "text": "제1장",
+    "font": "MalgunGothicBold",
+    "size": 7.5,
+    "bold": true,
+    "color": "#898989",
+    "bbox": [
+      304.0,
+      46.2,
+      322.7,
+      56.2
+    ]
+  },
+  {
+    "page": 2,
+    "block": 0,
+    "line": 0,
+    "text": " | 가이드라인 개요",
+    "font": "MalgunGothic",
+    "size": 7.5,
+    "bold": false,
+    "color": "#898989",
+    "bbox": [
+      322.5,
+      46.2,
+      382.9,
+      56.2
+    ]
+  },
+  {
+    "page": 2,
+    "block": 0,
+    "line": 1,
+    "text": "03",
+    "font": "HCRDotum-Bold",
+    "size": 10.0,
+    "bold": true,
+    "color": "#898989",
+    "bbox": [
+      473.9,
+      44.5,
+      484.7,
+      57.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 1,
+    "line": 0,
+    "text": "3",
+    "font": "MalgunGothicBold",
+    "size": 16.0,
+    "bold": true,
+    "color": "#ffffff",
+    "bbox": [
+      77.1,
+      118.6,
+      86.4,
+      139.9
+    ]
+  },
+  {
+    "page": 2,
+    "block": 1,
+    "line": 1,
+    "text": "적용 범위",
+    "font": "MalgunGothicBold",
+    "size": 12.0,
+    "bold": true,
+    "color": "#009c97",
+    "bbox": [
+      100.6,
+      121.5,
+      152.5,
+      137.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 4,
+    "line": 0,
+    "text": "(우선순위)",
+    "font": "TTD8A97B99tCID",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      166.6,
+      124.9,
+      178.1
+    ]
+  },
+  {
+    "page": 2,
+    "block": 4,
+    "line": 0,
+    "text": " 보건의료 분야의 개인정보 가명처리 및 가명정보 처리에 관하여 동 가이드라인 직용",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      124.7,
+      164.1,
+      487.7,
+      178.0
+    ]
+  },
+  {
+    "page": 2,
+    "block": 6,
+    "line": 0,
+    "text": "※ 본 가이드라인에서 별도로 정하지 않은 개인정보 보호 법령 및 고시에 규정된 사항은 ",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      79.4,
+      200.1,
+      379.7,
+      209.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 6,
+    "line": 0,
+    "text": "｢",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      380.6,
+      200.0,
+      384.8,
+      208.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 6,
+    "line": 0,
+    "text": "가명정보 처리 가이드라인",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      384.8,
+      200.1,
+      472.4,
+      209.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 6,
+    "line": 0,
+    "text": "｣ ",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      472.3,
+      200.0,
+      479.4,
+      208.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 7,
+    "line": 0,
+    "text": "(개인정보보호위원회)을 준용해야 함",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      89.9,
+      212.8,
+      214.7,
+      222.2
+    ]
+  },
+  {
+    "page": 2,
+    "block": 8,
+    "line": 0,
+    "text": "  -",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      79.4,
+      228.6,
+      92.7,
+      238.0
+    ]
+  },
+  {
+    "page": 2,
+    "block": 8,
+    "line": 0,
+    "text": "또한 ",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      96.7,
+      228.6,
+      113.2,
+      238.0
+    ]
+  },
+  {
+    "page": 2,
+    "block": 8,
+    "line": 0,
+    "text": "｢",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      114.1,
+      228.5,
+      118.4,
+      237.0
+    ]
+  },
+  {
+    "page": 2,
+    "block": 8,
+    "line": 0,
+    "text": "가명정보 처리 가이드라인",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      118.0,
+      228.6,
+      202.4,
+      238.0
+    ]
+  },
+  {
+    "page": 2,
+    "block": 8,
+    "line": 0,
+    "text": "｣ ",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      202.0,
+      228.5,
+      208.8,
+      237.0
+    ]
+  },
+  {
+    "page": 2,
+    "block": 8,
+    "line": 0,
+    "text": "(개인정보보호위원회)에서 구체적으로 제시하고 있는 가명처리 및 가명정보 처리에 ",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      209.3,
+      228.6,
+      479.0,
+      238.0
+    ]
+  },
+  {
+    "page": 2,
+    "block": 9,
+    "line": 0,
+    "text": "관한 예시나 서식 등에 대해서는 개인정보처리자의 판단에 따라 가명정보 처리 과정에서 적용할 수 있음",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      96.7,
+      241.3,
+      462.6,
+      250.7
+    ]
+  },
+  {
+    "page": 2,
+    "block": 13,
+    "line": 0,
+    "text": "(적용대상)",
+    "font": "TTD8A97B99tCID",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      291.7,
+      124.9,
+      303.2
+    ]
+  },
+  {
+    "page": 2,
+    "block": 13,
+    "line": 0,
+    "text": " 의료기관, 연구자, 기업, 공공기관, 대학교 등 보건의료데이터를 처리하는 모든 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      124.7,
+      289.2,
+      491.3,
+      303.1
+    ]
+  },
+  {
+    "page": 2,
+    "block": 14,
+    "line": 0,
+    "text": "개인정보처리자",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      307.0,
+      152.9,
+      320.9
+    ]
+  },
+  {
+    "page": 2,
+    "block": 15,
+    "line": 0,
+    "text": "4",
+    "font": "MalgunGothicBold",
+    "size": 16.0,
+    "bold": true,
+    "color": "#ffffff",
+    "bbox": [
+      77.1,
+      361.6,
+      86.4,
+      382.9
+    ]
+  },
+  {
+    "page": 2,
+    "block": 15,
+    "line": 1,
+    "text": "용어 정리",
+    "font": "MalgunGothicBold",
+    "size": 12.0,
+    "bold": true,
+    "color": "#009c97",
+    "bbox": [
+      100.6,
+      364.6,
+      152.5,
+      380.6
+    ]
+  },
+  {
+    "page": 2,
+    "block": 18,
+    "line": 0,
+    "text": "개인정보: 살아있는 개인에 관한 정보로서 다음의 정보를 포함함",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      407.1,
+      364.5,
+      421.1
+    ]
+  },
+  {
+    "page": 2,
+    "block": 19,
+    "line": 0,
+    "text": "(1)",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      432.5,
+      86.9,
+      443.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 19,
+    "line": 0,
+    "text": "성명, 주민등록번호 및 영상 등을 통하여 개인을 알아볼 수 있는 정보",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      91.9,
+      432.5,
+      380.4,
+      443.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 20,
+    "line": 0,
+    "text": "(2)",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      453.5,
+      86.9,
+      464.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 20,
+    "line": 0,
+    "text": "해당 정보만으로는 특정 개인을 알아볼 수 없더라도 다른 정보와 쉽게 결합하여 알아볼 수 있는 ",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      91.9,
+      453.5,
+      490.5,
+      464.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 21,
+    "line": 0,
+    "text": "정보",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      91.9,
+      469.4,
+      109.4,
+      480.4
+    ]
+  },
+  {
+    "page": 2,
+    "block": 22,
+    "line": 0,
+    "text": "※ 이 경우 쉽게 결합할 수 있는지 여부는 다른 정보의 입수 가능성 등 개인을 알아보는 데 소요되는 시간, 비용, 기술 등을 ",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      84.1,
+      485.6,
+      490.2,
+      496.2
+    ]
+  },
+  {
+    "page": 2,
+    "block": 23,
+    "line": 0,
+    "text": "합리적으로 고려하여야 함",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      92.8,
+      497.6,
+      178.5,
+      508.2
+    ]
+  },
+  {
+    "page": 2,
+    "block": 24,
+    "line": 0,
+    "text": "(3) (1) 또는 (2)를 가명처리함으로써 원래의 상태로 복원하기 위한 추가정보의 사용",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      75.1,
+      517.4,
+      413.4,
+      528.4
+    ]
+  },
+  {
+    "page": 2,
+    "block": 24,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      413.4,
+      517.3,
+      418.4,
+      527.4
+    ]
+  },
+  {
+    "page": 2,
+    "block": 24,
+    "line": 0,
+    "text": "결합 없이는 특정 ",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      418.4,
+      517.4,
+      490.5,
+      528.4
+    ]
+  },
+  {
+    "page": 2,
+    "block": 25,
+    "line": 0,
+    "text": "개인을 알아볼 수 없도록 처리한 정보 (이하 ‘가명정보’라 함)",
+    "font": "TTD8A97B99tCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      91.1,
+      533.4,
+      343.7,
+      544.5
+    ]
+  },
+  {
+    "page": 2,
+    "block": 26,
+    "line": 0,
+    "text": "※ 개인정보에 대한 판단기준은 개인정보처리자가 보유한 정보 또는 접근 가능한 권한 등 개인정보 처리 상황에 따라 다르게 ",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      84.1,
+      549.6,
+      490.2,
+      560.2
+    ]
+  },
+  {
+    "page": 2,
+    "block": 27,
+    "line": 0,
+    "text": "판단되어야 함",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      93.0,
+      561.6,
+      139.8,
+      572.2
+    ]
+  },
+  {
+    "page": 2,
+    "block": 29,
+    "line": 0,
+    "text": "개인정보처리자: 업무를 목적으로 개인정보파일을 운용하기 위하여 스스로 또는 다른 사람을 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      589.9,
+      491.3,
+      603.9
+    ]
+  },
+  {
+    "page": 2,
+    "block": 30,
+    "line": 0,
+    "text": "통하여 개인정보를 처리하는 공공기관, 법인, 단체 및 개인 등",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      607.8,
+      350.6,
+      621.7
+    ]
+  },
+  {
+    "page": 2,
+    "block": 32,
+    "line": 0,
+    "text": "개인정보파일: 개인정보를 쉽게 검색할 수 있도록 일정한 규칙에 따라 체계적으로 배열하거나 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      641.6,
+      491.3,
+      655.6
+    ]
+  },
+  {
+    "page": 2,
+    "block": 33,
+    "line": 0,
+    "text": "구성한 개인정보의 집합물",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      659.4,
+      198.8,
+      673.4
+    ]
+  },
+  {
+    "page": 3,
+    "block": 0,
+    "line": 0,
+    "text": "04",
+    "font": "HCRDotum-Bold",
+    "size": 10.0,
+    "bold": true,
+    "color": "#898989",
+    "bbox": [
+      68.0,
+      43.1,
+      78.9,
+      56.2
+    ]
+  },
+  {
+    "page": 3,
+    "block": 0,
+    "line": 0,
+    "text": "  보건의료데이터 활용 가이드라인",
+    "font": "MalgunGothic",
+    "size": 7.5,
+    "bold": false,
+    "color": "#898989",
+    "bbox": [
+      78.9,
+      45.7,
+      190.8,
+      55.7
+    ]
+  },
+  {
+    "page": 3,
+    "block": 2,
+    "line": 0,
+    "text": "처리: 개인정보의 수집, 생성, 연계, 연동, 기록, 저장, 보유, 가공, 편집, 검색, 출력, 정정(訂正), 복구, ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      113.7,
+      491.7,
+      127.7
+    ]
+  },
+  {
+    "page": 3,
+    "block": 3,
+    "line": 0,
+    "text": "이용, 제공, 공개, 파기(破棄), 그 밖에 이와 유사한 행위",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      131.5,
+      321.7,
+      145.5
+    ]
+  },
+  {
+    "page": 3,
+    "block": 5,
+    "line": 0,
+    "text": "가명처리: 개인정보의 일부를 삭제하거나 일부 또는 전부를 대체하는 등의 방법으로 추가 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      165.4,
+      491.2,
+      179.3
+    ]
+  },
+  {
+    "page": 3,
+    "block": 6,
+    "line": 0,
+    "text": "정보(이하 ‘추가정보’라 함)가 없이는 특정 개인을 알아볼 수 없도록 처리하는 것",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      183.2,
+      432.1,
+      197.2
+    ]
+  },
+  {
+    "page": 3,
+    "block": 8,
+    "line": 0,
+    "text": "정보주체: 처리되는 정보에 의하여 알아볼 수 있는 사람으로서 그 정보의 주체가 되는 사람",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      217.0,
+      479.3,
+      230.9
+    ]
+  },
+  {
+    "page": 3,
+    "block": 10,
+    "line": 0,
+    "text": "추가정보: 개인정보의 전부 또는 일부를 대체하는 가명처리 과정에서 생성 또는 사용된 정보로서 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      250.8,
+      491.4,
+      264.8
+    ]
+  },
+  {
+    "page": 3,
+    "block": 11,
+    "line": 0,
+    "text": "특정 개인을 알아보기 위하여 사용",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      268.6,
+      229.6,
+      282.6
+    ]
+  },
+  {
+    "page": 3,
+    "block": 11,
+    "line": 0,
+    "text": "‧",
+    "font": "HCRDotum",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      228.7,
+      268.8,
+      231.7,
+      282.5
+    ]
+  },
+  {
+    "page": 3,
+    "block": 11,
+    "line": 0,
+    "text": "결합될 수 있는 정보 (알고리즘, 매핑테이블 정보, 가명처리에 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      231.4,
+      268.6,
+      491.5,
+      282.6
+    ]
+  },
+  {
+    "page": 3,
+    "block": 12,
+    "line": 0,
+    "text": "사용된 개인정보 등)",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      286.5,
+      172.0,
+      300.4
+    ]
+  },
+  {
+    "page": 3,
+    "block": 13,
+    "line": 0,
+    "text": "※ 가명처리 과정에서 생성",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      84.1,
+      306.9,
+      170.8,
+      317.5
+    ]
+  },
+  {
+    "page": 3,
+    "block": 13,
+    "line": 0,
+    "text": "･",
+    "font": "HCRDotum",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      170.2,
+      307.0,
+      174.0,
+      317.4
+    ]
+  },
+  {
+    "page": 3,
+    "block": 13,
+    "line": 0,
+    "text": "사용된 정보에 한정된다는 점에서 다른 정보와 구분됨",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      173.7,
+      306.9,
+      349.6,
+      317.5
+    ]
+  },
+  {
+    "page": 3,
+    "block": 15,
+    "line": 0,
+    "text": "결합전문기관: 보호법 제28조의3 제1항에 따라 서로 다른 개인정보처리자 간의 가명정보 결합을 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      335.3,
+      491.3,
+      349.3
+    ]
+  },
+  {
+    "page": 3,
+    "block": 16,
+    "line": 0,
+    "text": "수행하기 위해 개인정보보호위원회 또는 관계 중앙행정기관의 장이 지정하는 전문기관",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      353.1,
+      463.5,
+      367.1
+    ]
+  },
+  {
+    "page": 3,
+    "block": 18,
+    "line": 0,
+    "text": "익명정보: 시간",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      386.9,
+      148.0,
+      400.9
+    ]
+  },
+  {
+    "page": 3,
+    "block": 18,
+    "line": 0,
+    "text": "･",
+    "font": "HCRDotum",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      147.2,
+      387.1,
+      152.3,
+      400.7
+    ]
+  },
+  {
+    "page": 3,
+    "block": 18,
+    "line": 0,
+    "text": "비용",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      152.0,
+      386.9,
+      172.2,
+      400.9
+    ]
+  },
+  {
+    "page": 3,
+    "block": 18,
+    "line": 0,
+    "text": "･",
+    "font": "HCRDotum",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      171.5,
+      387.1,
+      176.6,
+      400.7
+    ]
+  },
+  {
+    "page": 3,
+    "block": 18,
+    "line": 0,
+    "text": "기술 등을 합리적으로 고려할 때 다른 정보를 사용하여도 더 이상 개인을 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      176.2,
+      386.9,
+      491.4,
+      400.9
+    ]
+  },
+  {
+    "page": 3,
+    "block": 19,
+    "line": 0,
+    "text": "알아볼 수 없는 정보",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      404.7,
+      172.9,
+      418.7
+    ]
+  },
+  {
+    "page": 3,
+    "block": 21,
+    "line": 0,
+    "text": "적정성 검토:「가명정보 처리 가이드라인」(개인정보보호위원회, ’24.2월)의 절차를 기반으로 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      438.6,
+      491.3,
+      452.5
+    ]
+  },
+  {
+    "page": 3,
+    "block": 22,
+    "line": 0,
+    "text": "사전에 정의한 가명처리 기준에 따라 적절히 가명처리가 되었는지 확인하는 절차",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      456.4,
+      437.6,
+      470.3
+    ]
+  },
+  {
+    "page": 3,
+    "block": 24,
+    "line": 0,
+    "text": "재식별: 추가정보 또는 행위자가 달리 보유하고 있는 다른 정보나 공개된 정보와의 결합 또는 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      490.2,
+      491.4,
+      504.2
+    ]
+  },
+  {
+    "page": 3,
+    "block": 25,
+    "line": 0,
+    "text": "대조",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      508.0,
+      104.0,
+      522.0
+    ]
+  },
+  {
+    "page": 3,
+    "block": 25,
+    "line": 0,
+    "text": "･",
+    "font": "HCRDotum",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      103.3,
+      508.2,
+      108.4,
+      521.9
+    ]
+  },
+  {
+    "page": 3,
+    "block": 25,
+    "line": 0,
+    "text": "비교 등을 통해 특정 개인을 알게 되거나, 알아보려 하는 상태 또는 행위",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      108.1,
+      508.0,
+      422.1,
+      522.0
+    ]
+  },
+  {
+    "page": 3,
+    "block": 27,
+    "line": 0,
+    "text": "식별 위험성: 개인정보를 가명처리하여 처리한 가명정보가 데이터 자체 또는 처리 환경의 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      541.8,
+      491.2,
+      555.8
+    ]
+  },
+  {
+    "page": 3,
+    "block": 28,
+    "line": 0,
+    "text": "위험성으로 인해 정보주체가 식별될 수 있는 위험",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      559.6,
+      300.4,
+      573.6
+    ]
+  },
+  {
+    "page": 3,
+    "block": 30,
+    "line": 0,
+    "text": "식별정보: 전체 또는 특정 인구 집단 내에서 개인을 고유하게 구별하기 위해 부여한 기호 또는 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      593.5,
+      491.4,
+      607.4
+    ]
+  },
+  {
+    "page": 3,
+    "block": 31,
+    "line": 0,
+    "text": "번호, 기관 내",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      611.3,
+      142.3,
+      625.3
+    ]
+  },
+  {
+    "page": 3,
+    "block": 31,
+    "line": 0,
+    "text": "･",
+    "font": "HCRDotum",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      141.6,
+      611.5,
+      146.7,
+      625.1
+    ]
+  },
+  {
+    "page": 3,
+    "block": 31,
+    "line": 0,
+    "text": "외에서 개인 간 상호 구별을 위해 부여한 번호, 기호 등을 통칭",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      146.3,
+      611.3,
+      417.9,
+      625.3
+    ]
+  },
+  {
+    "page": 3,
+    "block": 32,
+    "line": 0,
+    "text": "※ (예시) 개인정보 보호 법령 상 고유식별번호(주민등록번호, 여권번호, 운전면허번호, 외국인등록번호), 보험가입자번호, ",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      84.1,
+      631.7,
+      490.3,
+      642.3
+    ]
+  },
+  {
+    "page": 3,
+    "block": 33,
+    "line": 0,
+    "text": "환자번호, 이름, 웹사이트의 ID, 사원번호 등",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      94.1,
+      643.7,
+      235.7,
+      654.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 0,
+    "line": 0,
+    "text": "제1장",
+    "font": "MalgunGothicBold",
+    "size": 7.5,
+    "bold": true,
+    "color": "#898989",
+    "bbox": [
+      304.0,
+      46.2,
+      322.7,
+      56.2
+    ]
+  },
+  {
+    "page": 4,
+    "block": 0,
+    "line": 0,
+    "text": " | 가이드라인 개요",
+    "font": "MalgunGothic",
+    "size": 7.5,
+    "bold": false,
+    "color": "#898989",
+    "bbox": [
+      322.5,
+      46.2,
+      382.9,
+      56.2
+    ]
+  },
+  {
+    "page": 4,
+    "block": 0,
+    "line": 1,
+    "text": "05",
+    "font": "HCRDotum-Bold",
+    "size": 10.0,
+    "bold": true,
+    "color": "#898989",
+    "bbox": [
+      473.9,
+      44.5,
+      484.7,
+      57.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 2,
+    "line": 0,
+    "text": "통계작성: 통계란 특정 집단이나 대상 등에 관하여 작성한 수량적인 정보를 의미하여 시장조사와 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      113.7,
+      491.4,
+      127.7
+    ]
+  },
+  {
+    "page": 4,
+    "block": 3,
+    "line": 0,
+    "text": "같은 상업적 목적의 통계 처리도 포함",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      131.5,
+      248.2,
+      145.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 4,
+    "line": 0,
+    "text": "    ※ 직접(1:1) 마케팅 등을 하기 위해 특정 개인을 식별할 수 있는 형태의 통계는 해당하지 않음",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      68.0,
+      152.0,
+      387.3,
+      162.6
+    ]
+  },
+  {
+    "page": 4,
+    "block": 5,
+    "line": 0,
+    "text": "통계작성 예시",
+    "font": "TT91EAE1BFtCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#ffffff",
+    "bbox": [
+      94.4,
+      176.7,
+      151.8,
+      187.7
+    ]
+  },
+  {
+    "page": 4,
+    "block": 7,
+    "line": 0,
+    "text": "지자체가 연령에 따른 편의시설 확대를 위해 편의시설(문화센터, 도서관, 체육시설 등)의 이용 통계(위치, 방문자 수, ",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      79.4,
+      196.7,
+      478.8,
+      206.1
+    ]
+  },
+  {
+    "page": 4,
+    "block": 7,
+    "line": 1,
+    "text": "체류시간, 나이대, 성별 등)를 생성",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      79.4,
+      209.5,
+      200.3,
+      218.8
+    ]
+  },
+  {
+    "page": 4,
+    "block": 7,
+    "line": 1,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      200.3,
+      209.4,
+      204.5,
+      217.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 7,
+    "line": 1,
+    "text": "분석하여 신규 편의시설 설치 지역을 선정하고자 하는 경우",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      204.5,
+      209.5,
+      411.8,
+      218.8
+    ]
+  },
+  {
+    "page": 4,
+    "block": 11,
+    "line": 0,
+    "text": "공익적 기록보존: 공공의 이익을 위하여 지속적인 열람 가치가 있는 정보를 기록 보존하는 것",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      247.4,
+      484.3,
+      261.4
+    ]
+  },
+  {
+    "page": 4,
+    "block": 12,
+    "line": 0,
+    "text": "-",
+    "font": "HYGoThic-Medium",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      71.0,
+      273.7,
+      78.9,
+      283.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 12,
+    "line": 0,
+    "text": "처리 주제가 공공기관인 경우에만 공익적 목적이 인정되는 것은 아니며, 민간기업, 단체 등이 일반적인 ",
+    "font": "HYGoThic-Medium",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      273.7,
+      491.0,
+      283.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 13,
+    "line": 0,
+    "text": "공익을 위하여 기록을 보존하는 경우도 공익적 기록보존 목적이 인정 가능",
+    "font": "HYGoThic-Medium",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      289.7,
+      387.7,
+      299.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 14,
+    "line": 0,
+    "text": "공익적 기록보존 예시",
+    "font": "TT91EAE1BFtCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#ffffff",
+    "bbox": [
+      94.4,
+      314.6,
+      183.0,
+      325.6
+    ]
+  },
+  {
+    "page": 4,
+    "block": 16,
+    "line": 0,
+    "text": "연구소가 현대사 연구 과정에서 수집한 정보 중에서 사료가치가 있는 생존 인물에 관한 정보를 기록",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      79.4,
+      336.1,
+      402.9,
+      345.4
+    ]
+  },
+  {
+    "page": 4,
+    "block": 16,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      402.5,
+      336.0,
+      406.8,
+      344.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 16,
+    "line": 0,
+    "text": "보관하고자 하는 경우",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      406.6,
+      336.1,
+      476.7,
+      345.4
+    ]
+  },
+  {
+    "page": 4,
+    "block": 20,
+    "line": 0,
+    "text": "과학적 연구: 기술개발, 실증, 기초연구, 응용연구 및 민간 투자 연구 등 과학적 방법을 적용하는 연구",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      375.4,
+      487.7,
+      389.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 21,
+    "line": 0,
+    "text": "-",
+    "font": "HYGoThic-Medium",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      71.0,
+      401.6,
+      78.9,
+      411.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 21,
+    "line": 0,
+    "text": "과학적 연구에는 자연과학적인 연구뿐만 아니라 과학적 방법을 적용하는 역사적 연구, 공중보건 ",
+    "font": "HYGoThic-Medium",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.1,
+      401.6,
+      490.7,
+      411.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 22,
+    "line": 0,
+    "text": "분야에서 공익을 위해 시행되는 연구 등은 물론, 새로운 기술",
+    "font": "HYGoThic-Medium",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.1,
+      417.7,
+      318.2,
+      427.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 22,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      317.2,
+      416.8,
+      322.0,
+      426.6
+    ]
+  },
+  {
+    "page": 4,
+    "block": 22,
+    "line": 0,
+    "text": "제품",
+    "font": "HYGoThic-Medium",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      321.3,
+      417.7,
+      339.2,
+      427.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 22,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      338.2,
+      416.8,
+      343.0,
+      426.6
+    ]
+  },
+  {
+    "page": 4,
+    "block": 22,
+    "line": 0,
+    "text": "서비스의 연구개발 및 개선 등 산업적 ",
+    "font": "HYGoThic-Medium",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      342.3,
+      417.7,
+      491.0,
+      427.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 23,
+    "line": 0,
+    "text": "목적의 연구 포함",
+    "font": "HYGoThic-Medium",
+    "size": 9.7,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.1,
+      433.7,
+      154.3,
+      443.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 24,
+    "line": 0,
+    "text": "과학적 연구의 예시",
+    "font": "TT91EAE1BFtCID",
+    "size": 10.0,
+    "bold": false,
+    "color": "#ffffff",
+    "bbox": [
+      94.4,
+      458.6,
+      174.2,
+      469.6
+    ]
+  },
+  {
+    "page": 4,
+    "block": 26,
+    "line": 0,
+    "text": "•",
+    "font": "HaansoftBatang",
+    "size": 8.4,
+    "bold": false,
+    "color": "#8acdca",
+    "bbox": [
+      79.4,
+      481.5,
+      83.2,
+      489.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 26,
+    "line": 0,
+    "text": " 약물을 개선",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      481.4,
+      128.5,
+      490.8
+    ]
+  },
+  {
+    "page": 4,
+    "block": 26,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      128.5,
+      481.4,
+      132.7,
+      489.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 26,
+    "line": 0,
+    "text": "개발하거나, 기존 약물의 효과를 평가하기 위한 연구",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      132.7,
+      481.4,
+      316.1,
+      490.8
+    ]
+  },
+  {
+    "page": 4,
+    "block": 27,
+    "line": 0,
+    "text": "•",
+    "font": "HaansoftBatang",
+    "size": 8.4,
+    "bold": false,
+    "color": "#8acdca",
+    "bbox": [
+      79.4,
+      497.2,
+      83.2,
+      505.6
+    ]
+  },
+  {
+    "page": 4,
+    "block": 27,
+    "line": 0,
+    "text": " 의료기기를 개선",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      497.2,
+      143.3,
+      506.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 27,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      143.3,
+      497.1,
+      147.5,
+      505.6
+    ]
+  },
+  {
+    "page": 4,
+    "block": 27,
+    "line": 0,
+    "text": "개발하거나, 기존 의료기기의 효과를 평가하기 위한 연구",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      147.5,
+      497.2,
+      345.7,
+      506.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 28,
+    "line": 0,
+    "text": "•",
+    "font": "HaansoftBatang",
+    "size": 8.4,
+    "bold": false,
+    "color": "#8acdca",
+    "bbox": [
+      79.4,
+      512.9,
+      83.2,
+      521.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 28,
+    "line": 0,
+    "text": " 진단",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      512.9,
+      102.0,
+      522.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 28,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      102.0,
+      512.8,
+      106.3,
+      521.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 28,
+    "line": 0,
+    "text": "치료법을 개선",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      106.3,
+      512.9,
+      154.9,
+      522.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 28,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      154.9,
+      512.8,
+      159.2,
+      521.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 28,
+    "line": 0,
+    "text": "개발하거나, 기존 진단",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      159.1,
+      512.9,
+      236.8,
+      522.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 28,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      236.8,
+      512.8,
+      241.0,
+      521.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 28,
+    "line": 0,
+    "text": "치료법의 효과를 평가하기 위한 연구",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      241.0,
+      512.9,
+      369.0,
+      522.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 29,
+    "line": 0,
+    "text": "•",
+    "font": "HaansoftBatang",
+    "size": 8.4,
+    "bold": false,
+    "color": "#8acdca",
+    "bbox": [
+      79.4,
+      528.7,
+      83.2,
+      537.1
+    ]
+  },
+  {
+    "page": 4,
+    "block": 29,
+    "line": 0,
+    "text": " 진단",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      82.9,
+      528.7,
+      101.1,
+      538.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 29,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      101.0,
+      528.6,
+      105.3,
+      537.1
+    ]
+  },
+  {
+    "page": 4,
+    "block": 29,
+    "line": 0,
+    "text": "치료 등의 의료적 목적을 갖는 소프트웨어를 개선",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      105.2,
+      528.7,
+      272.9,
+      538.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 29,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      272.8,
+      528.6,
+      277.0,
+      537.1
+    ]
+  },
+  {
+    "page": 4,
+    "block": 29,
+    "line": 0,
+    "text": "개발하거나, 기존 의료적 목적을 갖는 소프트웨어의 효과를 ",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      277.0,
+      528.7,
+      479.0,
+      538.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 29,
+    "line": 1,
+    "text": "평가하기 위한 연구",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      86.9,
+      541.4,
+      154.6,
+      550.8
+    ]
+  },
+  {
+    "page": 4,
+    "block": 30,
+    "line": 0,
+    "text": "•",
+    "font": "HaansoftBatang",
+    "size": 8.4,
+    "bold": false,
+    "color": "#8acdca",
+    "bbox": [
+      79.4,
+      557.1,
+      83.2,
+      565.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 30,
+    "line": 0,
+    "text": " 건강 상태 모니터링, 운동지도 등의 비의료적 건강관리 목적을 갖는 소프트웨어를 개선",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      557.1,
+      381.5,
+      566.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 30,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      381.5,
+      557.0,
+      385.7,
+      565.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 30,
+    "line": 0,
+    "text": "개발하거나, 기존 비의료적 ",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      385.7,
+      557.1,
+      478.8,
+      566.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 31,
+    "line": 0,
+    "text": "건강관리 목적을 갖는 소프트웨어의 효과를 평가하기 위한 연구",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      85.7,
+      569.9,
+      307.9,
+      579.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 32,
+    "line": 0,
+    "text": "•",
+    "font": "HaansoftBatang",
+    "size": 8.4,
+    "bold": false,
+    "color": "#8acdca",
+    "bbox": [
+      79.4,
+      585.6,
+      83.2,
+      594.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 32,
+    "line": 0,
+    "text": " 특정 질환을 갖고 있거나, 특정 치료제",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      585.6,
+      218.2,
+      595.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 32,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      218.2,
+      585.5,
+      222.5,
+      594.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 32,
+    "line": 0,
+    "text": "치료법에 적합한 임상적 요건을 갖춘 환자의 수, 지역적",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      222.4,
+      585.6,
+      413.1,
+      595.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 32,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      413.0,
+      585.5,
+      417.3,
+      594.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 32,
+    "line": 0,
+    "text": "연령적 분포 등을 ",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      417.3,
+      585.6,
+      478.8,
+      595.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 32,
+    "line": 1,
+    "text": "살피는 연구, 타 질환과의 연관성을 살피는 연구",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      86.6,
+      598.3,
+      255.3,
+      607.7
+    ]
+  },
+  {
+    "page": 4,
+    "block": 33,
+    "line": 0,
+    "text": "•",
+    "font": "HaansoftBatang",
+    "size": 8.4,
+    "bold": false,
+    "color": "#8acdca",
+    "bbox": [
+      79.4,
+      614.1,
+      83.2,
+      622.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 33,
+    "line": 0,
+    "text": " 다양한 약물, 치료법, 진단법 등 상호 간의 의학적",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      614.1,
+      262.7,
+      623.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 33,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      262.6,
+      614.0,
+      266.9,
+      622.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 33,
+    "line": 0,
+    "text": "사회적 효용을 비교하는 연구",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      266.9,
+      614.1,
+      368.4,
+      623.5
+    ]
+  },
+  {
+    "page": 4,
+    "block": 34,
+    "line": 0,
+    "text": "•",
+    "font": "HaansoftBatang",
+    "size": 8.4,
+    "bold": false,
+    "color": "#8acdca",
+    "bbox": [
+      79.4,
+      629.9,
+      83.2,
+      638.2
+    ]
+  },
+  {
+    "page": 4,
+    "block": 34,
+    "line": 0,
+    "text": " 인구집단 내 건강 상태의 지역적",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      629.8,
+      200.4,
+      639.2
+    ]
+  },
+  {
+    "page": 4,
+    "block": 34,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      200.4,
+      629.7,
+      204.7,
+      638.3
+    ]
+  },
+  {
+    "page": 4,
+    "block": 34,
+    "line": 0,
+    "text": "직업적 분포 등의 편차를 살피는 등의 연구",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      204.6,
+      629.8,
+      355.9,
+      639.2
+    ]
+  },
+  {
+    "page": 4,
+    "block": 35,
+    "line": 0,
+    "text": "•",
+    "font": "HaansoftBatang",
+    "size": 8.4,
+    "bold": false,
+    "color": "#8acdca",
+    "bbox": [
+      79.4,
+      645.6,
+      83.2,
+      654.0
+    ]
+  },
+  {
+    "page": 4,
+    "block": 35,
+    "line": 0,
+    "text": " 보건의료데이터를 표준화하거나, 품질을 높이거나, 안전하게 보호하는 등 보건의료데이터를 원활히 관리하기 위한 ",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.0,
+      645.5,
+      478.7,
+      654.9
+    ]
+  },
+  {
+    "page": 4,
+    "block": 36,
+    "line": 0,
+    "text": "기술",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      87.5,
+      658.3,
+      102.3,
+      667.7
+    ]
+  },
+  {
+    "page": 4,
+    "block": 36,
+    "line": 0,
+    "text": "･",
+    "font": "HaansoftBatang",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      102.3,
+      658.2,
+      106.6,
+      666.8
+    ]
+  },
+  {
+    "page": 4,
+    "block": 36,
+    "line": 0,
+    "text": "소프트웨어를 개발하기 위한 연구",
+    "font": "TTD8A97B99tCID",
+    "size": 8.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      106.5,
+      658.3,
+      222.9,
+      667.7
+    ]
+  },
+  {
+    "page": 5,
+    "block": 0,
+    "line": 0,
+    "text": "06",
+    "font": "HCRDotum-Bold",
+    "size": 10.0,
+    "bold": true,
+    "color": "#898989",
+    "bbox": [
+      68.0,
+      43.1,
+      78.9,
+      56.2
+    ]
+  },
+  {
+    "page": 5,
+    "block": 0,
+    "line": 0,
+    "text": "  보건의료데이터 활용 가이드라인",
+    "font": "MalgunGothic",
+    "size": 7.5,
+    "bold": false,
+    "color": "#898989",
+    "bbox": [
+      78.9,
+      45.7,
+      190.8,
+      55.7
+    ]
+  },
+  {
+    "page": 5,
+    "block": 2,
+    "line": 0,
+    "text": "결합키: 결합 대상 가명정보의 일부로서 해당 정보만으로는 특정 개인을 알아볼 수 없으나 다른 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      113.7,
+      491.4,
+      127.7
+    ]
+  },
+  {
+    "page": 5,
+    "block": 3,
+    "line": 0,
+    "text": "결합대상정보와 구별할 수 있도록 조치한 정보로서, 서로 다른 가명정보를 결합할 때 매개체로 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      131.5,
+      491.4,
+      145.5
+    ]
+  },
+  {
+    "page": 5,
+    "block": 4,
+    "line": 0,
+    "text": "이용되는 값",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      149.4,
+      136.8,
+      163.3
+    ]
+  },
+  {
+    "page": 5,
+    "block": 6,
+    "line": 0,
+    "text": "결합키연계정보: 결합키가 동일한 정보에 관한 가명정보를 결합할 수 있도록 서로 다른 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      183.2,
+      491.3,
+      197.2
+    ]
+  },
+  {
+    "page": 5,
+    "block": 7,
+    "line": 0,
+    "text": "결합신청자의 결합키를 연계한 정보",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      201.0,
+      241.3,
+      215.0
+    ]
+  },
+  {
+    "page": 5,
+    "block": 9,
+    "line": 0,
+    "text": "결합대상정보: 결합신청자가 결합을 위해 결합전문기관에 제공하는 가명정보에서 결합키를 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      234.8,
+      491.3,
+      248.8
+    ]
+  },
+  {
+    "page": 5,
+    "block": 10,
+    "line": 0,
+    "text": "제외한 정보",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      252.6,
+      136.8,
+      266.6
+    ]
+  },
+  {
+    "page": 5,
+    "block": 12,
+    "line": 0,
+    "text": "결합정보: 결합전문기관을 통해 결합대상정보를 결합하여 생성된 정보",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      284.8,
+      390.4,
+      298.8
+    ]
+  },
+  {
+    "page": 5,
+    "block": 14,
+    "line": 0,
+    "text": "반출정보: 결합전문기관에서 결합된 결합정보 중 결합전문기관의 심사를 통해 반출된 정보",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      317.1,
+      478.8,
+      331.0
+    ]
+  },
+  {
+    "page": 5,
+    "block": 16,
+    "line": 0,
+    "text": "반복결합: 시계열 분석 등을 위해 가명정보 결합을 반복하는 결합",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      349.3,
+      368.0,
+      363.2
+    ]
+  },
+  {
+    "page": 5,
+    "block": 18,
+    "line": 0,
+    "text": "반복결합연결정보: 반복결합을 통해 반출된 반출정보의 반복적인 분석을 위해 필요한 정보로, ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      381.5,
+      491.4,
+      395.5
+    ]
+  },
+  {
+    "page": 5,
+    "block": 19,
+    "line": 0,
+    "text": "반출시 해당 정보를 포함하여 반출",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      399.3,
+      235.0,
+      413.3
+    ]
+  },
+  {
+    "page": 5,
+    "block": 21,
+    "line": 0,
+    "text": "결합신청자: 가명정보의 결합을 신청하는 개인정보처리자 등",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      431.5,
+      347.9,
+      445.5
+    ]
+  },
+  {
+    "page": 5,
+    "block": 22,
+    "line": 0,
+    "text": "※ 가명정보를 제공하거나 결합된 정보를 이용하는 자(공공기관, 법인, 단체, 개인 등)를 모두 포함",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      84.1,
+      452.0,
+      399.2,
+      462.6
+    ]
+  },
+  {
+    "page": 5,
+    "block": 24,
+    "line": 0,
+    "text": "결합키관리기관: 보호법 시행령 제29조의3 제2항에 따라 특정 개인을 알아볼 수 없도록 가명정보의 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      480.4,
+      491.6,
+      494.3
+    ]
+  },
+  {
+    "page": 5,
+    "block": 25,
+    "line": 0,
+    "text": "안전한 결합을 지원(결합키연계정보를 생성하여 결합전문기관에 제공하는 등)하는 업무를 하는 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      498.2,
+      491.6,
+      512.2
+    ]
+  },
+  {
+    "page": 5,
+    "block": 26,
+    "line": 0,
+    "text": "한국인터넷진흥원 또는 개인정보보호위원회가 지정하여 고시하는 기관",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      516.0,
+      394.6,
+      530.0
+    ]
+  },
+  {
+    "page": 5,
+    "block": 28,
+    "line": 0,
+    "text": "폐쇄분석환경: 연구자 등 데이터를 활용하는 자가 가명정보를 안전하게 처리(활용)할 수 있도록 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      548.2,
+      491.4,
+      562.2
+    ]
+  },
+  {
+    "page": 5,
+    "block": 29,
+    "line": 0,
+    "text": "정부, 데이터 보유기관, 데이터 활용기관 등이 마련한 기술적",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      566.1,
+      338.4,
+      580.0
+    ]
+  },
+  {
+    "page": 5,
+    "block": 29,
+    "line": 0,
+    "text": "･",
+    "font": "HCRDotum",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      337.6,
+      566.2,
+      342.7,
+      579.9
+    ]
+  },
+  {
+    "page": 5,
+    "block": 29,
+    "line": 0,
+    "text": "관리적",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      342.1,
+      566.1,
+      371.9,
+      580.0
+    ]
+  },
+  {
+    "page": 5,
+    "block": 29,
+    "line": 0,
+    "text": "･",
+    "font": "HCRDotum",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      371.0,
+      566.2,
+      376.1,
+      579.9
+    ]
+  },
+  {
+    "page": 5,
+    "block": 29,
+    "line": 0,
+    "text": "물리적 보호조치가 적용된 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      375.5,
+      566.1,
+      491.3,
+      580.0
+    ]
+  },
+  {
+    "page": 5,
+    "block": 30,
+    "line": 0,
+    "text": "폐쇄 공간",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      583.9,
+      127.0,
+      597.8
+    ]
+  },
+  {
+    "page": 5,
+    "block": 32,
+    "line": 0,
+    "text": "인간대상연구: 생명윤리법 제2조제2호에서 규정한 것으로, 사람을 대상으로 물리적으로 개입하거나 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      616.1,
+      491.4,
+      630.1
+    ]
+  },
+  {
+    "page": 5,
+    "block": 33,
+    "line": 0,
+    "text": "의사소통, 대인 접촉 등의 상호작용을 통하여 수행하는 연구 또는 개인을 식별할 수 있는 정보를 ",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      633.9,
+      491.4,
+      647.9
+    ]
+  },
+  {
+    "page": 5,
+    "block": 34,
+    "line": 0,
+    "text": "이용하는 연구로서 보건복지부령으로 정하는 연구",
+    "font": "MalgunGothic",
+    "size": 10.5,
+    "bold": false,
+    "color": "#000000",
+    "bbox": [
+      83.8,
+      651.7,
+      303.3,
+      665.7
+    ]
+  },
+  {
+    "page": 5,
+    "block": 35,
+    "line": 0,
+    "text": "※ (참조) 「생명윤리 및 안전에 관한 법률」 제2조제1호, 동법 시행규칙 제2조제1항",
+    "font": "MalgunGothic",
+    "size": 7.9,
+    "bold": false,
+    "color": "#213765",
+    "bbox": [
+      84.1,
+      672.2,
+      349.8,
+      682.8
+    ]
+  }
+]

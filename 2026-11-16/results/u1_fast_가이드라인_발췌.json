@@ -1,0 +1,4707 @@
+[
+  {
+    "type": "Header",
+    "element_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8",
+    "text": "02 보건의료데이터 활용 가이드라인",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            68.04,
+            46.14889999999991
+          ],
+          [
+            68.04,
+            56.16890000000001
+          ],
+          [
+            190.812,
+            56.16890000000001
+          ],
+          [
+            190.812,
+            46.14889999999991
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "714d2f8d8c8f4cfb66df3b6bd2fb3edb",
+    "text": "01 가이드라인 개요",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            101.22,
+            109.72969999999998
+          ],
+          [
+            101.22,
+            138.7097
+          ],
+          [
+            304.17928800000004,
+            138.7097
+          ],
+          [
+            304.17928800000004,
+            109.72969999999998
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "6de7c0accb40ae09339fd0bab17ab0ae",
+    "text": "1 필요성 및 목적",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            77.1,
+            182.34511999999995
+          ],
+          [
+            77.1,
+            198.36511999999993
+          ],
+          [
+            181.02960000000002,
+            198.36511999999993
+          ],
+          [
+            181.02960000000002,
+            182.34511999999995
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "6bf03b4c6074ade8de0a181589c7920a",
+    "text": "개정된 개인정보 보호법(이하 ‘보호법’ 이라 함)이 시행(’20.8.5)됨에 따라, 데이터 활용의 핵심인",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            224.0347999999999
+          ],
+          [
+            83.82,
+            234.5347999999999
+          ],
+          [
+            491.75129999999984,
+            234.5347999999999
+          ],
+          [
+            491.75129999999984,
+            224.0347999999999
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "d56380cf39a8e08c248041206524ade3",
+    "text": "가명정보 활용에 대한 법적 근거 마련(제3절 특례조항 신설)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            240.83479999999997
+          ],
+          [
+            83.82,
+            251.33479999999997
+          ],
+          [
+            343.91759999999994,
+            251.33479999999997
+          ],
+          [
+            343.91759999999994,
+            240.83479999999997
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "0f30dba39f530f0e3ec2999c79a5a9ea",
+    "text": "개인정보처리자가 개인정보를 가명처리하여 통계작성, 과학적 연구, 공익적 기록보존 등의 목적으로",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.06,
+            262.5892
+          ],
+          [
+            75.06,
+            272.6092
+          ],
+          [
+            490.5352920000003,
+            272.6092
+          ],
+          [
+            490.5352920000003,
+            262.5892
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "d56380cf39a8e08c248041206524ade3"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "a17cf16b5c164b275ed2fdde4f1bf0bb",
+    "text": "활용할 수 있는 기반 마련",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            85.740318,
+            277.58914
+          ],
+          [
+            85.740318,
+            287.60913999999997
+          ],
+          [
+            193.00141199999996,
+            287.60913999999997
+          ],
+          [
+            193.00141199999996,
+            277.58914
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "02c5a494336141eaee6f2b12b48d49ce",
+    "text": "개인정보 보호 법령 등에서 구체적으로 정하지 않은 가명처리, 가명정보의 처리 및 결합 활용",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.04,
+            307.6147
+          ],
+          [
+            83.04,
+            318.1147
+          ],
+          [
+            491.3030999999998,
+            318.1147
+          ],
+          [
+            491.3030999999998,
+            307.6147
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a17cf16b5c164b275ed2fdde4f1bf0bb"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "3c284a9a639cd9b947b08e4aa3134f19",
+    "text": "등에 있어 보건의료데이터의 특수성 고려 필요",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.04,
+            324.35485
+          ],
+          [
+            83.04,
+            334.85485
+          ],
+          [
+            286.45860000000005,
+            334.85485
+          ],
+          [
+            286.45860000000005,
+            324.35485
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a17cf16b5c164b275ed2fdde4f1bf0bb"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "dcc47f8b9245994b2cd2ce5835cddcc6",
+    "text": "보건의료데이터의 분야･유형･목적별 세부 방법과 절차를 제시하여 가명정보의 처리에 대한 이해를",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.06,
+            345.07701999999995
+          ],
+          [
+            75.06,
+            356.18919999999997
+          ],
+          [
+            490.47316800000016,
+            356.18919999999997
+          ],
+          [
+            490.47316800000016,
+            345.07701999999995
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a17cf16b5c164b275ed2fdde4f1bf0bb"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "f1f444d4221b31a823e7b991e556e878",
+    "text": "돕고, 자료 오남용 방지",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            85.73931600000003,
+            361.16913999999997
+          ],
+          [
+            85.73931600000003,
+            371.18913999999995
+          ],
+          [
+            182.26498200000003,
+            371.18913999999995
+          ],
+          [
+            182.26498200000003,
+            361.16913999999997
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "02bbec470cc2b7bb45c02631aa866be9",
+    "text": "처리 과정 전반에 걸쳐 절차 및 거버넌스, 안전조치, 윤리적 사항 등을 정하여 정보 주체의 권익을",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.05899800000003,
+            379.169068
+          ],
+          [
+            75.05899800000003,
+            389.18906799999996
+          ],
+          [
+            490.4881980000001,
+            389.18906799999996
+          ],
+          [
+            490.4881980000001,
+            379.169068
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "f1f444d4221b31a823e7b991e556e878"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "9cb5d24c0d5b62917aa0dda8e7f4d1a3",
+    "text": "보호하고 안전한 개인정보 처리 도모",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            85.73931600000003,
+            394.16900799999996
+          ],
+          [
+            85.73931600000003,
+            404.18900799999994
+          ],
+          [
+            236.56135799999996,
+            404.18900799999994
+          ],
+          [
+            236.56135799999996,
+            394.16900799999996
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "f1f444d4221b31a823e7b991e556e878"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "c79c14b955f59695807adcf5630fd5ab",
+    "text": "2 관련 근거",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            77.1,
+            445.80502
+          ],
+          [
+            77.1,
+            461.82502
+          ],
+          [
+            152.5248,
+            461.82502
+          ],
+          [
+            152.5248,
+            445.80502
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "90711dfadc35b7873d95b0dec48a7171",
+    "text": "관련 법령",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            487.4947
+          ],
+          [
+            83.82,
+            497.9947
+          ],
+          [
+            127.02435,
+            497.9947
+          ],
+          [
+            127.02435,
+            487.4947
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "209cfabeb6ef9a8139ca8e44d45783c3",
+    "text": "｢개인정보 보호법｣ 제2조(정의), 제3절 가명정보의 처리에 관한 특례",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.06,
+            508.21702
+          ],
+          [
+            75.06,
+            519.3292
+          ],
+          [
+            369.27225000000004,
+            519.3292
+          ],
+          [
+            369.27225000000004,
+            508.21702
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "90711dfadc35b7873d95b0dec48a7171"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "20d118e1269bc2dd227922de1d04f1f3",
+    "text": "｢개인정보 보호법 시행령｣ 제4장의2 가명정보의 처리에 관한 특례",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.06000000000002,
+            526.216948
+          ],
+          [
+            75.06000000000002,
+            537.329128
+          ],
+          [
+            360.03681600000004,
+            537.329128
+          ],
+          [
+            360.03681600000004,
+            526.216948
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "90711dfadc35b7873d95b0dec48a7171"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "5ad7d856872af97ba82f3114664a5f14",
+    "text": "고시 등",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            557.2746999999999
+          ],
+          [
+            83.82,
+            567.7746999999999
+          ],
+          [
+            117.24465,
+            567.7746999999999
+          ],
+          [
+            117.24465,
+            557.2746999999999
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "5ecbffb3d3eb97e866b857adc0c819b0",
+    "text": "｢가명정보의 결합 및 반출 등에 관한 고시｣",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.06,
+            577.99702
+          ],
+          [
+            75.06,
+            589.1092
+          ],
+          [
+            265.29070199999995,
+            589.1092
+          ],
+          [
+            265.29070199999995,
+            577.99702
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "5ad7d856872af97ba82f3114664a5f14"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "5433cad29c58baf1850946dbef4e67ac",
+    "text": "｢가명정보 처리 가이드라인｣",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.06100199999997,
+            595.996948
+          ],
+          [
+            75.06100199999997,
+            607.109128
+          ],
+          [
+            204.99835799999994,
+            607.109128
+          ],
+          [
+            204.99835799999994,
+            595.996948
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "5ad7d856872af97ba82f3114664a5f14"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "cc53914bc8072c760bfd3e4b8cd6ed92",
+    "text": "▷ 개인정보처리자가 법에 따른 규정을 준수한 경우 가이드라인 미준수를 사유로 처벌받지 않음, 따라서, 개인정보",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            627.6742
+          ],
+          [
+            79.38,
+            636.1942
+          ],
+          [
+            476.26801199999943,
+            636.1942
+          ],
+          [
+            476.26801199999943,
+            627.6742
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "5ad7d856872af97ba82f3114664a5f14"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "8073b6e5d48c0c2254c20de9d007f347",
+    "text": "처리자는 데이터의 관련 분야 및 특수성 등을 고려하여 상황에 따라 유동적으로 처리 가능함",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            89.160108,
+            640.39456
+          ],
+          [
+            89.160108,
+            648.9145599999999
+          ],
+          [
+            413.8675319999998,
+            648.9145599999999
+          ],
+          [
+            413.8675319999998,
+            640.39456
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "5ad7d856872af97ba82f3114664a5f14"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "b4ae6d8204c076e72f6e25b95e8b15ff",
+    "text": "※ 가명정보 처리 가이드라인(개인정보보호위원회(’24.2.))",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            655.154608
+          ],
+          [
+            79.38,
+            663.674608
+          ],
+          [
+            297.11882399999985,
+            663.674608
+          ],
+          [
+            297.11882399999985,
+            655.154608
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 1,
+      "filetype": "application/pdf",
+      "parent_id": "a8f6cb77f94e5ccd11eaff767b5f4bd8"
+    }
+  },
+  {
+    "type": "Header",
+    "element_id": "e54d54f18058bccdb8d7443f1a34131a",
+    "text": "제1장 | 가이드라인 개요",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            304.02,
+            48.71180000000004
+          ],
+          [
+            304.02,
+            56.21180000000004
+          ],
+          [
+            382.86675,
+            56.21180000000004
+          ],
+          [
+            382.86675,
+            48.71180000000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "39ef2239ae7e5e9ee47ed6ad026e0d21",
+    "text": "3 적용 범위",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            77.1,
+            123.84511999999995
+          ],
+          [
+            77.1,
+            139.86511999999993
+          ],
+          [
+            152.5248,
+            139.86511999999993
+          ],
+          [
+            152.5248,
+            123.84511999999995
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "3c9aacb329c71274d763966966e1579c",
+    "text": "(우선순위) 보건의료 분야의 개인정보 가명처리 및 가명정보 처리에 관하여 동 가이드라인 직용",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            167.51479999999992
+          ],
+          [
+            83.82,
+            178.10929999999996
+          ],
+          [
+            487.6626000000001,
+            178.10929999999996
+          ],
+          [
+            487.6626000000001,
+            167.51479999999992
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "39ef2239ae7e5e9ee47ed6ad026e0d21"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "87d11fa8b0187cfd59ea803396ae7759",
+    "text": "※ 본 가이드라인에서 별도로 정하지 않은 개인정보 보호 법령 및 고시에 규정된 사항은 ｢가명정보 처리 가이드라인｣",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            200.02552000000003
+          ],
+          [
+            79.38,
+            209.4742
+          ],
+          [
+            479.3573639999999,
+            209.4742
+          ],
+          [
+            479.3573639999999,
+            200.02552000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "39ef2239ae7e5e9ee47ed6ad026e0d21"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "62aba2446e4e28b10642d9faf5d0c43a",
+    "text": "(개인정보보호위원회)을 준용해야 함",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            89.94054,
+            213.67456000000004
+          ],
+          [
+            89.94054,
+            222.19456000000002
+          ],
+          [
+            214.7295719999999,
+            222.19456000000002
+          ],
+          [
+            214.7295719999999,
+            213.67456000000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "a031ddd51ca18510f2dd6a0a85b07af0",
+    "text": "또한 ｢가명정보 처리 가이드라인｣ (개인정보보호위원회)에서 구체적으로 제시하고 있는 가명처리 및 가명정보 처리에 관한 예시나 서식 등에 대해서는 개인정보처리자의 판단에 따라 가명정보 처리 과정에서 적용할 수 있음",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.380852,
+            228.52577200000007
+          ],
+          [
+            79.380852,
+            250.69481200000007
+          ],
+          [
+            479.04127199999965,
+            250.69481200000007
+          ],
+          [
+            479.04127199999965,
+            228.52577200000007
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "62aba2446e4e28b10642d9faf5d0c43a"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "ab0640c761a09456f417db30c6880ef6",
+    "text": "(적용대상) 의료기관, 연구자, 기업, 공공기관, 대학교 등 보건의료데이터를 처리하는 모든",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            292.6147
+          ],
+          [
+            83.82,
+            303.2092
+          ],
+          [
+            491.30190000000005,
+            303.2092
+          ],
+          [
+            491.30190000000005,
+            292.6147
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "47b4d98fd339908ab06ab4af4f6de646",
+    "text": "개인정보처리자",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            310.43425
+          ],
+          [
+            83.82,
+            320.93425
+          ],
+          [
+            152.8785,
+            320.93425
+          ],
+          [
+            152.8785,
+            310.43425
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "7fa68f17bf069cf682b753c009aa2fd3",
+    "text": "4 용어 정리",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            77.1,
+            366.90502000000004
+          ],
+          [
+            77.1,
+            382.92502
+          ],
+          [
+            152.5248,
+            382.92502
+          ],
+          [
+            152.5248,
+            366.90502000000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "de2409d34d861ebe1e2d30baefe884bd",
+    "text": "개인정보: 살아있는 개인에 관한 정보로서 다음의 정보를 포함함",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            410.57480000000004
+          ],
+          [
+            83.82,
+            421.07480000000004
+          ],
+          [
+            364.5312,
+            421.07480000000004
+          ],
+          [
+            364.5312,
+            410.57480000000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "0b621669aac5212d1355b6a9f3a9015c",
+    "text": "(1) 성명, 주민등록번호 및 영상 등을 통하여 개인을 알아볼 수 있는 정보",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.06,
+            433.46930000000003
+          ],
+          [
+            75.06,
+            443.4893
+          ],
+          [
+            380.3874360000001,
+            443.4893
+          ],
+          [
+            380.3874360000001,
+            433.46930000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "de2409d34d861ebe1e2d30baefe884bd"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "3c7e6f56ae27efe2c17a77cd98144ca1",
+    "text": "(2) 해당 정보만으로는 특정 개인을 알아볼 수 없더라도 다른 정보와 쉽게 결합하여 알아볼 수 있는",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.06,
+            454.469216
+          ],
+          [
+            75.06,
+            464.489216
+          ],
+          [
+            490.53729599999997,
+            464.489216
+          ],
+          [
+            490.53729599999997,
+            454.469216
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "de2409d34d861ebe1e2d30baefe884bd"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "1f5ff14a9289ce0bf37ad462b1e0e584",
+    "text": "정보",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            91.919652,
+            470.429072
+          ],
+          [
+            91.919652,
+            480.449072
+          ],
+          [
+            109.35745800000001,
+            480.449072
+          ],
+          [
+            109.35745800000001,
+            470.429072
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "a81a7cdb75d812983b7bbb053f8faac0",
+    "text": "※ 이 경우 쉽게 결합할 수 있는지 여부는 다른 정보의 입수 가능성 등 개인을 알아보는 데 소요되는 시간, 비용, 기술 등을",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            84.06,
+            488.20738
+          ],
+          [
+            84.06,
+            496.18738
+          ],
+          [
+            490.17006585,
+            496.18738
+          ],
+          [
+            490.17006585,
+            488.20738
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "1f5ff14a9289ce0bf37ad462b1e0e584"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "7864e9de560ac0dafcf6ed9ec0f5fc88",
+    "text": "합리적으로 고려하여야 함",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            92.8194365,
+            500.20770400000004
+          ],
+          [
+            92.8194365,
+            508.18770400000005
+          ],
+          [
+            178.54817580000002,
+            508.18770400000005
+          ],
+          [
+            178.54817580000002,
+            500.20770400000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "03012318b0448ece1f6e205a6f99abaf",
+    "text": "(3) (1) 또는 (2)를 가명처리함으로써 원래의 상태로 복원하기 위한 추가정보의 사용･결합 없이는 특정",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            75.06,
+            517.3370199999999
+          ],
+          [
+            75.06,
+            528.4492
+          ],
+          [
+            490.528278,
+            528.4492
+          ],
+          [
+            490.528278,
+            517.3370199999999
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "7864e9de560ac0dafcf6ed9ec0f5fc88"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "99df417f22246dfae573ebc985cf3709",
+    "text": "개인을 알아볼 수 없도록 처리한 정보 (이하 ‘가명정보’라 함)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            91.07997599999999,
+            534.4491760000001
+          ],
+          [
+            91.07997599999999,
+            544.4691760000001
+          ],
+          [
+            343.73527800000005,
+            544.4691760000001
+          ],
+          [
+            343.73527800000005,
+            534.4491760000001
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "7864e9de560ac0dafcf6ed9ec0f5fc88"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "287ce89ca123470241d60d91f75d75c1",
+    "text": "※ 개인정보에 대한 판단기준은 개인정보처리자가 보유한 정보 또는 접근 가능한 권한 등 개인정보 처리 상황에 따라 다르게",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            84.06,
+            552.22738
+          ],
+          [
+            84.06,
+            560.2073800000001
+          ],
+          [
+            490.2229858,
+            560.2073800000001
+          ],
+          [
+            490.2229858,
+            552.22738
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "7864e9de560ac0dafcf6ed9ec0f5fc88"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "773806aaa0bc6a153f4d163907357fa2",
+    "text": "판단되어야 함",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            93.00031214999996,
+            564.227704
+          ],
+          [
+            93.00031214999996,
+            572.207704
+          ],
+          [
+            139.78391749999997,
+            572.207704
+          ],
+          [
+            139.78391749999997,
+            564.227704
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "02e7a0ffc30a7d799270bf3aaa86f673",
+    "text": "개인정보처리자: 업무를 목적으로 개인정보파일을 운용하기 위하여 스스로 또는 다른 사람을",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            593.3947000000001
+          ],
+          [
+            83.82,
+            603.8947000000001
+          ],
+          [
+            491.28824999999983,
+            603.8947000000001
+          ],
+          [
+            491.28824999999983,
+            593.3947000000001
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "65a8891285c725cdf8d976ba9a3b3e41",
+    "text": "통하여 개인정보를 처리하는 공공기관, 법인, 단체 및 개인 등",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            611.21425
+          ],
+          [
+            83.82,
+            621.71425
+          ],
+          [
+            350.56095,
+            621.71425
+          ],
+          [
+            350.56095,
+            611.21425
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "02e7a0ffc30a7d799270bf3aaa86f673"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "ad228e4b1a16da637025577545b665de",
+    "text": "개인정보파일: 개인정보를 쉽게 검색할 수 있도록 일정한 규칙에 따라 체계적으로 배열하거나",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            645.0547
+          ],
+          [
+            83.82,
+            655.5547
+          ],
+          [
+            491.3123999999998,
+            655.5547
+          ],
+          [
+            491.3123999999998,
+            645.0547
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "e54d54f18058bccdb8d7443f1a34131a"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "edbe21b46ed2ae377ec5ec0c0517358a",
+    "text": "구성한 개인정보의 집합물",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            662.87425
+          ],
+          [
+            83.82,
+            673.37425
+          ],
+          [
+            198.78764999999999,
+            673.37425
+          ],
+          [
+            198.78764999999999,
+            662.87425
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf",
+      "parent_id": "ad228e4b1a16da637025577545b665de"
+    }
+  },
+  {
+    "type": "Header",
+    "element_id": "0f813a97dde89a29fd3b7e86155b881a",
+    "text": "03",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            473.88,
+            47.52889999999991
+          ],
+          [
+            473.88,
+            57.5489
+          ],
+          [
+            484.730658,
+            57.5489
+          ],
+          [
+            484.730658,
+            47.52889999999991
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 2,
+      "filetype": "application/pdf"
+    }
+  },
+  {
+    "type": "Header",
+    "element_id": "e25ce10d932193053c1f73c8ad1711bc",
+    "text": "04 보건의료데이터 활용 가이드라인",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            68.04,
+            46.14889999999991
+          ],
+          [
+            68.04,
+            56.16890000000001
+          ],
+          [
+            190.812,
+            56.16890000000001
+          ],
+          [
+            190.812,
+            46.14889999999991
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "a1637baa62adf28f83b6a462c4afe63b",
+    "text": "처리: 개인정보의 수집, 생성, 연계, 연동, 기록, 저장, 보유, 가공, 편집, 검색, 출력, 정정(訂正), 복구,",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            117.1748
+          ],
+          [
+            83.82,
+            127.6748
+          ],
+          [
+            491.6799,
+            127.6748
+          ],
+          [
+            491.6799,
+            117.1748
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e25ce10d932193053c1f73c8ad1711bc"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "7ac9f8ff42f7c95598c7a72be7804d22",
+    "text": "이용, 제공, 공개, 파기(破棄), 그 밖에 이와 유사한 행위",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82105000000001,
+            134.99435000000005
+          ],
+          [
+            83.82105000000001,
+            145.49435000000005
+          ],
+          [
+            321.7111500000001,
+            145.49435000000005
+          ],
+          [
+            321.7111500000001,
+            134.99435000000005
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e25ce10d932193053c1f73c8ad1711bc"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "4675414ce097e393486848c53d0fa84f",
+    "text": "가명처리: 개인정보의 일부를 삭제하거나 일부 또는 전부를 대체하는 등의 방법으로 추가",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            168.83479999999997
+          ],
+          [
+            83.82,
+            179.33479999999997
+          ],
+          [
+            491.2347,
+            179.33479999999997
+          ],
+          [
+            491.2347,
+            168.83479999999997
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "7ac9f8ff42f7c95598c7a72be7804d22"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "3b3f94acb79ce22f5d6d650af7c0b701",
+    "text": "정보(이하 ‘추가정보’라 함)가 없이는 특정 개인을 알아볼 수 없도록 처리하는 것",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            186.65435000000002
+          ],
+          [
+            83.82,
+            197.15435000000002
+          ],
+          [
+            432.05039999999997,
+            197.15435000000002
+          ],
+          [
+            432.05039999999997,
+            186.65435000000002
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "7ac9f8ff42f7c95598c7a72be7804d22"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "16747f306f675b039635258dd560f62e",
+    "text": "정보주체: 처리되는 정보에 의하여 알아볼 수 있는 사람으로서 그 정보의 주체가 되는 사람",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            220.4346999999999
+          ],
+          [
+            83.82,
+            230.9346999999999
+          ],
+          [
+            479.33294999999987,
+            230.9346999999999
+          ],
+          [
+            479.33294999999987,
+            220.4346999999999
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "7ac9f8ff42f7c95598c7a72be7804d22"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "dcc657d9725abcf640f529e4a8ccf129",
+    "text": "추가정보: 개인정보의 전부 또는 일부를 대체하는 가명처리 과정에서 생성 또는 사용된 정보로서",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            254.2747
+          ],
+          [
+            83.82,
+            264.7747
+          ],
+          [
+            491.43315000000007,
+            264.7747
+          ],
+          [
+            491.43315000000007,
+            254.2747
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "7ac9f8ff42f7c95598c7a72be7804d22"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "4133474293e19861f608f296b3c04beb",
+    "text": "특정 개인을 알아보기 위하여 사용‧결합될 수 있는 정보 (알고리즘, 매핑테이블 정보, 가명처리에",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            271.97875
+          ],
+          [
+            83.82,
+            282.59425
+          ],
+          [
+            491.4825000000002,
+            282.59425
+          ],
+          [
+            491.4825000000002,
+            271.97875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "7ac9f8ff42f7c95598c7a72be7804d22"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "398c00400f24414141c556b83fb28a45",
+    "text": "사용된 개인정보 등)",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82000000000002,
+            289.9138
+          ],
+          [
+            83.82000000000002,
+            300.4138
+          ],
+          [
+            171.99060000000003,
+            300.4138
+          ],
+          [
+            171.99060000000003,
+            289.9138
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e25ce10d932193053c1f73c8ad1711bc"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "c765fafbd14f8009cbf73642135ea9fd",
+    "text": "※ 가명처리 과정에서 생성･사용된 정보에 한정된다는 점에서 다른 정보와 구분됨",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            84.06,
+            309.4396
+          ],
+          [
+            84.06,
+            317.50738
+          ],
+          [
+            349.6264499,
+            317.50738
+          ],
+          [
+            349.6264499,
+            309.4396
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "398c00400f24414141c556b83fb28a45"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "5c89cc4334f09da5a7f1c5ebb169d72f",
+    "text": "결합전문기관: 보호법 제28조의3 제1항에 따라 서로 다른 개인정보처리자 간의 가명정보 결합을",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            338.7547
+          ],
+          [
+            83.82,
+            349.2547
+          ],
+          [
+            491.3355000000001,
+            349.2547
+          ],
+          [
+            491.3355000000001,
+            338.7547
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e25ce10d932193053c1f73c8ad1711bc"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "544e6b08a6d018de77090cda73e41cdf",
+    "text": "수행하기 위해 개인정보보호위원회 또는 관계 중앙행정기관의 장이 지정하는 전문기관",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            356.57425
+          ],
+          [
+            83.82,
+            367.07425
+          ],
+          [
+            463.4716499999999,
+            367.07425
+          ],
+          [
+            463.4716499999999,
+            356.57425
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e25ce10d932193053c1f73c8ad1711bc"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "fbcaf957b4d0cd346602bdced781e0ec",
+    "text": "익명정보: 시간･비용･기술 등을 합리적으로 고려할 때 다른 정보를 사용하여도 더 이상 개인을",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            390.23920000000004
+          ],
+          [
+            83.82,
+            400.85470000000004
+          ],
+          [
+            491.4142500000001,
+            400.85470000000004
+          ],
+          [
+            491.4142500000001,
+            390.23920000000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "544e6b08a6d018de77090cda73e41cdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "c5672e53b2d56ce2cf2fd4db52259e2d",
+    "text": "알아볼 수 없는 정보",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.81895,
+            408.17425000000003
+          ],
+          [
+            83.81895,
+            418.67425000000003
+          ],
+          [
+            172.9314,
+            418.67425000000003
+          ],
+          [
+            172.9314,
+            408.17425000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "544e6b08a6d018de77090cda73e41cdf"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "c18a65e8123acd640d6b4742802911b1",
+    "text": "적정성 검토:「가명정보 처리 가이드라인」(개인정보보호위원회, ’24.2월)의 절차를 기반으로",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            442.01480000000004
+          ],
+          [
+            83.82,
+            452.51480000000004
+          ],
+          [
+            491.30084999999997,
+            452.51480000000004
+          ],
+          [
+            491.30084999999997,
+            442.01480000000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e25ce10d932193053c1f73c8ad1711bc"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "e1589622abf64ee4184268d7f04720d0",
+    "text": "사전에 정의한 가명처리 기준에 따라 적절히 가명처리가 되었는지 확인하는 절차",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            459.83435000000003
+          ],
+          [
+            83.82,
+            470.33435000000003
+          ],
+          [
+            437.6122500000001,
+            470.33435000000003
+          ],
+          [
+            437.6122500000001,
+            459.83435000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e25ce10d932193053c1f73c8ad1711bc"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "87ca1644aae92a0d33cae12f5d0de15b",
+    "text": "재식별: 추가정보 또는 행위자가 달리 보유하고 있는 다른 정보나 공개된 정보와의 결합 또는",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            493.67470000000003
+          ],
+          [
+            83.82,
+            504.17470000000003
+          ],
+          [
+            491.3607,
+            504.17470000000003
+          ],
+          [
+            491.3607,
+            493.67470000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e1589622abf64ee4184268d7f04720d0"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "581385efb2fecd1175123d4a5971c455",
+    "text": "대조･비교 등을 통해 특정 개인을 알게 되거나, 알아보려 하는 상태 또는 행위",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            511.37874999999997
+          ],
+          [
+            83.82,
+            521.99425
+          ],
+          [
+            422.08799999999997,
+            521.99425
+          ],
+          [
+            422.08799999999997,
+            511.37874999999997
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e1589622abf64ee4184268d7f04720d0"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "f9a5726945da4eaaaa16c414706dd095",
+    "text": "식별 위험성: 개인정보를 가명처리하여 처리한 가명정보가 데이터 자체 또는 처리 환경의",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            545.2746999999999
+          ],
+          [
+            83.82,
+            555.7746999999999
+          ],
+          [
+            491.2347,
+            555.7746999999999
+          ],
+          [
+            491.2347,
+            545.2746999999999
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e1589622abf64ee4184268d7f04720d0"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "ac9438131f577880bfec92b333dd8caa",
+    "text": "위험성으로 인해 정보주체가 식별될 수 있는 위험",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            563.09425
+          ],
+          [
+            83.82,
+            573.59425
+          ],
+          [
+            300.38355,
+            573.59425
+          ],
+          [
+            300.38355,
+            563.09425
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e1589622abf64ee4184268d7f04720d0"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "541f93d6b98a4a5828f43593cb10d5ea",
+    "text": "식별정보: 전체 또는 특정 인구 집단 내에서 개인을 고유하게 구별하기 위해 부여한 기호 또는",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            596.9347
+          ],
+          [
+            83.82,
+            607.4347
+          ],
+          [
+            491.43420000000003,
+            607.4347
+          ],
+          [
+            491.43420000000003,
+            596.9347
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e1589622abf64ee4184268d7f04720d0"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "10b399cb1bed684fb2edeadf1896a226",
+    "text": "번호, 기관 내･외에서 개인 간 상호 구별을 위해 부여한 번호, 기호 등을 통칭",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            614.63875
+          ],
+          [
+            83.82,
+            625.25425
+          ],
+          [
+            417.88590000000005,
+            625.25425
+          ],
+          [
+            417.88590000000005,
+            614.63875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e1589622abf64ee4184268d7f04720d0"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "084782443874ae823d158face2dbf12e",
+    "text": "※ (예시) 개인정보 보호 법령 상 고유식별번호(주민등록번호, 여권번호, 운전면허번호, 외국인등록번호), 보험가입자번호,",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            84.06,
+            634.36738
+          ],
+          [
+            84.06,
+            642.34738
+          ],
+          [
+            490.2845941,
+            642.34738
+          ],
+          [
+            490.2845941,
+            634.36738
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e1589622abf64ee4184268d7f04720d0"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "66ab62d00650504a68ad65afab38cdec",
+    "text": "환자번호, 이름, 웹사이트의 ID, 사원번호 등",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            94.14006569999998,
+            646.367704
+          ],
+          [
+            94.14006569999998,
+            654.347704
+          ],
+          [
+            235.6859248,
+            654.347704
+          ],
+          [
+            235.6859248,
+            646.367704
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 3,
+      "filetype": "application/pdf",
+      "parent_id": "e25ce10d932193053c1f73c8ad1711bc"
+    }
+  },
+  {
+    "type": "Header",
+    "element_id": "c82c5f509a3e5370ac210bc7cb5b3227",
+    "text": "제1장 | 가이드라인 개요",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            304.02,
+            48.71180000000004
+          ],
+          [
+            304.02,
+            56.21180000000004
+          ],
+          [
+            382.86675,
+            56.21180000000004
+          ],
+          [
+            382.86675,
+            48.71180000000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "bcf377de7555cd4815b86fd6d23832cd",
+    "text": "통계작성: 통계란 특정 집단이나 대상 등에 관하여 작성한 수량적인 정보를 의미하여 시장조사와",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            117.1748
+          ],
+          [
+            83.82,
+            127.6748
+          ],
+          [
+            491.44050000000016,
+            127.6748
+          ],
+          [
+            491.44050000000016,
+            117.1748
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "c82c5f509a3e5370ac210bc7cb5b3227"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "7bdf3045d2623297223e7b65c1fe904d",
+    "text": "같은 상업적 목적의 통계 처리도 포함",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            134.99435000000005
+          ],
+          [
+            83.82,
+            145.49435000000005
+          ],
+          [
+            248.18070000000003,
+            145.49435000000005
+          ],
+          [
+            248.18070000000003,
+            134.99435000000005
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "c82c5f509a3e5370ac210bc7cb5b3227"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "3ab92ae0cff06f2d633a195ead7cfcb7",
+    "text": "※ 직접(1:1) 마케팅 등을 하기 위해 특정 개인을 식별할 수 있는 형태의 통계는 해당하지 않음",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            68.04,
+            154.60738000000003
+          ],
+          [
+            68.04,
+            162.58738000000005
+          ],
+          [
+            387.3068482000002,
+            162.58738000000005
+          ],
+          [
+            387.3068482000002,
+            154.60738000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "7bdf3045d2623297223e7b65c1fe904d"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "0c014752e4c1fdd9f3b19e1e22adf23f",
+    "text": "통계작성 예시",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            94.44,
+            177.68920000000003
+          ],
+          [
+            94.44,
+            187.7092
+          ],
+          [
+            151.77945,
+            187.7092
+          ],
+          [
+            151.77945,
+            177.68920000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "c82c5f509a3e5370ac210bc7cb5b3227"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "cbc07bcb59c3411db058738f8c423c80",
+    "text": "지자체가 연령에 따른 편의시설 확대를 위해 편의시설(문화센터, 도서관, 체육시설 등)의 이용 통계(위치, 방문자 수, 체류시간, 나이대, 성별 등)를 생성･분석하여 신규 편의시설 설치 지역을 선정하고자 하는 경우",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            197.59429999999998
+          ],
+          [
+            79.38,
+            218.83465999999999
+          ],
+          [
+            478.75074,
+            218.83465999999999
+          ],
+          [
+            478.75074,
+            197.59429999999998
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "0c014752e4c1fdd9f3b19e1e22adf23f"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "74a401231b722c0c0158eef7b5753679",
+    "text": "공익적 기록보존: 공공의 이익을 위하여 지속적인 열람 가치가 있는 정보를 기록 보존하는 것",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            250.85470000000004
+          ],
+          [
+            83.82,
+            261.35470000000004
+          ],
+          [
+            484.2574500000006,
+            261.35470000000004
+          ],
+          [
+            484.2574500000006,
+            250.85470000000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "0c014752e4c1fdd9f3b19e1e22adf23f"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "351bccf658117425acf7ae70d026488a",
+    "text": "처리 주제가 공공기관인 경우에만 공익적 목적이 인정되는 것은 아니며, 민간기업, 단체 등이 일반적인",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            71.04,
+            273.89962
+          ],
+          [
+            71.04,
+            283.91962
+          ],
+          [
+            491.01253200000025,
+            283.91962
+          ],
+          [
+            491.01253200000025,
+            273.89962
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "0c014752e4c1fdd9f3b19e1e22adf23f"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "846e9a47e110036570091287c62956f4",
+    "text": "공익을 위하여 기록을 보존하는 경우도 공익적 기록보존 목적이 인정 가능",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            82.98006000000001,
+            289.919596
+          ],
+          [
+            82.98006000000001,
+            299.939596
+          ],
+          [
+            387.6701039999998,
+            299.939596
+          ],
+          [
+            387.6701039999998,
+            289.919596
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "0c014752e4c1fdd9f3b19e1e22adf23f"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "af56d0791eb66393d21f15aa8e168fa1",
+    "text": "공익적 기록보존 예시",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            94.44,
+            315.5692
+          ],
+          [
+            94.44,
+            325.5892
+          ],
+          [
+            182.980728,
+            325.5892
+          ],
+          [
+            182.980728,
+            315.5692
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "c82c5f509a3e5370ac210bc7cb5b3227"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "aa3fb0c5dd38f43d7265000952d0f8e8",
+    "text": "연구소가 현대사 연구 과정에서 수집한 정보 중에서 사료가치가 있는 생존 인물에 관한 정보를 기록･보관하고자 하는 경우",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            335.98552
+          ],
+          [
+            79.38,
+            345.4342
+          ],
+          [
+            476.68719600000003,
+            345.4342
+          ],
+          [
+            476.68719600000003,
+            335.98552
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "af56d0791eb66393d21f15aa8e168fa1"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "b4fb597dce0052e0ea3a57c362218d58",
+    "text": "과학적 연구: 기술개발, 실증, 기초연구, 응용연구 및 민간 투자 연구 등 과학적 방법을 적용하는 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            378.8347
+          ],
+          [
+            83.82,
+            389.3347
+          ],
+          [
+            487.74030000000016,
+            389.3347
+          ],
+          [
+            487.74030000000016,
+            378.8347
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "af56d0791eb66393d21f15aa8e168fa1"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "080f1b791d9042d44d4306e45fa7a894",
+    "text": "과학적 연구에는 자연과학적인 연구뿐만 아니라 과학적 방법을 적용하는 역사적 연구, 공중보건 분야에서 공익을 위해 시행되는 연구 등은 물론, 새로운 기술･제품･서비스의 연구개발 및 개선 등 산업적 목적의 연구 포함",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            71.04,
+            401.87962
+          ],
+          [
+            71.04,
+            443.93957199999994
+          ],
+          [
+            490.9566000000001,
+            443.93957199999994
+          ],
+          [
+            490.9566000000001,
+            401.87962
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "af56d0791eb66393d21f15aa8e168fa1"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "2f2f1252e6ee45cfe3a5dc566e166828",
+    "text": "과학적 연구의 예시",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            94.44,
+            459.5692
+          ],
+          [
+            94.44,
+            469.5892
+          ],
+          [
+            174.22024199999998,
+            469.5892
+          ],
+          [
+            174.22024199999998,
+            459.5692
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "c82c5f509a3e5370ac210bc7cb5b3227"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "f056f0869785b0e8868ae701aa31f278",
+    "text": "약물을 개선･개발하거나, 기존 약물의 효과를 평가하기 위한 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            481.36552
+          ],
+          [
+            79.38,
+            490.81419999999997
+          ],
+          [
+            316.1280959999999,
+            490.81419999999997
+          ],
+          [
+            316.1280959999999,
+            481.36552
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "2f2f1252e6ee45cfe3a5dc566e166828"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "8284a398b2cc50d0d96eabae5e8954f8",
+    "text": "의료기기를 개선･개발하거나, 기존 의료기기의 효과를 평가하기 위한 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            497.08552000000003
+          ],
+          [
+            79.38,
+            506.5342
+          ],
+          [
+            345.7086839999999,
+            506.5342
+          ],
+          [
+            345.7086839999999,
+            497.08552000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "2f2f1252e6ee45cfe3a5dc566e166828"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "3a9bc14e1203248284899e20e214057d",
+    "text": "진단･치료법을 개선･개발하거나, 기존 진단･치료법의 효과를 평가하기 위한 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            512.80552
+          ],
+          [
+            79.38,
+            522.2542
+          ],
+          [
+            368.9895839999999,
+            522.2542
+          ],
+          [
+            368.9895839999999,
+            512.80552
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "2f2f1252e6ee45cfe3a5dc566e166828"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "cf3bdca9cdccf3936b20b80650b8e284",
+    "text": "진단･치료 등의 의료적 목적을 갖는 소프트웨어를 개선･개발하거나, 기존 의료적 목적을 갖는 소프트웨어의 효과를",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            528.58552
+          ],
+          [
+            79.38,
+            538.0342
+          ],
+          [
+            478.9977599999999,
+            538.0342
+          ],
+          [
+            478.9977599999999,
+            528.58552
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "2f2f1252e6ee45cfe3a5dc566e166828"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "8fc898035664213518814a1779578d64",
+    "text": "평가하기 위한 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            86.88094799999996,
+            542.23456
+          ],
+          [
+            86.88094799999996,
+            550.75456
+          ],
+          [
+            154.61750399999994,
+            550.75456
+          ],
+          [
+            154.61750399999994,
+            542.23456
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "2f2f1252e6ee45cfe3a5dc566e166828"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "63969e3392516976e920268d05727bc7",
+    "text": "건강 상태 모니터링, 운동지도 등의 비의료적 건강관리 목적을 갖는 소프트웨어를 개선･개발하거나, 기존 비의료적",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            557.02552
+          ],
+          [
+            79.38,
+            566.4742
+          ],
+          [
+            478.80556800000005,
+            566.4742
+          ],
+          [
+            478.80556800000005,
+            557.02552
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "2f2f1252e6ee45cfe3a5dc566e166828"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "7ef011583dae7c3044ed4dd40192f16c",
+    "text": "건강관리 목적을 갖는 소프트웨어의 효과를 평가하기 위한 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            85.74048000000005,
+            570.7342
+          ],
+          [
+            85.74048000000005,
+            579.2542
+          ],
+          [
+            307.875624,
+            579.2542
+          ],
+          [
+            307.875624,
+            570.7342
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "c82c5f509a3e5370ac210bc7cb5b3227"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "73f8892a358eac8c25b4031386bd6df0",
+    "text": "특정 질환을 갖고 있거나, 특정 치료제･치료법에 적합한 임상적 요건을 갖춘 환자의 수, 지역적･연령적 분포 등을",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            585.52552
+          ],
+          [
+            79.38,
+            594.9742
+          ],
+          [
+            478.80897600000003,
+            594.9742
+          ],
+          [
+            478.80897600000003,
+            585.52552
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "7ef011583dae7c3044ed4dd40192f16c"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "3f76c5db611cd08ca1ae9700b3f6920d",
+    "text": "살피는 연구, 타 질환과의 연관성을 살피는 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            86.63934,
+            599.17456
+          ],
+          [
+            86.63934,
+            607.69456
+          ],
+          [
+            255.2646239999999,
+            607.69456
+          ],
+          [
+            255.2646239999999,
+            599.17456
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "c82c5f509a3e5370ac210bc7cb5b3227"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "7b4f691bbe10973a8091fc9aa3f0912e",
+    "text": "다양한 약물, 치료법, 진단법 등 상호 간의 의학적･사회적 효용을 비교하는 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            614.02552
+          ],
+          [
+            79.38,
+            623.4742
+          ],
+          [
+            368.388924,
+            623.4742
+          ],
+          [
+            368.388924,
+            614.02552
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "3f76c5db611cd08ca1ae9700b3f6920d"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "a13c4f7deabb9a26394ca4cc6304f555",
+    "text": "인구집단 내 건강 상태의 지역적･직업적 분포 등의 편차를 살피는 등의 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            629.7455199999999
+          ],
+          [
+            79.38,
+            639.1942
+          ],
+          [
+            355.90882799999986,
+            639.1942
+          ],
+          [
+            355.90882799999986,
+            629.7455199999999
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "3f76c5db611cd08ca1ae9700b3f6920d"
+    }
+  },
+  {
+    "type": "ListItem",
+    "element_id": "e9c01a3f0b22086a2abae624a5be3c65",
+    "text": "보건의료데이터를 표준화하거나, 품질을 높이거나, 안전하게 보호하는 등 보건의료데이터를 원활히 관리하기 위한",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            79.38,
+            645.46552
+          ],
+          [
+            79.38,
+            654.9141999999999
+          ],
+          [
+            478.7476319999996,
+            654.9141999999999
+          ],
+          [
+            478.7476319999996,
+            645.46552
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "3f76c5db611cd08ca1ae9700b3f6920d"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "2f775f1b489ac1b05ca55b08d6e7c090",
+    "text": "기술･소프트웨어를 개발하기 위한 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            87.480264,
+            658.2455199999999
+          ],
+          [
+            87.480264,
+            667.6942
+          ],
+          [
+            222.88862399999994,
+            667.6942
+          ],
+          [
+            222.88862399999994,
+            658.2455199999999
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf",
+      "parent_id": "c82c5f509a3e5370ac210bc7cb5b3227"
+    }
+  },
+  {
+    "type": "Header",
+    "element_id": "0c2610bd78299fb29974de0f70c13050",
+    "text": "05",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            473.88,
+            47.52889999999991
+          ],
+          [
+            473.88,
+            57.5489
+          ],
+          [
+            484.730658,
+            57.5489
+          ],
+          [
+            484.730658,
+            47.52889999999991
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 4,
+      "filetype": "application/pdf"
+    }
+  },
+  {
+    "type": "Header",
+    "element_id": "cb88d467adc5d93fb44fb369a66463c6",
+    "text": "06 보건의료데이터 활용 가이드라인",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            68.04,
+            46.14889999999991
+          ],
+          [
+            68.04,
+            56.16890000000001
+          ],
+          [
+            190.812,
+            56.16890000000001
+          ],
+          [
+            190.812,
+            46.14889999999991
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "d7a68563b422e798a08b0765d04901fe",
+    "text": "결합키: 결합 대상 가명정보의 일부로서 해당 정보만으로는 특정 개인을 알아볼 수 없으나 다른",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            117.1748
+          ],
+          [
+            83.82,
+            127.6748
+          ],
+          [
+            491.37224999999984,
+            127.6748
+          ],
+          [
+            491.37224999999984,
+            117.1748
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "c336cba143a03b2f207100641911fd6d",
+    "text": "결합대상정보와 구별할 수 있도록 조치한 정보로서, 서로 다른 가명정보를 결합할 때 매개체로",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            134.99435000000005
+          ],
+          [
+            83.82,
+            145.49435000000005
+          ],
+          [
+            491.42160000000024,
+            145.49435000000005
+          ],
+          [
+            491.42160000000024,
+            134.99435000000005
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "07b988504187b7286af70889fbd2d0df",
+    "text": "이용되는 값",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            152.8139000000001
+          ],
+          [
+            83.82,
+            163.3139000000001
+          ],
+          [
+            136.80405,
+            163.3139000000001
+          ],
+          [
+            136.80405,
+            152.8139000000001
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "822cef63eb02704da4c6cf30486ac5d3",
+    "text": "결합키연계정보: 결합키가 동일한 정보에 관한 가명정보를 결합할 수 있도록 서로 다른",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            186.6547999999999
+          ],
+          [
+            83.82,
+            197.1547999999999
+          ],
+          [
+            491.29664999999994,
+            197.1547999999999
+          ],
+          [
+            491.29664999999994,
+            186.6547999999999
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "07b988504187b7286af70889fbd2d0df"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "d2bdab9a79e05873e17f2e6d51049727",
+    "text": "결합신청자의 결합키를 연계한 정보",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            204.47434999999996
+          ],
+          [
+            83.82,
+            214.97434999999996
+          ],
+          [
+            241.2717,
+            214.97434999999996
+          ],
+          [
+            241.2717,
+            204.47434999999996
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "00a38d84ce3c91e0edd39bd238b87b06",
+    "text": "결합대상정보: 결합신청자가 결합을 위해 결합전문기관에 제공하는 가명정보에서 결합키를",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            238.25469999999996
+          ],
+          [
+            83.82,
+            248.7547
+          ],
+          [
+            491.28194999999994,
+            248.7547
+          ],
+          [
+            491.28194999999994,
+            238.25469999999996
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "a7213c67300e7ef4c73982f248a87d15",
+    "text": "제외한 정보",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            256.07425
+          ],
+          [
+            83.82,
+            266.57425
+          ],
+          [
+            136.80405,
+            266.57425
+          ],
+          [
+            136.80405,
+            256.07425
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "00a38d84ce3c91e0edd39bd238b87b06"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "31a3e87c9e8b250b4e45290e3d808377",
+    "text": "결합정보: 결합전문기관을 통해 결합대상정보를 결합하여 생성된 정보",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            288.29470000000003
+          ],
+          [
+            83.82,
+            298.79470000000003
+          ],
+          [
+            390.38535,
+            298.79470000000003
+          ],
+          [
+            390.38535,
+            288.29470000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "00a38d84ce3c91e0edd39bd238b87b06"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "9396ecc3dcf51e45bac73b8493bc72d8",
+    "text": "반출정보: 결합전문기관에서 결합된 결합정보 중 결합전문기관의 심사를 통해 반출된 정보",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            320.51480000000004
+          ],
+          [
+            83.82,
+            331.01480000000004
+          ],
+          [
+            478.7774999999999,
+            331.01480000000004
+          ],
+          [
+            478.7774999999999,
+            320.51480000000004
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "00a38d84ce3c91e0edd39bd238b87b06"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "65f9833aabe67baced0a7a66efa38c17",
+    "text": "반복결합: 시계열 분석 등을 위해 가명정보 결합을 반복하는 결합",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            352.73470000000003
+          ],
+          [
+            83.82,
+            363.23470000000003
+          ],
+          [
+            367.9563,
+            363.23470000000003
+          ],
+          [
+            367.9563,
+            352.73470000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6a6f250f8472a3104683efacf50fec75",
+    "text": "반복결합연결정보: 반복결합을 통해 반출된 반출정보의 반복적인 분석을 위해 필요한 정보로,",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            384.95480000000003
+          ],
+          [
+            83.82,
+            395.45480000000003
+          ],
+          [
+            491.35334999999975,
+            395.45480000000003
+          ],
+          [
+            491.35334999999975,
+            384.95480000000003
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "65f9833aabe67baced0a7a66efa38c17"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "704d353e24d2d5f2832c1f1a050afb84",
+    "text": "반출시 해당 정보를 포함하여 반출",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            402.77435
+          ],
+          [
+            83.82,
+            413.27435
+          ],
+          [
+            234.9759,
+            413.27435
+          ],
+          [
+            234.9759,
+            402.77435
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "65f9833aabe67baced0a7a66efa38c17"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "f63807b853064e185d4ed25b3157a5ce",
+    "text": "결합신청자: 가명정보의 결합을 신청하는 개인정보처리자 등",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            434.9947
+          ],
+          [
+            83.82,
+            445.4947
+          ],
+          [
+            347.90235000000007,
+            445.4947
+          ],
+          [
+            347.90235000000007,
+            434.9947
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "5e8d12caf239cb2b39cba04f92592d38",
+    "text": "※ 가명정보를 제공하거나 결합된 정보를 이용하는 자(공공기관, 법인, 단체, 개인 등)를 모두 포함",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            84.06,
+            454.60738
+          ],
+          [
+            84.06,
+            462.58738
+          ],
+          [
+            399.22673684999955,
+            462.58738
+          ],
+          [
+            399.22673684999955,
+            454.60738
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "f63807b853064e185d4ed25b3157a5ce"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "837fe8f0ceae4594ac82d254d6f27239",
+    "text": "결합키관리기관: 보호법 시행령 제29조의3 제2항에 따라 특정 개인을 알아볼 수 없도록 가명정보의",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            483.8347
+          ],
+          [
+            83.82,
+            494.3347
+          ],
+          [
+            491.61899999999997,
+            494.3347
+          ],
+          [
+            491.61899999999997,
+            483.8347
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "f63807b853064e185d4ed25b3157a5ce"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "2164d0123c5284ac45e088bb386e0a29",
+    "text": "안전한 결합을 지원(결합키연계정보를 생성하여 결합전문기관에 제공하는 등)하는 업무를 하는",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            501.65424999999993
+          ],
+          [
+            83.82,
+            512.1542499999999
+          ],
+          [
+            491.6032500000005,
+            512.1542499999999
+          ],
+          [
+            491.6032500000005,
+            501.65424999999993
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "f63807b853064e185d4ed25b3157a5ce"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "bddfe32f2000f5eab9f517491037afd9",
+    "text": "한국인터넷진흥원 또는 개인정보보호위원회가 지정하여 고시하는 기관",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            519.4738
+          ],
+          [
+            83.82,
+            529.9738
+          ],
+          [
+            394.57695,
+            529.9738
+          ],
+          [
+            394.57695,
+            519.4738
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "f63807b853064e185d4ed25b3157a5ce"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "6d6b459d3abdde340db34fabb936613a",
+    "text": "폐쇄분석환경: 연구자 등 데이터를 활용하는 자가 가명정보를 안전하게 처리(활용)할 수 있도록",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            551.6947
+          ],
+          [
+            83.82,
+            562.1947
+          ],
+          [
+            491.37015000000054,
+            562.1947
+          ],
+          [
+            491.37015000000054,
+            551.6947
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "f63807b853064e185d4ed25b3157a5ce"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "6ddc0de34b5a99c16d3892ec95318306",
+    "text": "정부, 데이터 보유기관, 데이터 활용기관 등이 마련한 기술적･관리적･물리적 보호조치가 적용된",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            569.39875
+          ],
+          [
+            83.82,
+            580.01425
+          ],
+          [
+            491.32710000000003,
+            580.01425
+          ],
+          [
+            491.32710000000003,
+            569.39875
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "d357215ba63c2da438edb3ae3145eaca",
+    "text": "폐쇄 공간",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            587.3338
+          ],
+          [
+            83.82,
+            597.8338
+          ],
+          [
+            127.02435,
+            597.8338
+          ],
+          [
+            127.02435,
+            587.3338
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "0193ef2adfec9a17e148b257971db1ff",
+    "text": "인간대상연구: 생명윤리법 제2조제2호에서 규정한 것으로, 사람을 대상으로 물리적으로 개입하거나",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            619.5547
+          ],
+          [
+            83.82,
+            630.0547
+          ],
+          [
+            491.4216000000001,
+            630.0547
+          ],
+          [
+            491.4216000000001,
+            619.5547
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "d357215ba63c2da438edb3ae3145eaca"
+    }
+  },
+  {
+    "type": "UncategorizedText",
+    "element_id": "d8366cc17c1c58ad1df36b358938f864",
+    "text": "의사소통, 대인 접촉 등의 상호작용을 통하여 수행하는 연구 또는 개인을 식별할 수 있는 정보를",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            637.37425
+          ],
+          [
+            83.82,
+            647.87425
+          ],
+          [
+            491.44365,
+            647.87425
+          ],
+          [
+            491.44365,
+            637.37425
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "d357215ba63c2da438edb3ae3145eaca"
+    }
+  },
+  {
+    "type": "Title",
+    "element_id": "9c697504194c8fc0d57eaf8df47da377",
+    "text": "이용하는 연구로서 보건복지부령으로 정하는 연구",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            83.82,
+            655.1938
+          ],
+          [
+            83.82,
+            665.6938
+          ],
+          [
+            303.25425,
+            665.6938
+          ],
+          [
+            303.25425,
+            655.1938
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "cb88d467adc5d93fb44fb369a66463c6"
+    }
+  },
+  {
+    "type": "NarrativeText",
+    "element_id": "dcbf8c4e60a25d4cebff76bf25ad99a1",
+    "text": "※ (참조) 「생명윤리 및 안전에 관한 법률」 제2조제1호, 동법 시행규칙 제2조제1항",
+    "metadata": {
+      "coordinates": {
+        "points": [
+          [
+            84.06,
+            674.80738
+          ],
+          [
+            84.06,
+            682.78738
+          ],
+          [
+            349.7837065500001,
+            682.78738
+          ],
+          [
+            349.7837065500001,
+            674.80738
+          ]
+        ],
+        "system": "PixelSpace",
+        "layout_width": 556.0,
+        "layout_height": 754.0
+      },
+      "filename": "가이드라인_발췌.pdf",
+      "languages": [
+        "kor"
+      ],
+      "last_modified": "2026-11-16T09:29:00",
+      "page_number": 5,
+      "filetype": "application/pdf",
+      "parent_id": "9c697504194c8fc0d57eaf8df47da377"
+    }
+  }
+]
