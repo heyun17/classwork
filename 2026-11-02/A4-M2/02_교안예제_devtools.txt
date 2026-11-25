@@ -1,0 +1,226 @@
+# A4-M2 교안 예제 모음 (Dev Tools) — 탭 순서대로. 요청 하나에 커서를 두고 ▶ 실행.
+# sales 100건이 들어 있어야 합니다 (GET sales/_count → 100)
+
+######################################################################
+# 01. 요청의 골격과 응답 읽기
+######################################################################
+GET sales/_search
+{
+  "size": 2,
+  "query": { "term": { "region": "서울" } },
+  "_source": ["order_id", "product", "revenue"],
+  "aggs": { "서울_총매출": { "sum": { "field": "revenue" } } }
+}
+
+
+######################################################################
+# 02. text와 keyword — match와 term은 왜 결과가 다른가
+######################################################################
+POST reviews/_analyze
+{ "field": "comment", "text": "노트북 성능은 좋은데 배송이 조금 늦었어요" }
+
+GET reviews/_search
+{ "query": { "match": { "comment": "배송" } } }
+
+GET reviews/_search
+{ "query": { "match": { "comment": "배송 빠름" } } }
+
+GET reviews/_search
+{ "query": { "match_phrase": { "comment": "배송 빠름" } } }
+
+GET reviews/_search
+{ "query": { "term": { "comment": "배송 빠름" } } }
+
+GET reviews/_search
+{ "query": { "term": { "product": "노트북" } } }
+
+GET reviews/_search
+{ "query": { "term": { "product": "노트" } } }
+
+
+######################################################################
+# 03. term · terms · range · exists — sales를 조건으로 고르기
+######################################################################
+# term — 값 하나와 정확히 같음
+GET sales/_count
+{ "query": { "term": { "region": "서울" } } }
+
+# terms — 여러 값 중 하나 (SQL의 IN)
+GET sales/_count
+{ "query": { "terms": { "region": ["서울", "광주"] } } }
+
+# range — 숫자 범위
+GET sales/_count
+{ "query": { "range": { "revenue": { "gte": 5000000 } } } }
+
+# range — 날짜 범위 (2분기)
+GET sales/_count
+{ "query": { "range": { "order_date": { "gte": "2026-04-01", "lte": "2026-06-30" } } } }
+
+# exists — 필드에 값이 있는 문서
+GET sales/_count
+{ "query": { "exists": { "field": "discount_rate" } } }
+
+
+######################################################################
+# 04. bool — 조건 여러 개를 묶는 네 칸
+######################################################################
+GET sales/_search
+{
+  "_source": ["order_id", "revenue"],
+  "query": { "bool": { "filter": [
+    { "term": { "region": "서울" } },
+    { "term": { "product": "노트북" } }
+  ] } }
+}
+
+GET sales/_count
+{
+  "query": { "bool": { "filter": [
+    { "term":  { "customer_type": "공공기관" } },
+    { "terms": { "region": ["서울", "광주"] } }
+  ] } }
+}
+
+GET sales/_search
+{
+  "size": 0,
+  "query": { "bool": {
+    "filter":   [ { "term": { "category": "IT기기" } } ],
+    "must_not": [ { "term": { "status": "취소" } } ]
+  } },
+  "aggs": { "매출": { "sum": { "field": "revenue" } } }
+}
+
+GET reviews/_search
+{
+  "_source": ["review_id", "rating", "comment"],
+  "query": { "bool": {
+    "must":   [ { "match": { "comment": "배송" } } ],
+    "filter": [ { "range": { "rating": { "gte": 4 } } } ]
+  } }
+}
+
+
+######################################################################
+# 05. size · from · sort · _source — 무엇을 몇 개 어떤 순서로
+######################################################################
+GET sales/_search
+{
+  "size": 3,
+  "_source": ["order_id", "region", "product", "revenue"],
+  "sort": [
+    { "revenue":  "desc" },
+    { "order_id": "asc" }
+  ]
+}
+
+GET sales/_search
+{
+  "size": 3,
+  "_source": ["order_id", "order_date"],
+  "query": { "bool": { "filter": [ { "term": { "region": "서울" } } ] } },
+  "sort": [ { "order_date": "asc" } ]
+}
+
+GET sales/_search
+{ "from": 3, "size": 3, "_source": ["order_id", "revenue"],
+  "sort": [ { "revenue": "desc" }, { "order_id": "asc" } ] }
+
+
+######################################################################
+# 06. metric 집계 — 숫자 하나 계산하기
+######################################################################
+GET sales/_search
+{
+  "size": 0,
+  "aggs": {
+    "합계":     { "sum":         { "field": "revenue" } },
+    "평균":     { "avg":         { "field": "revenue" } },
+    "최소":     { "min":         { "field": "revenue" } },
+    "최대":     { "max":         { "field": "revenue" } },
+    "건수":     { "value_count": { "field": "order_id" } },
+    "담당자수": { "cardinality": { "field": "salesperson" } },
+    "한번에":   { "stats":       { "field": "revenue" } }
+  }
+}
+
+
+######################################################################
+# 07. bucket 집계 — 그룹으로 나누기
+######################################################################
+GET sales/_search
+{ "size": 0, "aggs": { "상태별": { "terms": { "field": "status" } } } }
+
+GET sales/_search
+{
+  "size": 0,
+  "aggs": { "월별": { "date_histogram": {
+    "field": "order_date", "calendar_interval": "month", "format": "yyyy-MM"
+  } } }
+}
+
+GET sales/_search
+{
+  "size": 0,
+  "aggs": { "금액대": { "range": {
+    "field": "revenue",
+    "ranges": [
+      { "key": "100만 미만",   "to": 1000000 },
+      { "key": "100~500만",    "from": 1000000, "to": 5000000 },
+      { "key": "500만 이상",   "from": 5000000 }
+    ]
+  } } }
+}
+
+
+######################################################################
+# 08. 중첩과 정렬 — “그룹별로 계산하고 큰 순서로”
+######################################################################
+GET sales/_search
+{
+  "size": 0,
+  "aggs": {
+    "지역별": {
+      "terms": { "field": "region", "order": { "매출": "desc" } },
+      "aggs":  { "매출": { "sum": { "field": "revenue" } } }
+    }
+  }
+}
+
+GET sales/_search
+{
+  "size": 0,
+  "aggs": {
+    "지역별": {
+      "terms": { "field": "region" },
+      "aggs": {
+        "1위제품": {
+          "terms": { "field": "product", "size": 1, "order": { "매출": "desc" } },
+          "aggs":  { "매출": { "sum": { "field": "revenue" } } }
+        }
+      }
+    }
+  }
+}
+
+GET sales/_search
+{
+  "size": 0,
+  "query": { "bool": { "must_not": [ { "term": { "status": "취소" } } ] } },
+  "aggs": { "월별": {
+    "date_histogram": { "field": "order_date", "calendar_interval": "month", "format": "yyyy-MM" },
+    "aggs": { "매출": { "sum": { "field": "revenue" } } }
+  } }
+}
+
+
+######################################################################
+# 09. SQL ↔ Query DSL 대응표 — 아는 문법으로 번역하기
+######################################################################
+POST _plugins/_sql
+{ "query": "SELECT region, SUM(revenue) AS rev FROM sales GROUP BY region ORDER BY rev DESC" }
+
+POST _plugins/_sql/_explain
+{ "query": "SELECT COUNT(*) FROM sales WHERE region = '서울' AND status <> '취소'" }
+

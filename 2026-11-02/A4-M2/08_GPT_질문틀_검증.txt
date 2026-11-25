@@ -1,0 +1,80 @@
+# A4-M2 11탭 — GPT·검색으로 공부하기
+
+[질문 틀] [ ] 부분만 바꿔서 GPT에 붙여넣기
+[OpenSearch 2.x] Query DSL로 답해 줘. Elasticsearch 문법과 다르면 OpenSearch 기준으로.
+인덱스: sales
+필드: order_id(keyword), order_date(date), region(keyword), product(keyword),
+      customer_type(keyword), status(keyword), revenue(long), quantity(integer),
+      satisfaction(integer), discount_rate(integer)
+원하는 결과: [예: 2분기 공공기관 주문의 지역별 매출, 큰 순서]
+조건: Dev Tools에 바로 붙여넣을 수 있는 형태로, 각 줄에 짧은 설명 주석.
+
+[검증 체크리스트]
+1. Dev Tools에서 실행한다. 실행하지 않은 쿼리는 아직 정답이 아닙니다.
+2. 필드 이름이 우리 매핑에 있는지 본다 (GET sales/_mapping). .keyword가 붙어 있으면 의심.
+3. 건수 감각으로 확인한다. 서울은 21건, 전체는 100건. 결과가 0이거나 100이면 조건이 안 걸린 것.
+4. 숫자를 하나 손으로 맞춰 본다. 이 교안의 정답 숫자나 Dashboard와 비교.
+5. 오류가 나면 오류 메시지를 그대로 다시 GPT에게 준다.
+
+[GPT가 자주 틀리는 OpenSearch 부분]
+- "region.keyword"  →  동적 매핑을 가정한 이름. 우리 sales엔 없음 → 조용히 0건  →  "region" (이미 keyword)
+- _xpack/sql, _sql  →  Elasticsearch의 SQL 경로  →  _plugins/_sql
+- _opendistro/_sql  →  OpenSearch 이전 이름(구버전)  →  _plugins/_sql
+- 최상위 "knn": {...} (Elasticsearch 8 방식)  →  OpenSearch 벡터 검색과 문법이 다름  →  "query": {"knn": {...}} (A4-M3)
+- "interval": "month"  →  오래된 date_histogram 옵션  →  "calendar_interval": "month"
+- 필드에 없는 값으로 term (예: "서울시")  →  keyword는 완전 일치라 0건  →  실제 값 확인: terms 집계로 값 목록부터 보기
+
+[탭별 '스스로 찾아보기' 질문]
+
+(01. 요청의 골격과 응답 읽기)
+GPT에게: “OpenSearch _search 응답에서 hits.total.relation 값이 eq와 gte일 때 차이를 예시와 함께 설명해 줘.”
+문서 검색어: OpenSearch search API response body, track_total_hits
+확인: 위 요청에서 size를 0, 50으로 바꿔 hits.hits 길이와 total.value를 비교합니다.
+
+(02. text와 keyword — match와 term은 왜 결과가 다른가)
+GPT에게: “OpenSearch에서 text 필드와 keyword 필드를 둘 다 갖는 multi-field(fields) 매핑 예시를 보여 주고, match와 term을 각각 어디에 써야 하는지 설명해 줘.”
+문서 검색어: OpenSearch match vs term query, OpenSearch nori analyzer
+확인: POST reviews/_analyze로 R05 문장을 쪼개 보고, “속도”로 match 하면 몇 건인지 먼저 예상한 뒤 실행합니다.
+
+(03. term · terms · range · exists — sales를 조건으로 고르기)
+GPT에게: “OpenSearch range 쿼리에서 날짜 필드에 format과 time_zone 옵션을 쓰는 예를 보여 줘. 한국 시간 기준 하루 범위를 어떻게 잡아?”
+문서 검색어: OpenSearch range query date math, OpenSearch terms query
+확인: 3월 한 달(2026-03-01 ~ 2026-03-31) 주문 수를 직접 구해 봅니다. 정답 18건.
+
+(04. bool — 조건 여러 개를 묶는 네 칸)
+GPT에게: “OpenSearch bool 쿼리에서 should만 있을 때와 must/filter와 함께 있을 때 minimum_should_match 기본값이 어떻게 달라지는지 예시로 설명해 줘.”
+문서 검색어: OpenSearch bool query, query and filter context
+확인: 예제 1을 filter 대신 must로 바꿔 실행하고 _score가 어떻게 달라지는지 봅니다.
+
+(05. size · from · sort · _source — 무엇을 몇 개 어떤 순서로)
+GPT에게: “OpenSearch에서 from/size 페이지네이션과 search_after의 차이, 그리고 각각 언제 쓰는지 표로 정리해 줘.”
+문서 검색어: OpenSearch paginate results search_after, OpenSearch sort
+확인: 매출이 가장 작은 주문을 찾아봅니다. 정답 ORD057(42,750원).
+
+(06. metric 집계 — 숫자 하나 계산하기)
+GPT에게: “OpenSearch cardinality 집계가 왜 근사값인지, precision_threshold 옵션이 무엇인지 쉽게 설명해 줘.”
+문서 검색어: OpenSearch metric aggregations, percentiles aggregation
+확인: 판매 수량(quantity) 합계와 평균 만족도를 구해 봅니다. 정답 459개, 4.31.
+
+(07. bucket 집계 — 그룹으로 나누기)
+GPT에게: “OpenSearch terms 집계에서 size와 shard_size의 차이, 그리고 결과 건수가 부정확해질 수 있는 경우를 설명해 줘.”
+문서 검색어: OpenSearch bucket aggregations, date_histogram calendar_interval
+확인: 고객 유형(customer_type)별 건수를 구해 봅니다. 정답 공공기관 37, 개인 33, 기업 30.
+
+(08. 중첩과 정렬 — “그룹별로 계산하고 큰 순서로”)
+GPT에게: “OpenSearch에서 terms 집계 안에 top_hits를 넣어 그룹별 대표 문서를 함께 가져오는 예를 보여 줘. sales 인덱스(region, product, revenue)를 가정해 줘.”
+문서 검색어: OpenSearch sub-aggregations, bucket_sort, top_hits aggregation
+확인: 담당자별 매출 1·2위를 구해 봅니다. 정답 박지훈 36,420,750 / 최유진 35,067,000.
+
+(09. SQL ↔ Query DSL 대응표 — 아는 문법으로 번역하기)
+GPT에게: “아래 SQL을 OpenSearch Query DSL로 바꿔 줘. 인덱스 sales, region·status는 keyword, revenue는 long. SELECT product, AVG(satisfaction) FROM sales WHERE region='대구' GROUP BY product”
+문서 검색어: OpenSearch SQL plugin, OpenSearch SQL explain, Query Workbench
+확인: GPT가 준 DSL과 _plugins/_sql/_explain 결과를 나란히 놓고, 둘 다 Dev Tools에서 실행해 같은 숫자가 나오는지 봅니다.
+
+(10. Python으로 옮기기 — 그리고 get_region_summary 해부)
+GPT에게: “opensearch-py로 search 결과의 aggregations buckets를 pandas DataFrame으로 바꾸는 함수를 만들어 줘. 버킷 안에 sum 집계가 하나 있는 경우.”
+문서 검색어: opensearch-py search, opensearch-py transport perform_request
+확인: 위 body에서 "query"를 광주로 바꿔 실행하고 total_revenue가 39,029,500인지 봅니다.
+
+(12. 연습 문제 20 — 정답 숫자를 먼저 보고 쿼리 짜기)
+GPT에게: 11탭 질문 틀에 “연습 문제를 10개 더 만들어 줘. 정답 쿼리는 따로”를 붙여 문제를 받습니다. 받은 정답 쿼리는 실행해서 숫자가 맞는지까지 확인해야 진짜 정답입니다.

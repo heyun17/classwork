@@ -1,0 +1,59 @@
+# A4-M2 09탭 — SQL ↔ Query DSL 대응표와 SQL 실행 예제
+
+[대응표]
+- SQL: FROM sales
+  DSL: GET sales/_search   (01탭)
+- SQL: SELECT order_id, revenue
+  DSL: "_source": ["order_id", "revenue"]   (05탭)
+- SQL: WHERE region = '서울'
+  DSL: {"term": {"region": "서울"}}   (03탭)
+- SQL: WHERE region IN ('서울','광주')
+  DSL: {"terms": {"region": ["서울","광주"]}}   (03탭)
+- SQL: WHERE revenue >= 5000000
+  DSL: {"range": {"revenue": {"gte": 5000000}}}   (03탭)
+- SQL: WHERE order_date BETWEEN '2026-04-01' AND '2026-06-30'
+  DSL: {"range": {"order_date": {"gte": "2026-04-01", "lte": "2026-06-30"}}}   (03탭)
+- SQL: WHERE A AND B
+  DSL: {"bool": {"filter": [A, B]}}   (04탭)
+- SQL: WHERE A AND NOT B
+  DSL: {"bool": {"filter": [A], "must_not": [B]}}   (04탭)
+- SQL: WHERE A OR B
+  DSL: {"bool": {"should": [A, B], "minimum_should_match": 1}}   (04탭)
+- SQL: WHERE comment LIKE '%배송%'
+  DSL: (비슷하게) {"match": {"comment": "배송"}} — 토큰 단위라 완전히 같지 않음   (02탭)
+- SQL: WHERE discount_rate IS NOT NULL
+  DSL: {"exists": {"field": "discount_rate"}}   (03탭)
+- SQL: ORDER BY revenue DESC
+  DSL: "sort": [{"revenue": "desc"}]   (05탭)
+- SQL: LIMIT 3 OFFSET 3
+  DSL: "size": 3, "from": 3   (05탭)
+- SQL: SUM / AVG / MIN / MAX(revenue)
+  DSL: {"sum" | "avg" | "min" | "max": {"field": "revenue"}}   (06탭)
+- SQL: COUNT(DISTINCT salesperson)
+  DSL: {"cardinality": {"field": "salesperson"}}   (06탭)
+- SQL: GROUP BY region
+  DSL: {"terms": {"field": "region"}}   (07탭)
+- SQL: GROUP BY 월
+  DSL: {"date_histogram": {"field": "order_date", "calendar_interval": "month"}}   (07탭)
+- SQL: CASE WHEN 구간 + GROUP BY
+  DSL: {"range": {"field": "revenue", "ranges": [...]}}   (07탭)
+- SQL: SELECT region, SUM(revenue) … GROUP BY region
+  DSL: terms 안에 "aggs": {"매출": {"sum": …}}   (08탭)
+- SQL: ORDER BY SUM(revenue) DESC
+  DSL: terms에 "order": {"매출": "desc"}   (08탭)
+- SQL: HAVING SUM(revenue) > 40000000
+  DSL: 안쪽에 bucket_selector (또는 결과를 Python에서 거르기)   (13탭)
+- SQL: JOIN
+  DSL: 없음 — 두 번 조회해서 잇기 (또는 문서에 미리 합쳐 저장)   (13탭)
+
+[Dev Tools에서 SQL 실행]
+POST _plugins/_sql
+{ "query": "SELECT region, SUM(revenue) AS rev FROM sales GROUP BY region ORDER BY rev DESC" }
+
+POST _plugins/_sql/_explain
+{ "query": "SELECT COUNT(*) FROM sales WHERE region = '서울' AND status <> '취소'" }
+
+[연습] 아래 SQL을 실행하고 _explain으로 DSL을 확인해 보세요
+SELECT COUNT(*) FROM sales WHERE region = '부산'
+SELECT product, SUM(revenue) AS rev FROM sales GROUP BY product ORDER BY rev DESC
+SELECT customer_type, AVG(satisfaction) FROM sales GROUP BY customer_type

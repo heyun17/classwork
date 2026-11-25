@@ -1,0 +1,72 @@
+# A4-M2 실습 미션 6 — 정답
+
+■ 미션 1 · 월별 리포트
+[Dev Tools]
+GET sales/_search
+{
+  "size": 0,
+  "aggs": { "월별": {
+    "date_histogram": { "field": "order_date", "calendar_interval": "month", "format": "yyyy-MM" },
+    "aggs": {
+      "매출": { "sum":   { "field": "revenue" } },
+      "상태": { "terms": { "field": "status" } }
+    }
+  } }
+}
+버킷 하나 안에 계산을 여러 개 나란히 둘 수 있습니다. 월별 취소 건수는 1월 2, 3월 2, 4월 1, 6월 2입니다.
+
+■ 미션 2 · 할인율별 평균 매출
+[Dev Tools]
+GET sales/_search
+{ "size": 0, "aggs": { "할인율": {
+  "terms": { "field": "discount_rate", "order": { "_key": "asc" } },
+  "aggs": { "평균매출": { "avg": { "field": "revenue" } } } } } }
+0%: 55건 평균 2,057,090.9 / 5%: 17건 2,102,573.5 / 10%: 14건 2,481,107.1 / 15%: 14건 2,119,535.7. 10%까지는 오르지만 15%에서 다시 내려갑니다. “할인율이 높을수록 크다”는 맞지 않습니다. 데이터 100건으로는 단정하기 어렵다는 점도 함께 말할 수 있으면 좋습니다.
+
+■ 미션 3 · 조건 묶음 OR
+[Dev Tools]
+GET sales/_search
+{
+  "size": 0,
+  "query": { "bool": {
+    "should": [
+      { "bool": { "filter": [ { "term": { "region": "서울" } }, { "term": { "product": "노트북" } } ] } },
+      { "bool": { "filter": [ { "term": { "region": "부산" } }, { "term": { "product": "프린터" } } ] } }
+    ],
+    "minimum_should_match": 1
+  } },
+  "aggs": { "매출": { "sum": { "field": "revenue" } } }
+}
+서울 노트북 3건(21,360,000)에 부산 프린터 주문을 더한 값이 나옵니다. 부산 프린터만 따로 조회해 두 결과의 합과 같은지 확인합니다. minimum_should_match를 빼고 실행해 보면 should만 있을 때는 기본으로 하나 이상 만족해야 해서 결과가 같습니다. filter와 함께 쓰면 달라집니다(04탭 찾아보기 질문).
+
+■ 미션 4 · JOIN 없이 두 인덱스 잇기
+[Dev Tools]
+GET reviews/_search
+{ "_source": ["order_id", "rating", "comment"], "query": { "range": { "rating": { "lte": 2 } } } }
+# → ORD022 (2점, "배송 중 파손되어 교환했습니다"), ORD030 (1점, "주문 취소 후 환불이 늦어요")
+
+GET sales/_search
+{ "_source": ["order_id", "region", "product", "revenue", "status"],
+  "query": { "terms": { "order_id": ["ORD022", "ORD030"] } } }
+# → ORD022 대구 모니터 1,904,000 배송중 / ORD030 대구 모니터 2,304,000 취소
+ORD030은 후기대로 실제로 취소된 주문입니다. 두 건 모두 대구 모니터라는 공통점도 보입니다. 실무에서는 Python으로 첫 결과의 order_id 목록을 받아 두 번째 쿼리에 넣습니다. 이것이 JOIN이 없는 검색엔진에서 데이터를 잇는 기본 방법입니다.
+
+■ 미션 5 · SQL → DSL → Python
+[Python]
+body = {"size": 0,
+        "query": {"term": {"region": "대구"}},
+        "aggs": {"p": {"terms": {"field": "product"},
+                       "aggs": {"sat": {"avg": {"field": "satisfaction"}}}}}}
+res = client.search(index="sales", body=body)
+for b in res["aggregations"]["p"]["buckets"]:
+    print(b["key"], b["doc_count"], round(b["sat"]["value"], 2))
+
+# SQL을 Python에서 바로
+sql = client.transport.perform_request("POST", "/_plugins/_sql",
+        body={"query": "SELECT product, AVG(satisfaction) FROM sales WHERE region='대구' GROUP BY product"})
+print(sql["datarows"])
+두 방식의 숫자가 같아야 합니다. _explain이 준 DSL은 내가 쓴 것보다 길 수 있지만 결과는 같습니다.
+
+■ 미션 6 · GPT가 만든 틀린 쿼리 고치기
+① region.keyword → region: 우리 매핑에는 .keyword 하위 필드가 없습니다. 이대로면 오류 없이 0건이고 집계가 비어 있습니다. ② match → term: keyword 필드라 결과는 같지만, 정확한 값 조건은 term(가능하면 bool filter)이 의도에 맞습니다. ③ "order": {"total": "desc"} → {"revenue_sum": "desc"}: 정렬 이름은 안쪽 집계 이름과 같아야 합니다. 없는 이름이면 오류가 납니다. 고친 뒤 결과는 노트북 21,360,000 → 복합기 17,000,000 → 프로젝터 9,506,000 순입니다.
+

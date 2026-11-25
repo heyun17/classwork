@@ -1,0 +1,73 @@
+# A4-M2 연습 문제 정답 쿼리 (Dev Tools)
+
+# 1
+GET sales/_count
+# 2
+GET sales/_count
+{ "query": { "term": { "region": "서울" } } }
+# 3
+GET sales/_count
+{ "query": { "bool": { "filter": [ { "term": { "region": "서울" } }, { "term": { "product": "노트북" } } ] } } }
+# 4
+GET sales/_count
+{ "query": { "range": { "revenue": { "gte": 5000000 } } } }
+# 5
+GET sales/_search
+{ "size": 0, "query": { "range": { "order_date": { "gte": "2026-04-01", "lte": "2026-06-30" } } },
+  "aggs": { "매출": { "sum": { "field": "revenue" } } } }
+# 6
+GET sales/_count
+{ "query": { "bool": { "filter": [ { "term": { "customer_type": "공공기관" } }, { "terms": { "region": ["서울", "광주"] } } ] } } }
+# 7
+GET sales/_count
+{ "query": { "range": { "discount_rate": { "gt": 0 } } } }
+
+# 8
+GET sales/_search
+{ "size": 0, "query": { "bool": { "filter": [ { "term": { "category": "IT기기" } } ], "must_not": [ { "term": { "status": "취소" } } ] } },
+  "aggs": { "매출": { "sum": { "field": "revenue" } } } }
+# 9
+GET sales/_search
+{ "size": 3, "_source": ["order_id", "revenue"], "sort": [ { "revenue": "desc" }, { "order_id": "asc" } ] }
+# 10
+GET sales/_search
+{ "size": 3, "_source": ["order_id", "order_date"], "query": { "term": { "region": "서울" } }, "sort": [ { "order_date": "asc" } ] }
+# 11
+GET sales/_search
+{ "size": 0, "aggs": { "s": { "stats": { "field": "revenue" } } } }
+# 12
+GET sales/_search
+{ "size": 0, "aggs": { "담당자수": { "cardinality": { "field": "salesperson" } } } }
+
+# 13
+GET sales/_search
+{ "size": 0, "aggs": { "제품": { "terms": { "field": "product", "size": 1, "order": { "매출": "desc" } },
+  "aggs": { "매출": { "sum": { "field": "revenue" } } } } } }
+# 14
+GET sales/_search
+{ "size": 0, "aggs": { "담당자": { "terms": { "field": "salesperson", "size": 2, "order": { "매출": "desc" } },
+  "aggs": { "매출": { "sum": { "field": "revenue" } } } } } }
+# 15
+GET sales/_search
+{ "size": 0, "aggs": { "월별": { "date_histogram": { "field": "order_date", "calendar_interval": "month", "format": "yyyy-MM" },
+  "aggs": { "매출": { "sum": { "field": "revenue" } } } } } }
+#   → 응답에서 매출이 가장 큰 버킷 찾기 (date_histogram은 날짜순으로만 옴)
+# 16
+GET sales/_search
+{ "size": 0, "aggs": { "카테고리": { "terms": { "field": "category" },
+  "aggs": { "만족도": { "avg": { "field": "satisfaction" } } } } } }
+# 17
+GET sales/_search
+{ "size": 0, "aggs": { "유형": { "terms": { "field": "customer_type" },
+  "aggs": { "매출": { "sum": { "field": "revenue" } } } } } }
+
+# 18
+GET sales/_search
+{ "size": 0, "aggs": { "금액대": { "range": { "field": "revenue",
+  "ranges": [ { "to": 1000000 }, { "from": 1000000, "to": 5000000 }, { "from": 5000000 } ] } } } }
+# 19
+GET sales/_search
+{ "size": 0, "query": { "term": { "sales_team": "2팀" } }, "aggs": { "매출": { "sum": { "field": "revenue" } } } }
+# 20
+GET sales/_search
+{ "size": 0, "query": { "term": { "region": "대구" } }, "aggs": { "s": { "stats": { "field": "revenue" } } } }

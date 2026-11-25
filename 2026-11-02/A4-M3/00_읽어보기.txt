@@ -1,0 +1,17 @@
+A4-M3 RAG와 OpenSearch 벡터 검색 — 실습자료
+
+[준비]
+1. 이 폴더를 그대로 두고, 이 폴더에서 노트북(A4-M3_실습.ipynb)을 엽니다.
+2. .env.example 을 복사해 이름을 .env 로 바꾸고 값을 채웁니다.
+   OPENSEARCH_PASSWORD = Dashboards 로그인 admin 비밀번호
+   OPENAI_API_KEY      = 18탭 LLM 답변을 만들 때만 (없어도 검색까지는 됩니다)
+3. pip install opensearch-py sentence-transformers python-dotenv  (LLM까지 하려면 openai)
+
+[파일]
+rag_toy_bulk.txt         교안 14탭: Dev Tools에 붙여넣는 장난감 벡터 5개 (먼저 PUT rag_toy)
+docs/                    교안 15탭: RAG가 검색할 사내 안전 문서 6개 (가상 문서)
+A4-M3_실습.ipynb         교안 15~18탭 노트북 셀 1~11
+rag_eval_questions.csv   교안 19탭 미션 4·6: 평가 질문 20개
+
+[주의]
+docs/05_law_summary.txt 는 교육용 요약 예시이며 실제 법령 문구와 다를 수 있습니다.

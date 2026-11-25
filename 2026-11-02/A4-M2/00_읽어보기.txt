@@ -1,0 +1,22 @@
+A4-M2 OpenSearch 쿼리 문법 — 실습자료
+
+[준비]
+- Dashboards에 admin으로 로그인 → Dev Tools
+- GET sales/_count 가 100이어야 합니다. 아니면 sales_복구용/opensearch_devtools_bulk_100.txt 전체를
+  Dev Tools에 붙여넣어 실행합니다(인덱스가 없으면 A4-M1 02탭의 PUT sales 먼저).
+- Python을 쓸 때: .env.example 을 복사해 .env 로 이름을 바꾸고 OPENSEARCH_PASSWORD 입력
+
+[파일과 쓰는 순서]
+01_reviews_인덱스_만들기_devtools.txt   교안 02탭: 후기 10건 인덱스 (match vs term 실습용)
+02_교안예제_devtools.txt                 교안 01~10탭의 Dev Tools 예제를 탭 순서대로
+03_연습문제_20.txt                       교안 12탭: 문제와 정답 숫자 (쿼리는 직접)
+04_연습문제_정답쿼리_devtools.txt        교안 12탭: 정답 쿼리 — 다 푼 뒤에 보기
+05_미션_문제.txt                         교안 13탭: 미션 6개
+06_미션_정답.txt                         교안 13탭: 미션 정답
+07_SQL_대응표_예제.txt                   교안 09탭: SQL ↔ DSL 대응표, SQL 실행 예제
+08_GPT_질문틀_검증.txt                   교안 11탭: GPT 질문 틀, 검증 체크리스트, 탭별 찾아보기 질문
+A4-M2_실습.ipynb                         교안 10탭·미션 4·5를 Python으로
+sales_복구용/                            sales 100건 원본 (CSV, Dev Tools Bulk)
+
+[정답 숫자]
+교안과 파일의 정답 숫자는 모두 sales 100건 기준입니다. 내 결과가 다르면 쿼리를 다시 봅니다.

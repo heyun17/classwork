@@ -1,0 +1,22 @@
+A4-M4 숫자와 문서 통합 RAG — 실습자료
+
+[준비]
+1. VS Code에서 이 폴더 자체를 열고, 터미널 위치가 이 폴더인지 확인합니다.
+2. .env.example 을 복사해 이름을 .env 로 바꾸고 값을 채웁니다.
+   OPENAI_API_KEY      = OpenAI API 키
+   OPENSEARCH_PASSWORD = Dashboards 로그인 admin 비밀번호
+3. pip install -r requirements.txt
+4. python 00_preflight_check.py  → 모두 OK인지 확인 (FAISS 안내 줄은 정상)
+
+[실행 순서]  교안 04~11탭
+python 01_csv_check.py
+(02_csv_to_opensearch.py 는 참고용 — sales가 없을 때만)
+python 03_opensearch_query.py
+python 04_opensearch_gpt.py
+python 05_chunk_check.py
+python 06_make_faiss.py       → rag_faiss/ 폴더 생김
+python 07_faiss_search.py
+python 08_hybrid_rag.py
+streamlit run app.py          (안 되면 python -m streamlit run app.py)
+
+[미션]  미션_시작파일/00_미션_안내.txt

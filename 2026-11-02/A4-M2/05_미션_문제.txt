@@ -1,0 +1,44 @@
+# A4-M2 실습 미션 6 — 문제
+# 정답: 06_미션_정답.txt
+
+■ 미션 1 · 월별 리포트
+  1. 08탭 “취소 제외, 월별 매출”에서 query를 지웁니다.
+  2. 월별 버킷 안에 매출(sum) 옆에 상태(terms status)를 하나 더 넣습니다.
+  3. 3월 버킷이 매출 50,737,000, 완료 15·취소 2·배송중 1인지 확인합니다.
+
+■ 미션 2 · 할인율별 평균 매출
+  1. discount_rate로 terms 버킷을 만들고 안에 평균 매출을 넣습니다.
+  2. key 순서(0, 5, 10, 15)로 보고 싶으면 "order": {"_key": "asc"}.
+  3. 결과를 보고 “할인율이 높을수록 주문 금액이 크다”가 맞는지 한 문장으로 답합니다.
+
+■ 미션 3 · 조건 묶음 OR
+  1. should 안에 bool을 두 개 넣습니다. 각각 filter에 term 두 개.
+  2. "minimum_should_match": 1을 넣습니다.
+  3. 건수와 매출 합계를 받습니다.
+
+■ 미션 4 · JOIN 없이 두 인덱스 잇기
+  1. reviews에서 rating 2 이하인 후기의 order_id를 받습니다.
+  2. 그 order_id들로 sales를 terms 조회합니다.
+  3. 후기 내용과 실제 주문 상태가 맞는지 비교합니다.
+
+■ 미션 5 · SQL → DSL → Python
+  1. Query Workbench나 Dev Tools에서 SELECT product, AVG(satisfaction) FROM sales WHERE region='대구' GROUP BY product를 실행합니다.
+  2. 같은 SQL을 _plugins/_sql/_explain에 넣어 DSL을 받습니다.
+  3. 그 DSL(또는 직접 쓴 DSL)을 Python client.search로 실행해 제품별 평균 만족도를 출력합니다.
+
+■ 미션 6 · GPT가 만든 틀린 쿼리 고치기
+  아래는 “서울의 제품별 매출을 큰 순서로”를 GPT에게 물어 받은 답이라고 가정합니다. 실행하면 오류가 나거나 결과가 비어 있습니다. 11탭 체크리스트로 세 군데를 찾아 고칩니다.
+
+  [틀린 쿼리]
+GET sales/_search
+{
+  "size": 0,
+  "query": { "match": { "region.keyword": "서울" } },
+  "aggs": {
+    "products": {
+      "terms": { "field": "product", "order": { "total": "desc" } },
+      "aggs": { "revenue_sum": { "sum": { "field": "revenue" } } }
+    }
+  }
+}
+

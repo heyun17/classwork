@@ -1,0 +1,12 @@
+A4-M4 미션 시작파일 (교안 12탭)
+
+원본 파일은 고치지 말고, 아래 파일을 실습 폴더(config.py가 있는 곳)로 복사해서 작업합니다.
+
+미션 1  03_opensearch_query.py 의 region="서울" → "대전" 으로 바꿔 실행 (파일 없음)
+미션 2  m2_net_revenue.py        취소 제외 매출 (빈칸 채우기)
+미션 3  rag_service.py 복사본의 explain_sales 규칙에 취소 비율 규칙 추가 (파일 없음)
+미션 4  07_faiss_search.py 의 question 을 바꿔 순위 비교 (파일 없음)
+미션 5  m5_auto_region.py        질문에서 지역 자동 찾기 (빈칸 채우기)
+미션 6  m6_제주_섹션.md          지역_시장현황_RAG_테스트.md 를 백업한 뒤 원본 끝에 붙여넣기 → 05 → 06 → 08
+                                 끝나면 백업으로 되돌리고 06 다시 실행
+미션 7  m7_app_추가코드.py       app.py 를 m7_app.py 로 복사해 붙여넣기
