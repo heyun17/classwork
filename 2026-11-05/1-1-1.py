@@ -1,0 +1,3 @@
+text = "<div class=\"post\">\n<h2>❓ [FAQ] 솔바람섬 여행 FAQ</h2>\n<dl><dt>Q. 솔바람섬에서 렌터카를 빌릴 수 있나요?</dt><dd>A. 렌터카는 없고 전기 자전거 대여소만 있습니다.</dd></dl>\n<dl><dt>Q. 별빛전망대는 언제 쉬나요?</dt><dd>A. 매주 월요일에 쉽니다.</dd></dl>\n<dl><dt>Q. 솔바람섬에는 어떻게 들어가나요?</dt><dd>A. 노을항에서 솔바람페리를 타야 합니다.</dd></dl>\n<dl><dt>Q. 섬에 편의점이 있나요?</dt><dd>A. 선착장 앞에 한 곳이 있습니다.</dd></dl>\n<div class=\"footer\">▶ 공유하기 &nbsp;|&nbsp; ★ 즐겨찾기 &nbsp;|&nbsp; 문의: tour@eunha.example</div>\n</div>"
+
+print(len(text))

@@ -1,0 +1,327 @@
+[
+ {
+  "id": "S01",
+  "type": "single",
+  "question": "솔바람섬은 노을항에서 배로 얼마나 걸리나요?",
+  "answer": "40분",
+  "gold_doc_ids": [
+   "T01",
+   "T11"
+  ]
+ },
+ {
+  "id": "S02",
+  "type": "single",
+  "question": "별빛전망대 입장료는 얼마인가요?",
+  "answer": "5천 원",
+  "gold_doc_ids": [
+   "T02"
+  ]
+ },
+ {
+  "id": "S03",
+  "type": "single",
+  "question": "별빛전망대는 무슨 요일에 쉬나요?",
+  "answer": "매주 월요일",
+  "gold_doc_ids": [
+   "T02",
+   "T19"
+  ]
+ },
+ {
+  "id": "S04",
+  "type": "single",
+  "question": "청연계곡은 어디에 있나요?",
+  "answer": "은하군 산골면",
+  "gold_doc_ids": [
+   "T03"
+  ]
+ },
+ {
+  "id": "S05",
+  "type": "single",
+  "question": "반딧불 축제는 언제 열리나요?",
+  "answer": "매년 6월",
+  "gold_doc_ids": [
+   "T04"
+  ]
+ },
+ {
+  "id": "S06",
+  "type": "single",
+  "question": "노을항 해산물 축제는 몇 월에 열리나요?",
+  "answer": "10월",
+  "gold_doc_ids": [
+   "T05"
+  ]
+ },
+ {
+  "id": "S07",
+  "type": "single",
+  "question": "파도소리 리조트의 객실은 몇 개인가요?",
+  "answer": "120개",
+  "gold_doc_ids": [
+   "T06"
+  ]
+ },
+ {
+  "id": "S08",
+  "type": "single",
+  "question": "계곡쉼 펜션은 반려동물과 함께 묵을 수 있나요?",
+  "answer": "가능하다",
+  "gold_doc_ids": [
+   "T07"
+  ]
+ },
+ {
+  "id": "S09",
+  "type": "single",
+  "question": "노을스테이 호텔에서 페리 터미널까지 얼마나 걸리나요?",
+  "answer": "걸어서 5분",
+  "gold_doc_ids": [
+   "T08"
+  ]
+ },
+ {
+  "id": "S10",
+  "type": "single",
+  "question": "갈매기식당의 대표 메뉴는 무엇인가요?",
+  "answer": "전복 물회",
+  "gold_doc_ids": [
+   "T09"
+  ]
+ },
+ {
+  "id": "S11",
+  "type": "single",
+  "question": "솔바람페리는 하루에 몇 번 운항하나요?",
+  "answer": "하루 4회",
+  "gold_doc_ids": [
+   "T11"
+  ]
+ },
+ {
+  "id": "S12",
+  "type": "single",
+  "question": "솔바람섬 별빛 2박3일 상품의 가격은 얼마인가요?",
+  "answer": "1인 39만 원",
+  "gold_doc_ids": [
+   "T12"
+  ]
+ },
+ {
+  "id": "S13",
+  "type": "single",
+  "question": "청연계곡 반딧불 트레킹 상품은 언제 판매하나요?",
+  "answer": "6월에만",
+  "gold_doc_ids": [
+   "T13"
+  ]
+ },
+ {
+  "id": "S14",
+  "type": "single",
+  "question": "노을항 미식 투어의 가격은 얼마인가요?",
+  "answer": "25만 원",
+  "gold_doc_ids": [
+   "T14"
+  ]
+ },
+ {
+  "id": "S15",
+  "type": "single",
+  "question": "바람길여행 상품을 출발 8일 전에 취소하면 몇 %를 환불받나요?",
+  "answer": "80%",
+  "gold_doc_ids": [
+   "T15"
+  ]
+ },
+ {
+  "id": "S16",
+  "type": "single",
+  "question": "해온호스피탈리티 숙소를 체크인 하루 전에 취소하면 환불되나요?",
+  "answer": "환불되지 않는다",
+  "gold_doc_ids": [
+   "T16"
+  ]
+ },
+ {
+  "id": "S17",
+  "type": "single",
+  "question": "은하해운 여객선을 승객 사정으로 출항 1시간 전까지 취소하면 몇 %를 환불받나요?",
+  "answer": "90%",
+  "gold_doc_ids": [
+   "T17"
+  ]
+ },
+ {
+  "id": "S18",
+  "type": "single",
+  "question": "바람길여행 투어에 반려동물을 데려갈 수 있나요?",
+  "answer": "동반할 수 없다",
+  "gold_doc_ids": [
+   "T18"
+  ]
+ },
+ {
+  "id": "S19",
+  "type": "single",
+  "question": "솔바람섬에서 렌터카를 빌릴 수 있나요?",
+  "answer": "렌터카는 없고 전기 자전거 대여소만 있다",
+  "gold_doc_ids": [
+   "T19"
+  ]
+ },
+ {
+  "id": "S20",
+  "type": "single",
+  "question": "바람결여행 상품은 출발 며칠 전까지 취소해야 전액 환불되나요?",
+  "answer": "출발 3일 전",
+  "gold_doc_ids": [
+   "T22"
+  ]
+ },
+ {
+  "id": "S21",
+  "type": "single",
+  "question": "바람결여행의 본사는 어디에 있나요?",
+  "answer": "청람시",
+  "gold_doc_ids": [
+   "T22"
+  ]
+ },
+ {
+  "id": "S22",
+  "type": "single",
+  "question": "솔바람호텔의 운영사는 어디인가요?",
+  "answer": "청람호텔그룹",
+  "gold_doc_ids": [
+   "T20"
+  ]
+ },
+ {
+  "id": "S23",
+  "type": "single",
+  "question": "별빛캠핑장은 반려동물과 함께 이용할 수 있나요?",
+  "answer": "불가능하다",
+  "gold_doc_ids": [
+   "T21"
+  ]
+ },
+ {
+  "id": "S24",
+  "type": "single",
+  "question": "해온호스피탈리티 숙소를 체크인 5일 전에 취소하면 몇 %를 환불받나요?",
+  "answer": "50%",
+  "gold_doc_ids": [
+   "T16"
+  ]
+ },
+ {
+  "id": "M01",
+  "type": "multi",
+  "question": "솔바람섬 별빛 2박3일 상품을 체크인 4일 전에 취소하면, 숙소 비용은 몇 %를 환불받나요?",
+  "answer": "50% (숙소는 운영사 해온호스피탈리티 규정 적용)",
+  "gold_doc_ids": [
+   "T12",
+   "T15",
+   "T16"
+  ]
+ },
+ {
+  "id": "M02",
+  "type": "multi",
+  "question": "노을항 미식 투어에서 저녁을 먹는 식당의 대표 메뉴와 휴무일은?",
+  "answer": "전복 물회, 매주 화요일",
+  "gold_doc_ids": [
+   "T14",
+   "T09"
+  ]
+ },
+ {
+  "id": "M03",
+  "type": "multi",
+  "question": "솔바람섬 별빛 2박3일 상품에 포함된 여객선이 기상 악화로 결항되면 어떻게 되나요?",
+  "answer": "승선권 전액 환불 또는 무료 날짜 변경",
+  "gold_doc_ids": [
+   "T12",
+   "T11",
+   "T17"
+  ]
+ },
+ {
+  "id": "M04",
+  "type": "multi",
+  "question": "청연계곡 반딧불 트레킹에서 점심을 먹는 식당의 주인이 운영하는 숙소는 반려동물 동반이 가능한가요?",
+  "answer": "가능하다 (김산들의 계곡쉼 펜션)",
+  "gold_doc_ids": [
+   "T13",
+   "T10",
+   "T07"
+  ]
+ },
+ {
+  "id": "M05",
+  "type": "multi",
+  "question": "한별 가이드가 맡은 두 상품의 숙소를 운영하는 회사는 어디인가요?",
+  "answer": "해온호스피탈리티",
+  "gold_doc_ids": [
+   "T12",
+   "T14",
+   "T06",
+   "T08"
+  ]
+ },
+ {
+  "id": "M06",
+  "type": "multi",
+  "question": "별빛전망대가 있는 섬의 대형 리조트는 체크인이 몇 시인가요?",
+  "answer": "오후 3시 (파도소리 리조트)",
+  "gold_doc_ids": [
+   "T02",
+   "T01",
+   "T06"
+  ]
+ },
+ {
+  "id": "M07",
+  "type": "multi",
+  "question": "솔바람페리가 출발하는 항구에서 매년 10월에 열리는 축제는?",
+  "answer": "노을항 해산물 축제",
+  "gold_doc_ids": [
+   "T11",
+   "T05"
+  ]
+ },
+ {
+  "id": "M08",
+  "type": "multi",
+  "question": "반딧불 축제가 열리는 숲이 있는 계곡 입구 식당의 대표 메뉴는?",
+  "answer": "산채비빔밥 (숲속부엌)",
+  "gold_doc_ids": [
+   "T04",
+   "T03",
+   "T10"
+  ]
+ },
+ {
+  "id": "M09",
+  "type": "multi",
+  "question": "노을스테이 호텔과 같은 운영사가 운영하는 섬 리조트의 객실은 몇 개인가요?",
+  "answer": "120개 (파도소리 리조트)",
+  "gold_doc_ids": [
+   "T08",
+   "T06"
+  ]
+ },
+ {
+  "id": "M10",
+  "type": "multi",
+  "question": "바람결여행에서 판매하는 노을항 미식 투어의 가격은 얼마인가요?",
+  "answer": "문서에서 확인할 수 없음 (해당 상품은 바람길여행 상품이고, 바람결여행은 은하군 상품을 판매하지 않음)",
+  "gold_doc_ids": [
+   "T22",
+   "T14"
+  ]
+ }
+]
