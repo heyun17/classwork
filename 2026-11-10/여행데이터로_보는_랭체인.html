@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>여행 데이터로 보는 랭체인</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{word-break:keep-all;overflow-wrap:break-word;font-family:var(--body)}
+
+/* Layout: 왼쪽 고정 사이드바(단원 목차) + 오른쪽 본문 패널. 휴대폰 폭에서는 사이드바가 상단 가로 스크롤 바로 바뀜 */
+:root{
+  --bg:#f6f7fb; --paper:#ffffff; --ink:#1b2236; --muted:#5a6380; --line:#d9deeb;
+  --node:#24305e; --nodeText:#ffffff; --edge:#9aa4c2;
+  --teal:#0f8f83; --amber:#d98a1f; --coral:#d4553f; --violet:#6b5bd2;
+  --soft:#eef1f9; --tealSoft:#e2f4f1; --amberSoft:#fbf0dd; --coralSoft:#fbe7e3;
+  --code:#ffffff; --codeLine:#c9d0e2; --codeCmt:#6a7697; --outBg:#f4fbfa; --shadow:rgba(27,34,54,.08);
+  --kw:#6b5bd2; --str:#0f7d73; --fn:#b4561f;
+  --display:"Do Hyeon","IBM Plex Sans KR","Malgun Gothic",sans-serif;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12151f; --paper:#1a1e2b; --ink:#e7eaf4; --muted:#a2aac2; --line:#2e3447;
+  --node:#8f9cf0; --nodeText:#10131c; --edge:#5b6584;
+  --teal:#3cc4b5; --amber:#f0b04f; --coral:#f07a63; --violet:#a597ff;
+  --soft:#222839; --tealSoft:#163331; --amberSoft:#3a2e17; --coralSoft:#3d211c; --code:#0d1017; --codeLine:#3a4157; --codeCmt:#8d97b5; --outBg:#10201f; --shadow:rgba(0,0,0,.3);
+  --kw:#b3a8ff; --str:#5fd3c4; --fn:#f0a36a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151f; --paper:#1a1e2b; --ink:#e7eaf4; --muted:#a2aac2; --line:#2e3447;
+  --node:#8f9cf0; --nodeText:#10131c; --edge:#5b6584;
+  --teal:#3cc4b5; --amber:#f0b04f; --coral:#f07a63; --violet:#a597ff;
+  --soft:#222839; --tealSoft:#163331; --amberSoft:#3a2e17; --coralSoft:#3d211c; --code:#0d1017; --codeLine:#3a4157; --codeCmt:#8d97b5; --outBg:#10201f; --shadow:rgba(0,0,0,.3);
+  --kw:#b3a8ff; --str:#5fd3c4; --fn:#f0a36a; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:16px/1.75 var(--body);margin:0;word-break:keep-all;overflow-wrap:break-word}
+.panel{margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.layout{max-width:1220px;margin:0 auto;display:grid;grid-template-columns:252px minmax(0,1fr);gap:40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{min-width:0;padding-block:28px 64px;max-width:900px}
+h1,h2,h3{text-wrap:balance}
+h1{font:400 clamp(30px,5vw,44px)/1.2 var(--display);margin:6px 0 10px;letter-spacing:.5px}
+h2{font:400 28px/1.3 var(--display);margin:0 0 6px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+h2 .no{font:inherit;color:var(--teal)}
+h3{font-size:18px;margin:26px 0 6px}
+h4{font-size:16px;margin:18px 0 4px}
+p{margin:8px 0;max-width:72ch}
+ol,ul{padding-left:22px;margin:8px 0}
+li{margin:4px 0}
+.lead{color:var(--muted);font-size:17px}
+.kicker{font:600 12px var(--mono);letter-spacing:2px;color:var(--teal);text-transform:uppercase}
+.byline{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6}
+section{margin-top:40px}
+.panel > section:first-child{margin-top:8px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
+.card h4{margin-top:0}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+code,.mono{font-family:var(--mono);font-size:.9em}
+code{background:var(--soft);padding:1px 6px;border-radius:5px;word-break:break-word}
+pre{background:var(--code);border:1px solid var(--codeLine);box-shadow:0 1px 3px var(--shadow);border-radius:10px;padding:14px 16px;overflow-x:auto;font:13.5px/1.6 var(--mono);margin:8px 0;color:var(--ink);tab-size:4}
+pre .c{color:var(--codeCmt);font-style:italic}
+pre .s{color:var(--str)}
+pre .k{color:var(--kw);font-weight:600}
+pre.out{background:var(--outBg);border-style:dashed;box-shadow:none;white-space:pre-wrap;word-break:break-word;font-size:13px}
+pre.out::before{content:"출력";display:block;font:600 11px var(--mono);letter-spacing:1.5px;color:var(--teal);margin-bottom:4px}
+pre.out.ex::before{content:"출력 예시 · 모델 답변은 실행마다 달라짐"}
+pre.err{background:var(--coralSoft);border-color:var(--coral);box-shadow:none;white-space:pre-wrap;word-break:break-word;font-size:13px}
+pre.err::before{content:"에러";display:block;font:600 11px var(--mono);letter-spacing:1.5px;color:var(--coral);margin-bottom:4px}
+.codehead{display:flex;justify-content:space-between;align-items:center;gap:8px;font:600 12px var(--mono);color:var(--muted);margin:16px 0 -4px;flex-wrap:wrap}
+.copy{font:500 12px var(--body);border:1px solid var(--line);background:var(--paper);color:var(--muted);border-radius:6px;padding:2px 10px;cursor:pointer}
+.copy:hover{color:var(--ink)}
+.tw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;font-size:14px;min-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:600;white-space:nowrap}
+td code{white-space:nowrap}
+.note{background:var(--amberSoft);border-radius:10px;padding:12px 14px;font-size:15px;margin-top:12px}
+.note b{color:var(--amber)}
+.ragbox{background:var(--tealSoft);border-left:4px solid var(--teal);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:15px}
+.ragbox b{color:var(--teal)}
+.warn{background:var(--coralSoft);border-left:4px solid var(--coral);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:15px}
+.warn b{color:var(--coral)}
+.fix{background:var(--soft);border-left:4px solid var(--violet);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:15px}
+.fix b{color:var(--violet)}
+.note p,.ragbox p,.warn p,.fix p{margin:4px 0}
+.note ul,.ragbox ul,.warn ul,.fix ul{margin:4px 0}
+.fig{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px;overflow-x:auto;margin-top:12px}
+.fig svg{display:block;width:100%;height:auto;min-width:560px}
+svg text{font-family:var(--body)}
+.cap{font-size:13px;color:var(--muted);margin:6px 4px 0}
+.chip{display:inline-block;font:500 12px var(--body);padding:1px 10px;border-radius:999px;background:var(--soft);color:var(--muted);vertical-align:middle}
+.chip.ok{background:var(--tealSoft);color:var(--teal)}
+.chip.draft{background:var(--amberSoft);color:var(--amber)}
+.chip.ai{background:var(--coralSoft);color:var(--coral)}
+a{color:var(--teal)}
+.example{background:var(--soft);border-radius:10px;padding:12px 16px;margin:10px 0;font-size:15.5px}
+.example b{color:var(--node)}
+.steps{list-style:none;padding:0;margin:10px 0 0;counter-reset:st}
+.steps>li{counter-increment:st;padding:10px 0;border-top:1px dashed var(--line);margin:0}
+.steps>li::before{content:counter(st) ". ";font:600 14px var(--mono);color:var(--teal)}
+.steps>li:first-child{border-top:0}
+.steps .lbl{font-weight:700;color:var(--node)}
+.think{margin-top:8px;font-size:14.5px;color:var(--muted)}
+.think-h{display:inline-block;font:600 12px var(--body);color:var(--muted);margin-right:6px}
+mark{background:var(--amberSoft);color:inherit;border-bottom:2px solid var(--amber);padding:0 1px}
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:8px}
+details summary{cursor:pointer;font-weight:600}
+details[open] summary{margin-bottom:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font:500 13.5px var(--mono);margin:10px 0}
+.flow span{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:4px 10px}
+.flow span.n{background:var(--node);color:var(--nodeText);border-color:var(--node)}
+.flow i{font-style:normal;color:var(--edge)}
+
+/* sidebar */
+.side{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;max-height:100vh;overflow-y:auto;padding-block:28px 28px;scrollbar-width:thin}
+.side .brand{font:400 22px/1.2 var(--display);margin-bottom:2px}
+.side .brand-sub{font-size:12.5px;color:var(--muted);margin-bottom:14px}
+.prog{height:6px;background:var(--soft);border-radius:999px;overflow:hidden;margin:0 0 4px}
+.prog i{display:block;height:100%;width:0;background:var(--teal);transition:width .3s}
+.prog-t{font:500 12px var(--mono);color:var(--muted);margin-bottom:14px}
+.grp{font:600 11px var(--mono);letter-spacing:1.6px;color:var(--teal);text-transform:uppercase;margin:16px 0 6px}
+.navlist{display:flex;flex-direction:column;gap:2px}
+.navlist button{display:grid;grid-template-columns:28px minmax(0,1fr) 16px;align-items:center;gap:4px;width:100%;text-align:left;font:500 14px/1.35 var(--body);border:0;background:transparent;color:var(--ink);border-radius:8px;padding:7px 8px;cursor:pointer}
+.navlist button .n{font:600 12px var(--mono);color:var(--muted)}
+.navlist button .d{font-size:12px;color:var(--teal);visibility:hidden}
+.navlist button.done .d{visibility:visible}
+.navlist button:hover{background:var(--soft)}
+.navlist button[aria-selected="true"]{background:var(--node);color:var(--nodeText)}
+.navlist button[aria-selected="true"] .n,.navlist button[aria-selected="true"] .d{color:var(--nodeText)}
+.navlist button:focus-visible,.pager button:focus-visible,.copy:focus-visible,.donebtn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+/* panel footer */
+.pfoot{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+.donebtn{font:600 14px var(--body);border:2px solid var(--teal);background:var(--paper);color:var(--teal);border-radius:999px;padding:6px 16px;cursor:pointer}
+.donebtn[aria-pressed="true"]{background:var(--teal);color:var(--paper)}
+.pager{display:flex;gap:8px;flex-wrap:wrap}
+.pager button{font:500 14px var(--body);border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:6px 14px;cursor:pointer;max-width:100%}
+.pager button[disabled]{opacity:.4;cursor:default}
+footer{margin-top:50px;font-size:13px;color:var(--muted)}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0}
+  .side{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);max-height:none;overflow:visible;padding-block:10px;border-bottom:1px solid var(--line);margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .side .brand,.side .brand-sub,.grp,.prog,.prog-t{display:none}
+  .navwrap{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;padding-bottom:2px}
+  .navlist{flex-direction:row;gap:6px}
+  .navlist button{display:flex;flex:0 0 auto;width:auto;white-space:nowrap;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13.5px}
+  .navlist button .d{display:none}
+  .navlist button.done .n{color:var(--teal)}
+  main{padding-top:18px}
+}
+@media (max-width:600px){h2{font-size:24px} pre{font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.tg{display:inline-block;font:600 11.5px/1.5 var(--body);border-radius:5px;padding:1px 7px;margin-left:6px;vertical-align:middle;white-space:nowrap;letter-spacing:.2px}
+.tg.rag{background:var(--tealSoft);color:var(--teal);border:1px solid var(--teal)}
+.tg.lg1{background:var(--violet);color:var(--paper);border:1px solid var(--violet)}
+.tg.ag{background:var(--amberSoft);color:var(--amber);border:1px solid var(--amber)}
+.sm.ag{background:var(--amber);border-radius:2px}
+.tg.lg2{background:transparent;color:var(--violet);border:1px dashed var(--violet)}
+h2 .tg{font-size:12px;position:relative;top:-3px}
+.mhead .tgs{display:inline-flex;gap:0}
+.mhead .tgs .tg:first-child{margin-left:0}
+.sm{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:6px;vertical-align:middle}
+.sm.rag{background:var(--teal)}
+.sm.lg1{background:var(--violet)}
+.sm.lg2{border:1.5px solid var(--violet)}
+.mhead .tgs:empty{display:none}
+.navlist a[aria-current="page"] .sm{box-shadow:0 0 0 1.5px var(--nodeText)}
+.bridge{display:grid;gap:6px;margin-top:14px}
+.bridge div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:14.5px;line-height:1.6}
+.bridge .tg{margin-left:0}
+.legend2{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:13px;color:var(--muted);margin-top:8px}
+.legend2 .tg{margin-left:0}
+.path{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:10px}
+.path .card h4{margin:0 0 6px}
+.path ol{margin:4px 0 0}
+.ucard .tgrow{display:flex;flex-wrap:wrap;gap:4px}
+.ucard .tgrow .tg{margin-left:0}
+
+.copyright{font-size:14px;color:var(--muted);line-height:1.6;margin-top:8px}
+/* 탭: 모든 화면 폭에서 왼쪽 세로 배치 */
+@media (max-width:900px){
+  .layout{grid-template-columns:200px minmax(0,1fr) !important;gap:22px !important}
+  .side{position:sticky !important;top:env(safe-area-inset-top,0px) !important;max-height:100vh !important;overflow-y:auto !important;border-bottom:0 !important;margin:0 !important;padding:22px 0 !important;background:transparent !important}
+  .side .brand,.side .brand-sub{display:block !important}
+  .navwrap{display:block !important;overflow:visible !important}
+  .navlist{flex-direction:column !important;gap:2px !important}
+  .navlist button{display:grid !important;grid-template-columns:26px minmax(0,1fr) auto !important;width:100% !important;white-space:normal !important;border:0 !important;background:transparent !important;border-radius:8px !important;padding:7px 6px !important;font-size:14px !important}
+  .navlist button[aria-selected="true"]{background:var(--node) !important}
+  .navlist button .sm{display:inline-block !important}
+  main{padding-top:24px !important}
+}
+@media (max-width:600px){
+  .layout{grid-template-columns:112px minmax(0,1fr) !important;gap:12px !important}
+  .navlist button{grid-template-columns:minmax(0,1fr) auto !important;font-size:13px !important;padding:6px 5px !important}
+  .navlist button .n,.navlist button .sm,.side .brand-sub{display:none !important}
+  .side .brand{font-size:15px !important}
+}
+.view{margin-top:26px;background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--violet);border-radius:12px;padding:14px 18px 10px}
+.view-h{font:700 15px var(--body);color:var(--violet);letter-spacing:.3px;margin-bottom:4px}
+.view ul{margin:4px 0 0;padding-left:20px}
+.view li{margin:10px 0;line-height:1.8}
+.view li b{color:var(--ink)}
+/* 가독성: 글꼴 크기 */
+body{font-size:17.5px;line-height:1.85}
+p{max-width:78ch}
+h1{font-size:clamp(32px,5vw,46px)}
+h2{font-size:31px}
+h3{font-size:20.5px;margin-top:30px}
+h4{font-size:17.5px}
+pre{font-size:15px;line-height:1.7}
+pre.out,pre.err{font-size:14.5px}
+table{font-size:15.5px}
+th,td{padding:9px 12px}
+.cap{font-size:14.5px}
+.note,.warn,.ragbox,.fix{font-size:16px}
+.goal{font-size:16.5px}
+.navlist button{font-size:15.5px !important}
+.side .brand-sub{font-size:13.5px}
+.checks li{font-size:16px}
+.mhead h3{font-size:19.5px}
+.lv{font-size:13px}
+.tg{font-size:12.5px}
+.bridge div{font-size:15.5px}
+.legend2{font-size:14px}
+@media (max-width:600px){body{font-size:17px} pre{font-size:13.5px} h2{font-size:26px} table{font-size:14.5px}}
+
+.solo{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.solo main{max-width:none}
+.navlist button{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:start;gap:4px;width:100%;text-align:left;font:500 14px/1.4 var(--body);border:0;background:transparent;color:var(--ink);border-radius:8px;padding:8px 8px;cursor:pointer}
+.navlist button .n{font:600 12px/1.6 var(--mono);color:var(--muted)}
+.navlist button .mc{font:500 11px var(--mono);color:var(--muted)}
+.navlist button:hover{background:var(--soft)}
+.navlist button[aria-selected="true"]{background:var(--node);color:var(--nodeText)}
+.navlist button[aria-selected="true"] .n,.navlist button[aria-selected="true"] .mc{color:var(--nodeText)}
+.navlist button[aria-selected="true"] .sm{box-shadow:0 0 0 1.5px var(--nodeText)}
+.navlist button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.side .brand{font:400 24px/1.25 var(--display);margin-bottom:4px}
+.uhead{padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.uhead h1{margin-bottom:0}
+.pane > section{margin-top:0}
+.pane #missions{margin-top:0;padding-top:0;border-top:0}
+.pane > section > h2{margin-bottom:12px}
+@media (max-width:900px){
+  .navlist button{display:flex;flex:0 0 auto;width:auto;white-space:nowrap;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13.5px;gap:6px}
+  .navlist button .sm{display:none}
+  .side .brand{font-size:18px}
+}
+
+.time{font:600 14px var(--body);color:var(--ink);margin-top:2px}
+.time span{font-weight:400;color:var(--muted)}
+.goal{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--node);border-radius:10px;padding:10px 14px;margin-top:12px;font-size:15px}
+.goal b{color:var(--node)}
+.goal ul{margin:4px 0 0}
+.sumlist{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 18px 14px 36px;margin-top:10px}
+.sumlist li{margin:6px 0}
+.ucard .tm{font:500 12px var(--mono);color:var(--muted)}
+
+.navlist a{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:4px;width:100%;font:500 14px/1.35 var(--body);color:var(--ink);text-decoration:none;border-radius:8px;padding:7px 8px}
+.navlist a .n{font:600 12px var(--mono);color:var(--muted)}
+.navlist a .mc{font:500 11px var(--mono);color:var(--muted)}
+.navlist a.full .mc{color:var(--teal);font-weight:600}
+.navlist a:hover{background:var(--soft)}
+.navlist a[aria-current="page"]{background:var(--node);color:var(--nodeText)}
+.navlist a[aria-current="page"] .n,.navlist a[aria-current="page"] .mc{color:var(--nodeText)}
+.navlist a:focus-visible,.pager a:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.side .brand a{color:inherit;text-decoration:none}
+.unit-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.unit-meta a.go{font:600 13px var(--body);background:var(--teal);color:var(--paper);text-decoration:none;border-radius:999px;padding:4px 14px}
+.unit-panel{margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
+.unit-panel > section:first-child{margin-top:0}
+/* missions */
+#missions{scroll-margin-top:72px;margin-top:56px;padding-top:28px;border-top:3px double var(--line)}
+.mlegend{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 6px}
+.mprog{font:500 13px var(--mono);color:var(--muted)}
+.mission{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:16px;scroll-margin-top:70px}
+.mission.is-done{border-color:var(--teal);background:linear-gradient(var(--outBg),var(--outBg))}
+.mhead{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.mhead h3{margin:0;font-size:18px;flex:1 1 220px;min-width:0}
+.lv{font:600 12px var(--body);border-radius:6px;padding:2px 9px;white-space:nowrap}
+.lv1{background:var(--tealSoft);color:var(--teal)}
+.lv2{background:var(--amberSoft);color:var(--amber)}
+.lv3{background:var(--coralSoft);color:var(--coral)}
+.mdone{display:inline-flex;align-items:center;gap:6px;font:600 13px var(--body);color:var(--muted);cursor:pointer;border:1px solid var(--line);border-radius:999px;padding:3px 12px;background:var(--bg)}
+.mdone input{accent-color:var(--teal);width:16px;height:16px;margin:0}
+.mission.is-done .mdone{color:var(--teal);border-color:var(--teal)}
+.mlabel{font:600 11px var(--mono);letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin:14px 0 2px}
+.checks{list-style:none;padding:0;margin:4px 0 0}
+.checks li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:6px;align-items:start;margin:3px 0;font-size:15px}
+.checks input{accent-color:var(--teal);width:16px;height:16px;margin:5px 0 0}
+.checks label{cursor:pointer}
+.mission details{margin-top:10px}
+.mission details.ans summary{color:var(--violet)}
+.mission details.hint summary{color:var(--amber)}
+.mission .note{margin-top:10px}
+.pager{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;width:100%}
+.pager a{font:500 14px var(--body);border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:8px 14px;text-decoration:none;max-width:100%}
+.pager a:hover{border-color:var(--teal)}
+.pager .sp{flex:1}
+@media (max-width:900px){
+  .navlist a{display:flex;flex:0 0 auto;width:auto;white-space:nowrap;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13.5px;gap:6px}
+  .navlist a .mc{display:none}
+  .navlist a.full .n{color:var(--teal)}
+}
+/* index */
+.ucards{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-top:10px}
+.ucard{display:flex;flex-direction:column;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);min-width:0}
+.ucard:hover{border-color:var(--teal)}
+.ucard .n{font:600 12px var(--mono);color:var(--teal)}
+.ucard b{font-size:16px}
+.ucard .d{font-size:13.5px;color:var(--muted);line-height:1.55}
+.ucard .bar{height:5px;background:var(--soft);border-radius:999px;overflow:hidden;margin-top:auto}
+.ucard .bar i{display:block;height:100%;width:0;background:var(--teal)}
+.ucard .mc{font:500 12px var(--mono);color:var(--muted)}
+
+.ex{border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:22px 0;background:var(--card,transparent)}
+.ex h3{margin:0 0 6px}
+.ex .what{font-size:16.5px;margin:0 0 10px}
+.note{margin-top:12px;background:var(--soft);border-radius:10px;padding:10px 16px}
+.note-h{font-weight:700;color:var(--node);margin-bottom:4px}
+.note ul{margin:0;padding-left:20px}
+.note li{margin:5px 0;font-size:16px}
+.tip{margin:18px 0;padding:12px 16px;border-left:4px solid var(--node);background:var(--soft);border-radius:6px;font-size:16px}
+.tip b{margin-right:8px}
+pre.out[data-l]::before{content:attr(data-l)}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="side" aria-label="목차">
+<div class="brand">여행 데이터로 보는 랭체인</div>
+<div class="brand-sub">travel_docs.csv · 01 기본문법</div>
+<nav class="navwrap" role="tablist" aria-label="목차" aria-orientation="vertical"><div class="navlist">
+<button type="button" role="tab" id="tab-intro" aria-controls="pane-intro" data-t="intro"><span class="n">0</span><span>데이터 · 준비</span></button>
+<button type="button" role="tab" id="tab-t1" aria-controls="pane-t1" data-t="t1"><span class="n">1</span><span>기본 체인</span></button>
+<button type="button" role="tab" id="tab-t2" aria-controls="pane-t2" data-t="t2"><span class="n">2</span><span>프롬프트 템플릿</span></button>
+<button type="button" role="tab" id="tab-t3" aria-controls="pane-t3" data-t="t3"><span class="n">3</span><span>출력 파서</span></button>
+<button type="button" role="tab" id="tab-t4" aria-controls="pane-t4" data-t="t4"><span class="n">4</span><span>순차 체인</span></button>
+<button type="button" role="tab" id="tab-t5" aria-controls="pane-t5" data-t="t5"><span class="n">5</span><span>RunnableLambda</span></button>
+<button type="button" role="tab" id="tab-t6" aria-controls="pane-t6" data-t="t6"><span class="n">6</span><span>Gradio 화면</span></button>
+</div></nav></aside>
+<main>
+<header class="uhead"><div class="kicker">LangChain 기본문법 · 예제</div><h1>여행 데이터로 보는 랭체인</h1><div class="copyright">© 2026 부성순 · AI·클라우드 실무 과정<br>부성순 (bakpak@empas.com)</div></header>
+<div class="pane" role="tabpanel" id="pane-intro" aria-labelledby="tab-intro">
+<section><h2><span class="no">0</span>데이터와 준비 코드</h2>
+<p>01 기본문법 노트북에서 배운 코드를 <b>여행 정보 데이터</b>에 그대로 적용해 봅니다. 새 문법은 없습니다. 모든 예제는 코드와 결과, 설명을 함께 실었습니다.</p>
+
+<h3>이 자료에서 하는 RAG</h3>
+<p>RAG는 "자료를 프롬프트에 넣고 그 자료로 답하게 하기"입니다. 원래는 질문에 맞는 자료를 <b>찾는</b> 단계가 앞에 있지만, 여기서는 찾지 않고 <b>문서 번호로 직접 골라서</b> 넣습니다. 랭체인 문법에만 집중하기 위해서입니다.</p>
+
+<h3>데이터: travel_docs.csv</h3>
+<p>가상의 지역 '은하군'의 여행 정보 22건입니다. 장소·회사 이름이 모두 가상이라 모델은 미리 알 수 없습니다. 그래서 답이 맞으면 넣어 준 자료 덕분입니다.</p>
+<div class="tw"><table>
+<tr><th>doc_id</th><th>제목</th><th>doc_id</th><th>제목</th></tr>
+<tr><td>T01</td><td>솔바람섬 소개</td><td>T12</td><td>[상품] 솔바람섬 별빛 2박3일</td></tr>
+<tr><td>T02</td><td>별빛전망대</td><td>T13</td><td>[상품] 청연계곡 반딧불 트레킹</td></tr>
+<tr><td>T03</td><td>청연계곡</td><td>T14</td><td>[상품] 노을항 미식 투어</td></tr>
+<tr><td>T04</td><td>반딧불숲과 반딧불 축제</td><td>T15</td><td>바람길여행 예약 취소·환불 규정</td></tr>
+<tr><td>T05</td><td>노을항</td><td>T16</td><td>해온호스피탈리티 숙소 취소 규정</td></tr>
+<tr><td>T06</td><td>파도소리 리조트</td><td>T17</td><td>은하해운 결항·환불 규정</td></tr>
+<tr><td>T07</td><td>계곡쉼 펜션</td><td>T18</td><td>[FAQ] 바람길여행 자주 묻는 질문</td></tr>
+<tr><td>T08</td><td>노을스테이 호텔</td><td>T19</td><td>[FAQ] 솔바람섬 여행 FAQ</td></tr>
+<tr><td>T09</td><td>갈매기식당</td><td>T20</td><td>[혼동 주의] 솔바람호텔</td></tr>
+<tr><td>T10</td><td>숲속부엌</td><td>T21</td><td>[혼동 주의] 별빛캠핑장</td></tr>
+<tr><td>T11</td><td>솔바람페리</td><td>T22</td><td>[혼동 주의] 바람결여행 취소 규정</td></tr>
+</table></div>
+
+<h3>준비 코드 (맨 처음 한 번)</h3>
+<p>아래 준비 코드를 한 번 실행하면, 이후 예제는 <b>각 예제 코드만 복사해서 바로 실행</b>할 수 있습니다. 예제마다 필요한 프롬프트와 체인을 생략 없이 모두 넣었습니다.</p>
+<pre class="py">from dotenv import load_dotenv
+load_dotenv()
+
+import pandas as pd
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+llm = ChatOpenAI(model=&quot;gpt-4o-mini&quot;, temperature=0)
+parser = StrOutputParser()
+
+docs = pd.read_csv(&quot;travel_docs.csv&quot;)      # doc_id, category, source, title, body
+print(docs.shape)
+
+# 문서 번호 하나로 자료 가져오기
+def get_doc(doc_id: str) -&gt; str:
+    r = docs[docs[&quot;doc_id&quot;] == doc_id].iloc[0]
+    return f&quot;[{r[&#x27;doc_id&#x27;]}] {r[&#x27;title&#x27;]}\n{r[&#x27;body&#x27;]}&quot;
+
+# 문서 번호 여러 개를 한 번에
+def get_docs(doc_ids: list) -&gt; str:
+    return &quot;\n\n&quot;.join(get_doc(i) for i in doc_ids)
+
+print(get_doc(&quot;T02&quot;))</pre>
+<pre class="out" data-l="실행 결과">(22, 5)
+[T02] 별빛전망대
+별빛전망대는 솔바람섬 북쪽 언덕 꼭대기에 있는 천문 관측 명소이다. 맑은 날 밤에는 은하수를 맨눈으로 볼 수 있다. 별빛전망대는 매주 월요일에 휴관하며 입장료는 5천 원이다. 전망대까지는 섬 선착장에서 걸어서 약 30분이 걸린다. 겨울철에는 오후 9시에 문을 닫는다.</pre>
+<div class="note"><div class="note-h">설명</div><ul>
+<li><code>get_doc("T02")</code>는 문서 하나를 "[번호] 제목 + 본문" 글자로 돌려줍니다. 이 글자를 프롬프트의 <code>{context}</code> 자리에 넣게 됩니다.</li>
+<li>모델 답(실행 결과)은 실행할 때마다 문장이 조금씩 다를 수 있습니다. 핵심 내용(요일, 가격, 비율)이 같으면 됩니다.</li>
+</ul></div>
+</section></div>
+<div class="pane" role="tabpanel" id="pane-t1" aria-labelledby="tab-t1"><section><h2><span class="no">1</span>기본 체인: 자료를 넣으면 달라진다</h2><div class="ex" id="x1-1">
+<h3>1-1. 자료 없이 물어보기</h3>
+<p class="what">노트북 Step1의 <code>prompt | llm | parser</code>를 그대로 씁니다. 자료는 넣지 않습니다.</p>
+<pre class="py">prompt = ChatPromptTemplate.from_template(&quot;당신은 은하군 여행 안내원입니다. {question}에 답해주세요.&quot;)
+chain = prompt | llm | parser
+
+print(chain.invoke({&quot;question&quot;: &quot;별빛전망대는 언제 쉬어?&quot;}))</pre>
+<pre class="out" data-l="실행 결과">죄송하지만 은하군 별빛전망대의 휴무일에 대한 정확한 정보는 가지고 있지 않습니다.
+방문 전에 공식 홈페이지나 전화로 확인해 보시기 바랍니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>모델은 가상의 '별빛전망대'를 모릅니다. 그래서 모른다고 하거나, 그럴듯한 말을 지어냅니다.</li><li>모델이 학습하지 않은 정보는 프롬프트에 넣어 줘야 합니다. 이것이 RAG를 하는 이유입니다.</li></ul></div>
+</div><div class="ex" id="x1-2">
+<h3>1-2. 자료를 넣어서 물어보기</h3>
+<p class="what">프롬프트에 빈칸 <code>{context}</code>를 하나 더 만들고, 거기에 T02 문서를 넣습니다.</p>
+<pre class="py">prompt = ChatPromptTemplate.from_template(
+    &quot;아래 [자료]에 있는 내용만으로 답하세요.\n\n[자료]\n{context}\n\n[질문]\n{question}&quot;
+)
+rag_chain = prompt | llm | parser
+
+print(rag_chain.invoke({&quot;context&quot;: get_doc(&quot;T02&quot;), &quot;question&quot;: &quot;별빛전망대는 언제 쉬어?&quot;}))</pre>
+<pre class="out" data-l="실행 결과">별빛전망대는 매주 월요일에 휴관합니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>1-1과 바뀐 것은 <code>{context}</code> 빈칸 하나뿐입니다. 그런데 답이 정확해졌습니다.</li><li>invoke에 넣는 dict의 key(<code>context</code>, <code>question</code>)는 프롬프트의 빈칸 이름과 같아야 합니다.</li></ul></div>
+</div><div class="ex" id="x1-3">
+<h3>1-3. 자료에 없는 걸 물으면 &#x27;없다&#x27;고 답하게 하기</h3>
+<p class="what">자료에 없는 질문(맛집)을 하면 모델이 지어낼 수 있습니다. 규칙 한 문장을 추가해 막습니다.</p>
+<pre class="py">prompt = ChatPromptTemplate.from_template(
+    &quot;아래 [자료]에 있는 내용만으로 답하세요. [자료]에 없으면 &#x27;자료에 없습니다&#x27;라고 답하세요.\n\n&quot;
+    &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;
+)
+rag_chain = prompt | llm | parser
+
+print(rag_chain.invoke({&quot;context&quot;: get_doc(&quot;T02&quot;), &quot;question&quot;: &quot;별빛전망대 근처 맛집 알려줘&quot;}))</pre>
+<pre class="out" data-l="실행 결과">자료에 없습니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>여행 안내에서 틀린 정보(없는 식당, 틀린 휴무일)는 실제 피해로 이어집니다. 모르면 모른다고 하게 만드는 규칙이 꼭 필요합니다.</li></ul></div>
+</div><div class="ex" id="x1-4">
+<h3>1-4. 여러 질문 한 번에(batch), 글자 흐르게(stream)</h3>
+<p class="what">노트북 ⑤ 실행에서 본 세 가지 실행 방법 중 batch와 stream을 써 봅니다.</p>
+<pre class="py">prompt = ChatPromptTemplate.from_template(
+    &quot;아래 [자료]에 있는 내용만으로 답하세요. [자료]에 없으면 &#x27;자료에 없습니다&#x27;라고 답하세요.\n\n&quot;
+    &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;
+)
+rag_chain = prompt | llm | parser
+
+# batch: 입력 여러 개를 리스트로 한 번에
+inputs = [
+    {&quot;context&quot;: get_doc(&quot;T09&quot;), &quot;question&quot;: &quot;갈매기식당은 언제 쉬어?&quot;},
+    {&quot;context&quot;: get_doc(&quot;T11&quot;), &quot;question&quot;: &quot;솔바람페리는 하루 몇 번 다녀?&quot;},
+    {&quot;context&quot;: get_doc(&quot;T13&quot;), &quot;question&quot;: &quot;반딧불 트레킹 가이드는 누구야?&quot;},
+]
+for r in rag_chain.batch(inputs):
+    print(r)
+
+# stream: 답을 조금씩 받아서 바로 출력
+for chunk in rag_chain.stream({&quot;context&quot;: get_doc(&quot;T15&quot;),
+                               &quot;question&quot;: &quot;취소하면 환불을 얼마나 받아? 자세히 설명해줘&quot;}):
+    print(chunk, end=&quot;&quot;, flush=True)</pre>
+<pre class="out" data-l="실행 결과">갈매기식당은 매주 화요일에 쉽니다.
+솔바람페리는 하루 4회 운항합니다.
+청연계곡 반딧불 트레킹의 담당 가이드는 윤솔입니다.
+
+바람길여행 상품의 환불 규정은 다음과 같습니다.
+- 출발 10일 전까지 취소: 전액 환불
+- 출발 5~9일 전 취소: 80% 환불
+- 출발 2~4일 전 취소: 30% 환불
+- 출발 1일 전부터: 환불 불가
+
+단, 숙소 비용은 해당 숙소 운영사의 취소 규정을 따릅니다.
+환불은 결제 수단으로 영업일 기준 5일 안에 처리되며, 단체 예약은 별도 계약 조건을 따릅니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li><code>batch</code>는 결과도 입력 순서대로 리스트로 돌려줍니다.</li><li><code>stream</code>은 긴 답을 기다리지 않고 글자가 나오는 대로 보여 줄 때 씁니다. 챗봇 화면에서 많이 씁니다.</li></ul></div>
+</div></section></div>
+<div class="pane" role="tabpanel" id="pane-t2" aria-labelledby="tab-t2"><section><h2><span class="no">2</span>프롬프트 템플릿</h2><div class="ex" id="x2-1">
+<h3>2-1. 규칙은 system, 자료와 질문은 human</h3>
+<p class="what">1-3의 프롬프트를 노트북 Text-to-SQL처럼 <code>from_messages</code>로 나눕니다. 이후 예제는 모두 이 프롬프트를 씁니다.</p>
+<pre class="py">prompt = ChatPromptTemplate.from_messages([
+    (&quot;system&quot;, &quot;당신은 은하군 여행 안내원입니다. 아래 [자료]에 있는 내용만으로 답하세요. &quot;
+               &quot;[자료]에 없으면 &#x27;자료에 없습니다&#x27;라고 답하세요.&quot;),
+    (&quot;human&quot;, &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;),
+])
+rag_chain = prompt | llm | parser
+
+# 모델에 무엇이 전달되는지 확인 (모델은 부르지 않음)
+pv = prompt.invoke({&quot;context&quot;: get_doc(&quot;T02&quot;), &quot;question&quot;: &quot;별빛전망대는 언제 쉬어?&quot;})
+for m in pv.to_messages():
+    print(type(m).__name__, &quot;:&quot;, m.content[:40])
+
+print(rag_chain.invoke({&quot;context&quot;: get_doc(&quot;T02&quot;), &quot;question&quot;: &quot;별빛전망대는 언제 쉬어?&quot;}))</pre>
+<pre class="out" data-l="실행 결과">SystemMessage : 당신은 은하군 여행 안내원입니다. 아래 [자료]에 있는 내용만으로 답하세
+HumanMessage : [자료]
+[T02] 별빛전망대
+별빛전망대는 솔바람섬 북쪽 언덕 꼭대기에
+별빛전망대는 매주 월요일에 휴관합니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>system에는 바뀌지 않는 규칙을, human에는 매번 바뀌는 자료와 질문을 넣습니다.</li><li>모델은 system 메시지를 '지켜야 할 지시'로 더 무겁게 받아들입니다. 규칙이 길어질수록 나눠 두는 것이 좋습니다.</li><li><code>prompt.invoke()</code>만 하면 모델을 부르지 않고, 모델에 갈 메시지를 미리 볼 수 있습니다.</li></ul></div>
+</div><div class="ex" id="x2-2">
+<h3>2-2. {role} 빈칸으로 말투 바꾸기</h3>
+<p class="what">노트북의 <code>"당신은 {role} 전문가입니다"</code>처럼, 역할을 빈칸으로 만들어 말투만 바꿔 봅니다.</p>
+<pre class="py">role_prompt = ChatPromptTemplate.from_messages([
+    (&quot;system&quot;, &quot;당신은 {role}입니다. 아래 [자료]에 있는 내용만으로 답하세요.&quot;),
+    (&quot;human&quot;, &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;),
+])
+role_chain = role_prompt | llm | parser
+
+for role in [&quot;친절한 여행 상담원&quot;, &quot;10살 아이에게 설명하는 안내원&quot;]:
+    print(f&quot;【{role}】&quot;)
+    print(role_chain.invoke({&quot;role&quot;: role, &quot;context&quot;: get_doc(&quot;T12&quot;), &quot;question&quot;: &quot;이 상품 소개해줘&quot;}), &quot;\n&quot;)</pre>
+<pre class="out" data-l="실행 결과">【친절한 여행 상담원】
+&#x27;솔바람섬 별빛 2박3일&#x27;은 바람길여행의 투어 상품으로, 1인 39만 원(VAT 포함, 유류할증료 별도)입니다.
+파도소리 리조트에서 2박하며, 별빛전망대 야간 관측과 은빛해변 산책 일정이 있습니다.
+솔바람페리 왕복 승선권이 포함되고, 담당 가이드는 한별입니다. 최소 출발 인원은 6명입니다.
+
+【10살 아이에게 설명하는 안내원】
+솔바람섬에 가서 2박 3일 동안 별을 보는 여행이에요! 파도소리 리조트에서 자고,
+밤에는 별빛전망대에서 은하수를 볼 수 있어요. 가격은 한 사람에 39만 원이에요.
+배(솔바람페리)도 타고, 한별 가이드 선생님이 함께해요. 6명 이상 모여야 출발해요.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>빈칸은 자료나 질문만 넣는 곳이 아닙니다. 역할·말투처럼 프롬프트의 어떤 부분이든 빈칸으로 만들 수 있습니다.</li><li>말투는 바뀌었지만 가격(39만 원)과 숙소(파도소리 리조트)는 그대로입니다. 사실은 자료가 정합니다.</li></ul></div>
+</div><div class="ex" id="x2-3">
+<h3>2-3. 답의 모양을 정해 주기</h3>
+<p class="what">노트북 Text-to-SQL의 [Output Format]처럼, system에 답변 형식을 적어 두면 답이 항상 같은 모양으로 나옵니다.</p>
+<pre class="py">form_prompt = ChatPromptTemplate.from_messages([
+    (&quot;system&quot;, &quot;당신은 은하군 여행 안내원입니다. 아래 [자료]에 있는 내용만으로 답하세요.\n&quot;
+               &quot;반드시 아래 형식으로만 답하세요.\n&quot;
+               &quot;답: (한두 문장)\n&quot;
+               &quot;주의: (예약·휴무 등 주의할 점. 없으면 &#x27;없음&#x27;)&quot;),
+    (&quot;human&quot;, &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;),
+])
+tests = [
+    {&quot;context&quot;: get_doc(&quot;T07&quot;), &quot;question&quot;: &quot;계곡쉼 펜션에 강아지 데려가도 돼?&quot;},
+    {&quot;context&quot;: get_doc(&quot;T04&quot;), &quot;question&quot;: &quot;반딧불 축제 야간 탐방 그냥 가면 돼?&quot;},
+    {&quot;context&quot;: get_doc(&quot;T10&quot;), &quot;question&quot;: &quot;숲속부엌 대표 메뉴가 뭐야?&quot;},
+]
+for r in (form_prompt | llm | parser).batch(tests):
+    print(r, &quot;\n&quot;)</pre>
+<pre class="out" data-l="실행 결과">답: 네, 계곡쉼 펜션은 반려동물 동반 투숙이 가능합니다.
+주의: 주말에는 예약이 빨리 마감됩니다.
+
+답: 아니요, 축제 기간의 야간 탐방은 사전 예약제로 운영됩니다.
+주의: 탐방 중에는 손전등과 휴대폰 불빛 사용이 금지됩니다.
+
+답: 숲속부엌의 대표 메뉴는 산채비빔밥입니다.
+주의: 단체 손님은 하루 전에 예약해야 합니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>형식을 정해 두면 화면에 보여 주거나 코드로 나눠 쓰기 쉽습니다.</li><li>형식을 더 엄격하게 지키게 하려면 JSON 파서를 씁니다(3-2).</li></ul></div>
+</div><div class="ex" id="x2-4">
+<h3>2-4. 프롬프트에 JSON 예시를 넣을 때는 중괄호 두 번</h3>
+<p class="what">프롬프트 안의 <code>{ }</code>는 빈칸으로 읽힙니다. JSON 예시를 넣으면 빈칸으로 잘못 잡힙니다.</p>
+<pre class="py"># 잘못된 예: 중괄호 한 번
+wrong = ChatPromptTemplate.from_template(
+    &#x27;형식: {&quot;answer&quot;: &quot;답&quot;, &quot;found&quot;: true 또는 false}\n[자료]\n{context}\n[질문]\n{question}&#x27;
+)
+print(wrong.input_variables)
+
+# 올바른 예: 중괄호 두 번
+right = ChatPromptTemplate.from_template(
+    &#x27;형식: {{&quot;answer&quot;: &quot;답&quot;, &quot;found&quot;: true 또는 false}}\n[자료]\n{context}\n[질문]\n{question}&#x27;
+)
+print(right.input_variables)</pre>
+<pre class="out" data-l="실행 결과">[&#x27;&quot;answer&quot;&#x27;, &#x27;context&#x27;, &#x27;question&#x27;]
+[&#x27;context&#x27;, &#x27;question&#x27;]</pre>
+<div class="note"><div class="note-h">설명</div><ul><li><code>input_variables</code>는 프롬프트의 빈칸 목록입니다. 잘못된 예는 <code>"answer"</code>까지 빈칸으로 잡았습니다.</li><li>이대로 invoke하면 <code>KeyError: missing variables {'"answer"'}</code>가 납니다. 만들 때는 에러가 안 나고 실행할 때 나서 찾기 어렵습니다.</li><li><code>{{ }}</code>로 쓰면 빈칸이 아니라 글자 <code>{ }</code>로 모델에 전달됩니다. 노트북 응급/경미 판정 프롬프트도 이렇게 썼습니다.</li></ul></div>
+</div></section></div>
+<div class="pane" role="tabpanel" id="pane-t3" aria-labelledby="tab-t3"><section><h2><span class="no">3</span>출력 파서</h2><div class="ex" id="x3-1">
+<h3>3-1. 파서가 있을 때와 없을 때</h3>
+<p class="what">같은 체인을 파서 없이, 파서를 붙여서 실행하고 결과의 type을 비교합니다. (프롬프트는 2-1의 <code>prompt</code>)</p>
+<pre class="py">prompt = ChatPromptTemplate.from_messages([
+    (&quot;system&quot;, &quot;당신은 은하군 여행 안내원입니다. 아래 [자료]에 있는 내용만으로 답하세요. &quot;
+               &quot;[자료]에 없으면 &#x27;자료에 없습니다&#x27;라고 답하세요.&quot;),
+    (&quot;human&quot;, &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;),
+])
+rag_chain = prompt | llm | parser
+
+data = {&quot;context&quot;: get_doc(&quot;T15&quot;), &quot;question&quot;: &quot;출발 3일 전에 취소하면?&quot;}
+
+msg = (prompt | llm).invoke(data)            # 파서 없음
+print(type(msg).__name__, &quot;|&quot;, msg.content)
+
+text = (prompt | llm | parser).invoke(data)  # StrOutputParser
+print(type(text).__name__, &quot;|&quot;, text)</pre>
+<pre class="out" data-l="실행 결과">AIMessage | 출발 3일 전에 취소하면 30%를 환불받을 수 있습니다.
+str | 출발 3일 전에 취소하면 30%를 환불받을 수 있습니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>파서가 없으면 결과는 <code>AIMessage</code> 객체이고, 글자는 <code>.content</code> 안에 있습니다.</li><li><code>StrOutputParser</code>는 그 <code>.content</code>를 꺼내 문자열로 줍니다. 그래서 바로 print하거나 다음 체인에 넘길 수 있습니다.</li></ul></div>
+</div><div class="ex" id="x3-2">
+<h3>3-2. JSON 파서로 상품 정보 뽑아 표 만들기</h3>
+<p class="what">상품 문서 3개(T12, T13, T14)에서 이름·가격·가이드를 뽑아 pandas 표로 만듭니다.</p>
+<pre class="py">from langchain_core.output_parsers import JsonOutputParser
+
+extract = ChatPromptTemplate.from_template(
+    &quot;다음 상품 자료에서 정보를 뽑아 JSON으로만 답해. 다른 설명은 넣지 마.\n&quot;
+    &#x27;형식: {{&quot;name&quot;: &quot;상품명&quot;, &quot;price&quot;: &quot;가격&quot;, &quot;guide&quot;: &quot;가이드 이름&quot;}}\n\n&#x27;
+    &quot;[자료]\n{context}&quot;
+)
+extract_chain = extract | llm | JsonOutputParser()
+
+rows = extract_chain.batch([{&quot;context&quot;: get_doc(i)} for i in [&quot;T12&quot;, &quot;T13&quot;, &quot;T14&quot;]])
+print(type(rows[0]))
+
+table = pd.DataFrame(rows)
+print(table)
+
+# 표에서 바로 찾기: 가이드가 한별인 상품
+print(table[table[&quot;guide&quot;] == &quot;한별&quot;][&quot;name&quot;].tolist())</pre>
+<pre class="out" data-l="실행 결과">&lt;class &#x27;dict&#x27;&gt;
+               name                              price guide
+0    솔바람섬 별빛 2박3일  1인 39만 원 (VAT 포함 &amp; 유류할증료 별도)    한별
+1    청연계곡 반딧불 트레킹                           6만 9천 원    윤솔
+2       노을항 미식 투어                              25만 원    한별
+[&#x27;솔바람섬 별빛 2박3일&#x27;, &#x27;노을항 미식 투어&#x27;]</pre>
+<div class="note"><div class="note-h">설명</div><ul><li><code>JsonOutputParser</code>는 모델이 쓴 JSON 글자를 파이썬 dict로 바꿔 줍니다.</li><li>dict 리스트는 <code>pd.DataFrame</code>으로 바로 표가 됩니다. 표가 되면 "한별 담당 상품" 같은 질문은 모델에게 묻지 않고 코드로 정확히 찾을 수 있습니다.</li><li>JSON 예시의 중괄호는 2-4처럼 <code>{{ }}</code>로 씁니다.</li></ul></div>
+</div><div class="ex" id="x3-3">
+<h3>3-3. 리스트 파서로 키워드 뽑기</h3>
+<p class="what">문서마다 핵심 키워드 5개를 파이썬 리스트로 받습니다.</p>
+<pre class="py">from langchain_core.output_parsers import CommaSeparatedListOutputParser
+
+kw_chain = ChatPromptTemplate.from_template(
+    &quot;다음 자료의 핵심 키워드 5개를 쉼표로 구분해서만 답해.\n\n{context}&quot;
+) | llm | CommaSeparatedListOutputParser()
+
+ids = [&quot;T01&quot;, &quot;T02&quot;, &quot;T03&quot;, &quot;T04&quot;, &quot;T05&quot;]
+results = kw_chain.batch([{&quot;context&quot;: get_doc(i)} for i in ids])
+for doc_id, kws in zip(ids, results):
+    print(doc_id, kws)</pre>
+<pre class="out" data-l="실행 결과">T01 [&#x27;솔바람섬&#x27;, &#x27;별빛전망대&#x27;, &#x27;은빛해변&#x27;, &#x27;파도소리 리조트&#x27;, &#x27;솔바람페리&#x27;]
+T02 [&#x27;별빛전망대&#x27;, &#x27;은하수&#x27;, &#x27;월요일 휴관&#x27;, &#x27;입장료 5천 원&#x27;, &#x27;천문 관측&#x27;]
+T03 [&#x27;청연계곡&#x27;, &#x27;트레킹&#x27;, &#x27;계곡쉼 펜션&#x27;, &#x27;숲속부엌&#x27;, &#x27;반딧불숲&#x27;]
+T04 [&#x27;반딧불숲&#x27;, &#x27;반딧불 축제&#x27;, &#x27;6월&#x27;, &#x27;사전 예약제&#x27;, &#x27;야간 탐방&#x27;]
+T05 [&#x27;노을항&#x27;, &#x27;솔바람페리&#x27;, &#x27;갈매기식당&#x27;, &#x27;해산물 축제&#x27;, &#x27;노을&#x27;]</pre>
+<div class="note"><div class="note-h">설명</div><ul><li><code>CommaSeparatedListOutputParser</code>는 "a, b, c" 글자를 쉼표로 잘라 리스트 <code>['a', 'b', 'c']</code>로 바꿉니다.</li><li>프롬프트에 "쉼표로 구분해서만"이라고 써야 합니다. 번호나 설명을 붙이면 리스트가 이상하게 잘립니다.</li></ul></div>
+</div><div class="ex" id="x3-4">
+<h3>3-4. 판정하고 분기하기 (노트북 응급/경미 코드 변형)</h3>
+<p class="what">먼저 "자료로 답할 수 있는지"를 JSON으로 판정하고, 그 결과로 if 분기합니다. 노트북의 <code>level == "응급"</code>이 <code>found == True</code>로 바뀐 것뿐입니다.</p>
+<pre class="py">from langchain_core.output_parsers import JsonOutputParser
+
+prompt = ChatPromptTemplate.from_messages([
+    (&quot;system&quot;, &quot;당신은 은하군 여행 안내원입니다. 아래 [자료]에 있는 내용만으로 답하세요. &quot;
+               &quot;[자료]에 없으면 &#x27;자료에 없습니다&#x27;라고 답하세요.&quot;),
+    (&quot;human&quot;, &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;),
+])
+rag_chain = prompt | llm | parser
+
+judge = ChatPromptTemplate.from_template(
+    &quot;아래 [자료]로 [질문]에 답할 수 있는지 판정해 JSON으로만 답해. 다른 설명은 넣지 마.\n&quot;
+    &#x27;형식: {{&quot;found&quot;: true 또는 false, &quot;reason&quot;: &quot;판단 이유 한 문장&quot;}}\n\n&#x27;
+    &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;
+)
+judge_chain = judge | llm | JsonOutputParser()
+
+tests = [(&quot;T09&quot;, &quot;갈매기식당 쉬는 날이 언제야?&quot;),
+         (&quot;T09&quot;, &quot;갈매기식당에 주차장 있어?&quot;)]
+
+for doc_id, q in tests:
+    data = {&quot;context&quot;: get_doc(doc_id), &quot;question&quot;: q}
+    verdict = judge_chain.invoke(data)
+    print(&quot;【질문】&quot;, q)
+    print(&quot;【판정】&quot;, verdict)
+    if verdict[&quot;found&quot;] == True:
+        print(&quot;【답변】&quot;, rag_chain.invoke(data))
+    else:
+        print(&quot;【답변】 자료에 없는 내용입니다.&quot;)
+    print()</pre>
+<pre class="out" data-l="실행 결과">【질문】 갈매기식당 쉬는 날이 언제야?
+【판정】 {&#x27;found&#x27;: True, &#x27;reason&#x27;: &#x27;자료에 매주 화요일에 쉰다고 나와 있다.&#x27;}
+【답변】 갈매기식당은 매주 화요일에 쉽니다.
+
+【질문】 갈매기식당에 주차장 있어?
+【판정】 {&#x27;found&#x27;: False, &#x27;reason&#x27;: &#x27;자료에 주차장에 대한 정보가 없다.&#x27;}
+【답변】 자료에 없는 내용입니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>JSON 파서를 쓰는 가장 큰 이유가 이것입니다. 결과가 dict라서 <code>verdict["found"]</code>로 꺼내 if문에 쓸 수 있습니다.</li><li>문장으로 받으면("네, 답할 수 있어요") 코드가 판단하기 어렵습니다.</li><li><code>true/false</code>는 JSON 파서를 거치면 파이썬의 <code>True/False</code>가 됩니다.</li></ul></div>
+</div><div class="tip"><b>파서 고르는 법</b> 사람이 읽으면 <code>StrOutputParser</code> · 표로 만들거나 if로 분기하면 <code>JsonOutputParser</code> · 목록으로 쓰면 <code>CommaSeparatedListOutputParser</code></div></section></div>
+<div class="pane" role="tabpanel" id="pane-t4" aria-labelledby="tab-t4"><section><h2><span class="no">4</span>순차 체인</h2><div class="ex" id="x4-1">
+<h3>4-1. 규정 문서 → 쉬운 설명 → 3줄 요약 → 영어</h3>
+<p class="what">노트북 Step2의 'for문으로 줄이기' 코드에서 <code>templates</code>와 첫 입력만 바꿨습니다.</p>
+<pre class="py">templates = [
+    &quot;다음 여행사 규정을 여행객이 이해하기 쉽게 풀어서 설명해줘. 숫자는 그대로 써줘:\n{text}&quot;,
+    &quot;다음 내용을 딱 3줄로 요약해줘. 환불 비율은 빠뜨리지 마:\n{text}&quot;,
+    &quot;다음 한국어를 외국인 여행객용 영어로 번역해줘:\n{text}&quot;,
+]
+
+result = get_doc(&quot;T15&quot;)                       # 첫 입력: 환불 규정 문서
+for i, template in enumerate(templates, start=1):
+    chain = ChatPromptTemplate.from_template(template) | llm | parser
+    result = chain.invoke({&quot;text&quot;: result})   # 앞 단계 결과가 다음 단계 입력
+    print(f&quot;【{i}단계】\n{result}\n&quot;)</pre>
+<pre class="out" data-l="실행 결과">【1단계】
+바람길여행 상품을 취소할 때 환불 금액은 언제 취소하느냐에 따라 달라요.
+출발 10일 전까지 취소하면 전액, 5~9일 전이면 80%, 2~4일 전이면 30%를 돌려받고,
+출발 1일 전부터는 환불이 안 됩니다. 숙소 비용은 숙소 운영사의 규정을 따릅니다.
+환불은 결제한 수단으로 영업일 기준 5일 안에 들어오고, 단체 예약은 따로 정한 조건을 따릅니다.
+
+【2단계】
+1. 출발 10일 전까지 취소하면 전액 환불됩니다.
+2. 5~9일 전 취소는 80%, 2~4일 전 취소는 30% 환불되며, 1일 전부터는 환불되지 않습니다.
+3. 숙소 비용은 숙소 운영사의 취소 규정을 따릅니다.
+
+【3단계】
+1. Cancel at least 10 days before departure for a full refund.
+2. Cancellations 5–9 days before receive an 80% refund, 2–4 days before a 30% refund; no refund from 1 day before.
+3. Accommodation costs follow the cancellation policy of the accommodation operator.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li><code>result</code> 변수 하나를 계속 덮어쓰면서 다음 단계로 넘깁니다. 단계가 늘어도 <code>templates</code>에 문장만 추가하면 됩니다.</li><li>단계를 거칠수록 숫자가 빠지거나 바뀌기 쉽습니다. 그래서 프롬프트에 "숫자는 그대로", "환불 비율은 빠뜨리지 마"를 넣었습니다.</li></ul></div>
+</div></section></div>
+<div class="pane" role="tabpanel" id="pane-t5" aria-labelledby="tab-t5"><section><h2><span class="no">5</span>RunnableLambda</h2><div class="ex" id="x5-1">
+<h3>5-1. 문서 번호만 넣으면 답하는 체인</h3>
+<p class="what">지금까지는 <code>get_doc()</code>을 체인 밖에서 불렀습니다. 노트북 마스킹 체인처럼 이 일을 <code>RunnableLambda</code>로 체인 안에 넣습니다.</p>
+<pre class="py">prompt = ChatPromptTemplate.from_messages([
+    (&quot;system&quot;, &quot;당신은 은하군 여행 안내원입니다. 아래 [자료]에 있는 내용만으로 답하세요. &quot;
+               &quot;[자료]에 없으면 &#x27;자료에 없습니다&#x27;라고 답하세요.&quot;),
+    (&quot;human&quot;, &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;),
+])
+rag_chain = prompt | llm | parser
+
+from langchain_core.runnables import RunnableLambda
+
+# 입력 {&quot;doc_ids&quot;: [...], &quot;question&quot;: &quot;...&quot;}  →  프롬프트용 {&quot;context&quot;: ..., &quot;question&quot;: ...}
+def to_prompt_input(x):
+    return {&quot;context&quot;: get_docs(x[&quot;doc_ids&quot;]), &quot;question&quot;: x[&quot;question&quot;]}
+
+doc_chain = RunnableLambda(to_prompt_input) | prompt | llm | parser
+
+print(doc_chain.invoke({
+    &quot;doc_ids&quot;: [&quot;T12&quot;, &quot;T15&quot;, &quot;T16&quot;],
+    &quot;question&quot;: &quot;솔바람섬 별빛 2박3일을 출발 5일 전에 취소하면 환불은 어떻게 돼?&quot;
+}))</pre>
+<pre class="out" data-l="실행 결과">출발 5일 전에 취소하면 바람길여행 상품 비용은 80% 환불됩니다.
+다만 숙소(파도소리 리조트) 비용은 해온호스피탈리티 규정에 따라 체크인 3~6일 전 취소에 해당하여 50% 환불됩니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>노트북: <code>RunnableLambda(mask_privacy) | (lambda x: {"text": x}) | prompt | llm | parser</code> → 여기: <code>RunnableLambda(to_prompt_input) | prompt | llm | parser</code>. 맨 앞 '입력 바꾸기' 단계만 다릅니다.</li><li>이 질문은 상품(T12: 숙소가 파도소리 리조트), 여행사 규정(T15: 5일 전 80%, 숙소는 따로), 숙소 규정(T16: 3~6일 전 50%) 세 문서가 모두 있어야 맞게 답할 수 있습니다.</li><li>실제 RAG에서는 이 <code>to_prompt_input</code> 자리에서 질문에 맞는 문서를 자동으로 찾습니다(검색). 뒤의 <code>prompt | llm | parser</code>는 그대로입니다.</li></ul></div>
+</div><div class="ex" id="x5-2">
+<h3>5-2. 이름이 비슷한 자료가 섞여 있을 때</h3>
+<p class="what">'바람길여행'과 '바람결여행', '파도소리 리조트'와 '솔바람호텔'처럼 헷갈리는 자료를 함께 넣어 봅니다. 규칙 한 줄로 틀리지 않게 합니다.</p>
+<pre class="py">from langchain_core.runnables import RunnableLambda
+
+def to_prompt_input(x):
+    return {&quot;context&quot;: get_docs(x[&quot;doc_ids&quot;]), &quot;question&quot;: x[&quot;question&quot;]}
+
+strict_prompt = ChatPromptTemplate.from_messages([
+    (&quot;system&quot;, &quot;당신은 은하군 여행 안내원입니다. 아래 [자료]에 있는 내용만으로 답하세요. &quot;
+               &quot;[자료]에 없으면 &#x27;자료에 없습니다&#x27;라고 답하세요. &quot;
+               &quot;질문에 나온 이름과 정확히 같은 이름의 자료만 근거로 쓰세요.&quot;),
+    (&quot;human&quot;, &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;),
+])
+strict_chain = RunnableLambda(to_prompt_input) | strict_prompt | llm | parser
+
+tests = [
+    {&quot;doc_ids&quot;: [&quot;T15&quot;, &quot;T22&quot;], &quot;question&quot;: &quot;바람길여행 상품을 출발 3일 전에 취소하면 환불은?&quot;},
+    {&quot;doc_ids&quot;: [&quot;T06&quot;, &quot;T20&quot;], &quot;question&quot;: &quot;파도소리 리조트 운영사는?&quot;},
+]
+for r in strict_chain.batch(tests):
+    print(r)</pre>
+<pre class="out" data-l="실행 결과">바람길여행 상품을 출발 3일 전에 취소하면 30%를 환불받습니다.
+파도소리 리조트의 운영사는 해온호스피탈리티입니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li>T22(바람결여행)에는 "3일 전까지 취소하면 전액 환불"이 있습니다. 이 자료와 섞이면 바람길여행도 전액 환불이라고 잘못 답할 수 있습니다.</li><li>자료를 여러 개 넣을수록 이런 혼동이 생기기 쉽습니다. 실제 RAG에서도 검색 결과에 비슷한 문서가 섞여 들어오므로, 이런 규칙이 자주 쓰입니다.</li></ul></div>
+</div></section></div>
+<div class="pane" role="tabpanel" id="pane-t6" aria-labelledby="tab-t6"><section><h2><span class="no">6</span>Gradio 화면</h2><div class="ex" id="x6-1">
+<h3>6-1. 문서를 골라 질문하는 화면</h3>
+<p class="what">노트북 마스킹 + Gradio 코드를 바꿔, 문서를 고르고 질문하면 답이 나오는 화면을 만듭니다. 출력 두 칸 구조(마스킹 결과 / 안내문)는 노트북과 같습니다.</p>
+<pre class="py">prompt = ChatPromptTemplate.from_messages([
+    (&quot;system&quot;, &quot;당신은 은하군 여행 안내원입니다. 아래 [자료]에 있는 내용만으로 답하세요. &quot;
+               &quot;[자료]에 없으면 &#x27;자료에 없습니다&#x27;라고 답하세요.&quot;),
+    (&quot;human&quot;, &quot;[자료]\n{context}\n\n[질문]\n{question}&quot;),
+])
+rag_chain = prompt | llm | parser
+
+import gradio as gr
+
+choices = [f&quot;{r.doc_id} {r.title}&quot; for r in docs.itertuples()]   # 예: &quot;T02 별빛전망대&quot;
+
+def process(choice, question):
+    doc_id = choice.split()[0]          # &quot;T02 별빛전망대&quot; → &quot;T02&quot;
+    context = get_doc(doc_id)
+    answer = rag_chain.invoke({&quot;context&quot;: context, &quot;question&quot;: question})
+    return context, answer
+
+gr.Interface(
+    fn=process,
+    inputs=[gr.Dropdown(choices, label=&quot;문서 선택&quot;), gr.Textbox(label=&quot;질문&quot;)],
+    outputs=[gr.Textbox(lines=6, label=&quot;📄 모델에 전달된 자료&quot;),
+             gr.Textbox(lines=6, label=&quot;💬 답변&quot;)],
+    title=&quot;은하군 여행 안내&quot;,
+).launch()</pre>
+<pre class="out" data-l="실행 결과">(화면) 문서 선택: T09 갈매기식당 / 질문: 대표 메뉴가 뭐야?
+📄 모델에 전달된 자료:
+[T09] 갈매기식당
+갈매기식당은 노을항 앞에 있는 해산물 식당으로, 주인은 박바다이다. 갈매기식당의 대표 메뉴는 전복 물회이며 매주 화요일에 쉰다. 점심시간에는 대기 줄이 길어 일찍 가는 것이 좋다. 포장 주문도 가능하다.
+💬 답변: 갈매기식당의 대표 메뉴는 전복 물회입니다.</pre>
+<div class="note"><div class="note-h">설명</div><ul><li><code>inputs</code>가 두 개면 <code>process</code> 함수도 인자 두 개를 받습니다. <code>outputs</code>가 두 개면 return도 두 개입니다.</li><li>모델에 전달된 자료를 화면에 같이 보여 주면, 답이 어떤 자료에서 나왔는지 확인할 수 있습니다. RAG 서비스에서 '출처 보기'가 이 역할입니다.</li></ul></div>
+</div><h3>정리</h3>
+<div class="tw"><table>
+<tr><th>노트북에서 배운 것</th><th>여행 데이터에서 한 일</th><th>예제</th></tr>
+<tr><td><code>prompt | llm | parser</code></td><td>{context}에 문서를 넣어 답하게 하기</td><td>1-2</td></tr>
+<tr><td>invoke · batch · stream</td><td>여러 질문 한 번에, 글자 흐르게</td><td>1-4</td></tr>
+<tr><td><code>from_messages</code> (system/human)</td><td>규칙과 자료·질문 나누기</td><td>2-1</td></tr>
+<tr><td>빈칸 <code>{role}</code></td><td>말투 바꾸기</td><td>2-2</td></tr>
+<tr><td><code>{{ }}</code></td><td>JSON 예시 넣기</td><td>2-4</td></tr>
+<tr><td>JsonOutputParser</td><td>상품 정보 표 만들기, 판정 후 분기</td><td>3-2, 3-4</td></tr>
+<tr><td>CommaSeparatedListOutputParser</td><td>키워드 리스트</td><td>3-3</td></tr>
+<tr><td>순차 체인</td><td>규정 → 쉬운 설명 → 요약 → 영어</td><td>4-1</td></tr>
+<tr><td>RunnableLambda</td><td>문서 번호 → 자료로 바꾸는 단계를 체인 안에</td><td>5-1</td></tr>
+<tr><td>Gradio</td><td>문서 골라 질문하는 화면</td><td>6-1</td></tr>
+</table></div>
+<div class="tip"><b>다음 단계</b> 여기서는 문서 번호를 사람이 골랐습니다. 질문을 보고 맞는 문서를 자동으로 찾는 것이 검색(벡터DB)이고, 찾은 문서를 <code>{context}</code>에 넣는 뒤쪽은 이 자료의 코드를 그대로 씁니다.</div></section></div>
+<footer>은하군·솔바람섬·바람길여행 등은 모두 실습용 가상 데이터입니다. 모델 답변 결과는 실행마다 문장이 조금 다를 수 있습니다.</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  const UNITS = {"map": ["map-m1", "map-m2", "map-m3", "map-m4", "map-m5"], "basic": ["basic-m1", "basic-m2", "basic-m3", "basic-m4", "basic-m5", "basic-m6", "basic-m7", "basic-m8", "basic-m9", "basic-m10"], "prompt": ["prompt-m1", "prompt-m2", "prompt-m3", "prompt-m4", "prompt-m5", "prompt-m6"], "parser": ["parser-m1", "parser-m2", "parser-m3", "parser-m4", "parser-m5", "parser-m6"], "seq": ["seq-m1", "seq-m2", "seq-m3", "seq-m4", "seq-m5"], "lambda": ["lambda-m1", "lambda-m2", "lambda-m3", "lambda-m4", "lambda-m5", "lambda-m6"], "pass": ["pass-m1", "pass-m2", "pass-m3", "pass-m4", "pass-m5"], "parallel": ["parallel-m1", "parallel-m2", "parallel-m3", "parallel-m4", "parallel-m5", "parallel-m6"], "branch": ["branch-m1", "branch-m2", "branch-m3", "branch-m4", "branch-m5"], "sequence": ["sequence-m1", "sequence-m2", "sequence-m3", "sequence-m4", "sequence-m5"], "memory": ["memory-m1", "memory-m2", "memory-m3", "memory-m4", "memory-m5"], "structured": ["structured-m1", "structured-m2", "structured-m3", "structured-m4", "structured-m5"], "robust": ["robust-m1", "robust-m2", "robust-m3", "robust-m4", "robust-m5"], "tool": ["tool-m1", "tool-m2", "tool-m3", "tool-m4", "tool-m5"], "final": ["final-m1", "final-m2", "final-m3", "final-m4", "final-m5", "final-m6", "final-m7"], "cheat": ["cheat-m1", "cheat-m2", "cheat-m3", "cheat-m4", "cheat-m5"]};
+  const KEY = 'lc-missions-v1';
+  let st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { st = {}; }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e) {} };
+
+  // 코드 하이라이트 + 복사
+  const KW = /^(from|import|def|return|for|in|if|elif|else|not|and|or|with|as|class|lambda|True|False|None|try|except|finally|await|yield|is|raise|continue|print)$/;
+  const RE = /("""[\s\S]*?"""|f?"(?:[^"\\\n]|\\.)*"|f?'(?:[^'\\\n]|\\.)*'|#[^\n]*|\b[A-Za-z_]+\b)/g;
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  function selectText(el){ const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  document.querySelectorAll('pre.py').forEach(pre => {
+    const src = pre.textContent; let out = '', last = 0, m; RE.lastIndex = 0;
+    while ((m = RE.exec(src))) {
+      out += esc(src.slice(last, m.index)); const t = m[0];
+      if (t[0] === '#') out += '<span class="c">' + esc(t) + '</span>';
+      else if (t[0] === '"' || t[0] === "'" || (t[0] === 'f' && (t[1] === '"' || t[1] === "'"))) out += '<span class="s">' + esc(t) + '</span>';
+      else if (KW.test(t)) out += '<span class="k">' + t + '</span>';
+      else out += esc(t);
+      last = m.index + t.length;
+    }
+    pre.innerHTML = out + esc(src.slice(last));
+    const wrap = document.createElement('div'); wrap.style.position = 'relative';
+    pre.parentNode.insertBefore(wrap, pre); wrap.appendChild(pre);
+    const b = document.createElement('button'); b.className = 'copy'; b.type = 'button'; b.textContent = '복사';
+    b.style.cssText = 'position:absolute;top:8px;right:8px';
+    b.addEventListener('click', () => {
+      const ok = () => { b.textContent = '복사됨'; setTimeout(() => b.textContent = '복사', 1400); };
+      const fail = () => { selectText(pre); b.textContent = '선택됨'; };
+      try { navigator.clipboard.writeText(src).then(ok, fail); } catch(e) { fail(); }
+    });
+    wrap.appendChild(b);
+  });
+
+  // 미션 체크 상태
+  document.querySelectorAll('input[data-done],input[data-chk]').forEach(inp => {
+    const k = inp.dataset.done || inp.dataset.chk;
+    inp.checked = !!st[k];
+    inp.addEventListener('change', () => { st[k] = inp.checked; save(); paint(); });
+  });
+  function paint(){
+    document.querySelectorAll('.mission').forEach(m => m.classList.toggle('is-done', !!st[m.dataset.mid]));
+    let total = 0, done = 0;
+    Object.keys(UNITS).forEach(u => {
+      const ids = UNITS[u]; const d = ids.filter(id => st[id]).length;
+      total += ids.length; done += d;
+      document.querySelectorAll('[data-mc="' + u + '"]').forEach(el => el.textContent = d + '/' + ids.length);
+      document.querySelectorAll('[data-u="' + u + '"]').forEach(el => el.classList.toggle('full', d === ids.length));
+      document.querySelectorAll('[data-bar="' + u + '"]').forEach(el => el.style.width = (d / ids.length * 100) + '%');
+    });
+    const pb = document.getElementById('progbar'); if (pb) pb.style.width = (done / total * 100) + '%';
+    const pt = document.getElementById('progtext'); if (pt) pt.textContent = '미션 ' + done + ' / ' + total + ' 완료';
+    const mp = document.getElementById('mprog'); const cur = document.body.dataset.unit;
+    if (mp && cur) { const ids = UNITS[cur]; mp.textContent = '· 완료 ' + ids.filter(id => st[id]).length + ' / ' + ids.length; }
+    const mc = document.getElementById('mcount'); if (mc && cur) { const ids = UNITS[cur]; mc.textContent = ids.filter(id => st[id]).length + '/' + ids.length; }
+  }
+  paint();
+})();
+</script>
+
+<script>
+(function(){
+  const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+  if (!tabs.length) return;
+  const ids = tabs.map(t => t.dataset.t);
+  function show(id, push){
+    tabs.forEach(t => { const on = t.dataset.t === id; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1;
+      if (on) t.scrollIntoView({block:'nearest', inline:'nearest'}); });
+    document.querySelectorAll('[role="tabpanel"]').forEach(p => p.hidden = p.id !== 'pane-' + id);
+    if (push) { try { history.replaceState(null, '', '#' + id); } catch(e){} window.scrollTo({top: 0}); }
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(t.dataset.t, true));
+    t.addEventListener('keydown', e => {
+      const f = e.key === 'ArrowDown' || e.key === 'ArrowRight', b = e.key === 'ArrowUp' || e.key === 'ArrowLeft';
+      if (!f && !b) return; e.preventDefault();
+      const n = tabs[(i + (f ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); show(n.dataset.t, true);
+    });
+  });
+  const h = location.hash.slice(1);
+  show(ids.includes(h) ? h : 'intro', false);
+  window.addEventListener('hashchange', () => { const x = location.hash.slice(1); if (ids.includes(x)) show(x, false); });
+})();
+</script>
+</body>
+</html>

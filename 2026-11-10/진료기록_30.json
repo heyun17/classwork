@@ -1,0 +1,483 @@
+[
+  {
+    "patient_id": "P001",
+    "visit_date": "2025-07-02",
+    "age": 19,
+    "sex": "M",
+    "symptoms": [
+      "두통",
+      "인후통",
+      "재채기"
+    ],
+    "temperature": 36.7,
+    "symptom_days": 5,
+    "diagnosis": "급성 비인두염",
+    "prescription": "수액 처방",
+    "visit_type": "초진",
+    "note": "19세 남성 환자로 5일 전부터 두통, 인후통, 재채기 증상 호소. 체온 36.7도로 미열은 없음. 급성 비인두염 진단 하에 수액 처방 처방함."
+  },
+  {
+    "patient_id": "P002",
+    "visit_date": "2025-08-19",
+    "age": 16,
+    "sex": "M",
+    "symptoms": [
+      "피로감"
+    ],
+    "temperature": 38.0,
+    "symptom_days": 2,
+    "diagnosis": "급성 기관지염",
+    "prescription": "진해거담제",
+    "visit_type": "재진",
+    "note": "2일 전부터 시작된 피로감(으)로 내원. 내원 시 체온 38.0도로 측정됨. 진찰 결과 급성 기관지염 소견. 진해거담제 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P003",
+    "visit_date": "2025-02-12",
+    "age": 5,
+    "sex": "M",
+    "symptoms": [
+      "코막힘",
+      "근육통",
+      "두통"
+    ],
+    "temperature": 36.8,
+    "symptom_days": 4,
+    "diagnosis": "상기도 감염",
+    "prescription": "해열제",
+    "visit_type": "초진",
+    "note": "4일 전부터 시작된 코막힘, 근육통, 두통(으)로 내원. 체온 36.8도로 미열은 없음. 진찰 결과 상기도 감염 소견. 해열제 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P004",
+    "visit_date": "2025-11-20",
+    "age": 38,
+    "sex": "M",
+    "symptoms": [
+      "오한",
+      "피로감",
+      "기침"
+    ],
+    "temperature": 39.1,
+    "symptom_days": 7,
+    "diagnosis": "독감 의심",
+    "prescription": "해열제",
+    "visit_type": "재진",
+    "note": "7일 전부터 시작된 오한, 피로감, 기침(으)로 내원. 내원 시 체온 39.1도로 측정됨. 진찰 결과 독감 의심 소견. 해열제 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P005",
+    "visit_date": "2025-02-13",
+    "age": 29,
+    "sex": "M",
+    "symptoms": [
+      "가래"
+    ],
+    "temperature": 37.0,
+    "symptom_days": 7,
+    "diagnosis": "상기도 감염",
+    "prescription": "해열제",
+    "visit_type": "초진",
+    "note": "7일 전부터 시작된 가래(으)로 내원. 체온 37.0도로 미열은 없음. 진찰 결과 상기도 감염 소견. 해열제 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P006",
+    "visit_date": "2025-11-06",
+    "age": 63,
+    "sex": "F",
+    "symptoms": [
+      "근육통"
+    ],
+    "temperature": 37.3,
+    "symptom_days": 5,
+    "diagnosis": "상기도 감염",
+    "prescription": "수액 처방",
+    "visit_type": "초진",
+    "note": "주 증상은 근육통. 5일 전부터 지속됨. 체온 37.3도로 미열은 없음. 상기도 감염으로 판단되어 수액 처방 투약함. 충분한 휴식과 수분 섭취 안내."
+  },
+  {
+    "patient_id": "P007",
+    "visit_date": "2025-01-08",
+    "age": 36,
+    "sex": "M",
+    "symptoms": [
+      "코막힘",
+      "두통"
+    ],
+    "temperature": 39.2,
+    "symptom_days": 7,
+    "diagnosis": "급성 기관지염",
+    "prescription": "진해거담제",
+    "visit_type": "재진",
+    "note": "36세 남성 환자로 7일 전부터 코막힘, 두통 증상 호소. 내원 시 체온 39.2도로 측정됨. 급성 기관지염 진단 하에 진해거담제 처방함."
+  },
+  {
+    "patient_id": "P008",
+    "visit_date": "2025-11-16",
+    "age": 45,
+    "sex": "F",
+    "symptoms": [
+      "기침",
+      "인후통"
+    ],
+    "temperature": 38.9,
+    "symptom_days": 2,
+    "diagnosis": "급성 기관지염",
+    "prescription": "수액 처방",
+    "visit_type": "재진",
+    "note": "2일 전부터 시작된 기침, 인후통(으)로 내원. 내원 시 체온 38.9도로 측정됨. 진찰 결과 급성 기관지염 소견. 수액 처방 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P009",
+    "visit_date": "2025-07-12",
+    "age": 63,
+    "sex": "M",
+    "symptoms": [
+      "발열",
+      "인후통"
+    ],
+    "temperature": 38.5,
+    "symptom_days": 5,
+    "diagnosis": "급성 기관지염",
+    "prescription": "항히스타민제",
+    "visit_type": "재진",
+    "note": "63세 남성 환자로 5일 전부터 발열, 인후통 증상 호소. 내원 시 체온 38.5도로 측정됨. 급성 기관지염 진단 하에 항히스타민제 처방함."
+  },
+  {
+    "patient_id": "P010",
+    "visit_date": "2025-11-14",
+    "age": 22,
+    "sex": "F",
+    "symptoms": [
+      "콧물"
+    ],
+    "temperature": 38.8,
+    "symptom_days": 7,
+    "diagnosis": "급성 인두염",
+    "prescription": "수액 처방",
+    "visit_type": "초진",
+    "note": "주 증상은 콧물. 7일 전부터 지속됨. 내원 시 체온 38.8도로 측정됨. 급성 인두염으로 판단되어 수액 처방 투약함. 충분한 휴식과 수분 섭취 안내."
+  },
+  {
+    "patient_id": "P011",
+    "visit_date": "2025-09-25",
+    "age": 13,
+    "sex": "F",
+    "symptoms": [
+      "재채기",
+      "오한"
+    ],
+    "temperature": 37.8,
+    "symptom_days": 6,
+    "diagnosis": "급성 기관지염",
+    "prescription": "해열제",
+    "visit_type": "초진",
+    "note": "6일 전부터 시작된 재채기, 오한(으)로 내원. 내원 시 체온 37.8도로 측정됨. 진찰 결과 급성 기관지염 소견. 해열제 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P012",
+    "visit_date": "2025-02-28",
+    "age": 48,
+    "sex": "M",
+    "symptoms": [
+      "코막힘",
+      "발열"
+    ],
+    "temperature": 37.6,
+    "symptom_days": 5,
+    "diagnosis": "상기도 감염",
+    "prescription": "종합감기약",
+    "visit_type": "초진",
+    "note": "주 증상은 코막힘, 발열. 5일 전부터 지속됨. 내원 시 체온 37.6도로 측정됨. 상기도 감염으로 판단되어 종합감기약 투약함. 충분한 휴식과 수분 섭취 안내."
+  },
+  {
+    "patient_id": "P013",
+    "visit_date": "2025-06-16",
+    "age": 43,
+    "sex": "M",
+    "symptoms": [
+      "근육통"
+    ],
+    "temperature": 38.5,
+    "symptom_days": 5,
+    "diagnosis": "급성 기관지염",
+    "prescription": "종합감기약",
+    "visit_type": "초진",
+    "note": "43세 남성 환자로 5일 전부터 근육통 증상 호소. 내원 시 체온 38.5도로 측정됨. 급성 기관지염 진단 하에 종합감기약 처방함."
+  },
+  {
+    "patient_id": "P014",
+    "visit_date": "2025-08-27",
+    "age": 19,
+    "sex": "F",
+    "symptoms": [
+      "인후통",
+      "콧물"
+    ],
+    "temperature": 37.0,
+    "symptom_days": 6,
+    "diagnosis": "급성 기관지염",
+    "prescription": "해열제",
+    "visit_type": "초진",
+    "note": "19세 여성 환자로 6일 전부터 인후통, 콧물 증상 호소. 체온 37.0도로 미열은 없음. 급성 기관지염 진단 하에 해열제 처방함."
+  },
+  {
+    "patient_id": "P015",
+    "visit_date": "2025-10-14",
+    "age": 73,
+    "sex": "M",
+    "symptoms": [
+      "가래"
+    ],
+    "temperature": 37.7,
+    "symptom_days": 5,
+    "diagnosis": "급성 기관지염",
+    "prescription": "진해거담제",
+    "visit_type": "재진",
+    "note": "73세 남성 환자로 5일 전부터 가래 증상 호소. 내원 시 체온 37.7도로 측정됨. 급성 기관지염 진단 하에 진해거담제 처방함."
+  },
+  {
+    "patient_id": "P016",
+    "visit_date": "2025-04-03",
+    "age": 74,
+    "sex": "M",
+    "symptoms": [
+      "두통",
+      "코막힘",
+      "근육통"
+    ],
+    "temperature": 37.6,
+    "symptom_days": 2,
+    "diagnosis": "급성 기관지염",
+    "prescription": "소염제",
+    "visit_type": "초진",
+    "note": "2일 전부터 시작된 두통, 코막힘, 근육통(으)로 내원. 내원 시 체온 37.6도로 측정됨. 진찰 결과 급성 기관지염 소견. 소염제 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P017",
+    "visit_date": "2025-06-03",
+    "age": 7,
+    "sex": "M",
+    "symptoms": [
+      "인후통",
+      "콧물",
+      "기침"
+    ],
+    "temperature": 38.4,
+    "symptom_days": 1,
+    "diagnosis": "급성 비인두염",
+    "prescription": "진해거담제",
+    "visit_type": "초진",
+    "note": "주 증상은 인후통, 콧물, 기침. 어제부터 지속됨. 내원 시 체온 38.4도로 측정됨. 급성 비인두염으로 판단되어 진해거담제 투약함. 충분한 휴식과 수분 섭취 안내."
+  },
+  {
+    "patient_id": "P018",
+    "visit_date": "2025-08-26",
+    "age": 35,
+    "sex": "F",
+    "symptoms": [
+      "오한",
+      "인후통",
+      "피로감"
+    ],
+    "temperature": 36.7,
+    "symptom_days": 2,
+    "diagnosis": "급성 기관지염",
+    "prescription": "종합감기약",
+    "visit_type": "재진",
+    "note": "2일 전부터 시작된 오한, 인후통, 피로감(으)로 내원. 체온 36.7도로 미열은 없음. 진찰 결과 급성 기관지염 소견. 종합감기약 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P019",
+    "visit_date": "2025-12-02",
+    "age": 29,
+    "sex": "M",
+    "symptoms": [
+      "가래"
+    ],
+    "temperature": 37.6,
+    "symptom_days": 7,
+    "diagnosis": "독감 의심",
+    "prescription": "소염제",
+    "visit_type": "재진",
+    "note": "주 증상은 가래. 7일 전부터 지속됨. 내원 시 체온 37.6도로 측정됨. 독감 의심으로 판단되어 소염제 투약함. 충분한 휴식과 수분 섭취 안내."
+  },
+  {
+    "patient_id": "P020",
+    "visit_date": "2025-07-06",
+    "age": 17,
+    "sex": "M",
+    "symptoms": [
+      "근육통",
+      "기침"
+    ],
+    "temperature": 37.0,
+    "symptom_days": 2,
+    "diagnosis": "급성 인두염",
+    "prescription": "종합감기약",
+    "visit_type": "재진",
+    "note": "2일 전부터 시작된 근육통, 기침(으)로 내원. 체온 37.0도로 미열은 없음. 진찰 결과 급성 인두염 소견. 종합감기약 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P021",
+    "visit_date": "2025-09-27",
+    "age": 64,
+    "sex": "M",
+    "symptoms": [
+      "오한"
+    ],
+    "temperature": 38.6,
+    "symptom_days": 6,
+    "diagnosis": "급성 기관지염",
+    "prescription": "해열제",
+    "visit_type": "초진",
+    "note": "64세 남성 환자로 6일 전부터 오한 증상 호소. 내원 시 체온 38.6도로 측정됨. 급성 기관지염 진단 하에 해열제 처방함."
+  },
+  {
+    "patient_id": "P022",
+    "visit_date": "2025-07-01",
+    "age": 16,
+    "sex": "M",
+    "symptoms": [
+      "코막힘"
+    ],
+    "temperature": 37.7,
+    "symptom_days": 2,
+    "diagnosis": "급성 인두염",
+    "prescription": "소염제",
+    "visit_type": "초진",
+    "note": "2일 전부터 시작된 코막힘(으)로 내원. 내원 시 체온 37.7도로 측정됨. 진찰 결과 급성 인두염 소견. 소염제 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P023",
+    "visit_date": "2025-04-02",
+    "age": 38,
+    "sex": "F",
+    "symptoms": [
+      "코막힘",
+      "피로감"
+    ],
+    "temperature": 38.2,
+    "symptom_days": 3,
+    "diagnosis": "독감 의심",
+    "prescription": "진해거담제",
+    "visit_type": "초진",
+    "note": "주 증상은 코막힘, 피로감. 3일 전부터 지속됨. 내원 시 체온 38.2도로 측정됨. 독감 의심으로 판단되어 진해거담제 투약함. 충분한 휴식과 수분 섭취 안내."
+  },
+  {
+    "patient_id": "P024",
+    "visit_date": "2025-09-03",
+    "age": 74,
+    "sex": "M",
+    "symptoms": [
+      "근육통",
+      "콧물",
+      "재채기"
+    ],
+    "temperature": 38.0,
+    "symptom_days": 1,
+    "diagnosis": "급성 기관지염",
+    "prescription": "종합감기약",
+    "visit_type": "초진",
+    "note": "74세 남성 환자로 어제부터 근육통, 콧물, 재채기 증상 호소. 내원 시 체온 38.0도로 측정됨. 급성 기관지염 진단 하에 종합감기약 처방함."
+  },
+  {
+    "patient_id": "P025",
+    "visit_date": "2025-02-14",
+    "age": 13,
+    "sex": "M",
+    "symptoms": [
+      "인후통",
+      "코막힘",
+      "기침"
+    ],
+    "temperature": 39.0,
+    "symptom_days": 5,
+    "diagnosis": "급성 기관지염",
+    "prescription": "진해거담제",
+    "visit_type": "초진",
+    "note": "주 증상은 인후통, 코막힘, 기침. 5일 전부터 지속됨. 내원 시 체온 39.0도로 측정됨. 급성 기관지염으로 판단되어 진해거담제 투약함. 충분한 휴식과 수분 섭취 안내."
+  },
+  {
+    "patient_id": "P026",
+    "visit_date": "2025-06-25",
+    "age": 71,
+    "sex": "F",
+    "symptoms": [
+      "인후통",
+      "근육통"
+    ],
+    "temperature": 37.0,
+    "symptom_days": 4,
+    "diagnosis": "독감 의심",
+    "prescription": "진해거담제",
+    "visit_type": "재진",
+    "note": "71세 여성 환자로 4일 전부터 인후통, 근육통 증상 호소. 체온 37.0도로 미열은 없음. 독감 의심 진단 하에 진해거담제 처방함."
+  },
+  {
+    "patient_id": "P027",
+    "visit_date": "2025-02-08",
+    "age": 6,
+    "sex": "F",
+    "symptoms": [
+      "재채기",
+      "기침",
+      "가래"
+    ],
+    "temperature": 37.9,
+    "symptom_days": 3,
+    "diagnosis": "급성 기관지염",
+    "prescription": "항히스타민제",
+    "visit_type": "초진",
+    "note": "3일 전부터 시작된 재채기, 기침, 가래(으)로 내원. 내원 시 체온 37.9도로 측정됨. 진찰 결과 급성 기관지염 소견. 항히스타민제 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P028",
+    "visit_date": "2025-02-05",
+    "age": 41,
+    "sex": "M",
+    "symptoms": [
+      "피로감",
+      "두통"
+    ],
+    "temperature": 38.1,
+    "symptom_days": 6,
+    "diagnosis": "급성 기관지염",
+    "prescription": "해열제",
+    "visit_type": "재진",
+    "note": "6일 전부터 시작된 피로감, 두통(으)로 내원. 내원 시 체온 38.1도로 측정됨. 진찰 결과 급성 기관지염 소견. 해열제 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P029",
+    "visit_date": "2025-11-21",
+    "age": 19,
+    "sex": "M",
+    "symptoms": [
+      "피로감",
+      "발열",
+      "두통"
+    ],
+    "temperature": 37.1,
+    "symptom_days": 2,
+    "diagnosis": "급성 인두염",
+    "prescription": "수액 처방",
+    "visit_type": "재진",
+    "note": "2일 전부터 시작된 피로감, 발열, 두통(으)로 내원. 체온 37.1도로 미열은 없음. 진찰 결과 급성 인두염 소견. 수액 처방 처방 및 경과 관찰 권고."
+  },
+  {
+    "patient_id": "P030",
+    "visit_date": "2025-03-21",
+    "age": 69,
+    "sex": "F",
+    "symptoms": [
+      "콧물",
+      "기침"
+    ],
+    "temperature": 38.1,
+    "symptom_days": 3,
+    "diagnosis": "상기도 감염",
+    "prescription": "해열제",
+    "visit_type": "초진",
+    "note": "3일 전부터 시작된 콧물, 기침(으)로 내원. 내원 시 체온 38.1도로 측정됨. 진찰 결과 상기도 감염 소견. 해열제 처방 및 경과 관찰 권고."
+  }
+]
