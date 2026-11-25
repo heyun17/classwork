@@ -1,0 +1,28 @@
+717418040320
+
+
+aws s3 mb s3://heyun-cli-practice-717418040320 --region ap-northeast-2
+
+
+aws s3 rm s3://heyun-cli-practice-717418040320/test.txt
+
+aws s3 rb s3://heyun-cli-practice-717418040320 --force
+
+vpc-01b5206d236a4affd
+
+curl -I http://localhost
+
+ssh -i "$HOME\.ssh\bastion-key.pem" -J ec2-user@13.124.8.234 ec2-user@10.0.135.158
+
+
+
+http://nginx-alb-1445323631.ap-northeast-2.elb.amazonaws.com/ask
+
+
+i-089474339210051c1
+running
+3.38.212.75    
+
+
+$REGION="ap-northeast-2"
+$INSTANCE_ID="i-089474339210051c1"

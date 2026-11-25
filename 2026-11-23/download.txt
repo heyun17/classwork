@@ -1,0 +1,7 @@
+717418040320
+
+
+aws s3 mb s3://heyun-cli-practice-717418040320 --region ap-northeast-2
+
+
+aws s3 cp test.txt 
