@@ -1,0 +1,4 @@
+weights_bm25,weights_vector,precision,recall,hit,mrr,ndcg,context_chars,메모
+0.4,0.6,,,,,,,기본값
+0.7,0.3,,,,,,,
+0.2,0.8,,,,,,,

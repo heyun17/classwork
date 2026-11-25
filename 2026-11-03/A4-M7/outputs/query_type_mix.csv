@@ -1,0 +1,9 @@
+﻿query_type,count,ratio
+semantic,5,0.2
+no_answer,5,0.2
+exact_code,4,0.16
+comparison,4,0.16
+region,3,0.12
+year,2,0.08
+product,1,0.04
+customer,1,0.04

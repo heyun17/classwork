@@ -1,0 +1,10 @@
+Part3 패키지 검수 결과
+
+- Markdown 문서 수: 16
+- metadata.csv 행 수: 16
+- Golden Dataset 질문 수: 20
+- 작업지시서 수: 10
+- 오류: 없음
+
+샘플 데이터는 지역/연도/고객/제품/제품코드가 겹치도록 설계되어
+Metadata, BM25, Vector, Hybrid 검색 차이를 비교할 수 있게 구성함.

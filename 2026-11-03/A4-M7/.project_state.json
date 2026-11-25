@@ -1,0 +1,11 @@
+{
+  "document_scan": false,
+  "metadata": false,
+  "chunking": false,
+  "golden_dataset": false,
+  "bm25": false,
+  "faiss": false,
+  "hybrid": false,
+  "evaluation": false,
+  "dashboard": false
+}

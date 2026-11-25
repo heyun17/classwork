@@ -1,0 +1,34 @@
+A4-M7 RAG 답변 품질과 운영 모니터링 · 실습자료
+
+A4-M6 실습 폴더에 답변 생성·평가·운영 리포트 단계(s09~s11)와 운영 대시보드를 더한 폴더입니다.
+A4-M6을 하지 않았어도 이 폴더만으로 실습할 수 있습니다.
+
+[준비]
+1) 이 폴더를 VS Code로 엽니다.
+2) pip install -r requirements.txt
+3) .env.example 을 .env 로 복사하고 OPENAI_API_KEY 입력 (모델: gpt-4.1-nano)
+   키가 없으면 .env 에 LLM_BACKEND=fake → 흐름만 확인 (답변·시간·토큰은 흉내낸 값)
+
+[실행 순서 · 프로젝트 폴더에서]
+python src/s03_chunking.py                    heading 청크 만들기 (A4-M6 Step 03)
+python src/s10_answer_eval.py --samples       손으로 만든 답변 10개 채점 (키 불필요)
+python src/s09_answer.py                      질문 25개 → 검색 → GPT 답변 + 운영 로그
+python src/s10_answer_eval.py                 답변 품질 채점
+python src/s11_ops_report.py --save-baseline  운영 지표 계산 + 기준선 저장 (처음 한 번)
+streamlit run src/app_ops.py                  운영 대시보드 (http://localhost:8501)
+
+무엇을 바꾼 뒤에는: s09 → s10 → s11 (--save-baseline 없이) → 기준선과 비교, Alert 확인
+
+[새로 생긴 파일]
+src/config_ops.py              답변 모델, K, 가격, Alert 규칙
+src/s09_answer.py              답변 생성 + 단계별 시간·토큰·비용·재시도 기록
+src/s10_answer_eval.py         규칙 기반 채점 (+ 선택: LLM-as-a-Judge)
+src/s11_ops_report.py          Latency P50/P95/P99, 비용, 오류율, 기준선 비교, Alert
+src/app_ops.py                 운영 대시보드 (8개 화면)
+data/no_answer_questions.json  답할 수 없는 질문 5개
+data/answer_samples.json       채점 연습용 손 답변 10개
+미션_시작파일/                 교안 12탭 미션용
+
+[확인용 기대값]
+s10 --samples : S1·S10 PASS, S2 FAIL·근거없는사실(5년), S3 PASS(규칙의 한계), S7 WARN·불완전 ...
+LLM에 넘기는 평균 근거 글자 수: K=3 253.6자 / K=5 421.1자 / K=10 772.3자

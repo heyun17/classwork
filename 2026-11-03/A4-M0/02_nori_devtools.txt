@@ -1,0 +1,237 @@
+# ====================================================================
+# A4-M0 · Nori Dev Tools 요청 모음 — Dashboards → Dev Tools에 붙여 넣고 한 요청씩 실행
+# 각 요청 위의 [번호]는 교안 탭 번호
+# ====================================================================
+
+# [07] 실행 중인 노드가 Nori를 읽었는지
+GET _cat/plugins?v&s=component
+GET _nodes/plugins?filter_path=nodes.*.plugins.name
+
+# [09] ① standard — 띄어쓰기로만
+POST _analyze
+{ "analyzer": "standard", "text": "노트북 성능은 좋은데 배송이 조금 늦었어요" }
+
+# [09] ② nori_tokenizer — 형태소로 자르지만 조사·어미도 남음
+POST _analyze
+{ "tokenizer": "nori_tokenizer", "text": "노트북 성능은 좋은데 배송이 조금 늦었어요" }
+
+# [09] ③ nori 분석기 — 조사·어미·부사 등 제거
+POST _analyze
+{ "analyzer": "nori", "text": "노트북 성능은 좋은데 배송이 조금 늦었어요" }
+
+# [09] 토큰 글자만 보기 — filter_path
+POST _analyze?filter_path=tokens.token
+{ "analyzer": "nori", "text": "노트북 성능은 좋은데 배송이 조금 늦었어요" }
+
+# [10] 품사까지 보기 — explain + attributes
+POST _analyze
+{
+  "tokenizer": "nori_tokenizer",
+  "text": "배송이 늦었어요",
+  "explain": true,
+  "attributes": ["posType", "leftPOS", "rightPOS", "morphemes"]
+}
+
+# [10] 덩어리 토큰(COMPOUND · INFLECT)의 morphemes 보기 — decompound_mode none
+POST _analyze
+{
+  "tokenizer": { "type": "nori_tokenizer", "decompound_mode": "none" },
+  "text": "형태소 분석기를 추가했습니다",
+  "explain": true,
+  "attributes": ["posType", "leftPOS", "rightPOS", "morphemes"]
+}
+
+# [11] 복합명사 — none / discard(기본) / mixed
+POST _analyze?filter_path=tokens.token,tokens.position
+{ "tokenizer": { "type": "nori_tokenizer", "decompound_mode": "none" }, "text": "형태소 분석기를 추가했습니다" }
+POST _analyze?filter_path=tokens.token,tokens.position
+{ "tokenizer": { "type": "nori_tokenizer", "decompound_mode": "discard" }, "text": "형태소 분석기를 추가했습니다" }
+POST _analyze?filter_path=tokens.token,tokens.position
+{ "tokenizer": { "type": "nori_tokenizer", "decompound_mode": "mixed" }, "text": "형태소 분석기를 추가했습니다" }
+
+# [11] 사용자 사전 — 없이 / 있이
+POST _analyze?filter_path=tokens.token
+{ "tokenizer": "nori_tokenizer", "text": "오픈서치에 노리를 추가했습니다" }
+POST _analyze?filter_path=tokens.token
+{ "tokenizer": { "type": "nori_tokenizer", "user_dictionary_rules": ["오픈서치", "노리"] }, "text": "오픈서치에 노리를 추가했습니다" }
+
+# [11] 조사와 어미만 버리기 (OpenSearch 3.x 품사 이름)
+POST _analyze?filter_path=tokens.token
+{
+  "tokenizer": "nori_tokenizer",
+  "filter": [ { "type": "nori_part_of_speech",
+               "stoptags": ["EP","EF","EC","ETN","ETM","JKS","JKC","JKG","JKO","JKB","JKV","JKQ","JX","JC"] } ],
+  "text": "배송이 조금 늦었어요"
+}
+
+# [11] 일반 명사(NNG)만 남기기 — NNG를 뺀 모든 품사를 버림
+POST _analyze?filter_path=tokens.token
+{
+  "tokenizer": "nori_tokenizer",
+  "filter": [ { "type": "nori_part_of_speech",
+               "stoptags": ["EP","EF","EC","ETN","ETM","JKS","JKC","JKG","JKO","JKB","JKV","JKQ","JX","JC",
+                   "IC","MAG","MAJ","MM","NA","NNB","NNBC","NNP","NP","NR","SC","SE","SF","SH","SL","SN",
+                   "SP","SSC","SSO","SY","UNA","VA","VCN","VCP","VSV","VV","VX","XPN","XR","XSA","XSN","XSV"] } ],
+  "text": "노트북 성능은 좋은데 배송이 조금 늦었어요"
+}
+
+# [11] NNG만 + 복합명사 원래 단어도 (mixed)
+POST _analyze?filter_path=tokens.token
+{
+  "tokenizer": { "type": "nori_tokenizer", "decompound_mode": "mixed" },
+  "filter": [ { "type": "nori_part_of_speech",
+               "stoptags": ["EP","EF","EC","ETN","ETM","JKS","JKC","JKG","JKO","JKB","JKV","JKQ","JX","JC",
+                   "IC","MAG","MAJ","MM","NA","NNB","NNBC","NNP","NP","NR","SC","SE","SF","SH","SL","SN",
+                   "SP","SSC","SSO","SY","UNA","VA","VCN","VCP","VSV","VV","VX","XPN","XR","XSA","XSN","XSV"] } ],
+  "text": "노트북 성능은 좋은데 배송이 조금 늦었어요"
+}
+
+# [11] 한자 → 한글 읽기
+POST _analyze?filter_path=tokens.token
+{ "tokenizer": "nori_tokenizer", "filter": ["nori_readingform"], "text": "會議 일정" }
+
+# [12] 만들기 전: 있는지 확인 → 있으면 지우기
+HEAD reviews_nori
+GET _cat/indices/reviews*?v&h=index,docs.count
+GET _cat/aliases?v
+DELETE reviews_nori?ignore_unavailable=true
+
+# [12] Nori 인덱스 만들기 — comment는 ko(Nori), comment.std는 standard
+PUT reviews_nori
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "analysis": {
+      "tokenizer": {
+        "ko_tokenizer": { "type": "nori_tokenizer", "decompound_mode": "mixed", "user_dictionary_rules": ["가성비"] }
+      },
+      "analyzer": {
+        "ko": { "type": "custom", "tokenizer": "ko_tokenizer", "filter": ["nori_part_of_speech", "nori_readingform", "lowercase"] }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "review_id": { "type": "keyword" },
+      "order_id":  { "type": "keyword" },
+      "product":   { "type": "keyword" },
+      "region":    { "type": "keyword" },
+      "rating":    { "type": "integer" },
+      "comment":   { "type": "text", "analyzer": "ko",
+                     "fields": { "std": { "type": "text", "analyzer": "standard" } } }
+    }
+  }
+}
+
+# [12] 후기 10건 올리기
+POST _bulk?refresh=true
+{"index": {"_index": "reviews_nori", "_id": "R01"}}
+{"review_id": "R01", "order_id": "ORD001", "product": "복합기", "region": "서울", "rating": 5, "comment": "배송 빠르고 설치 기사님이 친절했어요"}
+{"index": {"_index": "reviews_nori", "_id": "R02"}}
+{"review_id": "R02", "order_id": "ORD002", "product": "노트북", "region": "광주", "rating": 4, "comment": "노트북 성능은 좋은데 배송이 조금 늦었어요"}
+{"index": {"_index": "reviews_nori", "_id": "R03"}}
+{"review_id": "R03", "order_id": "ORD006", "product": "모니터", "region": "광주", "rating": 5, "comment": "화면이 선명하고 배송 포장도 꼼꼼합니다"}
+{"index": {"_index": "reviews_nori", "_id": "R04"}}
+{"review_id": "R04", "order_id": "ORD009", "product": "노트북", "region": "부산", "rating": 3, "comment": "배터리가 생각보다 빨리 닳아요"}
+{"index": {"_index": "reviews_nori", "_id": "R05"}}
+{"review_id": "R05", "order_id": "ORD013", "product": "복합기", "region": "서울", "rating": 4, "comment": "복합기 소음이 조금 있지만 인쇄 속도는 빠름"}
+{"index": {"_index": "reviews_nori", "_id": "R06"}}
+{"review_id": "R06", "order_id": "ORD022", "product": "모니터", "region": "대구", "rating": 2, "comment": "배송 중 파손되어 교환했습니다"}
+{"index": {"_index": "reviews_nori", "_id": "R07"}}
+{"review_id": "R07", "order_id": "ORD030", "product": "모니터", "region": "대구", "rating": 1, "comment": "주문 취소 후 환불이 늦어요"}
+{"index": {"_index": "reviews_nori", "_id": "R08"}}
+{"review_id": "R08", "order_id": "ORD040", "product": "노트북", "region": "부산", "rating": 5, "comment": "가성비 최고 노트북 배송 빠름"}
+{"index": {"_index": "reviews_nori", "_id": "R09"}}
+{"review_id": "R09", "order_id": "ORD047", "product": "프로젝터", "region": "서울", "rating": 4, "comment": "회의실 프로젝터로 밝기 충분합니다"}
+{"index": {"_index": "reviews_nori", "_id": "R10"}}
+{"review_id": "R10", "order_id": "ORD079", "product": "노트북", "region": "서울", "rating": 5, "comment": "배송 빠름 품질 만족"}
+
+# [13] 들어갔는지 · 설정 · 매핑
+GET reviews_nori/_count
+GET reviews_nori/_settings?filter_path=*.settings.index.analysis
+GET reviews_nori/_mapping?filter_path=*.mappings.properties.comment
+
+# [13] 인덱스의 분석기로 자르기 — 두 필드 비교
+POST reviews_nori/_analyze?filter_path=tokens.token
+{ "field": "comment.std", "text": "노트북 성능은 좋은데 배송이 조금 늦었어요" }
+POST reviews_nori/_analyze?filter_path=tokens.token
+{ "field": "comment", "text": "노트북 성능은 좋은데 배송이 조금 늦었어요" }
+
+# [13] 검색어 '배송'은 어떤 토큰이 되나
+POST reviews_nori/_analyze?filter_path=tokens.token
+{ "field": "comment", "text": "배송" }
+
+# [13] 색인된 10건에서 '배송' 토큰 세기 — doc_freq = 들어 있는 후기 수
+POST reviews_nori/_mtermvectors?filter_path=docs._id,docs.term_vectors.comment.terms.배송
+{
+  "ids": ["R01","R02","R03","R04","R05","R06","R07","R08","R09","R10"],
+  "parameters": { "fields": ["comment"], "term_statistics": true }
+}
+
+# [13] 문서별로 색인된 토큰 목록 (가나다순)
+POST reviews_nori/_mtermvectors?filter_path=docs._id,docs.term_vectors.*.terms.*.term_freq
+{
+  "ids": ["R01","R02","R03","R04","R05","R06","R07","R08","R09","R10"],
+  "parameters": { "fields": ["comment", "comment.std"], "positions": false, "offsets": false }
+}
+
+# [13] 한 건만 자세히
+GET reviews_nori/_termvectors/R02?fields=comment&term_statistics=true
+
+# [14] 같은 검색어, 두 필드 — 건수
+GET reviews_nori/_count
+{ "query": { "match": { "comment.std": "배송" } } }
+GET reviews_nori/_count
+{ "query": { "match": { "comment": "배송" } } }
+
+# [14] 어떤 후기가 왜 걸렸나 — highlight
+GET reviews_nori/_search?filter_path=hits.hits._id,hits.hits._score,hits.hits.highlight
+{
+  "_source": false,
+  "query": { "match": { "comment": "배송이 늦어요" } },
+  "highlight": { "fields": { "comment": {} } }
+}
+GET reviews_nori/_search?filter_path=hits.hits._id,hits.hits._score,hits.hits.highlight
+{
+  "_source": false,
+  "query": { "match": { "comment.std": "배송이 늦어요" } },
+  "highlight": { "fields": { "comment.std": {} } }
+}
+
+# [14] 순서까지 맞아야 — match_phrase
+GET reviews_nori/_search?filter_path=hits.hits._id
+{ "query": { "match_phrase": { "comment": "배송 빠름" } } }
+
+# [15] (참고) 이미 있는 인덱스를 Nori로 — 새 인덱스 + _reindex + 별칭
+# POST _reindex
+# { "source": { "index": "reviews" }, "dest": { "index": "reviews_nori" } }
+# POST _aliases
+# { "actions": [ { "add": { "index": "reviews_nori", "alias": "reviews_search" } } ] }
+
+# [17] 방법 A — fielddata 켜기 (10건 실습용. 큰 인덱스에서는 쓰지 않음)
+PUT reviews_nori/_mapping
+{
+  "properties": {
+    "comment": { "type": "text", "analyzer": "ko", "fielddata": true,
+                 "fields": { "std": { "type": "text", "analyzer": "standard", "fielddata": true } } }
+  }
+}
+GET reviews_nori/_search
+{ "size": 0, "aggs": { "nori토큰": { "terms": { "field": "comment", "size": 20 } },
+                        "standard토큰": { "terms": { "field": "comment.std", "size": 20 } } } }
+
+# [17] 방법 B — 집계용 필드 comment_terms (keyword 배열). 값 채우기는 04_term_field.py
+PUT reviews_nori/_mapping
+{ "properties": { "comment_terms": { "type": "keyword" } } }
+POST reviews_nori/_update/R02
+{ "doc": { "comment_terms": ["노트북", "노트", "성능", "배송"] } }
+GET reviews_nori/_search
+{ "size": 0, "aggs": { "단어": { "terms": { "field": "comment_terms", "size": 20 } } } }
+
+# [08] Nori 삭제 전: Nori를 쓰는 인덱스 찾기 → 지우거나 standard로 옮기기
+GET _all/_settings?filter_path=*.settings.index.analysis
+
+# 정리
+# DELETE reviews_nori
+# DELETE reviews_nori_py

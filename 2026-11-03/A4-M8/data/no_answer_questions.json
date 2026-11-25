@@ -1,0 +1,7 @@
+[
+  {"query_id": "N01", "question": "2027년 서울 공공기관 노트북 정책은?", "query_type": "no_answer", "why": "문서는 2025·2026년만 있음"},
+  {"query_id": "N02", "question": "인천 지역 시장현황을 알려줘", "query_type": "no_answer", "why": "인천 문서 없음"},
+  {"query_id": "N03", "question": "NB-SEOUL-27 제품 코드를 쓰는 문서는?", "query_type": "no_answer", "why": "없는 제품 코드"},
+  {"query_id": "N04", "question": "대전 기업 복합기 렌탈의 월 요금은 얼마인가?", "query_type": "no_answer", "why": "운영비 '비교'만 있고 금액 없음"},
+  {"query_id": "N05", "question": "서울 공공기관 노트북 유지보수는 몇 년까지 연장할 수 있나?", "query_type": "no_answer", "why": "3년 명시만 있고 연장 정보 없음"}
+]

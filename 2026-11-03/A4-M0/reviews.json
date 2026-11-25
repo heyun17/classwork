@@ -1,0 +1,82 @@
+[
+ {
+  "review_id": "R01",
+  "order_id": "ORD001",
+  "product": "복합기",
+  "region": "서울",
+  "rating": 5,
+  "comment": "배송 빠르고 설치 기사님이 친절했어요"
+ },
+ {
+  "review_id": "R02",
+  "order_id": "ORD002",
+  "product": "노트북",
+  "region": "광주",
+  "rating": 4,
+  "comment": "노트북 성능은 좋은데 배송이 조금 늦었어요"
+ },
+ {
+  "review_id": "R03",
+  "order_id": "ORD006",
+  "product": "모니터",
+  "region": "광주",
+  "rating": 5,
+  "comment": "화면이 선명하고 배송 포장도 꼼꼼합니다"
+ },
+ {
+  "review_id": "R04",
+  "order_id": "ORD009",
+  "product": "노트북",
+  "region": "부산",
+  "rating": 3,
+  "comment": "배터리가 생각보다 빨리 닳아요"
+ },
+ {
+  "review_id": "R05",
+  "order_id": "ORD013",
+  "product": "복합기",
+  "region": "서울",
+  "rating": 4,
+  "comment": "복합기 소음이 조금 있지만 인쇄 속도는 빠름"
+ },
+ {
+  "review_id": "R06",
+  "order_id": "ORD022",
+  "product": "모니터",
+  "region": "대구",
+  "rating": 2,
+  "comment": "배송 중 파손되어 교환했습니다"
+ },
+ {
+  "review_id": "R07",
+  "order_id": "ORD030",
+  "product": "모니터",
+  "region": "대구",
+  "rating": 1,
+  "comment": "주문 취소 후 환불이 늦어요"
+ },
+ {
+  "review_id": "R08",
+  "order_id": "ORD040",
+  "product": "노트북",
+  "region": "부산",
+  "rating": 5,
+  "comment": "가성비 최고 노트북 배송 빠름"
+ },
+ {
+  "review_id": "R09",
+  "order_id": "ORD047",
+  "product": "프로젝터",
+  "region": "서울",
+  "rating": 4,
+  "comment": "회의실 프로젝터로 밝기 충분합니다"
+ },
+ {
+  "review_id": "R10",
+  "order_id": "ORD079",
+  "product": "노트북",
+  "region": "서울",
+  "rating": 5,
+  "comment": "배송 빠름 품질 만족"
+ }
+]

@@ -1,0 +1,31 @@
+A4-M8 Agentic RAG · Document Update Agent 실습자료
+
+A4-M7 폴더에 "새 문서를 스스로 검사·평가·반영하는 Agent"를 더한 폴더입니다.
+
+[준비]
+1) 이 폴더를 VS Code로 엽니다.
+2) pip install -r requirements.txt
+3) .env.example 을 .env 로 복사하고 OPENAI_API_KEY 입력 (모델: gpt-4.1-nano)
+   키가 없으면 자동으로 규칙 Workflow로 돕니다 (Agent와 비교용)
+
+[실행 순서 · 프로젝트 폴더에서]
+python src/s03_chunking.py                 검색 재료(heading 청크) 만들기 — 처음 한 번
+python src/agent_run.py                    Agent 실행: inbox/ 6개 파일 처리 (승인은 터미널에서 y/n)
+python src/agent_admin.py status           처리 이력(Memory)과 반영 버전 보기
+python src/agent_admin.py rollback         마지막 반영 되돌리기 (사람 확인)
+python src/agent_admin.py reset            실습 처음 상태로
+
+규칙 Workflow로 돌리기:  AGENT_BACKEND=rule  (PowerShell: $env:AGENT_BACKEND="rule")
+승인을 자동으로:        APPROVAL=no / APPROVAL=yes
+
+[새로 생긴 파일]
+inbox/                    Agent가 처리할 새 파일 6개
+src/agent_tools.py        Tool 10개 + Guardrail(코드로 강제) + Memory
+src/agent_run.py          Agent 실행기 (LLM이 Tool 선택) / 규칙 Workflow
+src/agent_admin.py        사람용 관리 명령 (status·rollback·reset)
+agent_state/              실행하면 생김: state.json(Memory), trace.jsonl(행동 기록), report.md, backups/
+미션_시작파일/            교안 12탭 미션용
+
+[확인용 기대값 · APPROVAL=no]
+committed 1 (광주 기업 노트북) · held 4 (부산 수정, 서울 FAQ, 인천, 2027 서울) · rejected 1 (회의메모)
+서울 FAQ를 반영하면  Recall@3 0.9125 → 0.8833, MRR 0.95 → 0.825

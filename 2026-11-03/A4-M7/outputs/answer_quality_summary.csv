@@ -1,0 +1,2 @@
+﻿n,answerable,no_answer,pass_rate,retrieval_hit,grounded_rule,citation_valid,citation_acc,citation_cov,keyword_cov,abstention_accuracy,over_abstention
+25,20,5,0.72,0.95,1.0,1.0,0.982,0.351,0.706,1.0,0.05

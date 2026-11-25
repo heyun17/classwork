@@ -1,0 +1,4 @@
+openai
+opensearch-py
+python-dotenv
+faiss-cpu

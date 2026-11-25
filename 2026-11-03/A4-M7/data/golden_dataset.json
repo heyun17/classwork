@@ -1,0 +1,376 @@
+[
+  {
+    "query_id": "Q001",
+    "question": "2026년 서울 공공기관 노트북 판매 전략은?",
+    "query_type": "year",
+    "relevant_doc_ids": [
+      "SEOUL_2026_PUBLIC_NOTEBOOK"
+    ],
+    "required_metadata": {
+      "year": 2026,
+      "region": "서울",
+      "customer_type": "공공기관",
+      "product": "노트북"
+    },
+    "expected_keywords": [
+      "NB-SEOUL-26",
+      "조달",
+      "유지보수"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query_id": "Q002",
+    "question": "NB-SEOUL-26 제품 코드를 사용하는 문서는?",
+    "query_type": "exact_code",
+    "relevant_doc_ids": [
+      "SEOUL_2026_PUBLIC_NOTEBOOK"
+    ],
+    "required_metadata": {
+      "region": "서울",
+      "year": 2026
+    },
+    "expected_keywords": [
+      "NB-SEOUL-26"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query_id": "Q003",
+    "question": "서울에서 기업 고객에게 복합기를 제안할 때 핵심 조건은?",
+    "query_type": "semantic",
+    "relevant_doc_ids": [
+      "SEOUL_2026_CORP_MFP"
+    ],
+    "required_metadata": {
+      "region": "서울",
+      "customer_type": "기업",
+      "product": "복합기"
+    },
+    "expected_keywords": [
+      "SLA",
+      "운영비",
+      "렌탈"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query_id": "Q004",
+    "question": "2025년 부산 공공기관 노트북 전략을 찾아줘",
+    "query_type": "year",
+    "relevant_doc_ids": [
+      "BUSAN_2025_PUBLIC_NOTEBOOK"
+    ],
+    "required_metadata": {
+      "year": 2025,
+      "region": "부산",
+      "customer_type": "공공기관",
+      "product": "노트북"
+    },
+    "expected_keywords": [
+      "NB-BUSAN-25"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query_id": "Q005",
+    "question": "부산 지역은 왜 설치 지원과 지역 A/S가 중요한가?",
+    "query_type": "region",
+    "relevant_doc_ids": [
+      "BUSAN_2026_MARKET"
+    ],
+    "required_metadata": {
+      "region": "부산",
+      "year": 2026
+    },
+    "expected_keywords": [
+      "항만",
+      "물류",
+      "현장 설치",
+      "A/S"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query_id": "Q006",
+    "question": "광주 공공기관에서 사용할 2026 노트북 제품 코드는?",
+    "query_type": "exact_code",
+    "relevant_doc_ids": [
+      "GWANGJU_2026_PUBLIC_NOTEBOOK"
+    ],
+    "required_metadata": {
+      "region": "광주",
+      "year": 2026,
+      "product": "노트북"
+    },
+    "expected_keywords": [
+      "NB-GWANGJU-26"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query_id": "Q007",
+    "question": "대전 기업 복합기 계약에서 장애 대응 조건은 어떻게 봐야 하나?",
+    "query_type": "semantic",
+    "relevant_doc_ids": [
+      "DAEJEON_2026_CORP_MFP"
+    ],
+    "required_metadata": {
+      "region": "대전",
+      "customer_type": "기업",
+      "product": "복합기"
+    },
+    "expected_keywords": [
+      "SLA",
+      "장애 대응",
+      "운영비"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query_id": "Q008",
+    "question": "서울 2025년과 2026년 공공기관 노트북 전략을 비교해줘",
+    "query_type": "comparison",
+    "relevant_doc_ids": [
+      "SEOUL_2025_PUBLIC_NOTEBOOK",
+      "SEOUL_2026_PUBLIC_NOTEBOOK"
+    ],
+    "required_metadata": {
+      "region": "서울",
+      "customer_type": "공공기관",
+      "product": "노트북"
+    },
+    "expected_keywords": [
+      "NB-SEOUL-25",
+      "NB-SEOUL-26"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query_id": "Q009",
+    "question": "2026년 각 지역의 시장 특성을 비교하려면 어떤 문서들이 필요한가?",
+    "query_type": "comparison",
+    "relevant_doc_ids": [
+      "SEOUL_2026_MARKET",
+      "BUSAN_2026_MARKET",
+      "GWANGJU_2026_MARKET",
+      "DAEJEON_2026_MARKET"
+    ],
+    "required_metadata": {
+      "year": 2026,
+      "doc_type": "시장현황"
+    },
+    "expected_keywords": [
+      "시장 개요"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query_id": "Q010",
+    "question": "공공기관과 기업의 구매 판단 기준 차이를 서울 기준으로 비교해줘",
+    "query_type": "comparison",
+    "relevant_doc_ids": [
+      "SEOUL_2026_PUBLIC_NOTEBOOK",
+      "SEOUL_2026_CORP_MFP",
+      "SEOUL_2026_MARKET"
+    ],
+    "required_metadata": {
+      "region": "서울",
+      "year": 2026
+    },
+    "expected_keywords": [
+      "조달",
+      "SLA",
+      "운영비",
+      "보안"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query_id": "Q011",
+    "question": "MFP-GWANGJU-26은 어떤 고객을 위한 코드인가?",
+    "query_type": "exact_code",
+    "relevant_doc_ids": [
+      "GWANGJU_2026_CORP_MFP"
+    ],
+    "required_metadata": {
+      "region": "광주",
+      "year": 2026,
+      "product": "복합기"
+    },
+    "expected_keywords": [
+      "MFP-GWANGJU-26",
+      "기업"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query_id": "Q012",
+    "question": "대전 연구기관과 기술기업이 많은 시장의 특징은?",
+    "query_type": "region",
+    "relevant_doc_ids": [
+      "DAEJEON_2026_MARKET"
+    ],
+    "required_metadata": {
+      "region": "대전",
+      "year": 2026
+    },
+    "expected_keywords": [
+      "연구기관",
+      "기술기업"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query_id": "Q013",
+    "question": "2026년 부산 기업의 복합기 렌탈 제안 핵심은?",
+    "query_type": "product",
+    "relevant_doc_ids": [
+      "BUSAN_2026_CORP_MFP"
+    ],
+    "required_metadata": {
+      "region": "부산",
+      "year": 2026,
+      "product": "복합기",
+      "customer_type": "기업"
+    },
+    "expected_keywords": [
+      "MFP-BUSAN-26",
+      "렌탈",
+      "SLA"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query_id": "Q014",
+    "question": "광주의 공공기관 중심 시장 특성과 노트북 전략을 같이 보고 싶어",
+    "query_type": "semantic",
+    "relevant_doc_ids": [
+      "GWANGJU_2026_MARKET",
+      "GWANGJU_2026_PUBLIC_NOTEBOOK"
+    ],
+    "required_metadata": {
+      "region": "광주",
+      "year": 2026,
+      "customer_type": "공공기관"
+    },
+    "expected_keywords": [
+      "공공기관",
+      "NB-GWANGJU-26"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query_id": "Q015",
+    "question": "2025년 제품 코드와 2026년 제품 코드가 비슷한 서울 노트북 문서를 구분해줘",
+    "query_type": "exact_code",
+    "relevant_doc_ids": [
+      "SEOUL_2025_PUBLIC_NOTEBOOK",
+      "SEOUL_2026_PUBLIC_NOTEBOOK"
+    ],
+    "required_metadata": {
+      "region": "서울",
+      "product": "노트북"
+    },
+    "expected_keywords": [
+      "NB-SEOUL-25",
+      "NB-SEOUL-26"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query_id": "Q016",
+    "question": "기업 고객이 월 운영비와 장애 대응 시간을 중요하게 보는 지역 문서를 찾아줘",
+    "query_type": "semantic",
+    "relevant_doc_ids": [
+      "SEOUL_2026_CORP_MFP",
+      "BUSAN_2026_CORP_MFP",
+      "GWANGJU_2026_CORP_MFP",
+      "DAEJEON_2026_CORP_MFP"
+    ],
+    "required_metadata": {
+      "year": 2026,
+      "customer_type": "기업",
+      "product": "복합기"
+    },
+    "expected_keywords": [
+      "운영비",
+      "SLA"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query_id": "Q017",
+    "question": "2026 부산 공공기관 노트북 조달 문서",
+    "query_type": "customer",
+    "relevant_doc_ids": [
+      "BUSAN_2026_PUBLIC_NOTEBOOK"
+    ],
+    "required_metadata": {
+      "region": "부산",
+      "year": 2026,
+      "customer_type": "공공기관"
+    },
+    "expected_keywords": [
+      "조달",
+      "NB-BUSAN-26"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query_id": "Q018",
+    "question": "서울 시장에서 납기와 유지보수를 중요하게 보는 이유를 설명할 자료는?",
+    "query_type": "region",
+    "relevant_doc_ids": [
+      "SEOUL_2026_MARKET",
+      "SEOUL_2026_PUBLIC_NOTEBOOK"
+    ],
+    "required_metadata": {
+      "region": "서울",
+      "year": 2026
+    },
+    "expected_keywords": [
+      "납기",
+      "유지보수"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query_id": "Q019",
+    "question": "대전의 2025 공공기관 노트북과 2026 기업 복합기 문서를 함께 찾아줘",
+    "query_type": "comparison",
+    "relevant_doc_ids": [
+      "DAEJEON_2025_PUBLIC_NOTEBOOK",
+      "DAEJEON_2026_CORP_MFP"
+    ],
+    "required_metadata": {
+      "region": "대전"
+    },
+    "expected_keywords": [
+      "NB-DAEJEON-25",
+      "MFP-DAEJEON-26"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query_id": "Q020",
+    "question": "조달이 아니라 렌탈과 SLA가 중요한 문서들은?",
+    "query_type": "semantic",
+    "relevant_doc_ids": [
+      "SEOUL_2026_CORP_MFP",
+      "BUSAN_2026_CORP_MFP",
+      "GWANGJU_2026_CORP_MFP",
+      "DAEJEON_2026_CORP_MFP"
+    ],
+    "required_metadata": {
+      "customer_type": "기업",
+      "product": "복합기",
+      "year": 2026
+    },
+    "expected_keywords": [
+      "렌탈",
+      "SLA"
+    ],
+    "difficulty": "medium"
+  }
+]

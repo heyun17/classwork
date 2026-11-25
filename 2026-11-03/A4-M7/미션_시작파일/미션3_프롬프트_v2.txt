@@ -1,0 +1,9 @@
+미션 3 · 프롬프트를 바꾸면 무엇이 달라지나 (OpenAI 키 필요)
+
+src/s09_answer.py 에서
+  PROMPT_VERSION = "v1"  →  "v2"
+  SYSTEM_PROMPT 의 규칙 2번 줄을 지웁니다 (답할 수 없으면 보류하라는 규칙)
+
+s09 → s10 → s11 (기준선은 v1로 저장해 둔 상태)
+확인: abstention_accuracy, grounded_rule, Alert 가 어떻게 바뀌는지
+끝나면 v1로 되돌립니다.

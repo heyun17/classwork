@@ -1,0 +1,32 @@
+A4-M6 RAG 검색 품질 평가와 모니터링 · 실습자료
+
+[준비]
+1) 이 폴더를 VS Code로 엽니다.
+2) pip install -r requirements.txt
+3) .env.example 을 .env 로 복사하고 OPENAI_API_KEY 입력 (06 Vector부터 필요)
+   키가 없으면 .env 에 EMBED_BACKEND=fake  → 흐름만 확인 (Vector·Hybrid 점수는 의미 없음)
+
+[실행 순서 · 프로젝트 폴더에서]
+python src/s01_document_scan.py     문서 16개 스캔
+python src/s02_metadata.py          metadata.csv 검증
+python src/s03_chunking.py          청킹 3가지 + 통계
+python src/s04_golden.py            Golden Dataset 20문항 검증
+python src/s05_bm25.py              BM25, Metadata+BM25
+python src/s06_faiss.py             Vector (OpenAI 임베딩 + FAISS, 캐시)
+python src/s07_hybrid.py            Hybrid (0.4 BM25 + 0.6 Vector)
+python src/s08_evaluation.py        지표 계산
+streamlit run src/app_dashboard.py  대시보드 (http://localhost:8501)
+
+결과는 모두 outputs/ 에 쌓입니다.
+
+[폴더]
+docs/            서울·부산·광주·대전 문서 16개
+data/            metadata.csv, golden_dataset.json
+src/             제공 코드 (교안 A 방식)
+instructions/    원본 단계별 지시서 (교안 B 방식 · Claude Code용), CLAUDE.md 규칙
+미션_시작파일/   교안 12탭 미션용 파일
+
+[확인용 기대값 · heading, K=3]
+BM25           Recall 0.888  Hit 0.95  MRR 0.900  nDCG 0.886
+Metadata+BM25  Recall 0.912  Hit 0.95  MRR 0.950  nDCG 0.946
+실패 질문: Q011 (미션 1에서 고침)

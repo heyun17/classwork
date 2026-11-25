@@ -1,0 +1,4 @@
+﻿chunk_method,chunks,avg_chars,min_chars,max_chars,too_short,too_long,empty,exact_duplicates,metadata_inheritance
+heading,60,87.5,65,118,0,0,0,0,1.0
+fixed_300,20,224.2,4,300,4,0,0,2,1.0
+fixed_500_overlap_100,16,280.2,255,308,0,0,0,0,1.0

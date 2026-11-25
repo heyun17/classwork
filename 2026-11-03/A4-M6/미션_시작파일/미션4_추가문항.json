@@ -1,0 +1,20 @@
+[
+  {
+    "query_id": "Q021",
+    "question": "MFP-DAEJEON-26 렌탈 제안에서 함께 비교할 비용은?",
+    "query_type": "exact_code",
+    "relevant_doc_ids": ["DAEJEON_2026_CORP_MFP"],
+    "required_metadata": {"region": "대전", "year": 2026, "product": "복합기"},
+    "expected_keywords": ["MFP-DAEJEON-26", "소모품", "운영비"],
+    "difficulty": "easy"
+  },
+  {
+    "query_id": "Q022",
+    "question": "항만과 물류 고객이 있는 지역의 시장 문서는?",
+    "query_type": "semantic",
+    "relevant_doc_ids": ["BUSAN_2026_MARKET"],
+    "required_metadata": {"region": "부산", "year": 2026},
+    "expected_keywords": ["항만", "물류"],
+    "difficulty": "medium"
+  }
+]

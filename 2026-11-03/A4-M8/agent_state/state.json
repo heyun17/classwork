@@ -1,0 +1,185 @@
+{
+  "version": 5,
+  "files": {
+    "회의메모_1028.txt": {
+      "status": "rejected",
+      "reason": "RAG 문서 형식 요건을 충족하지 않음: .md 확장자가 아니며 H1/H2 구조 및 최소 내용 요건에 미달.",
+      "sha1": "dabb40879608"
+    },
+    "2026_광주_기업_노트북전략.md": {
+      "sha1": "9155f958db29",
+      "status": "committed",
+      "doc_id": "GWANGJU_2026_CORP_NOTEBOOK",
+      "eval": {
+        "before": {
+          "recall": 0.9125,
+          "hit": 0.95,
+          "ndcg": 0.946,
+          "mrr": 0.95
+        },
+        "after": {
+          "recall": 0.9125,
+          "hit": 0.95,
+          "ndcg": 0.946,
+          "mrr": 0.95
+        },
+        "regression": []
+      },
+      "version": 1
+    },
+    "2026_부산_공공기관_노트북전략.md": {
+      "sha1": "8e7079386774",
+      "status": "committed",
+      "doc_id": "BUSAN_2026_PUBLIC_NOTEBOOK",
+      "eval": {
+        "before": {
+          "recall": 0.9125,
+          "hit": 0.95,
+          "ndcg": 0.946,
+          "mrr": 0.95
+        },
+        "after": {
+          "recall": 0.9125,
+          "hit": 0.95,
+          "ndcg": 0.946,
+          "mrr": 0.95
+        },
+        "regression": []
+      },
+      "version": 2
+    },
+    "2026_서울_공공기관_노트북_FAQ.md": {
+      "sha1": "0eabb40fe5f5",
+      "status": "committed",
+      "doc_id": "SEOUL_2026_PUBLIC_NOTEBOOK_FAQ",
+      "eval": {
+        "before": {
+          "recall": 0.9125,
+          "hit": 0.95,
+          "ndcg": 0.946,
+          "mrr": 0.95
+        },
+        "after": {
+          "recall": 0.8833,
+          "hit": 0.95,
+          "ndcg": 0.8361,
+          "mrr": 0.825
+        },
+        "regression": [
+          "Recall@3 0.9125 → 0.8833",
+          "MRR 0.95 → 0.825"
+        ]
+      },
+      "version": 3
+    },
+    "2026_인천_시장현황.md": {
+      "sha1": "68c187afae7a",
+      "status": "committed",
+      "doc_id": "INCHEON_2026_MARKET",
+      "eval": {
+        "before": {
+          "recall": 0.9125,
+          "hit": 0.95,
+          "ndcg": 0.946,
+          "mrr": 0.95
+        },
+        "after": {
+          "recall": 0.9125,
+          "hit": 0.95,
+          "ndcg": 0.942,
+          "mrr": 0.95
+        },
+        "regression": []
+      },
+      "version": 4
+    },
+    "2027_서울_공공기관_노트북전략.md": {
+      "sha1": "2e47cb7a80ac",
+      "status": "committed",
+      "doc_id": "SEOUL_2027_PUBLIC_NOTEBOOK",
+      "eval": {
+        "before": {
+          "recall": 0.9125,
+          "hit": 0.95,
+          "ndcg": 0.946,
+          "mrr": 0.95
+        },
+        "after": {
+          "recall": 0.8958,
+          "hit": 0.95,
+          "ndcg": 0.9265,
+          "mrr": 0.925
+        },
+        "regression": [
+          "MRR 0.95 → 0.925"
+        ]
+      },
+      "version": 5
+    }
+  },
+  "approvals": {
+    "2026_부산_공공기관_노트북전략.md": {
+      "reason": "기존 문서 BUSAN_2026_PUBLIC_NOTEBOOK를 덮어쓰는 수정 반영으로 메타데이터 검증상 사람 승인이 필요합니다.",
+      "answer": "yes",
+      "t": "2026-11-03 12:05:00"
+    },
+    "2026_서울_공공기관_노트북_FAQ.md": {
+      "reason": "새 FAQ 유형의 검색 경쟁 가능성에 대한 메타데이터 승인 필요. Golden 20 평가에서 Recall@3 및 MRR 회귀가 확인됨.",
+      "answer": "yes",
+      "t": "2026-11-03 12:05:07"
+    },
+    "2026_인천_시장현황.md": {
+      "reason": "새 지역 인천 추가에 대한 메타데이터 승인 필요. 평가에서는 회귀 기준에 해당하지 않음.",
+      "answer": "yes",
+      "t": "2026-11-03 12:05:10"
+    },
+    "2027_서울_공공기관_노트북전략.md": {
+      "reason": "새 연도 2027 추가에 대한 메타데이터 승인 필요. Golden 20 평가에서 MRR 회귀가 확인됨.",
+      "answer": "yes",
+      "t": "2026-11-03 12:05:11"
+    }
+  },
+  "last_eval": {
+    "recall": 0.8958,
+    "hit": 0.95,
+    "ndcg": 0.9265,
+    "mrr": 0.925
+  },
+  "history": [
+    {
+      "version": 1,
+      "file": "2026_광주_기업_노트북전략.md",
+      "doc_id": "GWANGJU_2026_CORP_NOTEBOOK",
+      "dest": "docs/광주/2026_광주_기업_노트북전략.md",
+      "new_file": true
+    },
+    {
+      "version": 2,
+      "file": "2026_부산_공공기관_노트북전략.md",
+      "doc_id": "BUSAN_2026_PUBLIC_NOTEBOOK",
+      "dest": "docs/부산/2026_부산_공공기관_노트북전략.md",
+      "new_file": false
+    },
+    {
+      "version": 3,
+      "file": "2026_서울_공공기관_노트북_FAQ.md",
+      "doc_id": "SEOUL_2026_PUBLIC_NOTEBOOK_FAQ",
+      "dest": "docs/서울/2026_서울_공공기관_노트북_FAQ.md",
+      "new_file": true
+    },
+    {
+      "version": 4,
+      "file": "2026_인천_시장현황.md",
+      "doc_id": "INCHEON_2026_MARKET",
+      "dest": "docs/인천/2026_인천_시장현황.md",
+      "new_file": true
+    },
+    {
+      "version": 5,
+      "file": "2027_서울_공공기관_노트북전략.md",
+      "doc_id": "SEOUL_2027_PUBLIC_NOTEBOOK",
+      "dest": "docs/서울/2027_서울_공공기관_노트북전략.md",
+      "new_file": true
+    }
+  ]
+}

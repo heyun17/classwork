@@ -1,0 +1,17 @@
+﻿doc_id,source_exists,duplicate_id,missing_fields,product_code_empty
+SEOUL_2026_MARKET,True,False,,True
+SEOUL_2026_PUBLIC_NOTEBOOK,True,False,,False
+SEOUL_2025_PUBLIC_NOTEBOOK,True,False,,False
+SEOUL_2026_CORP_MFP,True,False,,False
+BUSAN_2026_MARKET,True,False,,True
+BUSAN_2026_PUBLIC_NOTEBOOK,True,False,,False
+BUSAN_2025_PUBLIC_NOTEBOOK,True,False,,False
+BUSAN_2026_CORP_MFP,True,False,,False
+GWANGJU_2026_MARKET,True,False,,True
+GWANGJU_2026_PUBLIC_NOTEBOOK,True,False,,False
+GWANGJU_2025_PUBLIC_NOTEBOOK,True,False,,False
+GWANGJU_2026_CORP_MFP,True,False,,False
+DAEJEON_2026_MARKET,True,False,,True
+DAEJEON_2026_PUBLIC_NOTEBOOK,True,False,,False
+DAEJEON_2025_PUBLIC_NOTEBOOK,True,False,,False
+DAEJEON_2026_CORP_MFP,True,False,,False

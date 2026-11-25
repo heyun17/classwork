@@ -1,0 +1,41 @@
+﻿sample_id,label,query_id,query_type,answerable,question,answer,error,abstained,retrieval_hit,grounded_rule,unsupported,citation_valid,citation_acc,citation_cov,keyword_cov,verdict,quadrant
+,,Q001,year,True,2026년 서울 공공기관 노트북 판매 전략은?,"보안 요구사항, 납기 안정성, 유지보수 조건을 함께 검토하고, 제품 코드 NB-SEOUL-26 기준으로 제안서를 작성합니다. [SEOUL_2026_PUBLIC_NOTEBOOK]  
+3년 유지보수 조건과 대량 납품 일정·설치 범위를 명확히 하고, 조달 절차에 맞춘 문서를 제공합니다. [SEOUL_2026_PUBLIC_NOTEBOOK]",,False,True,1,,1.0,1.0,0.0,1.0,PASS,①검색O·답변O
+,,Q002,exact_code,True,NB-SEOUL-26 제품 코드를 사용하는 문서는?,NB-SEOUL-26 제품 코드를 사용하는 문서는 2026 서울 공공기관 노트북 전략입니다. [SEOUL_2026_PUBLIC_NOTEBOOK],,False,True,1,,1.0,1.0,0.0,1.0,PASS,①검색O·답변O
+,,Q003,semantic,True,서울에서 기업 고객에게 복합기를 제안할 때 핵심 조건은?,"서울 기업 고객은 계약 유연성, 운영비 비교, 월 유지비와 장애 대응 시간을 중요하게 평가하므로 이를 제안에 반영해야 합니다. [SEOUL_2026_CORP_MFP]  
+MFP-SEOUL-26 기준 렌탈안을 제시하고, 유지보수 SLA와 소모품 비용·월 운영비 비교, 장애 접수 및 교체 절차를 설명해야 합니다. [SEOUL_2026_CORP_MFP]",,False,True,1,,1.0,1.0,0.0,1.0,PASS,①검색O·답변O
+,,Q004,year,True,2025년 부산 공공기관 노트북 전략을 찾아줘,"2025년 부산 공공기관 노트북 전략은 예산 소진 시점의 교체 수요와 일괄 발주에 대응하는 것입니다. [BUSAN_2025_PUBLIC_NOTEBOOK]
+
+제품 코드 NB-BUSAN-25를 사용하고, 연말 조달 일정에 맞춰 선제 제안하며, 유지보수와 납품 일정을 함께 제시합니다. [BUSAN_2025_PUBLIC_NOTEBOOK]",,False,True,1,,1.0,1.0,0.0,1.0,PASS,①검색O·답변O
+,,Q005,region,True,부산 지역은 왜 설치 지원과 지역 A/S가 중요한가?,"대량 구매에서는 납기, 유지보수, 설치 지원을 함께 검토하며, 부산 시장은 현장 설치와 지역 A/S 대응이 중요하기 때문입니다. [BUSAN_2026_MARKET]",,False,True,1,,1.0,1.0,0.0,0.5,WARN·불완전,②검색O·답변X
+,,Q006,exact_code,True,광주 공공기관에서 사용할 2026 노트북 제품 코드는?,NB-GWANGJU-26 [GWANGJU_2026_PUBLIC_NOTEBOOK],,False,True,1,,1.0,1.0,1.0,1.0,PASS,①검색O·답변O
+,,Q007,semantic,True,대전 기업 복합기 계약에서 장애 대응 조건은 어떻게 봐야 하나?,"대전 기업 고객은 장애 대응 시간을 중요하게 평가하므로 유지보수 SLA를 명시해야 합니다.[DAEJEON_2026_CORP_MFP]  
+장애 접수 및 교체 절차도 설명해야 합니다.[DAEJEON_2026_CORP_MFP]",,False,True,1,,1.0,1.0,1.0,0.667,PASS,①검색O·답변O
+,,Q008,comparison,True,서울 2025년과 2026년 공공기관 노트북 전략을 비교해줘,"- 두 전략의 대상은 모두 서울 소재 공공기관입니다.[SEOUL_2025_PUBLIC_NOTEBOOK][SEOUL_2026_PUBLIC_NOTEBOOK]
+- 2025년에는 예산 소진 시점의 교체 수요와 일괄 발주가 주요 특징이었습니다.[SEOUL_2025_PUBLIC_NOTEBOOK]
+- 2026년에는 단순 최저가보다 보안 요구사항, 납기 안정성, 유지보수 조건을 함께 검토합니다.[SEOUL_2026_PUBLIC_NOTEBOOK]
+- 핵심 키워드는 2025년의 `NB-SEOUL-25`에서 2026년 `NB-SEOUL-26`으로 바뀌었고, 2026년에는 보안이 포함됩니다.[SEOUL_2025_PUBLIC_NOTEBOOK][SEOUL_2026_PUBLIC_NOTEBOOK]",,False,True,1,,1.0,1.0,0.667,1.0,PASS,①검색O·답변O
+,,Q009,comparison,True,2026년 각 지역의 시장 특성을 비교하려면 어떤 문서들이 필요한가?,"2026년 지역별 시장 특성을 비교하려면 부산·서울·광주·대전의 시장현황 문서가 필요합니다: [BUSAN_2026_MARKET], [SEOUL_2026_MARKET], [GWANGJU_2026_MARKET], [DAEJEON_2026_MARKET]",,False,True,1,,1.0,1.0,1.0,0.0,WARN·불완전,②검색O·답변X
+,,Q010,comparison,True,공공기관과 기업의 구매 판단 기준 차이를 서울 기준으로 비교해줘,"- 공공기관은 조달 절차에 맞춘 문서, 3년 유지보수 조건, 대량 납품 일정과 설치 범위를 명확히 하는 방향입니다. [SEOUL_2026_PUBLIC_NOTEBOOK]
+- 기업은 렌탈안, 유지보수 SLA, 소모품 비용과 월 운영비 비교, 장애 접수 및 교체 절차를 제시하는 방향입니다. [SEOUL_2026_CORP_MFP]
+- 서울에서는 고객 유형별 조달 방식과 의사결정 기준이 다르므로 고객군을 구분해 제안하는 것이 중요합니다. [SEOUL_2026_MARKET]",,False,True,1,,1.0,1.0,0.0,0.75,PASS,①검색O·답변O
+,,Q011,exact_code,True,MFP-GWANGJU-26은 어떤 고객을 위한 코드인가?,제공된 문서에서 확인할 수 없습니다.,,True,False,,,,,,,FAIL·과도한보류,④검색X·답변X
+,,Q012,region,True,대전 연구기관과 기술기업이 많은 시장의 특징은?,"연구기관·공공기관·기술기업 비중이 높고, 유지보수 SLA와 기술지원 조건을 중요하게 봅니다. [DAEJEON_2026_MARKET]",,False,True,1,,1.0,1.0,0.0,1.0,PASS,①검색O·답변O
+,,Q013,product,True,2026년 부산 기업의 복합기 렌탈 제안 핵심은?,"제품 코드 MFP-BUSAN-26 기준으로 렌탈안을 제시하고, 유지보수 SLA와 소모품 비용·월 운영비를 비교하며, 장애 접수 및 교체 절차를 설명하는 것입니다.[BUSAN_2026_CORP_MFP] 기업 고객은 계약 유연성과 운영비 비교, 월 유지비와 장애 대응 시간을 중요하게 평가합니다.[BUSAN_2026_CORP_MFP]",,False,True,1,,1.0,1.0,1.0,1.0,PASS,①검색O·답변O
+,,Q014,semantic,True,광주의 공공기관 중심 시장 특성과 노트북 전략을 같이 보고 싶어,"광주는 공공기관·교육기관 비중이 높고, 교육장·회의실 및 행정업무 장비 수요가 꾸준합니다. [GWANGJU_2026_MARKET]  
+공공기관 노트북은 최저가만이 아니라 보안 요구사항, 납기 안정성, 유지보수 조건을 함께 검토하는 전략이 적합합니다. [GWANGJU_2026_PUBLIC_NOTEBOOK]",,False,True,1,,1.0,1.0,0.0,0.5,WARN·불완전,②검색O·답변X
+,,Q015,exact_code,True,2025년 제품 코드와 2026년 제품 코드가 비슷한 서울 노트북 문서를 구분해줘,"2025년 서울 공공기관 노트북 문서는 제품 코드 **NB-SEOUL-25**를 사용합니다. [SEOUL_2025_PUBLIC_NOTEBOOK]  
+2026년 서울 공공기관 노트북 문서는 제품 코드 **NB-SEOUL-26**을 사용합니다. [SEOUL_2026_PUBLIC_NOTEBOOK]  
+연도와 제품 코드로 두 문서를 구분하면 됩니다. [SEOUL_2026_PUBLIC_NOTEBOOK]",,False,True,1,,1.0,1.0,0.0,1.0,PASS,①검색O·답변O
+,,Q016,semantic,True,기업 고객이 월 운영비와 장애 대응 시간을 중요하게 보는 지역 문서를 찾아줘,"서울, 부산, 광주, 대전 문서에서 확인됩니다. [SEOUL_2026_CORP_MFP] [BUSAN_2026_CORP_MFP] [GWANGJU_2026_CORP_MFP] [DAEJEON_2026_CORP_MFP]",,False,True,1,,1.0,1.0,0.0,0.0,WARN·불완전,②검색O·답변X
+,,Q017,customer,True,2026 부산 공공기관 노트북 조달 문서,"2026년 부산 공공기관 노트북 제안에는 제품 코드 NB-BUSAN-26을 사용하고, 3년 유지보수 조건과 대량 납품 일정·설치 범위를 명확히 하며 조달 절차에 맞춘 문서를 제공해야 합니다. [BUSAN_2026_PUBLIC_NOTEBOOK]",,False,True,1,,1.0,1.0,0.0,1.0,PASS,①검색O·답변O
+,,Q018,region,True,서울 시장에서 납기와 유지보수를 중요하게 보는 이유를 설명할 자료는?,"서울에는 기업 고객과 공공기관 고객이 모두 있고, 대량 구매 시 납기와 유지보수, 설치 지원을 함께 검토합니다.[SEOUL_2026_MARKET]  
+공공기관은 납기 안정성과 유지보수 조건을 보안 요구사항과 함께 검토하며, 기업은 월 유지비와 장애 대응 시간을 중요하게 평가합니다.[SEOUL_2026_PUBLIC_NOTEBOOK][SEOUL_2026_CORP_MFP]",,False,True,1,,1.0,0.667,1.0,1.0,PASS,①검색O·답변O
+,,Q019,comparison,True,대전의 2025 공공기관 노트북과 2026 기업 복합기 문서를 함께 찾아줘,"2025 대전 공공기관 노트북 전략 [DAEJEON_2025_PUBLIC_NOTEBOOK]  
+2026 대전 기업 복합기 전략 [DAEJEON_2026_CORP_MFP]",,False,True,1,,1.0,1.0,1.0,0.0,WARN·불완전,②검색O·답변X
+,,Q020,semantic,True,조달이 아니라 렌탈과 SLA가 중요한 문서들은?,"서울, 부산, 광주, 대전 기업 복합기 전략 문서입니다. [SEOUL_2026_CORP_MFP] [BUSAN_2026_CORP_MFP] [GWANGJU_2026_CORP_MFP] [DAEJEON_2026_CORP_MFP]",,False,True,1,,1.0,1.0,0.0,0.0,WARN·불완전,②검색O·답변X
+,,N01,no_answer,False,2027년 서울 공공기관 노트북 정책은?,제공된 문서에서 확인할 수 없습니다.,,True,,,,,,,,PASS,
+,,N02,no_answer,False,인천 지역 시장현황을 알려줘,제공된 문서에서 확인할 수 없습니다.,,True,,,,,,,,PASS,
+,,N03,no_answer,False,NB-SEOUL-27 제품 코드를 쓰는 문서는?,제공된 문서에서 확인할 수 없습니다.,,True,,,,,,,,PASS,
+,,N04,no_answer,False,대전 기업 복합기 렌탈의 월 요금은 얼마인가?,제공된 문서에서 확인할 수 없습니다.,,True,,,,,,,,PASS,
+,,N05,no_answer,False,서울 공공기관 노트북 유지보수는 몇 년까지 연장할 수 있나?,제공된 문서에서 확인할 수 없습니다.,,True,,,,,,,,PASS,

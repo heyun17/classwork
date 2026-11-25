@@ -1,0 +1,4 @@
+ANSWER_K,avg_context_chars,avg_input_tokens,cost_per_q_usd,retrieval_hit,grounded_rule,keyword_cov,e2e_p95_ms,Alert
+3,253.6,,,,,,,
+5,421.1,,,,,,,기준선
+10,772.3,,,,,,,

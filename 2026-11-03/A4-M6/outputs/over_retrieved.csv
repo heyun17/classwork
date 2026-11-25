@@ -1,0 +1,5 @@
+﻿retriever,retrieval_coverage,over_retrieved_top3
+BM25,1.0,SEOUL_2025_PUBLIC_NOTEBOOK__heading__00(3) | BUSAN_2025_PUBLIC_NOTEBOOK__heading__00(3) | SEOUL_2025_PUBLIC_NOTEBOOK__heading__03(3)
+Hybrid,1.0,SEOUL_2026_MARKET__heading__01(4) | BUSAN_2026_CORP_MFP__heading__00(4) | SEOUL_2026_PUBLIC_NOTEBOOK__heading__02(3)
+Metadata+BM25,1.0,BUSAN_2026_MARKET__heading__01(4) | SEOUL_2026_MARKET__heading__01(3) | SEOUL_2026_PUBLIC_NOTEBOOK__heading__02(3)
+Vector,0.929,SEOUL_2025_PUBLIC_NOTEBOOK__heading__00(4) | SEOUL_2026_MARKET__heading__01(4) | DAEJEON_2026_MARKET__heading__00(4)

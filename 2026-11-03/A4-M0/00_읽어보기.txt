@@ -1,0 +1,24 @@
+A4-M0 OpenSearch 설치(Windows Docker)와 한국어 형태소 분석기 Nori · 실습자료
+
+[파일]
+01_설치_명령.ps1      PowerShell 명령 (설치 → 확인 → Nori 설치·확인 → 영구 설치 → 삭제). 맨 위 비밀번호 한 줄만 바꿔 블록별로 실행
+Dockerfile            Nori가 들어 있는 OpenSearch 이미지 (교안 08탭)
+02_nori_devtools.txt  Dev Tools 요청 전부 — 분석·품사·옵션·NNG만(09~11) / 확인·삭제·생성·업로드(12) / 토큰 세기(13) / 검색 비교(14) / 집계(17)
+03_nori_python.py     Python — 분석·품사·NNG / 인덱스(reviews_nori_py) / 문서별 토큰 / 검색 비교 (교안 18~19탭)
+04_term_field.py      집계용 필드 comment_terms + 단어 빈도 (교안 17·19탭)
+reviews.json          후기 10건 (A4-M2 reviews와 같은 데이터)
+.env.example          .env 로 복사 후 OPENSEARCH_PASSWORD 입력
+
+[순서]
+1) 01_설치_명령.ps1 [02]~[05] → http://localhost:5601 로그인 (admin / 정한 비밀번호)
+2) [07] Nori 설치 → docker restart opensearch → 설치 확인
+3) Dev Tools에서 02_nori_devtools.txt 를 위에서부터
+4) Dashboards: Index patterns → reviews_nori → Discover · Visualize (교안 16~17탭)
+5) pip install opensearch-py python-dotenv
+   python 03_nori_python.py
+   python 04_term_field.py            (Dev Tools의 reviews_nori에 집계용 필드)
+
+[확인]
+docker exec opensearch /usr/share/opensearch/bin/opensearch-plugin list | findstr nori  → analysis-nori
+POST _analyze {"analyzer":"nori","text":"배송이 조금 늦었어요"} 에서 '배송'이 조사 없이 나오면 성공
+품사 이름은 OpenSearch 3.x 기준(JKS, EF ...). E, J 를 쓰면 No enum constant 오류

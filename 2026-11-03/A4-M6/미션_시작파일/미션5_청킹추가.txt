@@ -1,0 +1,10 @@
+미션 5 · 청킹 방식 추가
+
+1) src/s03_chunking.py 의 SPLITTERS 에 한 줄 추가
+       "fixed_150_overlap_30": lambda t: chunk_fixed(t, 150, 30),
+2) src/config.py 의 CHUNK_METHODS 에 같은 이름 추가
+       CHUNK_METHODS = ["heading", "fixed_300", "fixed_500_overlap_100", "fixed_150_overlap_30"]
+3) 청킹이 바뀌었으니 전부 다시:
+       s03 → s05 → s06 → s07 → s08
+   (임베딩 캐시 덕분에 s06은 새 청크만 API를 부릅니다)
+4) chunk_stats.csv 와 대시보드 Chunking Experiment 에서 heading 과 비교

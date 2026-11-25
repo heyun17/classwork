@@ -1,0 +1,16 @@
+미션 1 · 토크나이저 고치기
+
+src/common.py 의 tokenize 함수에서 아래 줄을 찾습니다.
+
+    for t in re.findall(r"[0-9A-Za-z가-힣/\-]+", text.lower()):
+
+영문·숫자와 한글이 붙어 있으면 따로 떼도록 정규식을 바꿉니다.
+  예: "MFP-GWANGJU-26은 2026년" → ['mfp-gwangju-26', '은', '2026', '년']
+
+    for t in re.findall(r"________________________", text.lower()):
+
+바꾼 뒤:  python src/s05_bm25.py → python src/s07_hybrid.py → python src/s08_evaluation.py
+(임베딩은 토큰화와 무관하므로 s06은 다시 돌리지 않습니다)
+
+완료 기준: BM25 heading K=3 의 Hit@3 = 1.0, failure_cases.csv 에서 Q011 사라짐
+바꾸기 전 outputs/evaluation_summary.csv 를 evaluation_summary_before.csv 로 복사해 두면 비교가 쉽습니다.

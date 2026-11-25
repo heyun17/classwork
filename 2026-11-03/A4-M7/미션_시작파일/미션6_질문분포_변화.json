@@ -1,0 +1,53 @@
+[
+  {
+    "query_id": "D01",
+    "question": "서울 공공기관에 노트북 팔 때 뭐가 중요해?",
+    "query_type": "semantic",
+    "relevant_doc_ids": [
+      "SEOUL_2026_PUBLIC_NOTEBOOK"
+    ],
+    "expected_keywords": [
+      "보안",
+      "유지보수"
+    ],
+    "why": "코드 대신 자연어"
+  },
+  {
+    "query_id": "D02",
+    "question": "부산 공공기관 노트북 제안할 때 챙길 것",
+    "query_type": "semantic",
+    "relevant_doc_ids": [
+      "BUSAN_2026_PUBLIC_NOTEBOOK"
+    ],
+    "expected_keywords": [
+      "NB-BUSAN-26",
+      "유지보수"
+    ],
+    "why": "코드 대신 자연어"
+  },
+  {
+    "query_id": "D03",
+    "question": "광주 기업한테 복합기 렌탈 제안 포인트",
+    "query_type": "semantic",
+    "relevant_doc_ids": [
+      "GWANGJU_2026_CORP_MFP"
+    ],
+    "expected_keywords": [
+      "MFP-GWANGJU-26",
+      "SLA"
+    ],
+    "why": "코드 대신 자연어"
+  },
+  {
+    "query_id": "D04",
+    "question": "대전 공공기관 노트북 올해 전략",
+    "query_type": "semantic",
+    "relevant_doc_ids": [
+      "DAEJEON_2026_PUBLIC_NOTEBOOK"
+    ],
+    "expected_keywords": [
+      "NB-DAEJEON-26"
+    ],
+    "why": "'올해'처럼 연도가 숨어 있음"
+  }
+]

@@ -1,0 +1,2 @@
+﻿type,metric,value,rule,baseline
+절대기준,e2e_p95_ms,5403.0,<= 5000,

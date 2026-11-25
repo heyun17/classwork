@@ -1,0 +1,11 @@
+﻿sample_id,label,query_id,query_type,answerable,question,answer,error,abstained,retrieval_hit,grounded_rule,unsupported,citation_valid,citation_acc,citation_cov,keyword_cov,verdict,quadrant
+S1,정상 답변,Q001,year,True,2026년 서울 공공기관 노트북 판매 전략은?,2026 서울 공공기관 노트북은 제품 코드 NB-SEOUL-26 기준 제안서를 사용하고 3년 유지보수 조건을 명시합니다. [SEOUL_2026_PUBLIC_NOTEBOOK] 조달 절차에 맞춘 문서를 제공합니다. [SEOUL_2026_PUBLIC_NOTEBOOK],,False,True,1,,1.0,1.0,0.5,1.0,PASS,①검색O·답변O
+S2,근거에 없는 사실(5년),Q001,year,True,2026년 서울 공공기관 노트북 판매 전략은?,2026 서울 공공기관 노트북은 NB-SEOUL-26 기준으로 5년 유지보수 조건을 명시합니다. [SEOUL_2026_PUBLIC_NOTEBOOK] 조달 절차에 맞춘 문서를 제공합니다. [SEOUL_2026_PUBLIC_NOTEBOOK],,False,True,0,5년,1.0,1.0,0.5,1.0,FAIL·근거없는사실,②검색O·답변X
+S3,의미 과장(명시→법적 필수),Q001,year,True,2026년 서울 공공기관 노트북 판매 전략은?,NB-SEOUL-26 제안에서 3년 유지보수는 법으로 정해진 필수 조건이라 빠지면 조달에 참여할 수 없습니다. [SEOUL_2026_PUBLIC_NOTEBOOK],,False,True,1,,1.0,1.0,0.0,1.0,PASS,①검색O·답변O
+S4,출처 표시 없음,Q001,year,True,2026년 서울 공공기관 노트북 판매 전략은?,NB-SEOUL-26 기준 제안서를 사용하고 3년 유지보수 조건을 명시하며 조달 절차에 맞춘 문서를 제공합니다.,,False,True,1,,,,0.0,1.0,FAIL·출처없음,②검색O·답변X
+S5,없는 문서를 인용,Q001,year,True,2026년 서울 공공기관 노트북 판매 전략은?,NB-SEOUL-26 기준 제안서를 사용하고 3년 유지보수 조건을 명시하며 조달 절차에 맞춘 문서를 제공합니다. [SEOUL_2026_POLICY],,False,True,1,,0.0,0.0,0.0,1.0,FAIL·없는출처,②검색O·답변X
+S6,엉뚱한 문서를 인용(시장현황),Q001,year,True,2026년 서울 공공기관 노트북 판매 전략은?,NB-SEOUL-26 기준 제안서를 사용하고 3년 유지보수 조건을 명시하며 조달 절차에 맞춘 문서를 제공합니다. [SEOUL_2026_MARKET],,False,True,1,,1.0,0.0,0.0,1.0,FAIL·엉뚱한출처,②검색O·답변X
+S7,비교 질문에 한쪽만,Q008,comparison,True,서울 2025년과 2026년 공공기관 노트북 전략을 비교해줘,2026년 서울 공공기관 노트북 전략은 NB-SEOUL-26 기준 제안서를 사용합니다. [SEOUL_2026_PUBLIC_NOTEBOOK],,False,True,1,,1.0,1.0,0.0,0.5,WARN·불완전,②검색O·답변X
+S8,답할 수 있는데 보류,Q003,semantic,True,서울에서 기업 고객에게 복합기를 제안할 때 핵심 조건은?,제공된 문서에서 확인할 수 없습니다.,,True,True,,,,,,,FAIL·과도한보류,②검색O·답변X
+S9,답할 수 없는데 지어냄,N01,no_answer,False,2027년 서울 공공기관 노트북 정책은?,2027년 서울 공공기관 노트북은 4년 유지보수 정책이 적용됩니다. [SEOUL_2026_PUBLIC_NOTEBOOK],,False,,0,2027년 4년,1.0,,0.0,,FAIL·근거없는답변,
+S10,답할 수 없어 보류,N01,no_answer,False,2027년 서울 공공기관 노트북 정책은?,제공된 문서에서 확인할 수 없습니다.,,True,,,,,,,,PASS,

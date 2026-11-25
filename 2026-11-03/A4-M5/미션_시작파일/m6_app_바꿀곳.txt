@@ -1,0 +1,18 @@
+A4-M5 미션 6 · A4-M4의 app.py를 OpenSearch 검색으로
+
+1. os_vector_search.py 를 A4-M4 폴더(Part1...)로 복사
+2. A4-M4 폴더에서 app.py → m6_app.py 로 복사
+3. m6_app.py 에서 아래 네 곳 수정
+4. streamlit run m6_app.py
+
+# ① import: faiss_service 줄을 지우고 추가
+from os_vector_search import search_opensearch, count_docs
+
+# ② load_vector_db() 함수와 그 호출(faiss_index, chunks = load_vector_db()) 삭제
+
+# ③ 사이드바 슬라이더의 faiss_index.ntotal → count_docs(os_client)
+top_k = st.slider("RAG 검색 문서 수", min_value=1,
+                  max_value=min(5, count_docs(os_client)), value=min(3, count_docs(os_client)))
+
+# ④ search_faiss(openai_client, 질문, k=top_k) 두 곳 →
+search_opensearch(openai_client, os_client, 질문, k=top_k)

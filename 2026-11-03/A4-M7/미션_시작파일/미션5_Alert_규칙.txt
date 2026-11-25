@@ -1,0 +1,9 @@
+미션 5 · Alert 규칙 정하기
+
+src/config_ops.py 의 ALERT_ABS, ALERT_REL 을 보고
+1) e2e_p95_ms 기준을 우리 서비스 요구사항으로 바꿔 봅니다 (예: 3000).
+2) ALERT_REL 에 "keyword_cov": ("down", 0.10) 을 추가합니다.
+3) python src/s11_ops_report.py  (s09·s10은 다시 돌리지 않아도 됨)
+4) alerts.csv 와 대시보드 Alerts 화면 확인
+
+생각할 것: 고정 기준(ALERT_ABS)만 있으면 무엇을 놓치고, 기준선 대비(ALERT_REL)만 있으면 무엇을 놓치나?
