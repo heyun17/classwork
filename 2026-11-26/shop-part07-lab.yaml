@@ -1,0 +1,583 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Part 07 troubleshooting lab (shop). Builds VPC, EC2 (FastAPI+Redis) and RDS PostgreSQL 16,
+  then breaks some parts on purpose based on ScenarioCode. Delete the stack after the lab.
+
+Parameters:
+  ScenarioCode:
+    Type: String
+    Default: S9
+    AllowedValues: [S0, S1, S2, S3, S4, S5, S6, S7, S8, S9]
+    Description: Leave as is (change only if the instructor says so).
+  DbEngineVersion:
+    Type: String
+    Default: '16.15'
+    AllowedPattern: '^16\.\d+$'
+    Description: RDS PostgreSQL 16 minor version (upgraded to 17 in Part 06)
+  InstanceType:
+    Type: String
+    Default: t3.micro
+    AllowedValues: [t3.micro, t3.small]
+  AzA:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: ap-northeast-2a
+    Description: AZ for EC2 and the first DB subnet
+  AzB:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: ap-northeast-2c
+    Description: AZ for the second DB subnet (must differ from AzA)
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64
+
+Mappings:
+  Scenarios:
+    S0: {Sg: 'false', Pw: 'false', Ca: 'false', CacheKey: 'false', Redis: 'false', Grant: 'false', Ssm: 'false'}
+    S1: {Sg: 'true',  Pw: 'false', Ca: 'false', CacheKey: 'false', Redis: 'false', Grant: 'false', Ssm: 'false'}
+    S2: {Sg: 'false', Pw: 'true',  Ca: 'false', CacheKey: 'false', Redis: 'false', Grant: 'false', Ssm: 'false'}
+    S3: {Sg: 'false', Pw: 'false', Ca: 'false', CacheKey: 'true',  Redis: 'true',  Grant: 'false', Ssm: 'false'}
+    S4: {Sg: 'false', Pw: 'false', Ca: 'false', CacheKey: 'false', Redis: 'false', Grant: 'true',  Ssm: 'false'}
+    S5: {Sg: 'false', Pw: 'false', Ca: 'true',  CacheKey: 'false', Redis: 'false', Grant: 'false', Ssm: 'false'}
+    S6: {Sg: 'false', Pw: 'false', Ca: 'false', CacheKey: 'false', Redis: 'false', Grant: 'false', Ssm: 'true'}
+    S7: {Sg: 'true',  Pw: 'true',  Ca: 'false', CacheKey: 'false', Redis: 'false', Grant: 'false', Ssm: 'false'}
+    S8: {Sg: 'false', Pw: 'false', Ca: 'false', CacheKey: 'false', Redis: 'true',  Grant: 'true',  Ssm: 'true'}
+    S9: {Sg: 'true',  Pw: 'true',  Ca: 'false', CacheKey: 'false', Redis: 'true',  Grant: 'true',  Ssm: 'false'}
+
+Conditions:
+  FaultSg: !Equals [!FindInMap [Scenarios, !Ref ScenarioCode, Sg], 'true']
+  FaultSsm: !Equals [!FindInMap [Scenarios, !Ref ScenarioCode, Ssm], 'true']
+
+Resources:
+  # ---------- Network (Part 00/02) ----------
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags: [{Key: Name, Value: test-shop-vpc}]
+
+  PublicSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Ref AzA
+      MapPublicIpOnLaunch: true
+      Tags: [{Key: Name, Value: test-shop-public-a}]
+
+  DbSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.0.11.0/24
+      AvailabilityZone: !Ref AzA
+      Tags: [{Key: Name, Value: test-shop-db-a}]
+
+  DbSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.0.12.0/24
+      AvailabilityZone: !Ref AzB
+      Tags: [{Key: Name, Value: test-shop-db-b}]
+
+  Igw:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags: [{Key: Name, Value: test-shop-igw}]
+
+  IgwAttach:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Vpc
+      InternetGatewayId: !Ref Igw
+
+  PublicRt:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+      Tags: [{Key: Name, Value: test-shop-public-rt}]
+
+  PublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: IgwAttach
+    Properties:
+      RouteTableId: !Ref PublicRt
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref Igw
+
+  PublicRtAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRt
+      SubnetId: !Ref PublicSubnetA
+
+  PrivateRt:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+      Tags: [{Key: Name, Value: test-shop-private-rt}]
+
+  PrivateRtAssocA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRt
+      SubnetId: !Ref DbSubnetA
+
+  PrivateRtAssocB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRt
+      SubnetId: !Ref DbSubnetB
+
+  Ec2Sg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: test-shop-ec2-sg
+      GroupDescription: shop-admin-ec2
+      VpcId: !Ref Vpc
+      Tags: [{Key: Name, Value: test-shop-ec2-sg}]
+
+  DbSg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: test-shop-db-sg
+      GroupDescription: shop-rds
+      VpcId: !Ref Vpc
+      Tags: [{Key: Name, Value: test-shop-db-sg}]
+
+  DbIngressFromEc2:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !Ref DbSg
+      IpProtocol: tcp
+      FromPort: !If [FaultSg, 5433, 5432]
+      ToPort: !If [FaultSg, 5433, 5432]
+      SourceSecurityGroupId: !Ref Ec2Sg
+      Description: PostgreSQL from test-shop-ec2-sg
+
+  # ---------- DB passwords (generated by Secrets Manager) ----------
+  DbMasterSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: test-shop-db master (postgres)
+      GenerateSecretString:
+        SecretStringTemplate: '{"username":"postgres"}'
+        GenerateStringKey: password
+        PasswordLength: 20
+        ExcludePunctuation: true
+
+  DbAppSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: test-shop-db app user (shop_app)
+      GenerateSecretString:
+        SecretStringTemplate: '{"username":"shop_app"}'
+        GenerateStringKey: password
+        PasswordLength: 20
+        ExcludePunctuation: true
+
+  # ---------- RDS (Part 02) ----------
+  DbSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupName: test-shop-db-subnets
+      DBSubnetGroupDescription: shop private database subnets
+      SubnetIds: [!Ref DbSubnetA, !Ref DbSubnetB]
+
+  ShopDb:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      DBInstanceIdentifier: test-shop-db
+      Engine: postgres
+      EngineVersion: !Ref DbEngineVersion
+      DBInstanceClass: db.t4g.micro
+      AllocatedStorage: '20'
+      StorageType: gp3
+      StorageEncrypted: true
+      MultiAZ: false
+      PubliclyAccessible: false
+      DBName: shop
+      MasterUsername: postgres
+      MasterUserPassword: !Sub '{{resolve:secretsmanager:${DbMasterSecret}:SecretString:password}}'
+      DBSubnetGroupName: !Ref DbSubnetGroup
+      VPCSecurityGroups: [!Ref DbSg]
+      BackupRetentionPeriod: 7
+      DeletionProtection: false
+      DeleteAutomatedBackups: true
+      Tags: [{Key: Name, Value: test-shop-db}]
+
+  # ---------- IAM (SSM + read DB secrets) ----------
+  Ec2Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Service: ec2.amazonaws.com}
+            Action: sts:AssumeRole
+      ManagedPolicyArns: !If
+        - FaultSsm
+        - !Ref AWS::NoValue
+        - [!Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore']
+      Policies:
+        - PolicyName: read-shop-db-secrets
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: secretsmanager:GetSecretValue
+                Resource: [!Ref DbMasterSecret, !Ref DbAppSecret]
+      Tags: [{Key: Name, Value: test-shop-ec2-ssm}]
+
+  Ec2Profile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles: [!Ref Ec2Role]
+
+  # ---------- EC2 (Part 00/03/04) ----------
+  ShopApi:
+    Type: AWS::EC2::Instance
+    DependsOn: [PublicRoute, PublicRtAssoc]
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: !Ref InstanceType
+      IamInstanceProfile: !Ref Ec2Profile
+      NetworkInterfaces:
+        - DeviceIndex: '0'
+          SubnetId: !Ref PublicSubnetA
+          AssociatePublicIpAddress: true
+          GroupSet: [!Ref Ec2Sg]
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs: {VolumeSize: 16, VolumeType: gp3, DeleteOnTermination: true}
+      Tags: [{Key: Name, Value: test-shop-api}]
+      UserData:
+        Fn::Base64: !Sub
+          - |
+            #!/bin/bash
+            set -uo pipefail
+            exec > /var/log/shop-bootstrap.log 2>&1
+            chmod 600 /var/log/shop-bootstrap.log
+            REGION='${AWS::Region}'
+            DB_HOST='${DbHost}'
+            MASTER_SECRET='${MasterSecretArn}'
+            APP_SECRET='${AppSecretArn}'
+            F_PW='${FPw}'
+            F_CA='${FCa}'
+            F_CACHEKEY='${FCacheKey}'
+            F_REDIS='${FRedis}'
+            F_GRANT='${FGrant}'
+
+            dnf install -y python3 python3-pip nano docker postgresql15 jq
+            systemctl enable --now docker
+
+            id ssm-user >/dev/null 2>&1 || useradd -m -s /bin/bash ssm-user
+            echo 'ssm-user ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ssm-agent-users
+            chmod 440 /etc/sudoers.d/ssm-agent-users
+
+            APP_DIR=/home/ssm-user/shop
+            mkdir -p "$APP_DIR"
+            cd "$APP_DIR"
+            curl -fsSLo global-bundle.pem https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
+            python3 -m venv .venv
+            .venv/bin/pip install --quiet fastapi uvicorn "psycopg[binary,pool]" python-dotenv redis
+
+            cat > main.py <<'PYEOF'
+            import os, json, logging
+            from contextlib import asynccontextmanager
+            from dotenv import load_dotenv
+            from fastapi import FastAPI, HTTPException
+            from pydantic import BaseModel, Field
+            from psycopg_pool import ConnectionPool
+            from psycopg.rows import dict_row
+            import redis
+
+            load_dotenv()
+            logging.basicConfig(level=logging.INFO)
+            log = logging.getLogger("shop")
+            pool = ConnectionPool("", kwargs={
+                "host": os.environ["DB_HOST"],
+                "dbname": os.getenv("DB_NAME", "shop"),
+                "user": os.environ["DB_USER"],
+                "password": os.environ["DB_PASSWORD"],
+                "sslmode": "verify-full",
+                "sslrootcert": os.environ["DB_CA"],
+                "row_factory": dict_row,
+            }, min_size=1, max_size=5, open=False)
+            cache = redis.Redis.from_url(os.getenv("REDIS_URL", "redis://127.0.0.1:6379/0"),
+                decode_responses=True, socket_connect_timeout=0.3, socket_timeout=0.3)
+            enabled = os.getenv("CACHE_ENABLED") == "1"
+
+            @asynccontextmanager
+            async def lifespan(app):
+                pool.open(wait=True)
+                try:
+                    yield
+                finally:
+                    pool.close()
+                    cache.close()
+
+            app = FastAPI(lifespan=lifespan)
+
+            def invalidate(pid):
+                if enabled:
+                    try:
+                        cache.delete(f"product:{pid}")
+                    except redis.RedisError:
+                        log.exception("cache invalidation failed")
+
+            class OrderIn(BaseModel):
+                product_id: int = Field(gt=0)
+                qty: int = Field(gt=0, le=1000)
+
+            class PriceIn(BaseModel):
+                price: int = Field(ge=0, le=2147483647)
+
+            @app.get("/health")
+            def health():
+                with pool.connection() as conn:
+                    conn.execute("SELECT 1")
+                return {"db": "ok"}
+
+            @app.get("/products/{pid}")
+            def product(pid: int):
+                key = f"product:{pid}"
+                if enabled:
+                    try:
+                        value = cache.get(key)
+                        if value is not None:
+                            return {"source": "redis", "data": json.loads(value)}
+                    except (redis.RedisError, ValueError):
+                        log.warning("cache read failed")
+                with pool.connection() as conn:
+                    row = conn.execute("SELECT id,name,price,stock FROM products WHERE id=%s AND active", (pid,)).fetchone()
+                if row is None:
+                    raise HTTPException(404, "product not found")
+                if enabled:
+                    try:
+                        cache.setex(key, 30, json.dumps(row, ensure_ascii=False))
+                    except redis.RedisError:
+                        log.warning("cache write failed")
+                return {"source": "postgresql", "data": row}
+
+            @app.post("/orders", status_code=201)
+            def order(body: OrderIn):
+                with pool.connection() as conn:
+                    row = conn.execute(
+                        "UPDATE products SET stock=stock-%s WHERE id=%s AND active AND stock >= %s RETURNING price",
+                        (body.qty, body.product_id, body.qty)).fetchone()
+                    if row is None:
+                        raise HTTPException(409, "product not found or out of stock")
+                    oid = conn.execute("INSERT INTO orders DEFAULT VALUES RETURNING id").fetchone()["id"]
+                    conn.execute("INSERT INTO order_items(order_id,product_id,qty,unit_price) VALUES (%s,%s,%s,%s)",
+                                 (oid, body.product_id, body.qty, row["price"]))
+                invalidate(body.product_id)
+                return {"order_id": oid}
+
+            @app.patch("/products/{pid}/price")
+            def price(pid: int, body: PriceIn):
+                with pool.connection() as conn:
+                    row = conn.execute("UPDATE products SET price=%s WHERE id=%s AND active RETURNING id",
+                                       (body.price,pid)).fetchone()
+                    if row is None:
+                        raise HTTPException(404, "product not found")
+                invalidate(pid)
+                return {"id": pid, "price": body.price}
+            PYEOF
+
+            cat > bench.py <<'PYEOF'
+            import time, json, statistics
+            from urllib.request import urlopen
+            url = "http://127.0.0.1:8000/products/1"
+            with urlopen(url) as r:
+                r.read()
+            times = []
+            hits = 0
+            for _ in range(200):
+                t = time.perf_counter()
+                with urlopen(url) as r:
+                    data = json.load(r)
+                times.append((time.perf_counter()-t)*1000)
+                hits += data["source"] == "redis"
+            print("mean ms:", round(statistics.mean(times), 2))
+            print("p95 ms:", round(sorted(times)[189], 2))
+            print("hit rate:", hits/len(times))
+            PYEOF
+
+            get_pw() {
+              aws secretsmanager get-secret-value --region "$REGION" --secret-id "$1" \
+                --query SecretString --output text | jq -r .password
+            }
+            APP_PW=$(get_pw "$APP_SECRET")
+
+            ENV_PW="$APP_PW"
+            if [ "$F_PW" = true ]; then ENV_PW="$APP_PW"0; fi
+            ENV_CA="$APP_DIR/global-bundle.pem"
+            if [ "$F_CA" = true ]; then ENV_CA=/home/ssm-user/global-bundle.pem; fi
+            CACHE_KEY=CACHE_ENABLED
+            if [ "$F_CACHEKEY" = true ]; then CACHE_KEY=CACHE_ENABLE; fi
+
+            umask 077
+            cat > .env <<EOF
+            DB_HOST=$DB_HOST
+            DB_NAME=shop
+            DB_USER=shop_app
+            DB_PASSWORD='$ENV_PW'
+            DB_CA=$ENV_CA
+            REDIS_URL=redis://127.0.0.1:6379/0
+            $CACHE_KEY=1
+            EOF
+            umask 022
+            chown -R ssm-user:ssm-user /home/ssm-user
+            chmod 600 .env
+
+            # Redis (Part 04)
+            if [ "$F_REDIS" = true ]; then
+              docker run -d --name shop-redis -p 127.0.0.1:6379:6379 redis:7-alpine
+              sleep 3
+              docker stop shop-redis
+            else
+              docker run -d --name shop-redis --restart unless-stopped -p 127.0.0.1:6379:6379 redis:7-alpine
+            fi
+
+            # DB init (Part 02 schema + shop_app). Retries until the DB is reachable.
+            cat > /root/shop-bootstrap.env <<EOF
+            REGION=$REGION
+            DB_HOST=$DB_HOST
+            MASTER_SECRET=$MASTER_SECRET
+            APP_SECRET=$APP_SECRET
+            EOF
+            chmod 600 /root/shop-bootstrap.env
+
+            cat > /root/shop-init.sql <<'SQLEOF'
+            CREATE TABLE IF NOT EXISTS products (
+             id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+             name text NOT NULL,
+             price integer NOT NULL CHECK (price >= 0),
+             stock integer NOT NULL CHECK (stock >= 0),
+             active boolean NOT NULL DEFAULT true
+            );
+            CREATE TABLE IF NOT EXISTS orders (
+             id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+             created_at timestamptz NOT NULL DEFAULT now()
+            );
+            CREATE TABLE IF NOT EXISTS order_items (
+             order_id bigint REFERENCES orders(id),
+             product_id bigint REFERENCES products(id),
+             qty integer NOT NULL CHECK (qty > 0),
+             unit_price integer NOT NULL CHECK (unit_price >= 0),
+             PRIMARY KEY(order_id, product_id)
+            );
+            INSERT INTO products(name,price,stock)
+            SELECT v.name, v.price, v.stock
+            FROM (VALUES ('Keyboard',30000,100),('Mouse',20000,50),('Monitor',200000,20)) AS v(name,price,stock)
+            WHERE NOT EXISTS (SELECT 1 FROM products);
+            CREATE INDEX IF NOT EXISTS idx_orders_created ON orders(created_at);
+            CREATE INDEX IF NOT EXISTS idx_items_product ON order_items(product_id);
+            SELECT 'CREATE ROLE shop_app LOGIN' WHERE NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'shop_app')\gexec
+            ALTER ROLE shop_app PASSWORD :'app_pw';
+            GRANT CONNECT ON DATABASE shop TO shop_app;
+            GRANT USAGE ON SCHEMA public TO shop_app;
+            GRANT SELECT, UPDATE(stock,price) ON products TO shop_app;
+            GRANT SELECT,INSERT ON orders TO shop_app;
+            GRANT SELECT ON order_items TO shop_app;
+            GRANT USAGE,SELECT ON ALL SEQUENCES IN SCHEMA public TO shop_app;
+            SQLEOF
+            if [ "$F_GRANT" != true ]; then
+              echo 'GRANT INSERT ON order_items TO shop_app;' >> /root/shop-init.sql
+            fi
+            chmod 600 /root/shop-init.sql
+
+            cat > /usr/local/sbin/shop-db-init.sh <<'SHEOF'
+            #!/bin/bash
+            set -uo pipefail
+            [ -f /var/lib/shop-db-init.done ] && exit 0
+            source /root/shop-bootstrap.env
+            pw() {
+              aws secretsmanager get-secret-value --region "$REGION" --secret-id "$1" \
+                --query SecretString --output text | jq -r .password
+            }
+            export PGPASSWORD="$(pw "$MASTER_SECRET")"
+            export PGSSLMODE=verify-full PGSSLROOTCERT=/home/ssm-user/shop/global-bundle.pem PGCONNECT_TIMEOUT=5
+            APP_PW="$(pw "$APP_SECRET")"
+            until psql -h "$DB_HOST" -U postgres -d shop -c 'SELECT 1' >/dev/null; do
+              echo "DB not reachable yet, retry in 10s"
+              sleep 10
+            done
+            psql -h "$DB_HOST" -U postgres -d shop -v ON_ERROR_STOP=1 -v app_pw="$APP_PW" -f /root/shop-init.sql \
+              && touch /var/lib/shop-db-init.done
+            SHEOF
+            chmod 700 /usr/local/sbin/shop-db-init.sh
+
+            cat > /etc/systemd/system/shop-db-init.service <<'EOF'
+            [Unit]
+            Description=shop DB schema bootstrap
+            After=network-online.target
+            Wants=network-online.target
+
+            [Service]
+            Type=oneshot
+            ExecStart=/usr/local/sbin/shop-db-init.sh
+            TimeoutStartSec=infinity
+            RemainAfterExit=yes
+
+            [Install]
+            WantedBy=multi-user.target
+            EOF
+
+            cat > /etc/systemd/system/shop-api.service <<'EOF'
+            [Unit]
+            Description=shop FastAPI (uvicorn)
+            After=network-online.target docker.service
+            Wants=network-online.target
+            StartLimitIntervalSec=0
+
+            [Service]
+            User=ssm-user
+            WorkingDirectory=/home/ssm-user/shop
+            ExecStart=/home/ssm-user/shop/.venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000
+            Restart=always
+            RestartSec=5
+
+            [Install]
+            WantedBy=multi-user.target
+            EOF
+
+            systemctl daemon-reload
+            systemctl enable shop-db-init.service shop-api.service
+            systemctl start --no-block shop-db-init.service
+            systemctl start --no-block shop-api.service
+            echo "bootstrap finished"
+          - DbHost: !GetAtt ShopDb.Endpoint.Address
+            MasterSecretArn: !Ref DbMasterSecret
+            AppSecretArn: !Ref DbAppSecret
+            FPw: !FindInMap [Scenarios, !Ref ScenarioCode, Pw]
+            FCa: !FindInMap [Scenarios, !Ref ScenarioCode, Ca]
+            FCacheKey: !FindInMap [Scenarios, !Ref ScenarioCode, CacheKey]
+            FRedis: !FindInMap [Scenarios, !Ref ScenarioCode, Redis]
+            FGrant: !FindInMap [Scenarios, !Ref ScenarioCode, Grant]
+
+Outputs:
+  InstanceId:
+    Description: shop-api EC2 ID (connect with Session Manager)
+    Value: !Ref ShopApi
+  SessionManagerUrl:
+    Description: Open an SSM session in the browser
+    Value: !Sub 'https://${AWS::Region}.console.aws.amazon.com/systems-manager/session-manager/${ShopApi}?region=${AWS::Region}'
+  DbEndpoint:
+    Description: RDS endpoint
+    Value: !GetAtt ShopDb.Endpoint.Address
+  DbMasterSecretArn:
+    Description: Secrets Manager ARN holding the postgres password
+    Value: !Ref DbMasterSecret
+  DbAppSecretArn:
+    Description: Secrets Manager ARN holding the shop_app password
+    Value: !Ref DbAppSecret
+  Ec2RoleName:
+    Description: IAM role name attached to the EC2 instance
+    Value: !Ref Ec2Role

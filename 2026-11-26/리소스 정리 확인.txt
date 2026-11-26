@@ -1,0 +1,131 @@
+REGION=ap-northeast-2
+T_START=$(TZ=Asia/Seoul date +%Y-%m-%dT00:00:00+09:00)
+export AWS_PAGER=""
+
+# 1. 오늘 생성한 리소스 기록
+aws cloudtrail lookup-events --region "$REGION" --start-time "$T_START" \
+  --lookup-attributes AttributeKey=ReadOnly,AttributeValue=false \
+  --query 'Events[?(starts_with(EventName,`Create`)||starts_with(EventName,`Run`)||starts_with(EventName,`Allocate`)||starts_with(EventName,`Restore`)||starts_with(EventName,`Copy`)||starts_with(EventName,`Register`)) && EventSource!=`resource-explorer-2.amazonaws.com`].[EventName,Resources[0].ResourceName]' \
+  --output text | grep -v None | sort -u > created.txt
+
+# 2. 오늘 삭제한 리소스 기록
+aws cloudtrail lookup-events --region "$REGION" --start-time "$T_START" \
+  --lookup-attributes AttributeKey=ReadOnly,AttributeValue=false \
+  --query 'Events[?starts_with(EventName,`Delete`)||starts_with(EventName,`Terminate`)||starts_with(EventName,`Release`)||starts_with(EventName,`Deregister`)].Resources[].ResourceName' \
+  --output text | tr '\t' '\n' | sort -u > deleted.txt
+
+echo "=== 1. 오늘 생성하고 삭제 기록이 확인되지 않은 리소스 ==="
+
+awk 'FILENAME==ARGV[1]{d[$1];next}!($2 in d){print}' deleted.txt created.txt
+
+# 조회 결과 출력 함수
+check() {
+    echo
+    echo "[$1]"
+    shift
+    if result=$(aws "$@" --region "$REGION" --output text); then
+        if [ -z "$result" ] || [ "$result" = "None" ]; then
+            echo "(없음)"
+        else
+            printf '%s\n' "$result"
+        fi
+    else
+        echo "(조회 실패 - 확인 필요)"
+    fi
+}
+
+echo
+echo "=== 2. 실제 잔존 리소스 ($REGION) ==="
+
+check "EC2 인스턴스" \
+    ec2 describe-instances \
+    --filters Name=instance-state-name,Values=pending,running,stopping,stopped,shutting-down \
+    --query 'Reservations[].Instances[].[InstanceId,Tags[?Key==`Name`].Value|[0],State.Name]'
+
+check "탄력적 IP" \
+    ec2 describe-addresses \
+    --query 'Addresses[].[PublicIp,AllocationId]'
+
+check "로드 밸런서 (ALB/NLB/GWLB)" \
+    elbv2 describe-load-balancers \
+    --query 'LoadBalancers[].[LoadBalancerName,State.Code]'
+
+check "Classic 로드 밸런서" \
+    elb describe-load-balancers \
+    --query 'LoadBalancerDescriptions[].LoadBalancerName'
+
+check "NAT 게이트웨이" \
+    ec2 describe-nat-gateways \
+    --filter Name=state,Values=pending,available,deleting \
+    --query 'NatGateways[].[NatGatewayId,State]'
+
+check "RDS 인스턴스" \
+    rds describe-db-instances \
+    --query 'DBInstances[].[DBInstanceIdentifier,DBInstanceStatus]'
+
+check "RDS 클러스터" \
+    rds describe-db-clusters \
+    --query 'DBClusters[].[DBClusterIdentifier,Status]'
+
+check "RDS 수동 스냅샷" \
+    rds describe-db-snapshots \
+    --snapshot-type manual \
+    --query 'DBSnapshots[].[DBSnapshotIdentifier,Status]'
+
+check "RDS 보존된 자동 백업" \
+    rds describe-db-instance-automated-backups \
+    --filters Name=status,Values=retained \
+    --query 'DBInstanceAutomatedBackups[].[DBInstanceIdentifier,Status]'
+
+check "EBS 볼륨" \
+    ec2 describe-volumes \
+    --query 'Volumes[].[VolumeId,State,Size]'
+
+check "EBS 스냅샷" \
+    ec2 describe-snapshots \
+    --owner-ids self \
+    --query 'Snapshots[].[SnapshotId,VolumeSize,State]'
+
+check "S3 버킷 (전체 리전)" \
+    s3api list-buckets \
+    --query 'Buckets[].Name'
+
+check "Secrets Manager" \
+    secretsmanager list-secrets \
+    --include-planned-deletion \
+    --query 'SecretList[].[Name,DeletedDate]'
+
+check "VPC 엔드포인트" \
+    ec2 describe-vpc-endpoints \
+    --query 'VpcEndpoints[].[VpcEndpointId,VpcEndpointType,State]'
+
+check "CloudFormation 스택" \
+    cloudformation list-stacks \
+    --query 'StackSummaries[?StackStatus!=`DELETE_COMPLETE`].[StackName,StackStatus]'
+
+check "CloudWatch 로그 그룹" \
+    logs describe-log-groups \
+    --query 'logGroups[].[logGroupName,storedBytes]'
+
+check "Glue ETL 작업" \
+    glue get-jobs \
+    --query 'Jobs[].Name'
+
+check "Glue 크롤러" \
+    glue get-crawlers \
+    --query 'Crawlers[].[Name,State]'
+
+check "Glue 트리거" \
+    glue get-triggers \
+    --query 'Triggers[].[Name,State]'
+
+check "Glue Data Catalog 데이터베이스" \
+    glue get-databases \
+    --query 'DatabaseList[].Name'
+
+check "VPC" \
+    ec2 describe-vpcs \
+    --query 'Vpcs[].[VpcId,Tags[?Key==`Name`].Value|[0],IsDefault]'
+
+echo
+echo "=== 조회 완료 ==="
