@@ -1,0 +1,361 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Isolated serverless inventory API lab - private MySQL, Lambda, HTTP API and monitoring.
+Parameters:
+  LatestAmiId:
+    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64
+  DbEngineVersion:
+    Type: String
+    Default: '8.4'
+Resources:
+  LabVpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.60.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-vpc'
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+  GatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref LabVpc
+      InternetGatewayId: !Ref InternetGateway
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LabVpc
+      CidrBlock: 10.60.1.0/24
+      AvailabilityZone: !Select [0, !GetAZs '']
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-public-import'
+  PrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LabVpc
+      CidrBlock: 10.60.11.0/24
+      AvailabilityZone: !Select [0, !GetAZs '']
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-a'
+  PrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref LabVpc
+      CidrBlock: 10.60.12.0/24
+      AvailabilityZone: !Select [1, !GetAZs '']
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-private-b'
+  PublicRoutes:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref LabVpc
+  DefaultPublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: GatewayAttachment
+    Properties:
+      RouteTableId: !Ref PublicRoutes
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+  PublicAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRoutes
+      SubnetId: !Ref PublicSubnet
+  PrivateRoutes:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref LabVpc
+  PrivateAssociationA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRoutes
+      SubnetId: !Ref PrivateSubnetA
+  PrivateAssociationB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRoutes
+      SubnetId: !Ref PrivateSubnetB
+  ImportSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Import host - SSM only, no inbound rules
+      VpcId: !Ref LabVpc
+  LambdaSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Lambda client for private MySQL
+      VpcId: !Ref LabVpc
+  DatabaseSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: MySQL only from import host and Lambda
+      VpcId: !Ref LabVpc
+  DatabaseImportIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !Ref DatabaseSecurityGroup
+      IpProtocol: tcp
+      FromPort: 3306
+      ToPort: 3306
+      SourceSecurityGroupId: !Ref ImportSecurityGroup
+  DatabaseLambdaIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !Ref DatabaseSecurityGroup
+      IpProtocol: tcp
+      FromPort: 3306
+      ToPort: 3306
+      SourceSecurityGroupId: !Ref LambdaSecurityGroup
+  DumpBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+  ReaderSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Lab-only read-only database user credentials
+      GenerateSecretString:
+        SecretStringTemplate: '{"username":"inventory_reader"}'
+        GenerateStringKey: password
+        PasswordLength: 28
+        ExcludePunctuation: true
+  DatabaseSubnets:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Two private subnets in separate AZs
+      SubnetIds:
+        - !Ref PrivateSubnetA
+        - !Ref PrivateSubnetB
+  Database:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      Engine: mysql
+      EngineVersion: !Ref DbEngineVersion
+      DBInstanceClass: db.t4g.micro
+      DBName: inventorylab
+      MasterUsername: labadmin
+      ManageMasterUserPassword: true
+      AllocatedStorage: '20'
+      StorageType: gp3
+      StorageEncrypted: true
+      MultiAZ: false
+      PubliclyAccessible: false
+      BackupRetentionPeriod: 0
+      DeleteAutomatedBackups: true
+      DeletionProtection: false
+      DBSubnetGroupName: !Ref DatabaseSubnets
+      VPCSecurityGroups:
+        - !Ref DatabaseSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-mysql'
+  ImportRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore'
+  ImportDataPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: import-lab-data
+      Roles:
+        - !Ref ImportRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: s3:GetObject
+            Resource: !Sub '${DumpBucket.Arn}/imports/*'
+          - Effect: Allow
+            Action: secretsmanager:GetSecretValue
+            Resource:
+              - !GetAtt Database.MasterUserSecret.SecretArn
+              - !Ref ReaderSecret
+  ImportProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref ImportRole
+  ImportHost:
+    Type: AWS::EC2::Instance
+    DependsOn:
+      - DefaultPublicRoute
+      - PublicAssociation
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: t3.micro
+      IamInstanceProfile: !Ref ImportProfile
+      MetadataOptions:
+        HttpTokens: required
+      NetworkInterfaces:
+        - DeviceIndex: '0'
+          SubnetId: !Ref PublicSubnet
+          GroupSet:
+            - !Ref ImportSecurityGroup
+          AssociatePublicIpAddress: true
+      UserData: !Base64 |
+        #!/bin/bash
+        set -e
+        dnf install -y mariadb105 jq
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-import'
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole'
+  FunctionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-inventory'
+      RetentionInDays: 1
+  InventoryFunction:
+    Type: AWS::Lambda::Function
+    DependsOn:
+      - FunctionLogs
+      - DatabaseLambdaIngress
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-inventory'
+      Runtime: python3.12
+      Handler: index.lambda_handler
+      Role: !GetAtt LambdaRole.Arn
+      MemorySize: 512
+      Timeout: 15
+      VpcConfig:
+        SecurityGroupIds:
+          - !Ref LambdaSecurityGroup
+        SubnetIds:
+          - !Ref PrivateSubnetA
+          - !Ref PrivateSubnetB
+      Environment:
+        Variables:
+          DB_HOST: !GetAtt Database.Endpoint.Address
+          DB_NAME: inventorylab
+          DB_USER: inventory_reader
+          DB_PASSWORD: !Sub '{{resolve:secretsmanager:${ReaderSecret}:SecretString:password}}'
+      Code:
+        ZipFile: |
+          import json
+          def lambda_handler(event, context):
+              return {"statusCode": 503, "headers": {"content-type": "application/json"}, "body": json.dumps({"message": "Deploy application code after database import"})}
+  HttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub '${AWS::StackName}-http-api'
+      ProtocolType: HTTP
+  ApiIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApi
+      IntegrationType: AWS_PROXY
+      IntegrationMethod: POST
+      IntegrationUri: !GetAtt InventoryFunction.Arn
+      PayloadFormatVersion: '2.0'
+      TimeoutInMillis: 20000
+  InventoryRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApi
+      RouteKey: 'GET /inventory'
+      AuthorizationType: AWS_IAM
+      Target: !Sub 'integrations/${ApiIntegration}'
+  ApiStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref HttpApi
+      StageName: '$default'
+      AutoDeploy: true
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 10
+        ThrottlingRateLimit: 5
+  ApiPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref InventoryFunction
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub 'arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*/GET/inventory'
+  DatabaseErrorMetric:
+    Type: AWS::Logs::MetricFilter
+    Properties:
+      LogGroupName: !Ref FunctionLogs
+      FilterPattern: '"DB_CONNECTION_ERROR"'
+      MetricTransformations:
+        - MetricNamespace: !Sub 'InventoryLab/${AWS::StackName}'
+          MetricName: DbConnectionErrors
+          MetricValue: '1'
+  DatabaseAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub '${AWS::StackName}-db-connection-error'
+      AlarmDescription: Database connection failure detected in application log
+      Namespace: !Sub 'InventoryLab/${AWS::StackName}'
+      MetricName: DbConnectionErrors
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      DatapointsToAlarm: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+Outputs:
+  VpcId:
+    Value: !Ref LabVpc
+  ImportInstanceId:
+    Value: !Ref ImportHost
+  DumpBucket:
+    Value: !Ref DumpBucket
+  DbEndpoint:
+    Value: !GetAtt Database.Endpoint.Address
+  MasterSecretArn:
+    Value: !GetAtt Database.MasterUserSecret.SecretArn
+  ReaderSecretArn:
+    Value: !Ref ReaderSecret
+  DbSecurityGroupId:
+    Value: !Ref DatabaseSecurityGroup
+  LambdaSecurityGroupId:
+    Value: !Ref LambdaSecurityGroup
+  FunctionName:
+    Value: !Ref InventoryFunction
+  ApiUrl:
+    Value: !Sub '${HttpApi.ApiEndpoint}/inventory'
+  LogGroup:
+    Value: !Ref FunctionLogs
+  AlarmName:
+    Value: !Ref DatabaseAlarm

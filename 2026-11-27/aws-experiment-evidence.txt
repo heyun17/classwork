@@ -1,0 +1,116 @@
+=== Database Failure Logs ===
+[
+    {
+        "Time": 1795763845868,
+        "Message": "{\"event\": \"DB_CONNECTION_ERROR\", \"request_id\": \"24a79b14-46c5-4383-b244-0197f9902bee\", \"error_type\": \"OperationalError\", \"error_code\": 2003, \"elapsed_ms\": 3042.33}\n"
+    },
+    {
+        "Time": 1795763850246,
+        "Message": "{\"event\": \"DB_CONNECTION_ERROR\", \"request_id\": \"e08b5bd1-1416-4fa8-912d-d3be8b25472e\", \"error_type\": \"OperationalError\", \"error_code\": 2003, \"elapsed_ms\": 3024.86}\n"
+    }
+]
+=== Lambda Load Test Metrics ===
+METRIC: Invocations
+{
+    "Label": "Invocations",
+    "Datapoints": [
+        {
+            "Timestamp": "2026-11-27T16:51:00+09:00",
+            "Sum": 27.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:25:00+09:00",
+            "Sum": 7.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:52:00+09:00",
+            "Sum": 27.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:26:00+09:00",
+            "Sum": 58.0,
+            "Unit": "Count"
+        }
+    ]
+}
+METRIC: Throttles
+{
+    "Label": "Throttles",
+    "Datapoints": [
+        {
+            "Timestamp": "2026-11-27T16:51:00+09:00",
+            "Sum": 0.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:25:00+09:00",
+            "Sum": 0.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:52:00+09:00",
+            "Sum": 8.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:26:00+09:00",
+            "Sum": 3.0,
+            "Unit": "Count"
+        }
+    ]
+}
+METRIC: Errors
+{
+    "Label": "Errors",
+    "Datapoints": [
+        {
+            "Timestamp": "2026-11-27T16:51:00+09:00",
+            "Sum": 0.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:25:00+09:00",
+            "Sum": 0.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:52:00+09:00",
+            "Sum": 0.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:26:00+09:00",
+            "Sum": 0.0,
+            "Unit": "Count"
+        }
+    ]
+}
+METRIC: ConcurrentExecutions
+{
+    "Label": "ConcurrentExecutions",
+    "Datapoints": [
+        {
+            "Timestamp": "2026-11-27T16:51:00+09:00",
+            "Maximum": 8.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:25:00+09:00",
+            "Maximum": 3.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:52:00+09:00",
+            "Maximum": 10.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2026-11-27T16:26:00+09:00",
+            "Maximum": 10.0,
+            "Unit": "Count"
+        }
+    ]
+}

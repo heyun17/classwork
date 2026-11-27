@@ -1,0 +1,354 @@
+{
+    "StackResourceSummaries": [
+        {
+            "LogicalResourceId": "ApiIntegration",
+            "PhysicalResourceId": "9e51j6o",
+            "ResourceType": "AWS::ApiGatewayV2::Integration",
+            "LastUpdatedTimestamp": "2026-11-27T05:52:56.115000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "ApiPermission",
+            "PhysicalResourceId": "inventory-lab-ApiPermission-apW0l9CP7t57",
+            "ResourceType": "AWS::Lambda::Permission",
+            "LastUpdatedTimestamp": "2026-11-27T05:50:18.591000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "ApiStage",
+            "PhysicalResourceId": "$default",
+            "ResourceType": "AWS::ApiGatewayV2::Stage",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:37.816000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "Database",
+            "PhysicalResourceId": "inventory-lab-database-8oioyykv1uud",
+            "ResourceType": "AWS::RDS::DBInstance",
+            "LastUpdatedTimestamp": "2026-11-27T05:50:04.815000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "DatabaseAlarm",
+            "PhysicalResourceId": "inventory-lab-db-connection-error",
+            "ResourceType": "AWS::CloudWatch::Alarm",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:35.397000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "DatabaseErrorMetric",
+            "PhysicalResourceId": "DatabaseErrorMetric-8qKzPAXD0Jxs",
+            "ResourceType": "AWS::Logs::MetricFilter",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:44.563000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "DatabaseImportIngress",
+            "PhysicalResourceId": "sgr-05db9826964868ab5",
+            "ResourceType": "AWS::EC2::SecurityGroupIngress",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:56.552000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "DatabaseLambdaIngress",
+            "PhysicalResourceId": "sgr-0bb8037562614fbc1",
+            "ResourceType": "AWS::EC2::SecurityGroupIngress",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:56.432000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "DatabaseSecurityGroup",
+            "PhysicalResourceId": "sg-016adf7e8f7abd67b",
+            "ResourceType": "AWS::EC2::SecurityGroup",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:54.424000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "DatabaseSubnets",
+            "PhysicalResourceId": "inventory-lab-databasesubnets-82pjrdfbk3p6",
+            "ResourceType": "AWS::RDS::DBSubnetGroup",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:54.664000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "DefaultPublicRoute",
+            "PhysicalResourceId": "rtb-083825f11ae469392|0.0.0.0/0",
+            "ResourceType": "AWS::EC2::Route",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:59.715000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "DumpBucket",
+            "PhysicalResourceId": "inventory-lab-dumpbucket-mkrziw3wdear",
+            "ResourceType": "AWS::S3::Bucket",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:47.369000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "FunctionLogs",
+            "PhysicalResourceId": "/aws/lambda/inventory-lab-inventory",
+            "ResourceType": "AWS::Logs::LogGroup",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:42.130000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "GatewayAttachment",
+            "PhysicalResourceId": "IGW|vpc-0cd14dad1b98af1a3",
+            "ResourceType": "AWS::EC2::VPCGatewayAttachment",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:48.684000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "HttpApi",
+            "PhysicalResourceId": "zisk4rxane",
+            "ResourceType": "AWS::ApiGatewayV2::Api",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:35.596000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "ImportDataPolicy",
+            "PhysicalResourceId": "inven-Impor-S7nN7iYrJ7fm",
+            "ResourceType": "AWS::IAM::Policy",
+            "LastUpdatedTimestamp": "2026-11-27T05:50:23.966000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "ImportHost",
+            "PhysicalResourceId": "i-02d3fc4992aede9a4",
+            "ResourceType": "AWS::EC2::Instance",
+            "LastUpdatedTimestamp": "2026-11-27T05:47:17.295000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "ImportProfile",
+            "PhysicalResourceId": "inventory-lab-ImportProfile-0Yp95XEL81kR",
+            "ResourceType": "AWS::IAM::InstanceProfile",
+            "LastUpdatedTimestamp": "2026-11-27T05:47:03.030000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "ImportRole",
+            "PhysicalResourceId": "inventory-lab-ImportRole-XZO62A7btqLw",
+            "ResourceType": "AWS::IAM::Role",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:50.433000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "ImportSecurityGroup",
+            "PhysicalResourceId": "sg-0bf8642353af0d857",
+            "ResourceType": "AWS::EC2::SecurityGroup",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:54.364000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "InternetGateway",
+            "PhysicalResourceId": "igw-09dde53516435fda9",
+            "ResourceType": "AWS::EC2::InternetGateway",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:49.068000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "InventoryFunction",
+            "PhysicalResourceId": "inventory-lab-inventory",
+            "ResourceType": "AWS::Lambda::Function",
+            "LastUpdatedTimestamp": "2026-11-27T05:52:54.282000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "InventoryRoute",
+            "PhysicalResourceId": "4c154c9",
+            "ResourceType": "AWS::ApiGatewayV2::Route",
+            "LastUpdatedTimestamp": "2026-11-27T05:52:59.146000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "LabVpc",
+            "PhysicalResourceId": "vpc-0cd14dad1b98af1a3",
+            "ResourceType": "AWS::EC2::VPC",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:45.695000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "LambdaRole",
+            "PhysicalResourceId": "inventory-lab-LambdaRole-riK7NrQaV20r",
+            "ResourceType": "AWS::IAM::Role",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:50.718000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "LambdaSecurityGroup",
+            "PhysicalResourceId": "sg-0fc785f9c33d738f8",
+            "ResourceType": "AWS::EC2::SecurityGroup",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:54.113000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "PrivateAssociationA",
+            "PhysicalResourceId": "rtbassoc-0bb6da54b06ce3a4e",
+            "ResourceType": "AWS::EC2::SubnetRouteTableAssociation",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:52.586000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "PrivateAssociationB",
+            "PhysicalResourceId": "rtbassoc-00de1c3765e9cc829",
+            "ResourceType": "AWS::EC2::SubnetRouteTableAssociation",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:52.632000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "PrivateRoutes",
+            "PhysicalResourceId": "rtb-069a4f62caf913ecf",
+            "ResourceType": "AWS::EC2::RouteTable",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:57.964000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "PrivateSubnetA",
+            "PhysicalResourceId": "subnet-0d8e10a579a9ac728",
+            "ResourceType": "AWS::EC2::Subnet",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:50.571000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "PrivateSubnetB",
+            "PhysicalResourceId": "subnet-0b79ed02c71155a94",
+            "ResourceType": "AWS::EC2::Subnet",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:50.564000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "PublicAssociation",
+            "PhysicalResourceId": "rtbassoc-0e4d7f533ad72e1de",
+            "ResourceType": "AWS::EC2::SubnetRouteTableAssociation",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:52.761000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "PublicRoutes",
+            "PhysicalResourceId": "rtb-083825f11ae469392",
+            "ResourceType": "AWS::EC2::RouteTable",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:57.658000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "PublicSubnet",
+            "PhysicalResourceId": "subnet-0d824bd7b57c5d78b",
+            "ResourceType": "AWS::EC2::Subnet",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:50.673000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "LogicalResourceId": "ReaderSecret",
+            "PhysicalResourceId": "arn:aws:secretsmanager:ap-northeast-2:717418040320:secret:ReaderSecret-O0OE8G0qGeEo-BgZaRD",
+            "ResourceType": "AWS::SecretsManager::Secret",
+            "LastUpdatedTimestamp": "2026-11-27T05:44:35.984000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        }
+    ]
+}
